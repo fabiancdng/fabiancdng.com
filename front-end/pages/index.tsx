@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import { env } from 'process';
 import { useEffect, useState } from 'react';
+import MarkdownParser from '../utils/markdown-parser';
 
 /**
  * Data (& content) for the homepage from CMS.
@@ -22,8 +23,8 @@ const Home: NextPage<homePageData> = (data: homePageData) => {
     <>
       <div className="flex justify-center w-full mb-5">
         <div className="w-full p-10 md:p-0 md:w-2/3">
-          <h1 className="text-4xl font-bold my-5">{ data['title'] }</h1>
-          <p>{ data['content'] }</p>
+          <h1 className="text-5xl font-bold my-5">{ data['title'] }</h1>
+          <div dangerouslySetInnerHTML={{ __html: data['content'] }}></div>
         </div>
       </div>
     </>
@@ -43,12 +44,18 @@ export async function getServerSideProps() {
 
   // Parse JSON response and get relevant data.
   const homepageDataRaw = await homepageDataRequest.json();
+  const pageData = homepageDataRaw['data']['attributes'];
+
+  // Parse page content (markdown).
+  const markdownParser = new MarkdownParser();
+  pageData['content'] = markdownParser.parseMarkdown(pageData['content']);
+
   const data: homePageData = {
-    title: homepageDataRaw['data']['attributes']['title'],
-    content: homepageDataRaw['data']['attributes']['content'],
-    updatedAt: homepageDataRaw['data']['attributes']['updatedAt'],
-    createdAt: homepageDataRaw['data']['attributes']['createdAt'],
-    publishedAt: homepageDataRaw['data']['attributes']['publishedAt'],
+    title: pageData['title'],
+    content: pageData['content'],
+    updatedAt: pageData['updatedAt'],
+    createdAt: pageData['createdAt'],
+    publishedAt: pageData['publishedAt'],
   }
 
   // Pass data/content from the CMS to the component as a prop.
