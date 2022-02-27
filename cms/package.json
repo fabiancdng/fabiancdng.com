@@ -10,9 +10,9 @@
     "strapi": "strapi"
   },
   "dependencies": {
-    "@strapi/plugin-i18n": "4.1.0",
-    "@strapi/plugin-users-permissions": "4.1.0",
-    "@strapi/strapi": "4.1.0",
+    "@strapi/plugin-i18n": "4.1.1",
+    "@strapi/plugin-users-permissions": "4.1.1",
+    "@strapi/strapi": "4.1.1",
     "mysql": "2.18.1",
     "sharp": "^0.30.1"
   },
