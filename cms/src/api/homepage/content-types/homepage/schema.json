@@ -15,19 +15,12 @@
     "title": {
       "type": "string"
     },
-    "logo": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
     "content": {
-      "type": "richtext"
+      "type": "dynamiczone",
+      "components": [
+        "layout.hero-section",
+        "layout.project-explorer"
+      ]
     }
   }
 }

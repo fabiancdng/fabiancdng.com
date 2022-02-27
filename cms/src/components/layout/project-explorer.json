@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_layout_project_explorers",
+  "info": {
+    "displayName": "ProjectExplorer",
+    "icon": "project-diagram",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "projects": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::project.project"
+    }
+  }
+}

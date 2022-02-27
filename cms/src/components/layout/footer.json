@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_layout_footers",
+  "info": {
+    "displayName": "Footer",
+    "icon": "pager"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string"
+    }
+  }
+}

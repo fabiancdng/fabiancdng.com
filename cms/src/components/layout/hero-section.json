@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_layout_hero_sections",
+  "info": {
+    "displayName": "HeroSection",
+    "icon": "address-card",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "backgroundColorCode": {
+      "type": "string"
+    },
+    "backgroundImage": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

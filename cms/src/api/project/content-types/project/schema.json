@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "projects",
+  "info": {
+    "singularName": "project",
+    "pluralName": "projects",
+    "displayName": "Projects",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "url": {
+      "type": "string"
+    },
+    "githubRepo": {
+      "type": "string"
+    },
+    "languages": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::programming-language.programming-language",
+      "mappedBy": "projects"
+    },
+    "thumbnail": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}
