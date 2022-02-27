@@ -11,11 +11,13 @@
   "dependencies": {
     "markdown-it": "^12.3.2",
     "next": "12.1.0",
+    "qs": "^6.10.3",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
   "devDependencies": {
     "@types/node": "17.0.18",
+    "@types/qs": "^6.9.7",
     "@types/react": "17.0.39",
     "autoprefixer": "^10.4.2",
     "eslint": "8.9.0",
