@@ -18,8 +18,10 @@
     "content": {
       "type": "dynamiczone",
       "components": [
+        "layout.header",
         "layout.hero-section",
-        "layout.project-explorer"
+        "layout.project-explorer",
+        "layout.footer"
       ]
     }
   }

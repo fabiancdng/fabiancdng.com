@@ -20,7 +20,10 @@
       "required": true
     },
     "content": {
-      "type": "richtext"
+      "type": "dynamiczone",
+      "components": [
+        "layout.markdown-text"
+      ]
     }
   }
 }

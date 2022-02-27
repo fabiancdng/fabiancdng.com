@@ -2,12 +2,18 @@
   "collectionName": "components_layout_footers",
   "info": {
     "displayName": "Footer",
-    "icon": "pager"
+    "icon": "pager",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "text": {
       "type": "string"
+    },
+    "links": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::footer-link.footer-link"
     }
   }
 }
