@@ -30,15 +30,11 @@ const Home: NextPage<homePageData> = (data: homePageData) => {
       <Head>
         <title>{ data.title }</title>
       </Head>
-      <div className="flex justify-center w-full mb-5">
-        <div className="w-full p-10 md:p-0 md:w-2/3">
-          <h1 className="text-5xl font-bold my-5">{ data.title }</h1>
-        </div>
-        {
-          // Render all known dynamic components from the CMS data.
-          contentComponents.map((component, index) => renderComponent(component, index))
-        }
-      </div>
+
+      {
+        // Render all known dynamic components from the CMS data.
+        contentComponents.map((component, index) => renderComponent(component, index))
+      }
     </>
   );
 };
