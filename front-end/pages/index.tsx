@@ -3,21 +3,26 @@ import { env } from 'process';
 import { useEffect, useState } from 'react';
 import qs from 'qs';
 import Head from 'next/head';
+import React from 'react';
+import { renderComponent } from '../utils/dynamic-component';
 
 /**
  * Data (& content) for the homepage from CMS.
  */
 interface homePageData {
   title: string,
-  content: Array<Object>,
+  content: never[],
   updatedAt: string,
   createdAt: string,
   publishedAt: string,
 }
 
 const Home: NextPage<homePageData> = (data: homePageData) => {
+  const [contentComponents, setContentComponents] = useState([]);
+
   useEffect(() => {
     console.log(data.content);
+    setContentComponents(data.content);
   }, []);
 
   return (
@@ -29,6 +34,10 @@ const Home: NextPage<homePageData> = (data: homePageData) => {
         <div className="w-full p-10 md:p-0 md:w-2/3">
           <h1 className="text-5xl font-bold my-5">{ data.title }</h1>
         </div>
+        {
+          // Render all known dynamic components from the CMS data.
+          contentComponents.map((component, index) => renderComponent(component, index))
+        }
       </div>
     </>
   );
