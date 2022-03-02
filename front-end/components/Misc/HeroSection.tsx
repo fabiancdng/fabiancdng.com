@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import imageData from "../types/image";
+import imageData from "../../types/image";
 
 /**
  * Data from the CMS for a HeroSection component.

@@ -1,8 +1,8 @@
 import React from "react";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import HeroSection from "../components/HeroSection";
-import ProjectExplorer from "../components/ProjectExplorer";
+import Footer from "../components/Footer/Footer";
+import Header from "../components/Header/Header";
+import HeroSection from "../components/Misc/HeroSection";
+import ProjectExplorer from "../components/Projects/ProjectExplorer";
 
 const componentsTable: { [key: string]: React.FC<any> } = {
   'layout.header': Header,
