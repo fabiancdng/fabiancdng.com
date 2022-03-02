@@ -37,9 +37,9 @@ const HeroSection = ({ data, statics }: heroSectionProps) => {
             <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center gap-12 mt-10 lg:mt-25">
                 {/* Text */}
                 <div className="flex flex-1 flex-col items-center lg:items-start">
-                    <h1 className="text-3xl md:text-4 lg:text-5xl text-center lg:text-left mb-3 font-bold">{ data.title }</h1>
-                    <h2 className="text-2xl md:text-3 lg:text-4xl text-center lg:text-left text-slate-700">{ data.subtitle }</h2>
-                    <h3 className="text-xl md:text-2 lg:text-2xl text-center lg:text-left mb-6 text-gray-500">{ data.description }</h3>
+                    <h1 className="text-4xl lg:text-6xl text-center lg:text-left mb-3 font-bold">{ data.title }</h1>
+                    <h2 className="text-3xl lg:text-5xl text-center lg:text-left text-slate-700 mb-1">{ data.subtitle }</h2>
+                    <h3 className="text-2xl lg:text-3xl text-center lg:text-left mb-6 text-gray-500">{ data.description }</h3>
                 </div>
 
                 {/* Logo */}
