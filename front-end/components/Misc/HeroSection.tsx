@@ -11,7 +11,6 @@ interface heroSectionData {
     title: string,
     subtitle: string,
     description: string|null,
-    backgroundColorCode: string|null,
     backgroundImage: {
         data: imageData|null,
     },

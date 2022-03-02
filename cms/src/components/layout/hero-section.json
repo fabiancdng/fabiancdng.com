@@ -16,9 +16,6 @@
     "description": {
       "type": "text"
     },
-    "backgroundColorCode": {
-      "type": "string"
-    },
     "backgroundImage": {
       "type": "media",
       "multiple": false,
