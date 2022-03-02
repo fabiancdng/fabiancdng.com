@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import FooterLink from "./FooterLink";
 
 /**
  * Data from the CMS for a link in the header (nested in headerData).
@@ -38,7 +39,12 @@ const Footer = ({ data }: footerProps) => {
     }, []);
 
     return (
-        <div>Footer</div>
+        <>
+            {
+                // Render all header links (separate `FooterLink` component).
+                data.links.data?.map((link, index) => <FooterLink key={ index } data={ link } />)
+            }
+        </>
     );
 }
 
