@@ -29,9 +29,7 @@ const HeroSection = ({ data }: heroSectionProps) => {
     }, []);
 
     return (
-        <div className="h-screen">
-            <div className="algin-middle">{ data.title }</div>
-        </div>
+        <div>{ data.title }</div>
     );
 }
 
