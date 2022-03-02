@@ -1,10 +1,12 @@
 import React from "react";
 import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
+import ProjectExplorer from "../components/ProjectExplorer";
 
 const componentsTable: { [key: string]: React.FC<any> } = {
   'layout.header': Header,
   'layout.hero-section': HeroSection,
+  'layout.project-explorer': ProjectExplorer,
 }
 
 /**

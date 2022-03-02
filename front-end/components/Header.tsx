@@ -20,7 +20,7 @@ interface headerData {
     id: number,
     __component: string,
     links: {
-        data: headerLink[],
+        data: headerLink[]|null,
     }
 }
 
@@ -41,4 +41,4 @@ const Header = ({ data }: headerProps) => {
     );
 }
 
-export default Header
+export default Header;
