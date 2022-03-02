@@ -3,6 +3,7 @@ import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 import HeroSection from "../components/Misc/HeroSection";
 import ProjectExplorer from "../components/Projects/ProjectExplorer";
+import staticsData from "../types/statics";
 
 const componentsTable: { [key: string]: React.FC<any> } = {
   'layout.header': Header,
@@ -15,7 +16,7 @@ const componentsTable: { [key: string]: React.FC<any> } = {
  * Render and return component by name as string (`__component`) and
  * pass component data payload as prop.
  */
-export const renderComponent = (component: any, index: number) => {
+export const renderComponent = (component: any, index: number, statics: staticsData) => {
   /**
    * String to identify the component (must exist as key in `componentsTable`).
    */
@@ -27,7 +28,11 @@ export const renderComponent = (component: any, index: number) => {
     return React.createElement(
       componentsTable[componentIdentifier],
       // Pass unique key (in case used in a forEach) and data as props.
-      { key: index, data: component },
+      {
+        key: index,
+        data: component,
+        statics: statics,
+      },
     );
   }
 }

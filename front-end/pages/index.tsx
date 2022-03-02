@@ -5,6 +5,7 @@ import qs from 'qs';
 import Head from 'next/head';
 import React from 'react';
 import { renderComponent } from '../utils/dynamic-component';
+import staticsData from '../types/statics';
 
 /**
  * Data (& content) for the homepage from CMS.
@@ -17,11 +18,20 @@ interface homePageData {
   publishedAt: string,
 }
 
-const Home: NextPage<homePageData> = (data: homePageData) => {
+/**
+ * Props for the Home component.
+ */
+interface homeProps {
+  data: homePageData,
+  statics: staticsData,
+}
+
+const Home: NextPage<homeProps> = ({ data, statics }: homeProps) => {
   const [contentComponents, setContentComponents] = useState([]);
 
   useEffect(() => {
     console.log(data.content);
+    console.log(data, statics);
     setContentComponents(data.content);
   }, []);
 
@@ -33,7 +43,7 @@ const Home: NextPage<homePageData> = (data: homePageData) => {
 
       {
         // Render all known dynamic components from the CMS data.
-        contentComponents.map((component, index) => renderComponent(component, index))
+        contentComponents.map((component, index) => renderComponent(component, index, statics))
       }
     </>
   );
@@ -66,10 +76,14 @@ export async function getServerSideProps() {
   const homepageDataRaw = await homepageDataRequest.json();
   const data: homePageData = homepageDataRaw.data.attributes;
 
+  const statics: staticsData = {
+    'CMS_URL': CMS_URL !== undefined ? CMS_URL : '',
+  };
+
   // Pass data/content from the CMS to the component as a prop.
   return {
-    props: data,
-  }
+    props: { data, statics },
+  };
 }
 
 export default Home;

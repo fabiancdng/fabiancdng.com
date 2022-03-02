@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import staticsData from "../../types/statics";
 
 /**
  * Data from the CMS for a link in the header.
@@ -26,7 +27,7 @@ const HeaderLink = ({ data }: headerLinkProps) => {
     }, []);
 
     return (
-        <div>HeaderLink { data.attributes.title }</div>
+        <li>HeaderLink { data.attributes.title }</li>
     );
 }
 

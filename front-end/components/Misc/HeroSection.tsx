@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import imageData from "../../types/image";
+import staticsData from "../../types/statics";
 
 /**
  * Data from the CMS for a HeroSection component.
@@ -24,9 +25,10 @@ interface heroSectionData {
  */
 interface heroSectionProps {
     data: heroSectionData,
+    statics: staticsData,
 }
 
-const HeroSection = ({ data }: heroSectionProps) => {
+const HeroSection = ({ data, statics }: heroSectionProps) => {
     useEffect(() => {
         console.log('HeroSection: ', data);
     }, []);

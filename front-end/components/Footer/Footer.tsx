@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import staticsData from "../../types/statics";
 import FooterLink from "./FooterLink";
 
 /**
@@ -31,9 +32,10 @@ interface footerData {
  */
 interface footerProps {
     data: footerData,
+    statics: staticsData,
 }
 
-const Footer = ({ data }: footerProps) => {
+const Footer = ({ data, statics }: footerProps) => {
     useEffect(() => {
         console.log('Footer', data);
     }, []);

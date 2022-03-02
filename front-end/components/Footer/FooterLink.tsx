@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import staticsData from "../../types/statics";
 
 /**
  * Data from the CMS for a link in the header.

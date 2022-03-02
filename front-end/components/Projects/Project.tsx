@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import staticsData from "../../types/statics";
 
 /**
  * Data from the CMS for a single project.
@@ -21,9 +22,10 @@ export interface projectData {
  */
 interface projectProps {
     data: projectData,
+    statics: staticsData,
 }
 
-const Project = ({ data }: projectProps) => {
+const Project = ({ data, statics }: projectProps) => {
     useEffect(() => {
         console.log('Project', data);
     }, []);

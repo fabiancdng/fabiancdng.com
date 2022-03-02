@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import staticsData from "../../types/statics";
 import Project, { projectData } from "./Project";
 
 /**
@@ -19,9 +20,10 @@ interface projectExplorerData {
  */
 interface projectExplorerProps {
     data: projectExplorerData,
+    statics: staticsData,
 }
 
-const ProjectExplorer = ({ data }: projectExplorerProps) => {
+const ProjectExplorer = ({ data, statics }: projectExplorerProps) => {
     useEffect(() => {
         console.log('ProjectExplorer', data);
         console.log(data.projects.data);
