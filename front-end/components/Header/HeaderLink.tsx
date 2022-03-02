@@ -1,6 +1,3 @@
-import { useEffect } from "react";
-import staticsData from "../../types/statics";
-
 /**
  * Data from the CMS for a link in the header.
  */
@@ -19,16 +16,11 @@ export interface headerLinkData {
  */
 interface headerLinkProps {
     data: headerLinkData,
+    additionalCSS: string,
 }
 
-const HeaderLink = ({ data }: headerLinkProps) => {
-    useEffect(() => {
-        console.log('HeaderLink', data);
-    }, []);
-
-    return (
-        <li>HeaderLink { data.attributes.title }</li>
-    );
+const HeaderLink = ({ data, additionalCSS }: headerLinkProps) => {
+    return <a className={ additionalCSS } href={ data.attributes.url }>{ data.attributes.title }</a>;
 }
 
 export default HeaderLink;

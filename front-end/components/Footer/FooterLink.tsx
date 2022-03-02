@@ -1,6 +1,3 @@
-import { useEffect } from "react";
-import staticsData from "../../types/statics";
-
 /**
  * Data from the CMS for a link in the header.
  */
@@ -22,12 +19,8 @@ interface footerLinkProps {
 }
 
 const FooterLink = ({ data }: footerLinkProps) => {
-    useEffect(() => {
-        console.log('FooterLink', data);
-    }, []);
-
     return (
-        <div>FooterLink { data.attributes.title }</div>
+        <li>{ data.attributes.title }</li>
     );
 }
 
