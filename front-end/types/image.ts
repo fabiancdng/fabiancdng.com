@@ -21,7 +21,7 @@ export default interface imageData {
                 size: number,
                 url: string
             }
-        },
+        }|null,
         hash: string,
         ext: string,
         mime: string,

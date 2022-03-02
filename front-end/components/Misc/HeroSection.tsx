@@ -14,6 +14,9 @@ interface heroSectionData {
     backgroundImage: {
         data: imageData|null,
     },
+    logo: {
+        data: imageData|null,
+    }
 }
 
 /**
