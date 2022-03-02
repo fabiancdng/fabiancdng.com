@@ -50,11 +50,11 @@ const Header = ({ data, statics }: headerProps) => {
     }, []);
 
     return (
-        <header className="fixed top-0 left-0 w-full z-20">
+        <header className="fixed top-0 left-0 w-full z-20 bg-white">
             {/* Navigation */}
-            <nav className="flex items-center px-2 sm:px-0 mt-2 sm:mt-4 container mx-auto">
+            <nav className="flex items-center px-2 sm:px-0 my-2 container mx-auto">
                 {/* Site title/logo */}
-                <div className="w-14 h-14 flex items-center">
+                <div className="w-14 h-14 p-1 flex items-center">
                     <img src={ statics.CMS_URL ? statics.CMS_URL + data.logo.data?.attributes.url : '' } alt="" />
                     <h2 className="ml-2 text-2xl font-semibold">{ data.title }</h2>
                 </div>

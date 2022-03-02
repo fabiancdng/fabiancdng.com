@@ -14,6 +14,8 @@ export interface projectData {
       updatedAt: string,
       publishedAt: string,
       githubRepo: string|null,
+      shortDescription: string,
+      longDescription: string,
     }
 }
 
@@ -31,7 +33,10 @@ const Project = ({ data, statics }: projectProps) => {
     }, []);
 
     return (
-        <div>Project</div>
+        <div className="bg-slate-200 rounded-md p-5">
+            <h4 className="text-2xl">{ data.attributes.name }</h4>
+            <p>{ data.attributes.shortDescription }</p>
+        </div>
     );
 }
 
