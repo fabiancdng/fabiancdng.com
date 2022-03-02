@@ -19,9 +19,7 @@ interface footerLinkProps {
 }
 
 const FooterLink = ({ data }: footerLinkProps) => {
-    return (
-        <li>{ data.attributes.title }</li>
-    );
+    return <a href={ data.attributes.url }>{ data.attributes.title }</a>;
 }
 
 export default FooterLink;

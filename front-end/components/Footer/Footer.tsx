@@ -41,12 +41,17 @@ const Footer = ({ data, statics }: footerProps) => {
     }, []);
 
     return (
-        <>
-            {
-                // Render all header links (separate `FooterLink` component).
-                data.links.data?.map((link, index) => <FooterLink key={ index } data={ link } />)
-            }
-        </>
+        <footer className="container mx-auto flex flex-col justify-center items-center py-5">
+            <p className="border-b border-gray-300">{ data.text }</p>
+            <ul className="flex">
+                {
+                    // Render all header links (separate `FooterLink` component).
+                    data.links.data?.map((link, index) => (
+                        <li key={ index } className="mr-5 text-gray-500 hover:underline"><FooterLink data={ link } /></li>
+                    ))
+                }
+            </ul>
+        </footer>
     );
 }
 
