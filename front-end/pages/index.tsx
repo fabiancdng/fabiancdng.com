@@ -57,7 +57,13 @@ export async function getServerSideProps() {
     populate: {
       // Populate DZ 'content'.
       content: {
-        populate: '*'
+        populate: [
+          '*',
+          'logo',
+          'links',
+          'projects',
+          'projects.languages',
+        ]
       }
     }
   }, {
