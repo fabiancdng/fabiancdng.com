@@ -33,7 +33,21 @@ const HeroSection = ({ data, statics }: heroSectionProps) => {
     }, []);
 
     return (
-        <div>{ data.title }</div>
+        <div className="h-screen flex flex-col justify-center align-middle">
+            <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center gap-12 mt-10 lg:mt-25">
+                {/* Text */}
+                <div className="flex flex-1 flex-col items-center lg:items-start">
+                    <h1 className="text-3xl md:text-4 lg:text-5xl text-center lg:text-left mb-3 font-bold">{ data.title }</h1>
+                    <h2 className="text-2xl md:text-3 lg:text-4xl text-center lg:text-left text-slate-700">{ data.subtitle }</h2>
+                    <h3 className="text-xl md:text-2 lg:text-2xl text-center lg:text-left mb-6 text-gray-500">{ data.description }</h3>
+                </div>
+
+                {/* Logo */}
+                <div className="flex justify-center flex-1 lg:mb-0 z-10">
+                    <img src={ statics.CMS_URL + data.logo.data?.attributes.url } className="lg:w-3/6 lg:h-3/6" alt="" />
+                </div>
+            </div>
+        </div>
     );
 }
 
