@@ -1,20 +1,5 @@
 import { useEffect } from "react";
-
-/**
- * Data from the CMS for a single project (nested in `projectExplorerData`).
- */
-interface projectData {
-    id: number,
-    attributes: {
-      name: string,
-      slug: string,
-      url: string|null,
-      createdAt: string,
-      updatedAt: string,
-      publishedAt: string,
-      githubRepo: string|null,
-    }
-}
+import Project, { projectData } from "./Project";
 
 /**
  * Data from the CMS for a `ProjectExplorer` component.
@@ -39,10 +24,16 @@ interface projectExplorerProps {
 const ProjectExplorer = ({ data }: projectExplorerProps) => {
     useEffect(() => {
         console.log('ProjectExplorer', data);
+        console.log(data.projects.data);
     }, []);
 
     return (
-        <div>ProjectExplorer</div>
+        <>
+            {
+                // Render all Projects (separate `Project` component).
+                data.projects.data?.map((project, index) => <Project key={ index } data={ project } />)
+            }
+        </>
     );
 }
 
