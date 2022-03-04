@@ -5,7 +5,7 @@ export interface footerLinkData {
     id: number,
     attributes: {
         title: string,
-        url: string,
+        urlOrAnchor: string,
         createdAt: string,
         updatedAt: string,
     }
@@ -19,7 +19,7 @@ interface footerLinkProps {
 }
 
 const FooterLink = ({ data }: footerLinkProps) => {
-    return <a href={ data.attributes.url }>{ data.attributes.title }</a>;
+    return <a href={ data.attributes.urlOrAnchor }>{ data.attributes.title }</a>;
 }
 
 export default FooterLink;

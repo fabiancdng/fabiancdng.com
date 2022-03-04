@@ -5,7 +5,7 @@ export interface headerLinkData {
     id: number,
     attributes: {
         title: string,
-        url: string,
+        urlOrAnchor: string,
         createdAt: string,
         updatedAt: string,
     }
@@ -20,7 +20,7 @@ interface headerLinkProps {
 }
 
 const HeaderLink = ({ data, additionalCSS }: headerLinkProps) => {
-    return <a className={ additionalCSS } href={ data.attributes.url }>{ data.attributes.title }</a>;
+    return <a className={ additionalCSS } href={ data.attributes.urlOrAnchor }>{ data.attributes.title }</a>;
 }
 
 export default HeaderLink;
