@@ -15,7 +15,7 @@
     "title": {
       "type": "string"
     },
-    "url": {
+    "urlOrAnchor": {
       "type": "string"
     }
   }

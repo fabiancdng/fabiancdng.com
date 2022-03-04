@@ -17,6 +17,9 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::project.project"
+    },
+    "htmlAnchor": {
+      "type": "string"
     }
   }
 }
