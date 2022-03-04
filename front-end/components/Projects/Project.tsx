@@ -51,7 +51,15 @@ const Project = ({ data, statics }: projectProps) => {
 
     return (
         <div className="bg-slate-200 rounded-md p-5 flex flex-col justify-between">
-            <h4 className="text-2xl">{ data.attributes.name }</h4>
+            <h4 className="text-2xl">
+                <a href={
+                    data.attributes.url
+                    ? data.attributes.url
+                    : data.attributes.githubRepo ? 'https://github.com/' + data.attributes.githubRepo : 'javascript:void(0);'
+                }>
+                    { data.attributes.name }
+                </a>
+            </h4>
             <p className="mt-3">{ data.attributes.shortDescription }</p>
             <div className="grid grid-cols-2 gap-3">
                 {
