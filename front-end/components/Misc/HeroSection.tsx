@@ -16,7 +16,8 @@ interface heroSectionData {
     },
     logo: {
         data: imageData|null,
-    }
+    },
+    htmlAnchor: string,
 }
 
 /**
@@ -33,7 +34,7 @@ const HeroSection = ({ data, statics }: heroSectionProps) => {
     }, []);
 
     return (
-        <div className="h-screen flex flex-col justify-center align-middle">
+        <div id={ data.htmlAnchor } className="h-screen flex flex-col justify-center align-middle">
             <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center gap-12 mt-10 lg:mt-25">
                 {/* Text */}
                 <div className="flex flex-1 flex-col items-center lg:items-start">
