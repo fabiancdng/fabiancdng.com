@@ -13,3 +13,4 @@ cms/public/uploads/*
 
 # REST API
 venv/
+__pycache__/
