@@ -1,7 +1,15 @@
+# Misc
 .DS_Store
 node_modules/
 package-lock.json
 .env
+
+# Front End
 .next/
+
+# CMS
 cms/.strapi-updater.json
 cms/public/uploads/*
+
+# REST API
+venv/
