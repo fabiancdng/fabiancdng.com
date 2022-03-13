@@ -5,6 +5,7 @@ import qs from 'qs';
 import Head from 'next/head';
 import React from 'react';
 import { renderComponent } from '../utils/dynamic-component';
+import GhostContentAPI, { PostOrPage } from "@tryghost/content-api";
 import staticsData from '../types/statics';
 
 /**
@@ -16,6 +17,7 @@ interface homePageData {
   updatedAt: string,
   createdAt: string,
   publishedAt: string,
+  blogPosts: PostOrPage[],
 }
 
 /**
@@ -81,6 +83,17 @@ export async function getServerSideProps() {
   // Parse JSON response and get relevant data.
   const homepageDataRaw = await homepageDataRequest.json();
   const data: homePageData = homepageDataRaw.data.attributes;
+  
+  // Initialize Ghost Content API.
+  const ghostContentAPI = new GhostContentAPI({
+    url: 'https://blog.fabiancdng.com',
+    key: '230342eab24d14ef2f58f0fa21',
+    version: "v3"
+  });
+
+  // Retrieve blog posts from Ghost.
+  const blogPosts = await ghostContentAPI.posts.browse({ limit: 'all' });
+  data.blogPosts = blogPosts;
 
   const statics: staticsData = {
     'CMS_URL': CMS_URL !== undefined ? CMS_URL : '',
