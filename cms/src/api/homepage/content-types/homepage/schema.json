@@ -21,7 +21,8 @@
         "layout.header",
         "layout.hero-section",
         "layout.project-explorer",
-        "layout.footer"
+        "layout.footer",
+        "layout.blog-posts-explorer"
       ]
     }
   }
