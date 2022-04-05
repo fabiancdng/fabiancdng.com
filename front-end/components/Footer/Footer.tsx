@@ -47,7 +47,7 @@ const Footer = ({ data, statics }: footerProps) => {
                 {
                     // Render all header links (separate `FooterLink` component).
                     data.links.data?.map((link, index) => (
-                        <li key={ index } className="mr-5 text-gray-500 hover:underline"><FooterLink data={ link } /></li>
+                        <li key={ index } className="mr-5 last:mr-0 text-gray-500 hover:underline"><FooterLink data={ link } /></li>
                     ))
                 }
             </ul>

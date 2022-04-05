@@ -39,7 +39,7 @@ const HeroSection = ({ data, statics }: heroSectionProps) => {
                 {/* Text */}
                 <div className="flex flex-1 flex-col items-center lg:items-start">
                     <h1 className="text-4xl lg:text-6xl text-center lg:text-left mb-3 font-bold">{ data.title }</h1>
-                    <h2 className="text-3xl lg:text-5xl text-center lg:text-left text-slate-700 mb-1">{ data.subtitle }</h2>
+                    <h2 className="text-3xl lg:text-5xl text-center lg:text-left text-slate-700 mb-2">{ data.subtitle }</h2>
                     <h3 className="text-2xl lg:text-3xl text-center lg:text-left mb-6 text-gray-500">{ data.description }</h3>
                 </div>
 
