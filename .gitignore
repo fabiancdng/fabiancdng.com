@@ -3,6 +3,7 @@
 node_modules/
 package-lock.json
 .env
+docker-volumes/
 
 # Front End
 .next/
@@ -10,7 +11,5 @@ package-lock.json
 # CMS
 cms/.strapi-updater.json
 cms/public/uploads/*
-
-# REST API
-venv/
-__pycache__/
+cms/.cache/
+cms/build/
