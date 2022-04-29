@@ -9,7 +9,7 @@ import FooterLink from "./FooterLink";
     id: number,
     attributes: {
         title: string,
-        url: string,
+        urlOrAnchor: string,
         createdAt: string,
         updatedAt: string,
     }
