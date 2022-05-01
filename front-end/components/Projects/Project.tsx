@@ -59,7 +59,7 @@ const Project = ({ data, statics }: projectProps) => {
             className="p-4 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-50 hover:scale-105 transition-all flex flex-col justify-between overflow-hidden">
             {/* <img className="w-full" src="/img/card-top.jpg" alt="Sunset in the mountains" /> */}
             <div className="px-6 py-4">
-                <div className="font-bold text-2xl mb-2">
+                <div className="font-semibold text-2xl mb-2">
                     { data.attributes.name }
                 </div>
                 <p className="text-gray-700 text-md">

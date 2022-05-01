@@ -34,7 +34,7 @@ const ProjectExplorer = ({ data, statics }: projectExplorerProps) => {
         <div id={ data.htmlAnchor } className="w-screen">
             <div className="container mx-auto">
                 {/* Title and subtitle */}
-                <h1 className="text-gray-800 text-5xl pt-20 text-center sm:text-left mx-4 sm:mx-0">{ data.title }</h1>
+                <h1 className="text-gray-800 text-5xl font-semibold pt-20 text-center sm:text-left mx-4 sm:mx-0">{ data.title }</h1>
                 <h2 className="text-gray-800 text-2xl mb-10 mt-3 text-center sm:text-left mx-4 sm:mx-0">{ data.subtitle }</h2>
 
                 {/* Projects */}
