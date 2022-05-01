@@ -19,6 +19,9 @@ services:
     restart: unless-stopped
     env_file:
       - ./cms/.env
+    volumes:
+      - './cms/database:/app/database'
+      - './cms/public:/app/public'
     depends_on:
       - mariadb
     ports:
