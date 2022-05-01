@@ -84,7 +84,7 @@ const Header = ({ data, statics }: headerProps) => {
                     // Render all header links (separate `HeaderLink` component).
                     data.links.data?.map((link, index) => (
                         // Single Navigation Link
-                        <li key={ index } className="rounded bg-slate-200 hover:bg-slate-300 transition ease-in-out duration-300"><HeaderLink data={ link } additionalCSS="block w-full px-3 py-2" /></li>
+                        <li onClick={ e => setMobileMenuOpen(false) } key={ index } className="rounded bg-slate-200 hover:bg-slate-300 transition ease-in-out duration-300"><HeaderLink data={ link } additionalCSS="block w-full px-3 py-2" /></li>
                     ))
                 }
             </ul> }
