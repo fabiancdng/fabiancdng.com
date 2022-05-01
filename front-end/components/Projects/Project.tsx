@@ -53,7 +53,7 @@ const Project = ({ data, statics }: projectProps) => {
         <a href={
                 data.attributes.url
                 ? data.attributes.url
-                : data.attributes.githubRepo ? 'https://github.com/' + data.attributes.githubRepo : 'javascript:void(0);'
+                : data.attributes.githubRepo ? 'https://github.com/' + data.attributes.githubRepo : ''
             }
             target="fabiancdng"
             className="p-4 bg-white dark:bg-slate-800 rounded-lg border border-gray-200 dark:border-slate-600 shadow-md hover:bg-gray-50 hover:scale-[1.03] transition-all flex flex-col justify-between overflow-hidden">
@@ -87,31 +87,6 @@ const Project = ({ data, statics }: projectProps) => {
             </div>
         </a>
         );
-        {/* <div className="bg-slate-200 rounded-md p-5 flex flex-col justify-between">
-            <h4 className="text-2xl">
-                <a href={
-                    data.attributes.url
-                    ? data.attributes.url
-                    : data.attributes.githubRepo ? 'https://github.com/' + data.attributes.githubRepo : 'javascript:void(0);'
-                }>
-                    { data.attributes.name }
-                </a>
-            </h4>
-            <p className="mt-3">{ data.attributes.shortDescription }</p>
-            <div className="grid grid-cols-2 gap-3">
-                {
-                    data.attributes.languages.data.map((language, index) => (
-                        <div key={ index } className="flex items-center mt-5">
-                            <span
-                                className="rounded-full w-4 h-4 mr-2"
-                                style={{ background: language.attributes.colorCode !== null ? language.attributes.colorCode : 'gray' }}
-                            ></span>
-                            <span>{ language.attributes.name }</span>
-                        </div>
-                    ))
-                }
-            </div>
-        </div> */}
 }
 
 export default Project;

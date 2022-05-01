@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaMoon, FaRegMoon } from 'react-icons/fa';
 // import { GlobalContext } from '../../contexts/GlobalContext';
 
@@ -18,6 +18,9 @@ const DarkModeToggle = ({ additionalCSS }: darkModeToggleProps) => {
     const changeColorMode = () => {
         // Toggle color mode in state.
         setColorMode(colorMode === 'light' ? 'dark' : 'light');
+    }
+
+    useEffect(() => {
         // Set .dark class on body to use tailwind dark: selectors.
         if (colorMode === 'dark') {
             document.body.classList.add('dark');
@@ -25,7 +28,7 @@ const DarkModeToggle = ({ additionalCSS }: darkModeToggleProps) => {
             // Remove class when dark mode has been disabled.
             document.body.classList.remove('dark');
         }
-    }
+    }, [colorMode]);
 
     return (
         <a
