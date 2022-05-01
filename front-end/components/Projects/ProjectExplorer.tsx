@@ -31,11 +31,11 @@ const ProjectExplorer = ({ data, statics }: projectExplorerProps) => {
     }, []);
 
     return (
-        <div id={ data.htmlAnchor } className="w-screen">
+        <div id={ data.htmlAnchor } className="w-screen dark:bg-slate-900">
             <div className="container mx-auto">
                 {/* Title and subtitle */}
-                <h1 className="text-gray-800 text-5xl font-semibold pt-20 text-center sm:text-left mx-4 sm:mx-0">{ data.title }</h1>
-                <h2 className="text-gray-800 text-2xl mb-10 mt-3 text-center sm:text-left mx-4 sm:mx-0">{ data.subtitle }</h2>
+                <h1 className="text-gray-800 dark:text-slate-100 text-5xl font-semibold pt-20 text-center sm:text-left mx-4 sm:mx-0">{ data.title }</h1>
+                <h2 className="text-gray-800 dark:text-slate-200 text-2xl mb-10 mt-3 text-center sm:text-left mx-4 sm:mx-0">{ data.subtitle }</h2>
 
                 {/* Projects */}
                 <div className="grid sm:grid-cols-2 mx-4 sm:mx-0 gap-4 pb-20">

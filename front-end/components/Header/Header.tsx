@@ -51,7 +51,7 @@ const Header = ({ data, statics }: headerProps) => {
     }, []);
 
     return (
-        <header className="fixed top-0 left-0 w-full z-20 bg-white">
+        <header className="fixed top-0 left-0 w-full z-20 bg-white dark:bg-slate-800">
             {/* Navigation */}
             <nav className="flex items-center px-2 sm:px-0 my-2 container mx-auto">
                 {/* Site title/logo */}
@@ -65,7 +65,7 @@ const Header = ({ data, statics }: headerProps) => {
                         // Render all header links (separate `HeaderLink` component).
                         data.links.data?.map((link, index) => (
                             // Single Navigation Link
-                            <li key={ index }><HeaderLink data={ link } additionalCSS="hover:bg-slate-200 rounded transition-all duration-500 px-4 py-3" /></li>
+                            <li key={ index }><HeaderLink data={ link } additionalCSS="dark:hover:bg-slate-600 dark:text-white hover:bg-slate-200 rounded transition-all duration-500 px-4 py-3" /></li>
                         ))
                     }
                 </ul>
