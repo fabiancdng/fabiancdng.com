@@ -1,7 +1,7 @@
 /**
  * Data of an image from the CMS.
  */
-export default interface imageData {
+export default interface ImageData {
     id: number,
     attributes: {
         name: string,

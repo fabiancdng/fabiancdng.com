@@ -4,10 +4,11 @@
   "info": {
     "singularName": "website",
     "pluralName": "websites",
-    "displayName": "Website"
+    "displayName": "Website",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
@@ -15,11 +16,12 @@
       "type": "string"
     },
     "favicon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     }
   }
 }

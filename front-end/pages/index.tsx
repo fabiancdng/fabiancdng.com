@@ -7,6 +7,7 @@ import React from 'react';
 import { renderComponent } from '../utils/dynamic-component';
 import GhostContentAPI, { PostOrPage } from "@tryghost/content-api";
 import staticsData from '../types/statics';
+import { WebsiteMetaData } from '../types/website-meta-data';
 
 /**
  * Data (& content) for the homepage from CMS.
@@ -41,6 +42,11 @@ const Home: NextPage<homeProps> = ({ data, statics }: homeProps) => {
     <>
       <Head>
         <title>{ data.title }</title>
+        <link
+          rel="icon"
+          href={ statics.CMS_URL + statics.website.data.attributes.favicon.data.attributes.url }
+          type={ statics.website.data.attributes.favicon.data.attributes.mime }
+        />
       </Head>
 
       {
@@ -53,6 +59,16 @@ const Home: NextPage<homeProps> = ({ data, statics }: homeProps) => {
 
 export async function getServerSideProps() {
   const { CMS_URL, CMS_ACCESS_TOKEN } = env;
+
+  // Retrieve website metadata from CMS on the server side.
+  const websiteMetaDataRequest = await fetch(CMS_URL + '/api/website?populate=*', {
+    method: 'GET',
+    headers: {
+    'Authorization': 'Bearer ' + CMS_ACCESS_TOKEN,
+    }
+  });
+
+  const websiteMetaData: WebsiteMetaData = await websiteMetaDataRequest.json();
 
   // Querystring holding the fields to populate.
   const querystring = qs.stringify({
@@ -96,7 +112,8 @@ export async function getServerSideProps() {
   data.blogPosts = blogPosts;
 
   const statics: staticsData = {
-    'CMS_URL': CMS_URL !== undefined ? CMS_URL : '',
+    CMS_URL: CMS_URL !== undefined ? CMS_URL : '',
+    website: websiteMetaData,
   };
 
   // Pass data/content from the CMS to the component as a prop.
