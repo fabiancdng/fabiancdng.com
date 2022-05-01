@@ -41,7 +41,7 @@ const Home: NextPage<HomeProps> = ({ data, statics }: HomeProps) => {
   return (
     <>
       <Head>
-        <title>{ data.title }</title>
+        <title>{ data.title + ' | ' + statics.website.name }</title>
         <link
           rel="icon"
           href={ statics.CMS_URL + statics.website.favicon.data.attributes.url }
