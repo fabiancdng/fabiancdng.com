@@ -12,7 +12,7 @@ import { WebsiteMetaData } from '../types/website-meta-data';
 /**
  * Data (& content) for the homepage from CMS.
  */
-interface homePageData {
+interface HomePageData {
   title: string,
   content: never[],
   updatedAt: string,
@@ -24,12 +24,12 @@ interface homePageData {
 /**
  * Props for the Home component.
  */
-interface homeProps {
-  data: homePageData,
+interface HomeProps {
+  data: HomePageData,
   statics: staticsData,
 }
 
-const Home: NextPage<homeProps> = ({ data, statics }: homeProps) => {
+const Home: NextPage<HomeProps> = ({ data, statics }: HomeProps) => {
   const [contentComponents, setContentComponents] = useState([]);
 
   useEffect(() => {
@@ -44,8 +44,8 @@ const Home: NextPage<homeProps> = ({ data, statics }: homeProps) => {
         <title>{ data.title }</title>
         <link
           rel="icon"
-          href={ statics.CMS_URL + statics.website.data.attributes.favicon.data.attributes.url }
-          type={ statics.website.data.attributes.favicon.data.attributes.mime }
+          href={ statics.CMS_URL + statics.website.favicon.data.attributes.url }
+          type={ statics.website.favicon.data.attributes.mime }
         />
       </Head>
 
@@ -68,7 +68,8 @@ export async function getServerSideProps() {
     }
   });
 
-  const websiteMetaData: WebsiteMetaData = await websiteMetaDataRequest.json();
+  const websiteMetaDataRaw = await websiteMetaDataRequest.json();
+  const websiteMetaData: WebsiteMetaData = websiteMetaDataRaw.data.attributes;
 
   // Querystring holding the fields to populate.
   const querystring = qs.stringify({
@@ -98,7 +99,7 @@ export async function getServerSideProps() {
 
   // Parse JSON response and get relevant data.
   const homepageDataRaw = await homepageDataRequest.json();
-  const data: homePageData = homepageDataRaw.data.attributes;
+  const data: HomePageData = homepageDataRaw.data.attributes;
   
   // Initialize Ghost Content API.
   const ghostContentAPI = new GhostContentAPI({
