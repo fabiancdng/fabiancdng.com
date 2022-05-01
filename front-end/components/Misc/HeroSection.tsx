@@ -23,12 +23,12 @@ interface heroSectionData {
 /**
  * Props for the HeroSection component.
  */
-interface heroSectionProps {
+interface HeroSectionProps {
     data: heroSectionData,
     statics: staticsData,
 }
 
-const HeroSection = ({ data, statics }: heroSectionProps) => {
+const HeroSection = ({ data, statics }: HeroSectionProps) => {
     useEffect(() => {
         console.log('HeroSection: ', data);
     }, []);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ImageData from "../../types/image";
-import HeaderLink, { headerLinkData } from "./HeaderLink";
+import HeaderLink, { HeaderLinkData } from "./HeaderLink";
 import { FaBars } from 'react-icons/fa';
 import DarkModeToggle from "./DarkModeToggle";
 
@@ -15,7 +15,7 @@ interface headerData {
         data: ImageData|null,
     },
     links: {
-        data: headerLinkData[]|null,
+        data: HeaderLinkData[]|null,
     }
 }
 

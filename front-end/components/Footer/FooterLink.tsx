@@ -1,7 +1,7 @@
 /**
  * Data from the CMS for a link in the header.
  */
-export interface footerLinkData {
+export interface FooterLinkData {
     id: number,
     attributes: {
         title: string,
@@ -14,11 +14,11 @@ export interface footerLinkData {
 /**
  * Props for the HeaderLink component.
  */
-interface footerLinkProps {
-    data: footerLinkData,
+interface FooterLinkProps {
+    data: FooterLinkData,
 }
 
-const FooterLink = ({ data }: footerLinkProps) => {
+const FooterLink = ({ data }: FooterLinkProps) => {
     return <a className="dark:text-slate-300" href={ data.attributes.urlOrAnchor }>{ data.attributes.title }</a>;
 }
 

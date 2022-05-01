@@ -1,17 +1,17 @@
 import { useEffect } from "react";
 import staticsData from "../../types/statics";
-import Project, { projectData } from "./Project";
+import Project, { ProjectData } from "./Project";
 
 /**
  * Data from the CMS for a `ProjectExplorer` component.
  */
-interface projectExplorerData {
+interface ProjectExplorerData {
     id: number,
     __component: string,
     title: string,
     subtitle: string,
     projects: {
-        data: projectData[]|null,
+        data: ProjectData[]|null,
     },
     htmlAnchor: string,
 }
@@ -20,7 +20,7 @@ interface projectExplorerData {
  * Props for the Header component.
  */
 interface projectExplorerProps {
-    data: projectExplorerData,
+    data: ProjectExplorerData,
     statics: staticsData,
 }
 

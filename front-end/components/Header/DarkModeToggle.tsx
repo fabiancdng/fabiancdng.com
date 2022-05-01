@@ -5,12 +5,12 @@ import { FaMoon, FaRegMoon } from 'react-icons/fa';
 /**
  * Props for the DarkModeToggle component.
  */
- interface darkModeToggleProps {
+ interface DarkModeToggleProps {
     additionalCSS?: string
 }
 
 
-const DarkModeToggle = ({ additionalCSS }: darkModeToggleProps) => {
+const DarkModeToggle = ({ additionalCSS }: DarkModeToggleProps) => {
     // Get color mode state from global context.
     // const { colorMode, setColorMode } = useContext(GlobalContext);
     const [colorMode, setColorMode] = useState('light');

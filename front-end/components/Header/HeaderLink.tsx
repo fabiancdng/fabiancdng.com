@@ -1,7 +1,7 @@
 /**
  * Data from the CMS for a link in the header.
  */
-export interface headerLinkData {
+export interface HeaderLinkData {
     id: number,
     attributes: {
         title: string,
@@ -14,12 +14,12 @@ export interface headerLinkData {
 /**
  * Props for the HeaderLink component.
  */
-interface headerLinkProps {
-    data: headerLinkData,
+interface HeaderLinkProps {
+    data: HeaderLinkData,
     additionalCSS: string,
 }
 
-const HeaderLink = ({ data, additionalCSS }: headerLinkProps) => {
+const HeaderLink = ({ data, additionalCSS }: HeaderLinkProps) => {
     return <a className={ additionalCSS } href={ data.attributes.urlOrAnchor }>{ data.attributes.title }</a>;
 }
 

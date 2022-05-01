@@ -5,7 +5,7 @@ import FooterLink from "./FooterLink";
 /**
  * Data from the CMS for a link in the header (nested in headerData).
  */
- interface footerLink {
+ interface FooterLink {
     id: number,
     attributes: {
         title: string,
@@ -18,24 +18,24 @@ import FooterLink from "./FooterLink";
 /**
  * Data from the CMS for a Footer component.
  */
-interface footerData {
+interface FooterData {
     id: number,
     __component: string,
     text: string,
     links: {
-        data: footerLink[]|null,
+        data: FooterLink[]|null,
     }
 }
 
 /**
  * Props for the Footer component.
  */
-interface footerProps {
-    data: footerData,
+interface FooterProps {
+    data: FooterData,
     statics: StaticsData,
 }
 
-const Footer = ({ data, statics }: footerProps) => {
+const Footer = ({ data, statics }: FooterProps) => {
     useEffect(() => {
         console.log('Footer', data);
     }, []);

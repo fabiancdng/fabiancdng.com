@@ -4,7 +4,7 @@ import staticsData from "../../types/statics";
 /**
  * Data about a programming language from the CMS.
  */
-interface programmingLanguageData {
+interface ProgrammingLanguageData {
     id: number,
     attributes: {
         name: string,
@@ -18,7 +18,7 @@ interface programmingLanguageData {
 /**
  * Data from the CMS for a single project.
  */
-export interface projectData {
+export interface ProjectData {
     id: number,
     attributes: {
         name: string,
@@ -31,7 +31,7 @@ export interface projectData {
         shortDescription: string,
         longDescription: string,
         languages: {
-            data: programmingLanguageData[]
+            data: ProgrammingLanguageData[]
         }
     }
 }
@@ -39,12 +39,12 @@ export interface projectData {
 /**
  * Props for the Project component.
  */
-interface projectProps {
-    data: projectData,
+interface ProjectProps {
+    data: ProjectData,
     statics: staticsData,
 }
 
-const Project = ({ data, statics }: projectProps) => {
+const Project = ({ data, statics }: ProjectProps) => {
     useEffect(() => {
         console.log('Project', data);
     }, []);
