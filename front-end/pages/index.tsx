@@ -33,8 +33,6 @@ const Home: NextPage<HomeProps> = ({ data, statics }: HomeProps) => {
   const [contentComponents, setContentComponents] = useState([]);
 
   useEffect(() => {
-    console.log(data.content);
-    console.log(data, statics);
     setContentComponents(data.content);
   }, []);
 

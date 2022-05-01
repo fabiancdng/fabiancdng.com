@@ -1,6 +1,5 @@
-import { useEffect } from "react";
-import StaticsData from "../../types/statics";
-import FooterLink from "./FooterLink";
+import StaticsData from '../../types/statics';
+import FooterLink from './FooterLink';
 
 /**
  * Data from the CMS for a link in the header (nested in headerData).
@@ -36,10 +35,6 @@ interface FooterProps {
 }
 
 const Footer = ({ data, statics }: FooterProps) => {
-    useEffect(() => {
-        console.log('Footer', data);
-    }, []);
-
     return (
         <footer className="dark:bg-slate-800">
             <div className="container mx-auto flex flex-col justify-center items-center py-5">

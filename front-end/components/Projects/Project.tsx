@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import staticsData from "../../types/statics";
+import StaticsData from "../../types/statics";
 
 /**
  * Data about a programming language from the CMS.
@@ -41,14 +40,10 @@ export interface ProjectData {
  */
 interface ProjectProps {
     data: ProjectData,
-    statics: staticsData,
+    statics: StaticsData,
 }
 
 const Project = ({ data, statics }: ProjectProps) => {
-    useEffect(() => {
-        console.log('Project', data);
-    }, []);
-
     return (
         <a href={
                 data.attributes.url

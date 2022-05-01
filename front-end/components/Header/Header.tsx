@@ -37,8 +37,6 @@ const Header = ({ data, statics }: headerProps) => {
     const menuBreakpoint = 640;
 
     useEffect(() => {
-        console.log('Header: ', data);
-
         const handleResize = () => {
             // Update screenWidth state on resize.
             setScreenWidth(window.innerWidth);

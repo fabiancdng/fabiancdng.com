@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import staticsData from "../../types/statics";
+import StaticsData from "../../types/statics";
 import Project, { ProjectData } from "./Project";
 
 /**
@@ -21,15 +20,10 @@ interface ProjectExplorerData {
  */
 interface projectExplorerProps {
     data: ProjectExplorerData,
-    statics: staticsData,
+    statics: StaticsData,
 }
 
 const ProjectExplorer = ({ data, statics }: projectExplorerProps) => {
-    useEffect(() => {
-        console.log('ProjectExplorer', data);
-        console.log(data.projects.data);
-    }, []);
-
     return (
         <div id={ data.htmlAnchor } className="w-screen dark:bg-slate-900">
             <div className="container mx-auto">

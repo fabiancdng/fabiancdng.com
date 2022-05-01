@@ -1,21 +1,20 @@
-import { useEffect } from "react";
-import imageData from "../../types/image";
-import staticsData from "../../types/statics";
+import ImageData from '../../types/image';
+import StaticsData from '../../types/statics';
 
 /**
  * Data from the CMS for a HeroSection component.
  */
-interface heroSectionData {
+interface HeroSectionData {
     id: number,
     __component: string,
     title: string,
     subtitle: string,
     description: string|null,
     backgroundImage: {
-        data: imageData|null,
+        data: ImageData|null,
     },
     logo: {
-        data: imageData|null,
+        data: ImageData|null,
     },
     htmlAnchor: string,
 }
@@ -24,15 +23,11 @@ interface heroSectionData {
  * Props for the HeroSection component.
  */
 interface HeroSectionProps {
-    data: heroSectionData,
-    statics: staticsData,
+    data: HeroSectionData,
+    statics: StaticsData,
 }
 
 const HeroSection = ({ data, statics }: HeroSectionProps) => {
-    useEffect(() => {
-        console.log('HeroSection: ', data);
-    }, []);
-
     return (
         <div id={ data.htmlAnchor } className="h-screen flex flex-col justify-center align-middle dark:bg-slate-900">
             <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center gap-12 mt-10 lg:mt-25">
