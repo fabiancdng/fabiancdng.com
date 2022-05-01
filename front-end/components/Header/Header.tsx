@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import imageData from "../../types/image";
 import HeaderLink, { headerLinkData } from "./HeaderLink";
 import { FaBars } from 'react-icons/fa';
+import DarkModeToggle from "./DarkModeToggle";
 
 /**
  * Data from the CMS for a Header component.
@@ -64,14 +65,25 @@ const Header = ({ data, statics }: headerProps) => {
                         // Render all header links (separate `HeaderLink` component).
                         data.links.data?.map((link, index) => (
                             // Single Navigation Link
-                            <li key={ index } className=""><HeaderLink data={ link } additionalCSS="hover:bg-slate-200 rounded p-3 transition-all duration-500" /></li>
+                            <li key={ index }><HeaderLink data={ link } additionalCSS="hover:bg-slate-200 rounded transition-all duration-500 px-4 py-3" /></li>
                         ))
                     }
                 </ul>
+
+                {/* Icon to toggle dark/light mode */}
+                <div className="hidden sm:flex">
+                    <DarkModeToggle />
+                </div>
                 
                 {/* Mobile menu toggler (icon) */}
-                <div className="flex sm:hidden flex-1 justify-end text-2xl">
-                    <button onClick={ () => setMobileMenuOpen(!mobileMenuOpen) } className="rounded focus:bg-slate-100 p-2 focus:border-slate-300 border-white border transition-all ease-in-out duration-200">
+                <div className="flex sm:hidden space-x-4 flex-1 justify-end text-3xl">
+                    {/* Icon to toggle dark/light mode */}
+                    <DarkModeToggle />
+                    <button
+                        onClick={ () => setMobileMenuOpen(!mobileMenuOpen) }
+                        className={ `rounded p-2 border-white border transition-all
+                        ease-in-out duration-200 hover:bg-slate-200 bg-slate-100` }
+                    >
                         <FaBars />
                     </button>
                 </div>
@@ -84,7 +96,7 @@ const Header = ({ data, statics }: headerProps) => {
                     // Render all header links (separate `HeaderLink` component).
                     data.links.data?.map((link, index) => (
                         // Single Navigation Link
-                        <li onClick={ e => setMobileMenuOpen(false) } key={ index } className="rounded bg-slate-200 hover:bg-slate-300 transition ease-in-out duration-300"><HeaderLink data={ link } additionalCSS="block w-full px-3 py-2" /></li>
+                        <li onClick={ () => setMobileMenuOpen(false) } key={ index } className="rounded bg-slate-200 hover:bg-slate-300 transition ease-in-out duration-300"><HeaderLink data={ link } additionalCSS="block w-full px-3 py-2" /></li>
                     ))
                 }
             </ul> }
