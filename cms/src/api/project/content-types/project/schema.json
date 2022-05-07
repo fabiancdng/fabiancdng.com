@@ -43,9 +43,6 @@
     },
     "shortDescription": {
       "type": "text"
-    },
-    "longDescription": {
-      "type": "richtext"
     }
   }
 }
