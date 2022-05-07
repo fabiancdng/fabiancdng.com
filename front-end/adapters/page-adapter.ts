@@ -28,16 +28,16 @@ class PageAdapter {
         // Querystring holding the fields to populate.
         const querystring = qs.stringify({
             populate: {
-            // Populate DZ 'content'.
-            content: {
-                populate: [
-                '*',
-                'logo',
-                'links',
-                'projects',
-                'projects.languages',
-                ]
-            }
+                // Populate DZ 'content'.
+                content: {
+                    populate: [
+                        '*',
+                        'logo',
+                        'links',
+                        'projects',
+                        'projects.languages',
+                    ]
+                }
             }
         }, {
             encodeValuesOnly: true,
@@ -68,9 +68,12 @@ class PageAdapter {
      * Get the template for a custom/dynamic page from Strapi.
      */
     public getPageTemplate(): Promise<PageTemplateData> {
+        // Querystring holding the fields to populate.
+        const querystring = '?populate[content][populate]=*';
+
         return new Promise(async (resolve, reject) => {
             // Retrieve page template from Strapi.
-            const pageTemplateRequest = await fetch(this.STRAPI_URL + '/api/page-template?populate[0]=*&populate[pageHeader][populate]=logo', {
+            const pageTemplateRequest = await fetch(this.STRAPI_URL + '/api/page-template' + querystring, {
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + this.STRAPI_ACCESS_TOKEN,

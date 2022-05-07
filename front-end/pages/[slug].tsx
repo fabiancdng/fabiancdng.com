@@ -1,11 +1,13 @@
 import GhostContentAPI, { PostOrPage } from '@tryghost/content-api';
 import { GetServerSideProps } from 'next';
 import { env } from 'process';
+import { useEffect, useState } from 'react';
 import PageAdapter from '../adapters/page-adapter';
 import WebsiteAdapter from '../adapters/website-adapter';
 import Header from '../components/Header/Header';
 import PageTemplateData from '../types/page-template';
 import StaticsData from '../types/statics';
+import { renderComponent } from '../utils/dynamic-component';
 
 interface PageProps {
     page: PostOrPage,
@@ -14,10 +16,9 @@ interface PageProps {
 }
 
 /**
- * Custom Page component.
- * Gets the page content from Ghost by its slug (if it exists).
+ * Component to be intercepted to "opt-out" of Strapi and use data from Ghost.
  */
-const Page = ({ page, template, statics }: PageProps) => {
+const PageContent = ({ page }: { page: PostOrPage }) => {
     /**
      * The page content (HTML).
      */
@@ -25,14 +26,27 @@ const Page = ({ page, template, statics }: PageProps) => {
 
     return (
         <>
-        {JSON.stringify(template.pageHeader)}
-            <Header
-                data={ template.pageHeader }
-                statics={ statics }
-            />
             <h1>{ page.title }</h1>
             <div dangerouslySetInnerHTML={{ __html: pageContent }}></div>
         </>
+    );
+}
+
+/**
+ * Custom Page component.
+ * Gets the page content from Ghost by its slug (if it exists).
+ */
+const Page = ({ page, template, statics }: PageProps) => {
+    const [contentComponents, setContentComponents] = useState<any>([]);
+
+    useEffect(() => {
+      setContentComponents(template.content);
+    }, []);
+
+    return (
+        contentComponents.map((component: any, index: number) => (
+            component['__component'] === 'adapters.ghost-page' ? <PageContent key={ index } page={ page } /> : renderComponent(component, index, statics)
+        ))
     );
 }
 
