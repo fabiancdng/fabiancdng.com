@@ -43,7 +43,7 @@ const HeroSection = ({ data, statics }: HeroSectionProps) => {
 
                 {/* Logo */}
                 <div className="flex justify-center flex-1 lg:mb-0 z-10">
-                    <img src={ statics.CMS_URL + data.logo.data?.attributes.url } className="lg:w-3/6 lg:h-3/6" alt="" />
+                    <img src={ statics.STRAPI_URL + data.logo.data?.attributes.url } className="lg:w-3/6 lg:h-3/6" alt="" />
                 </div>
             </div>
         </div>

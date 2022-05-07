@@ -8,19 +8,19 @@ class PageAdapter {
     /**
      * URL of the CMS.
      */
-    private CMS_URL: string|undefined;
+    private STRAPI_URL: string|undefined;
 
     /**
      * Access token needed to access the CMS's API.
      */
-    private CMS_ACCESS_TOKEN: string|undefined;
+    private STRAPI_ACCESS_TOKEN: string|undefined;
 
     /**
      * Constructor for the PageAdapter class.
      */
-    constructor(CMS_URL: string|undefined, CMS_ACCESS_TOKEN: string|undefined) {
-        this.CMS_URL = CMS_URL;
-        this.CMS_ACCESS_TOKEN = CMS_ACCESS_TOKEN;
+    constructor(STRAPI_URL: string|undefined, STRAPI_ACCESS_TOKEN: string|undefined) {
+        this.STRAPI_URL = STRAPI_URL;
+        this.STRAPI_ACCESS_TOKEN = STRAPI_ACCESS_TOKEN;
     }
 
     public getHomePageData(): Promise<HomePageData> {
@@ -44,10 +44,10 @@ class PageAdapter {
 
         return new Promise(async (resolve, reject) => {
             // Retrieve homepage data (& content) from CMS.
-            const homepageDataRequest = await fetch(this.CMS_URL + '/api/homepage?' + querystring, {
+            const homepageDataRequest = await fetch(this.STRAPI_URL + '/api/homepage?' + querystring, {
                 method: 'GET',
                 headers: {
-                    'Authorization': 'Bearer ' + this.CMS_ACCESS_TOKEN,
+                    'Authorization': 'Bearer ' + this.STRAPI_ACCESS_TOKEN,
                 }
             });
 

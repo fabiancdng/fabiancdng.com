@@ -25,7 +25,7 @@ interface headerData {
 interface headerProps {
     data: headerData,
     statics: {
-        'CMS_URL': string,
+        STRAPI_URL: string,
     }
 }
 
@@ -54,7 +54,7 @@ const Header = ({ data, statics }: headerProps) => {
             <nav className="flex items-center px-2 sm:px-0 my-2 container mx-auto">
                 {/* Site title/logo */}
                 <div className="w-14 h-14 p-1 flex items-center">
-                    <img src={ statics.CMS_URL ? statics.CMS_URL + data.logo.data?.attributes.url : '' } alt="" />
+                    <img src={ statics.STRAPI_URL ? statics.STRAPI_URL + data.logo.data?.attributes.url : '' } alt="" />
                     <h2 className="ml-2 text-2xl font-semibold">{ data.title }</h2>
                 </div>
                 {/* Navigation Links */}

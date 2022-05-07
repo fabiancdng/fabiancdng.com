@@ -30,7 +30,7 @@ const Home: NextPage<HomeProps> = ({ pageData, statics }: HomeProps) => {
         <title>{ pageData.title + ' | ' + statics.website.name }</title>
         <link
           rel="icon"
-          href={ statics.CMS_URL + statics.website.favicon.data.attributes.url }
+          href={ statics.STRAPI_URL + statics.website.favicon.data.attributes.url }
           type={ statics.website.favicon.data.attributes.mime }
         />
       </Head>
@@ -44,18 +44,18 @@ const Home: NextPage<HomeProps> = ({ pageData, statics }: HomeProps) => {
 };
 
 export async function getServerSideProps() {
-  const { CMS_URL, CMS_ACCESS_TOKEN } = env;
+  const { STRAPI_URL, STRAPI_ACCESS_TOKEN } = env;
 
   // Retrieve website metadata from CMS on the server side.
-  const websiteAdapter = new WebsiteAdapter(CMS_URL, CMS_ACCESS_TOKEN);
+  const websiteAdapter = new WebsiteAdapter(STRAPI_URL, STRAPI_ACCESS_TOKEN);
   const websiteMetaData = await websiteAdapter.getWebsiteMetaData();
 
   // Retrieve homepage data (& content) from the CMS on the server side.
-  const pageAdapter = new PageAdapter(CMS_URL, CMS_ACCESS_TOKEN);
+  const pageAdapter = new PageAdapter(STRAPI_URL, STRAPI_ACCESS_TOKEN);
   const pageData = await pageAdapter.getHomePageData();
 
   const statics: StaticsData = {
-    CMS_URL: CMS_URL !== undefined ? CMS_URL : '',
+    STRAPI_URL: STRAPI_URL !== undefined ? STRAPI_URL : '',
     website: websiteMetaData,
   };
 
