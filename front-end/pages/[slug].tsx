@@ -1,5 +1,6 @@
 import GhostContentAPI, { PostOrPage } from '@tryghost/content-api';
 import { GetServerSideProps } from 'next';
+import Head from 'next/head';
 import { env } from 'process';
 import { useEffect, useState } from 'react';
 import PageAdapter from '../adapters/page-adapter';
@@ -25,10 +26,13 @@ const PageContent = ({ page }: { page: PostOrPage }) => {
     var pageContent = String(page.html);
 
     return (
-        <>
-            <h1>{ page.title }</h1>
-            <div dangerouslySetInnerHTML={{ __html: pageContent }}></div>
-        </>
+        <div className="container pt-32 mx-auto mb-20 px-7 text-black dark:text-white">
+            <h1 className="text-4xl">{ page.title }</h1>
+            <div
+                id="ghost-page"
+                dangerouslySetInnerHTML={{ __html: pageContent }}
+            />
+        </div>
     );
 }
 
@@ -44,9 +48,18 @@ const Page = ({ page, template, statics }: PageProps) => {
     }, []);
 
     return (
-        contentComponents.map((component: any, index: number) => (
-            component['__component'] === 'adapters.ghost-page' ? <PageContent key={ index } page={ page } /> : renderComponent(component, index, statics)
-        ))
+        <>
+            <Head>
+                <title>{ page.title + ' | ' + statics.website.name }</title>
+            </Head>
+            <div className="bg-white dark:bg-slate-800">
+                {
+                    contentComponents.map((component: any, index: number) => (
+                        component['__component'] === 'adapters.ghost-page' ? <PageContent key={ index } page={ page } /> : renderComponent(component, index, statics)
+                    ))
+                }
+            </div>
+        </>
     );
 }
 
