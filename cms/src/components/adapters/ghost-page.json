@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_adapters_ghost_pages",
+  "info": {
+    "displayName": "GhostPage",
+    "icon": "plug"
+  },
+  "options": {},
+  "attributes": {
+    "dummySwitch": {
+      "type": "boolean"
+    }
+  }
+}
