@@ -1,4 +1,5 @@
 import qs from "qs";
+import PageTemplateData from "../types/page-template";
 import HomePageData from "../types/pages/homepage";
 
 /**
@@ -59,6 +60,29 @@ class PageAdapter {
 
             // Resolve promise and return data.
             resolve(data);
+        });
+    }
+
+
+    /**
+     * Get the template for a custom/dynamic page from Strapi.
+     */
+    public getPageTemplate(): Promise<PageTemplateData> {
+        return new Promise(async (resolve, reject) => {
+            // Retrieve page template from Strapi.
+            const pageTemplateRequest = await fetch(this.STRAPI_URL + '/api/page-template?populate[0]=*&populate[pageHeader][populate]=logo', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + this.STRAPI_ACCESS_TOKEN,
+                }
+            });
+
+            // Parse JSON response and return relevant data.
+            const pageTemplateDataRaw = await pageTemplateRequest.json();
+            const pageTemplate: PageTemplateData = pageTemplateDataRaw.data.attributes;
+            
+            // TODO: Add error handling.
+            resolve(pageTemplate);
         });
     }
 }
