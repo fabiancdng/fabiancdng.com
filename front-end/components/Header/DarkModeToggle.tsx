@@ -16,9 +16,23 @@ const DarkModeToggle = ({ additionalCSS }: DarkModeToggleProps) => {
     const [colorMode, setColorMode] = useState('light');
 
     const changeColorMode = () => {
+        // The new color mode to apply.
+        const newColorMode = colorMode === 'light' ? 'dark' : 'light';
+
+        // Save color mode in localStorage.
+        window.localStorage.setItem('colorMode', newColorMode);
+
         // Toggle color mode in state.
-        setColorMode(colorMode === 'light' ? 'dark' : 'light');
+        setColorMode(newColorMode);
     }
+
+    useEffect(() => {
+        // Set initial color mode according to user's preferences (if set).
+        const storedColorMode = window.localStorage.getItem('colorMode');
+        if (storedColorMode!== null) {
+            setColorMode(String(storedColorMode));
+        }
+    }, []);
 
     useEffect(() => {
         // Set .dark class on body to use tailwind dark: selectors.
