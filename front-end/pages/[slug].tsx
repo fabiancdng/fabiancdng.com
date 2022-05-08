@@ -51,13 +51,12 @@ const Page = ({ page, template, statics }: PageProps) => {
             <Head>
                 <title>{ page.title + ' | ' + statics.website.name }</title>
             </Head>
-            <div className="bg-white dark:bg-slate-800">
-                {
-                    contentComponents.map((component: any, index: number) => (
-                        component['__component'] === 'adapters.ghost-page' ? <PageContent key={ index } page={ page } /> : renderComponent(component, index, statics)
-                    ))
-                }
-            </div>
+            {
+                contentComponents.map((component: any, index: number) => (
+                    component['__component'] === 'adapters.ghost-page' ? <PageContent key={ index } page={ page } /> : renderComponent(component, index, statics)
+                ))
+            }
+
         </>
     );
 }
