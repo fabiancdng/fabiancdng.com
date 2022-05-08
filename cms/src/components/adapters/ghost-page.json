@@ -2,12 +2,9 @@
   "collectionName": "components_adapters_ghost_pages",
   "info": {
     "displayName": "GhostPage",
-    "icon": "plug"
+    "icon": "align-justify",
+    "description": ""
   },
   "options": {},
-  "attributes": {
-    "dummySwitch": {
-      "type": "boolean"
-    }
-  }
+  "attributes": {}
 }

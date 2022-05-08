@@ -1,0 +1,24 @@
+{
+  "kind": "singleType",
+  "collectionName": "post_templates",
+  "info": {
+    "singularName": "post-template",
+    "pluralName": "post-templates",
+    "displayName": "PostTemplate",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "content": {
+      "type": "dynamiczone",
+      "components": [
+        "layout.header",
+        "adapters.ghost-post",
+        "layout.footer"
+      ]
+    }
+  }
+}
