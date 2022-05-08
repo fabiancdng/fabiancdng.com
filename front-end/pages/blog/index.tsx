@@ -109,6 +109,11 @@ const Blog = ({ posts, template, statics }: BlogProps) => {
     <>
       <Head>
         <title>Blog | { statics.website.name }</title>
+        <link
+          rel="icon"
+          href={ statics.STRAPI_URL + statics.website.favicon.data.attributes.url }
+          type={ statics.website.favicon.data.attributes.mime }
+        />
       </Head>
       {
         contentComponents.map((component: any, index: number) => (

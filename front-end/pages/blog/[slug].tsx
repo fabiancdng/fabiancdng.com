@@ -50,6 +50,11 @@ const BlogPost = ({ post, template, statics }: BlogPostProps) => {
         <>
             <Head>
                 <title>{ post.title + ' | ' + statics.website.name }</title>
+                <link
+                    rel="icon"
+                    href={ statics.STRAPI_URL + statics.website.favicon.data.attributes.url }
+                    type={ statics.website.favicon.data.attributes.mime }
+                />
             </Head>
             <div className="bg-white dark:bg-slate-800">
                 {
