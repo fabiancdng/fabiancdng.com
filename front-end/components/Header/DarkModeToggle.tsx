@@ -32,7 +32,7 @@ const DarkModeToggle = ({ additionalCSS }: DarkModeToggleProps) => {
 
     return (
         <a
-            onClick={changeColorMode}
+            onClick={ changeColorMode }
             className={ `hover:bg-slate-200 bg-slate-100 flex flex-col justify-center rounded cursor-pointer px-4 py-3
             text-xl transition-all duration-500 dark:bg-slate-600 dark:hover:bg-slate-500 dark:text-white ` + additionalCSS }
         >
