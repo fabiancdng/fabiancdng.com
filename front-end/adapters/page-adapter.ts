@@ -1,5 +1,5 @@
 import qs from "qs";
-import PageTemplateData from "../types/page-template";
+import { PageTemplate, BlogPostTemplate } from "../types/templates";
 import HomePageData from "../types/pages/homepage";
 
 /**
@@ -59,7 +59,7 @@ class PageAdapter {
             // TODO: Add error handling.
 
             // Resolve promise and return data.
-            resolve(data);
+            return resolve(data);
         });
     }
 
@@ -67,7 +67,7 @@ class PageAdapter {
     /**
      * Get the template for a custom/dynamic page from Strapi.
      */
-    public getPageTemplate(): Promise<PageTemplateData> {
+    public getPageTemplate(): Promise<PageTemplate> {
         // Querystring holding the fields to populate.
         const querystring = '?populate[content][populate]=*';
 
@@ -81,11 +81,37 @@ class PageAdapter {
             });
 
             // Parse JSON response and return relevant data.
-            const pageTemplateDataRaw = await pageTemplateRequest.json();
-            const pageTemplate: PageTemplateData = pageTemplateDataRaw.data.attributes;
+            const pageTemplateRaw = await pageTemplateRequest.json();
+            const pageTemplate: PageTemplate = pageTemplateRaw.data.attributes;
             
             // TODO: Add error handling.
-            resolve(pageTemplate);
+            return resolve(pageTemplate);
+        });
+    }
+
+    /**
+     * Get the template for a custom/dynamic blog post from Strapi.
+     */
+    public getBlogPostTemplate(): Promise<BlogPostTemplate> {
+        // Querystring holding the fields to populate.
+        const querystring = '?populate[content][populate]=*';
+
+        return new Promise(async (resolve, reject) => {
+            // Retrieve post template from Strapi.
+            const postTemplateRequest = await fetch(this.STRAPI_URL + '/api/post-template' + querystring, {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + this.STRAPI_ACCESS_TOKEN,
+                }
+            });
+
+            // Parse JSON response and return relevant data.
+            const postTemplateRaw = await postTemplateRequest.json();
+            const postTemplate: BlogPostTemplate = postTemplateRaw.data.attributes;
+
+            // TODO: Add error handling.
+
+            return resolve(postTemplate);
         });
     }
 }

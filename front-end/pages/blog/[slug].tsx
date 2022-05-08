@@ -3,14 +3,14 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import { env } from 'process';
 import { useEffect, useState } from 'react';
-import PageAdapter from '../adapters/page-adapter';
-import WebsiteAdapter from '../adapters/website-adapter';
-import { PageTemplate } from '../types/templates';
-import StaticsData from '../types/statics';
-import { renderComponent } from '../utils/dynamic-component';
+import PageAdapter from '../../adapters/page-adapter';
+import WebsiteAdapter from '../../adapters/website-adapter';
+import { PageTemplate } from '../../types/templates';
+import StaticsData from '../../types/statics';
+import { renderComponent } from '../../utils/dynamic-component';
 
-interface PageProps {
-    page: PostOrPage,
+interface BlogPostProps {
+    post: PostOrPage,
     template: PageTemplate,
     statics: StaticsData,
 }
@@ -18,28 +18,28 @@ interface PageProps {
 /**
  * Component to be intercepted to "opt-out" of Strapi and use data from Ghost.
  */
-const PageContent = ({ page }: { page: PostOrPage }) => {
+const BlogPostContent = ({ post }: { post: PostOrPage }) => {
     /**
      * The page content (HTML).
      */
-    var pageContent = String(page.html);
+    var postContent = String(post.html);
 
     return (
         <div className="container pt-32 mx-auto mb-20 px-7 text-black dark:text-white">
-            <h1 className="text-4xl">{ page.title }</h1>
+            <h1 className="text-4xl">{ post.title }</h1>
             <div
                 id="ghost-page"
-                dangerouslySetInnerHTML={{ __html: pageContent }}
+                dangerouslySetInnerHTML={{ __html: postContent }}
             />
         </div>
     );
 }
 
 /**
- * Custom Page component.
- * Gets the page content from Ghost by its slug (if it exists).
+ * Custom BlogPost component.
+ * Gets the post content from Ghost by its slug (if it exists).
  */
-const Page = ({ page, template, statics }: PageProps) => {
+const BlogPost = ({ post, template, statics }: BlogPostProps) => {
     const [contentComponents, setContentComponents] = useState<any>([]);
 
     useEffect(() => {
@@ -49,12 +49,12 @@ const Page = ({ page, template, statics }: PageProps) => {
     return (
         <>
             <Head>
-                <title>{ page.title + ' | ' + statics.website.name }</title>
+                <title>{ post.title + ' | ' + statics.website.name }</title>
             </Head>
             <div className="bg-white dark:bg-slate-800">
                 {
                     contentComponents.map((component: any, index: number) => (
-                        component['__component'] === 'adapters.ghost-page' ? <PageContent key={ index } page={ page } /> : renderComponent(component, index, statics)
+                        component['__component'] === 'adapters.ghost-post' ? <BlogPostContent key={ index } post={ post } /> : renderComponent(component, index, statics)
                     ))
                 }
             </div>
@@ -80,16 +80,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
         version: 'v3',
     });
 
-    // Get list of all pages from Ghost.
-    // TODO: Don't get full page, only list of slugs is necessary.
-    const pages = await ghost.pages.browse({
+    // Get list of all posts from Ghost.
+    // TODO: Don't get full post, only list of slugs is necessary.
+    const posts = await ghost.posts.browse({
         include: 'authors',
     });
 
-    // Go through each page and add its slug to the list of available paths.
-    pages.forEach((page: PostOrPage) => {
-        const pageSlug = '/' + page.slug;
-        paths.push(pageSlug);
+    // Go through each post and add its slug to the list of available paths.
+    posts.forEach((post: PostOrPage) => {
+        const postSlug = '/blog/' + post.slug;
+        paths.push(postSlug);
     });
 
     return {
@@ -100,9 +100,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
     /**
-     * The slug of this page.
+     * The slug of this post/page.
      */
-    const pageSlug = String(context.params?.slug);
+    const postSlug = String(context.params?.slug);
 
     const {
         GHOST_URL,
@@ -118,14 +118,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
         version: 'v3',
     });
 
-    let pageData;
-    // Try to get page from Ghost by slug.
+    let postData;
+    // Try to get post from Ghost by slug.
     try {
-        pageData = await ghost.pages.read({
-            slug: pageSlug,
+        postData = await ghost.posts.read({
+            slug: postSlug,
         });
     } catch(error) {
-        // Return 404 page if the page doesn't exist.
+        // Return 404 page if the post doesn't exist.
         return {
             notFound: true,
         }
@@ -137,7 +137,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
     // Get the template for a custom page from Strapi.
     const pageAdapter = new PageAdapter(STRAPI_URL, STRAPI_ACCESS_TOKEN);
-    const pageTemplate = await pageAdapter.getPageTemplate();
+    const postTemplate = await pageAdapter.getBlogPostTemplate();
 
     const statics: StaticsData = {
         STRAPI_URL: String(STRAPI_URL),
@@ -147,8 +147,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
     // Pass the page metadata and content from Ghost.
     return {
         props: {
-            page: pageData,
-            template: pageTemplate,
+            post: postData,
+            template: postTemplate,
             statics,
         },
         // Next.js will attempt to re-generate the page:
@@ -158,4 +158,4 @@ export const getStaticProps: GetStaticProps = async (context) => {
     };
 }
 
-export default Page;
+export default BlogPost;
