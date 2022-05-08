@@ -111,6 +111,19 @@ export const getStaticProps: GetStaticProps = async (context) => {
         STRAPI_ACCESS_TOKEN,
     } = env;
 
+    // Get website metadata from Strapi.
+    const websiteAdapter = new WebsiteAdapter(STRAPI_URL, STRAPI_ACCESS_TOKEN);
+    const websiteMetaData = await websiteAdapter.getWebsiteMetaData();
+
+    // Get the template for a custom page from Strapi.
+    const pageAdapter = new PageAdapter(STRAPI_URL, STRAPI_ACCESS_TOKEN);
+    const postTemplate = await pageAdapter.getBlogPostTemplate();
+
+    const statics: StaticsData = {
+        STRAPI_URL: String(STRAPI_URL),
+        website: websiteMetaData,
+    }
+
     // Initialize GhostContentAPI.
     const ghost = new GhostContentAPI({
         url: GHOST_URL ? GHOST_URL : '',
@@ -131,19 +144,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
         }
     }
 
-    // Get website metadata from Strapi.
-    const websiteAdapter = new WebsiteAdapter(STRAPI_URL, STRAPI_ACCESS_TOKEN);
-    const websiteMetaData = await websiteAdapter.getWebsiteMetaData();
-
-    // Get the template for a custom page from Strapi.
-    const pageAdapter = new PageAdapter(STRAPI_URL, STRAPI_ACCESS_TOKEN);
-    const postTemplate = await pageAdapter.getBlogPostTemplate();
-
-    const statics: StaticsData = {
-        STRAPI_URL: String(STRAPI_URL),
-        website: websiteMetaData,
-    }
-    
     // Pass the page metadata and content from Ghost.
     return {
         props: {
