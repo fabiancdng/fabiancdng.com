@@ -32,7 +32,7 @@ const BlogPostCardFull = ({ post, index }: { post: PostOrPage, index: number }) 
             />
             <div>
               <h3 className="text-lg font-medium leading-3">{ post.primary_author?.name }</h3>
-              <p className="text-gray-600 text-md dark:text-slate-400">{ new Date(post.published_at).toLocaleString('en-US', { dateStyle: "long" }) }</p>
+              <p className="text-gray-600 text-md dark:text-slate-400">{ new Date(String(post.published_at)).toLocaleString('en-US', { dateStyle: "long" }) }</p>
             </div>
           </div>
           <div
@@ -68,7 +68,7 @@ const BlogPostCardSmall = ({ post, index }: { post: PostOrPage, index: number })
           />
           <div>
             <h3 className="text-lg font-medium leading-3">{ post.primary_author?.name }</h3>
-            <p className="text-gray-600 text-md dark:text-slate-400">{ new Date(post.published_at).toLocaleString('en-US', { dateStyle: "long" }) }</p>
+            <p className="text-gray-600 text-md dark:text-slate-400">{ new Date(String(post.published_at)).toLocaleString('en-US', { dateStyle: "long" }) }</p>
           </div>
         </div>
       </div>

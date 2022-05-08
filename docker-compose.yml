@@ -14,7 +14,7 @@ services:
       MYSQL_PASSWORD: 'tester'
 
   cms:
-    image: fabiancdng-com-cms
+    image: ghcr.io/fabiancdng/fabiancdng-website-cms:latest
     container_name: fabiancdng-com-cms
     restart: unless-stopped
     env_file:
@@ -28,7 +28,7 @@ services:
       - "1337:1337"
     
   frontend:
-    image: fabiancdng-com-frontend
+    image: ghcr.io/fabiancdng/fabiancdng-website-frontend:latest
     container_name: fabiancdng-com-frontend
     restart: unless-stopped
     depends_on:
