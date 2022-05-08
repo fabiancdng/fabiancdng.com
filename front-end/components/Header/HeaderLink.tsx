@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 /**
  * Data from the CMS for a link in the header.
  */
@@ -20,7 +22,7 @@ interface HeaderLinkProps {
 }
 
 const HeaderLink = ({ data, additionalCSS }: HeaderLinkProps) => {
-    return <a className={ additionalCSS } href={ data.attributes.urlOrAnchor }>{ data.attributes.title }</a>;
+    return <Link href={ data.attributes.urlOrAnchor }><p className={ 'cursor-pointer ' + additionalCSS }>{ data.attributes.title }</p></Link>;
 }
 
 export default HeaderLink;
