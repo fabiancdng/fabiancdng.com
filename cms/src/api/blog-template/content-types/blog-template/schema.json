@@ -1,0 +1,25 @@
+{
+  "kind": "singleType",
+  "collectionName": "blog_templates",
+  "info": {
+    "singularName": "blog-template",
+    "pluralName": "blog-templates",
+    "displayName": "BlogTemplate",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "content": {
+      "type": "dynamiczone",
+      "components": [
+        "layout.header",
+        "layout.showcase",
+        "adapters.ghost-posts",
+        "layout.footer"
+      ]
+    }
+  }
+}
