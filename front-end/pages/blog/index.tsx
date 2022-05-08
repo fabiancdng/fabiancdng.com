@@ -1,6 +1,7 @@
 import GhostContentAPI, { PostOrPage } from "@tryghost/content-api";
 import { GetStaticProps } from "next";
 import Head from "next/head";
+import Link from "next/link";
 import { env } from "process";
 import { useEffect, useState } from "react";
 import PageAdapter from "../../adapters/page-adapter";
@@ -9,17 +10,69 @@ import StaticsData from "../../types/statics";
 import { BlogTemplate } from "../../types/templates";
 import { renderComponent } from "../../utils/dynamic-component";
 
-const BlogPostCard = ({ post }: { post: PostOrPage }) => {
+const BlogPostCardFull = ({ post, index }: { post: PostOrPage, index: number }) => {
   return(
-    <div className="p-4 bg-white dark:bg-slate-800 cursor-pointer rounded-lg border border-gray-200 dark:border-slate-600 shadow-md hover:bg-gray-50 hover:scale-[1.03] transition-all overflow-hidden">
-      <h1 className="font-semibold text-2xl">{ post.title }</h1>
-      <h2 className="font-medium my-4 text-lg">{ post.primary_author?.name }</h2>
-      <img className="rounded-lg mb-5" src={ String(post.feature_image) } alt={ String(post.feature_image_alt) } />
-      <div
-        id="ghost-post"
-        dangerouslySetInnerHTML={{ __html: String(post.excerpt) }}
-      />
-    </div>
+    <Link href={ '/blog/' + post.slug }>
+      <div className={`p-4 bg-white dark:bg-slate-800 cursor-pointer rounded-lg border border-gray-200 dark:border-slate-600
+      shadow-md hover:bg-gray-50 hover:scale-[1.03] transition-all overflow-hidden col-span-2 flex flex-row justify-between`}>
+        <div className="w-7/12 flex flex-col justify-center align-middle">
+          <img
+            className="rounded-lg mb-5"
+            src={ String(post.feature_image) }
+            alt={ String(post.feature_image_alt) }
+          />
+        </div>
+        <div className="w-5/12 px-8">
+          <h1 className="font-semibold my-5 text-3xl">{ post.title }</h1>
+          <div className="flex items-center my-5">
+            <img
+              className="w-12 h-12 -translate-y-0.5 mr-2 rounded-full"
+              src={ String(post.primary_author?.profile_image) }
+              alt={ post.primary_author?.name + '\'s profile picture' }
+            />
+            <div>
+              <h3 className="text-lg font-medium leading-3">{ post.primary_author?.name }</h3>
+              <p className="text-gray-600 text-md dark:text-slate-400">{ new Date(post.published_at).toLocaleString('en-US', { dateStyle: "long" }) }</p>
+            </div>
+          </div>
+          <div
+            id="ghost-excerpt"
+            dangerouslySetInnerHTML={{ __html: String(post.excerpt) }}
+          />
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+const BlogPostCardSmall = ({ post, index }: { post: PostOrPage, index: number }) => {
+  return(
+    <Link href={ '/blog/' + post.slug }>
+      <div className={`p-4 bg-white dark:bg-slate-800 cursor-pointer rounded-lg border border-gray-200 dark:border-slate-600
+      shadow-md hover:bg-gray-50 hover:scale-[1.03] transition-all overflow-hidden`}>
+        <h1 className="font-semibold my-5 text-2xl">{ post.title }</h1>
+        <img
+          className="rounded-lg mb-5"
+          src={ String(post.feature_image) }
+          alt={ String(post.feature_image_alt) }
+        />
+        <div
+          id="ghost-post"
+          dangerouslySetInnerHTML={{ __html: String(post.excerpt) }}
+        />
+        <div className="flex items-center my-5">
+          <img
+            className="w-12 h-12 -translate-y-0.5 mr-2 rounded-full"
+            src={ String(post.primary_author?.profile_image) }
+            alt={ post.primary_author?.name + '\'s profile picture' }
+          />
+          <div>
+            <h3 className="text-lg font-medium leading-3">{ post.primary_author?.name }</h3>
+            <p className="text-gray-600 text-md dark:text-slate-400">{ new Date(post.published_at).toLocaleString('en-US', { dateStyle: "long" }) }</p>
+          </div>
+        </div>
+      </div>
+    </Link>
   );
 }
 
@@ -27,9 +80,12 @@ const BlogPostCard = ({ post }: { post: PostOrPage }) => {
 const BlogPosts = ({ posts }: { posts: PostOrPage[] }) => {
   return (
     <div className="container mt-32 mx-auto">
+      <h1 className="text-5xl my-10 font-medium">Blog</h1>
       <div className="grid sm:grid-cols-2 mx-4 sm:mx-0 gap-4 pb-20">
         {posts.map((post: PostOrPage, index: number) => (
-          <BlogPostCard key={ index } post={ post } />
+          index === 0
+          ? <BlogPostCardFull key={ index } index={ index } post={ post } />
+          : <BlogPostCardSmall key={ index } index={ index } post={ post } />
         ))}
       </div>
     </div>

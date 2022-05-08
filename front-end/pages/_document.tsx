@@ -4,9 +4,11 @@ const Document = () => {
   return (
     <Html className="min-h-screen" lang="en">
         <Head />
-        <body className="dark:bg-slate-800 min-h-screen">
+        <body className="dark:bg-slate min-h-screen">
+          <div className="dark:bg-slate-900 dark:text-white">
             <Main />
             <NextScript />
+          </div>
         </body>
     </Html>
   );
