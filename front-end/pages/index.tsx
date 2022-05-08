@@ -1,4 +1,4 @@
-import type { NextPage } from 'next';
+import type { GetStaticProps, NextPage } from 'next';
 import { env } from 'process';
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
@@ -43,7 +43,7 @@ const Home: NextPage<HomeProps> = ({ pageData, statics }: HomeProps) => {
   );
 };
 
-export async function getServerSideProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const { STRAPI_URL, STRAPI_ACCESS_TOKEN } = env;
 
   // Retrieve website metadata from CMS on the server side.
@@ -65,6 +65,10 @@ export async function getServerSideProps() {
       pageData,
       statics
     },
+    // Next.js will attempt to re-generate the page:
+    // - When a request comes in
+    // - At most once every 10 seconds
+    revalidate: 10, // seconds
   };
 }
 

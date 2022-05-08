@@ -1,5 +1,5 @@
 import GhostContentAPI, { PostOrPage } from '@tryghost/content-api';
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import { env } from 'process';
 import { useEffect, useState } from 'react';
@@ -63,9 +63,47 @@ const Page = ({ page, template, statics }: PageProps) => {
     );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    // The slug of this page.
-    const pageSlug = String(context.query.slug);
+export const getStaticPaths: GetStaticPaths = async () => {
+    /**
+     * The list of available paths to return.
+     */
+    const paths: string[] = [];
+
+    const {
+        GHOST_URL,
+        GHOST_CONTENT_API_KEY
+    } = env;
+
+    // Initialize GhostContentAPI.
+    const ghost = new GhostContentAPI({
+        url: String(GHOST_URL),
+        key: String(GHOST_CONTENT_API_KEY),
+        version: 'v3',
+    });
+
+    // Get list of all pages from Ghost.
+    // TODO: Don't get full page, only list of slugs is necessary.
+    const pages = await ghost.pages.browse({
+        include: 'authors',
+    });
+
+    // Go through each page and add its slug to the list of available paths.
+    pages.forEach((page: PostOrPage) => {
+        const pageSlug = '/' + page.slug;
+        paths.push(pageSlug);
+    });
+
+    return {
+        paths,
+        fallback: false,
+    };
+}
+
+export const getStaticProps: GetStaticProps = async (context) => {
+    /**
+     * The slug of this page.
+     */
+    const pageSlug = String(context.params?.slug);
 
     const {
         GHOST_URL,
