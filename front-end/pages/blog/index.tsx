@@ -2,13 +2,12 @@ import GhostContentAPI, { PostOrPage } from "@tryghost/content-api";
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import { env } from "process";
+import { useEffect, useState } from "react";
+import PageAdapter from "../../adapters/page-adapter";
 import WebsiteAdapter from "../../adapters/website-adapter";
 import StaticsData from "../../types/statics";
-
-interface BlogProps {
-  posts: PostOrPage[],
-  statics: StaticsData,
-}
+import { BlogTemplate } from "../../types/templates";
+import { renderComponent } from "../../utils/dynamic-component";
 
 const BlogPostCard = ({ post }: { post: PostOrPage }) => {
   return(
@@ -24,19 +23,43 @@ const BlogPostCard = ({ post }: { post: PostOrPage }) => {
   );
 }
 
-const Blog = ({ posts, statics }: BlogProps) => {
+
+const BlogPosts = ({ posts }: { posts: PostOrPage[] }) => {
+  return (
+    <div className="container mt-32 mx-auto">
+      <div className="grid sm:grid-cols-2 mx-4 sm:mx-0 gap-4 pb-20">
+        {posts.map((post: PostOrPage, index: number) => (
+          <BlogPostCard key={ index } post={ post } />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+interface BlogProps {
+  posts: PostOrPage[],
+  template: BlogTemplate,
+  statics: StaticsData,
+}
+
+const Blog = ({ posts, template, statics }: BlogProps) => {
+  const [contentComponents, setContentComponents] = useState<any>([]);
+
+  useEffect(() => {
+    setContentComponents(template.content);
+  }, []);
+
   return (
     <>
       <Head>
         <title>Blog | { statics.website.name }</title>
       </Head>
-      <div className="container mx-auto">
-        <div className="grid sm:grid-cols-2 mx-4 sm:mx-0 gap-4 pb-20">
-          {posts.map((post: PostOrPage, index: number) => (
-            <BlogPostCard key={ index } post={ post } />
-          ))}
-        </div>
-      </div>
+      {
+        contentComponents.map((component: any, index: number) => (
+            component['__component'] === 'adapters.ghost-posts' ? <BlogPosts key={ index } posts={ posts } /> : renderComponent(component, index, statics)
+        ))
+      }
+
     </>
   );
 }
@@ -52,6 +75,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
   // Get website metadata from Strapi.
   const websiteAdapter = new WebsiteAdapter(STRAPI_URL, STRAPI_ACCESS_TOKEN);
   const websiteMetaData = await websiteAdapter.getWebsiteMetaData();
+
+  // Get the template for the blog page from Strapi.
+  const pageAdapter = new PageAdapter(STRAPI_URL, STRAPI_ACCESS_TOKEN);
+  const blogTemplate = await pageAdapter.getBlogTemplate();
 
   // Initialize GhostContentAPI.
   const ghost = new GhostContentAPI({
@@ -69,11 +96,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const statics: StaticsData = {
     STRAPI_URL: String(STRAPI_URL),
     website: websiteMetaData,
-}
+  }
 
   return {
     props: {
       posts,
+      template: blogTemplate,
       statics,
     },
     // Next.js will attempt to re-generate the page:

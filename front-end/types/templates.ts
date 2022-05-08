@@ -9,6 +9,16 @@ export interface PageTemplate {
 }
 
 /**
+ * Template for the blog page.
+ */
+ export interface BlogTemplate {
+    content: any[],
+    updatedAt: string,
+    createdAt: string,
+    publishedAt: string,
+}
+
+/**
  * Template for a dynamic blog post from Ghost.
  */
 export interface BlogPostTemplate {

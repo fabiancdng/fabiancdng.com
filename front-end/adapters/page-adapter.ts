@@ -1,5 +1,5 @@
 import qs from "qs";
-import { PageTemplate, BlogPostTemplate } from "../types/templates";
+import { PageTemplate, BlogPostTemplate, BlogTemplate } from "../types/templates";
 import HomePageData from "../types/pages/homepage";
 
 /**
@@ -86,6 +86,33 @@ class PageAdapter {
             
             // TODO: Add error handling.
             return resolve(pageTemplate);
+        });
+    }
+
+
+    /**
+     * Get the template for the blog page from Strapi.
+     */
+    public getBlogTemplate(): Promise<BlogTemplate> {
+        // Querystring holding the fields to populate.
+        const querystring = '?populate[content][populate]=*';
+
+        return new Promise(async (resolve, reject) => {
+            // Retrieve blog template from Strapi.
+            const postTemplateRequest = await fetch(this.STRAPI_URL + '/api/blog-template' + querystring, {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + this.STRAPI_ACCESS_TOKEN,
+                }
+            });
+
+            // Parse JSON response and return relevant data.
+            const blogTemplateRaw = await postTemplateRequest.json();
+            const blogTemplate: BlogPostTemplate = blogTemplateRaw.data.attributes;
+
+            // TODO: Add error handling.
+
+            return resolve(blogTemplate);
         });
     }
 
