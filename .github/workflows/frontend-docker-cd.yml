@@ -6,12 +6,41 @@ on:
       - "*"
 
 jobs:
-  build:
+  next-build:
+    runs-on: ubuntu-latest
+    container: node:16-alpine
+    name: Build Next.js App
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+      - name: Build the Next.js app
+        env:
+          STRAPI_URL: ${{ secrets.STRAPI_CMS_URL }}
+          STRAPI_ACCESS_TOKEN: ${{ secrets.STRAPI_CMS_ACCESS_TOKEN }}
+          GHOST_URL: ${{ secrets.GHOST_CMS_URL }}
+          GHOST_CONTENT_API_KEY: ${{ secrets.GHOST_CMS_CONTENT_API_KEY }}
+        working-directory: front-end
+        run: npm install && npm run build
+      - name: Upload Next.js build as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: |
+            .next
+            public
+          retention-days: 1
+
+  docker-build:
+    needs: next-build
     runs-on: ubuntu-latest
     name: Build and push Docker image
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
+      - name: Download Next.js build artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: build
       - name: Login to GitHub Container Registry (ghcr.io)
         uses: docker/login-action@v1
         with:
