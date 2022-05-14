@@ -36,6 +36,7 @@ const BlogPostCardFull = ({ post, index }: { post: PostOrPage, index: number }) 
             </div>
           </div>
           <div
+            className="ghost-css"
             id="ghost-excerpt"
             dangerouslySetInnerHTML={{ __html: String(post.excerpt) }}
           />
@@ -57,6 +58,7 @@ const BlogPostCardSmall = ({ post, index }: { post: PostOrPage, index: number })
           alt={ String(post.feature_image_alt) }
         />
         <div
+          className="ghost-css"
           id="ghost-post"
           dangerouslySetInnerHTML={{ __html: String(post.excerpt) }}
         />
@@ -80,7 +82,7 @@ const BlogPostCardSmall = ({ post, index }: { post: PostOrPage, index: number })
 const BlogPosts = ({ posts }: { posts: PostOrPage[] }) => {
   return (
     <div className="container mt-32 mx-auto">
-      <h1 className="text-5xl my-10 font-medium">Blog</h1>
+      <h1 className="text-5xl my-10 font-semibold">Blog</h1>
       <div className="grid sm:grid-cols-2 mx-4 sm:mx-0 gap-4 pb-20">
         {posts.map((post: PostOrPage, index: number) => (
           index === 0

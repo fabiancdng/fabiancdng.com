@@ -1,3 +1,13 @@
+/*
+    fabiancdng.com
+
+    Global stylesheet.
+
+    https://github.com/fabiancdng/fabiancdng.com
+
+    Copyright (c) 2022 Fabian Reinders (fabiancdng).
+*/
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

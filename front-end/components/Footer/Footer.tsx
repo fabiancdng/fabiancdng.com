@@ -37,7 +37,7 @@ interface FooterProps {
 const Footer = ({ data, statics }: FooterProps) => {
     return (
         <>
-            <div className="spacer mt-28"></div>
+            <div className="spacer mt-36"></div>
             <footer className="dark:bg-slate-800 absolute left-0 -bottom-0 w-full">
                 <div className="container mx-auto flex flex-col justify-center items-center py-5">
                     <p className="border-b border-gray-300 dark:text-slate-200">{ data.text }</p>

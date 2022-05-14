@@ -25,9 +25,10 @@ const BlogPostContent = ({ post }: { post: PostOrPage }) => {
     var postContent = String(post.html);
 
     return (
-        <div className="container pt-32 mx-auto mb-20 px-7 text-black dark:text-white">
-            <h1 className="text-4xl">{ post.title }</h1>
+        <div className="container pt-32 mx-auto mb-20 px-7 max-w-6xl text-black dark:text-white">
+            <h1 className="text-5xl font-semibold">{ post.title }</h1>
             <div
+                className="ghost-css"
                 id="ghost-page"
                 dangerouslySetInnerHTML={{ __html: postContent }}
             />
@@ -56,7 +57,7 @@ const BlogPost = ({ post, template, statics }: BlogPostProps) => {
                     type={ statics.website.favicon.data.attributes.mime }
                 />
             </Head>
-            <div className="bg-white dark:bg-slate-800">
+            <div className="bg-white dark:bg-slate-900">
                 {
                     contentComponents.map((component: any, index: number) => (
                         component['__component'] === 'adapters.ghost-post' ? <BlogPostContent key={ index } post={ post } /> : renderComponent(component, index, statics)
