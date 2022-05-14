@@ -42,9 +42,12 @@ const PageContent = ({ page }: { page: PostOrPage }) => {
  */
 const Page = ({ page, template, statics }: PageProps) => {
     const [contentComponents, setContentComponents] = useState<any>([]);
+    const [currentURL, setCurrentURL] = useState('');
 
     useEffect(() => {
-      setContentComponents(template.content);
+        // Set initial state.
+        setCurrentURL(window.location.href);
+        setContentComponents(template.content);
     }, []);
 
     return (
@@ -56,6 +59,17 @@ const Page = ({ page, template, statics }: PageProps) => {
                     href={ statics.STRAPI_URL + statics.website.favicon.data.attributes.url }
                     type={ statics.website.favicon.data.attributes.mime }
                 />
+                <meta name="description" content={ page.meta_description ? page.meta_description : page.excerpt } />
+                <link rel="canonical" href={ currentURL } />
+                <meta property="og:site_name" content={ statics.website.name } />
+                <meta property="og:title" content={ page.title } />
+                <meta property="og:description" content={ page.meta_description ? page.meta_description : page.excerpt } />
+                <meta property="og:url" content={ currentURL } />
+                <meta property="og:type" content="" />
+                {
+                    // Always 'null'.
+                    // <meta property="og:image" content={ String(page.feature_image) } />
+                }
             </Head>
             {
                 contentComponents.map((component: any, index: number) => (
