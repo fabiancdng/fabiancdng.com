@@ -11,7 +11,6 @@
 .ghost-css#ghost-page,
 .ghost-css#ghost-post {
     @apply text-xl;
-    margin-top: 30px;
 }
 
 .ghost-css a {
@@ -26,6 +25,26 @@
     transition: all 0.2s ease-in-out;
     font-size: larger;
     text-decoration-thickness: 3px;
+}
+
+.ghost-css figure {
+    margin: 35px 0px 40px 0px;
+}
+
+.ghost-css figcaption {
+    @apply text-gray-600 dark:text-gray-300 italic mt-3 mb-5;
+    text-align: center;
+}
+
+.ghost-css img {
+    @apply rounded-2xl;
+    width: 100%;
+}
+
+.ghost-css pre code {
+    @apply text-base;
+    margin: 20px 0px 20px 0px;
+    border-radius: 10px;
 }
 
 .ghost-css p b,
@@ -43,11 +62,13 @@
 }
 
 .ghost-css h1 {
-    @apply text-5xl my-2 mt-16;
+    @apply text-5xl my-2;
+    margin-top: 30px;
 }
 
 .ghost-css h2 {
-    @apply text-4xl mb-2 mt-16;
+    @apply text-4xl mb-2;
+    margin-top: 30px;
 }
 
 .ghost-css h3 {

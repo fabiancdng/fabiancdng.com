@@ -8,6 +8,7 @@ import WebsiteAdapter from '../../adapters/website-adapter';
 import { PageTemplate } from '../../types/templates';
 import StaticsData from '../../types/statics';
 import { renderComponent } from '../../utils/dynamic-component';
+import hljs from 'highlight.js';
 
 interface BlogPostProps {
     post: PostOrPage,
@@ -20,13 +21,19 @@ interface BlogPostProps {
  */
 const BlogPostContent = ({ post }: { post: PostOrPage }) => {
     /**
-     * The page content (HTML).
+     * The post content as string (HTML).
      */
     var postContent = String(post.html);
 
+    useEffect(() => {
+        // Initialize Highlight.js.
+        hljs.highlightAll();
+    }, []);
+
     return (
-        <div className="container pt-32 mx-auto mb-20 px-7 max-w-6xl text-black dark:text-white">
+        <div className="container pt-32 px-7 mx-auto mb-20 max-w-5xl text-black dark:text-white">
             <h1 className="text-5xl font-semibold">{ post.title }</h1>
+
             <div
                 className="ghost-css"
                 id="ghost-page"

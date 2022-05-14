@@ -25,7 +25,7 @@ const PageContent = ({ page }: { page: PostOrPage }) => {
     var pageContent = String(page.html);
 
     return (
-        <div className="container pt-32 mx-auto mb-20 px-7 max-w-6xl text-black dark:text-white">
+        <div className="container pt-32 px-7 mx-auto mb-20 max-w-5xl text-black dark:text-white">
             <h1 className="text-5xl font-semibold">{ page.title }</h1>
             <div
                 className="ghost-css"
