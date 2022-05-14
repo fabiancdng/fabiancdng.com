@@ -4,8 +4,8 @@ const Document = () => {
   return (
     <Html className="min-h-screen" lang="en">
         <Head />
-        <body className="dark:bg-slate min-h-screen">
-          <div className="dark:bg-slate-900 dark:text-white">
+        <body>
+          <div className="dark:bg-slate-900 min-h-screen dark:text-white relative">
             <Main />
             <NextScript />
           </div>

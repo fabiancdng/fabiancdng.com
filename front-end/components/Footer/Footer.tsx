@@ -36,19 +36,22 @@ interface FooterProps {
 
 const Footer = ({ data, statics }: FooterProps) => {
     return (
-        <footer className="dark:bg-slate-800">
-            <div className="container mx-auto flex flex-col justify-center items-center py-5">
-                <p className="border-b border-gray-300 dark:text-slate-200">{ data.text }</p>
-                <ul className="flex">
-                    {
-                        // Render all header links (separate `FooterLink` component).
-                        data.links.data?.map((link, index) => (
-                            <li key={ index } className="mr-5 last:mr-0 text-gray-500 hover:underline"><FooterLink data={ link } /></li>
-                        ))
-                    }
-                </ul>
-            </div>
-        </footer>
+        <>
+            <div className="spacer mt-28"></div>
+            <footer className="dark:bg-slate-800 absolute left-0 -bottom-0 w-full">
+                <div className="container mx-auto flex flex-col justify-center items-center py-5">
+                    <p className="border-b border-gray-300 dark:text-slate-200">{ data.text }</p>
+                    <ul className="flex">
+                        {
+                            // Render all header links (separate `FooterLink` component).
+                            data.links.data?.map((link, index) => (
+                                <li key={ index } className="mr-5 last:mr-0 text-gray-500 hover:underline"><FooterLink data={ link } /></li>
+                            ))
+                        }
+                    </ul>
+                </div>
+            </footer>
+        </>
     );
 }
 

@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@tryghost/content-api": "^1.7.0",
+    "@tryghost/content-api": "^1.9.6",
     "markdown-it": "^12.3.2",
     "next": "12.1.0",
     "nextjs-progressbar": "^0.0.14",

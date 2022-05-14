@@ -81,7 +81,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const ghost = new GhostContentAPI({
         url: String(GHOST_URL),
         key: String(GHOST_CONTENT_API_KEY),
-        version: 'v3',
+        version: 'v4.46',
     });
 
     // Get list of all pages from Ghost.
@@ -119,7 +119,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     const ghost = new GhostContentAPI({
         url: GHOST_URL ? GHOST_URL : '',
         key: GHOST_CONTENT_API_KEY ? GHOST_CONTENT_API_KEY : '',
-        version: 'v3',
+        version: 'v4.46',
     });
 
     let pageData;
