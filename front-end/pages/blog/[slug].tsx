@@ -33,11 +33,18 @@ const BlogPostContent = ({ post }: { post: PostOrPage }) => {
     return (
         <div className="container pt-32 px-7 mx-auto mb-20 max-w-5xl text-black dark:text-white">
             <h1 className="text-5xl font-semibold">{ post.title }</h1>
+
+            { post.custom_excerpt
+                && <p className="my-7 text-xl text-gray-500 dark:text-gray-300">{ post.custom_excerpt }</p>
+            }
+
+
             <img
                 className="w-full my-5"
                 src={ String(post.feature_image) }
                 alt={ String(post.feature_image_alt) }
             />
+
             <div
                 className="ghost-css"
                 id="ghost-page"
@@ -53,9 +60,12 @@ const BlogPostContent = ({ post }: { post: PostOrPage }) => {
  */
 const BlogPost = ({ post, template, statics }: BlogPostProps) => {
     const [contentComponents, setContentComponents] = useState<any>([]);
+    const [currentURL, setCurrentURL] = useState('');
 
     useEffect(() => {
-      setContentComponents(template.content);
+        // Set initial state.
+        setCurrentURL(window.location.href);
+        setContentComponents(template.content);
     }, []);
 
     return (
@@ -67,6 +77,14 @@ const BlogPost = ({ post, template, statics }: BlogPostProps) => {
                     href={ statics.STRAPI_URL + statics.website.favicon.data.attributes.url }
                     type={ statics.website.favicon.data.attributes.mime }
                 />
+                <meta name="description" content={ post.meta_description ? post.meta_description : post.excerpt } />
+                <link rel="canonical" href={ currentURL } />
+                <meta property="og:site_name" content={ "Blog | " + statics.website.name } />
+                <meta property="og:title" content={ post.title } />
+                <meta property="og:description" content={ post.meta_description ? post.meta_description : post.excerpt } />
+                <meta property="og:url" content={ currentURL } />
+                <meta property="og:type" content="article" />
+                <meta property="og:image" content={ String(post.feature_image) } />
             </Head>
             <div className="bg-white dark:bg-slate-900">
                 {
