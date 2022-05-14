@@ -14,10 +14,10 @@ const BlogPostCardFull = ({ post, index }: { post: PostOrPage, index: number }) 
   return(
     <Link href={ '/blog/' + post.slug }>
       <div className={`p-4 bg-white dark:bg-slate-800 cursor-pointer rounded-lg border border-gray-200 dark:border-slate-600
-      shadow-md hover:bg-gray-50 hover:scale-[1.03] transition-all overflow-hidden col-span-2 flex flex-row justify-between`}>
+      shadow-md hover:bg-gray-50 hover:scale-[1.03] transition-all overflow-hidden mb-5 col-span-2 flex flex-row justify-between`}>
         <div className="w-7/12 flex flex-col justify-center align-middle">
           <img
-            className="rounded-lg mb-5"
+            className="rounded-lg max-w-3xl"
             src={ String(post.feature_image) }
             alt={ String(post.feature_image_alt) }
           />
@@ -49,14 +49,16 @@ const BlogPostCardFull = ({ post, index }: { post: PostOrPage, index: number }) 
 const BlogPostCardSmall = ({ post, index }: { post: PostOrPage, index: number }) => {
   return(
     <Link href={ '/blog/' + post.slug }>
-      <div className={`p-4 bg-white dark:bg-slate-800 cursor-pointer rounded-lg border border-gray-200 dark:border-slate-600
+      <div className={`py-4 px-9 bg-white dark:bg-slate-800 cursor-pointer rounded-lg border border-gray-200 dark:border-slate-600
       shadow-md hover:bg-gray-50 hover:scale-[1.03] transition-all overflow-hidden`}>
         <h1 className="font-semibold my-5 text-2xl">{ post.title }</h1>
-        <img
-          className="rounded-lg mb-5"
-          src={ String(post.feature_image) }
-          alt={ String(post.feature_image_alt) }
-        />
+        <div className="mx-auto max-w-2xl">
+          <img
+            className="rounded-lg mb-5s"
+            src={ String(post.feature_image) }
+            alt={ String(post.feature_image_alt) }
+          />
+        </div>
         <div
           className="ghost-css"
           id="ghost-post"
@@ -80,15 +82,39 @@ const BlogPostCardSmall = ({ post, index }: { post: PostOrPage, index: number })
 
 
 const BlogPosts = ({ posts }: { posts: PostOrPage[] }) => {
+  const [mobileView, setMobileView] = useState<boolean|null>(null);
+
+  useEffect(() => {
+    /**
+     * Breakpoint (in px) for mobile view.
+     */
+    const mobileBreakpoint = 1024;
+
+    const handleResize = () => {
+        // Update screenWidth state on resize.
+        const screenWidth = window.innerWidth;
+        // Auto-toggle mobile view.
+        if (screenWidth !== null && screenWidth < mobileBreakpoint) setMobileView(true);
+        else setMobileView(false);
+    };
+
+    // Event listener for keeping screenWidth up-to-date.
+    window.addEventListener('resize', handleResize);
+    handleResize();
+  }, []);
+
+  // Render component only when state was initialized.
+  if (mobileView === null) return null;
+
   return (
-    <div className="container mt-32 mx-auto">
+    <div className="container mt-32 mx-auto px-7">
       <h1 className="text-5xl my-10 font-semibold">Blog</h1>
-      <div className="grid sm:grid-cols-2 mx-4 sm:mx-0 gap-4 pb-20">
-        {posts.map((post: PostOrPage, index: number) => (
+      <div className="grid grid-cols-1 lg:grid-cols-2 sm:mx-0 gap-4 pb-20">
+        { posts.map((post: PostOrPage, index: number) => (
           index === 0
-          ? <BlogPostCardFull key={ index } index={ index } post={ post } />
+          ? mobileView ? <BlogPostCardSmall key={ index } index={ index } post={ post } /> : <BlogPostCardFull key={ index } index={ index } post={ post } />
           : <BlogPostCardSmall key={ index } index={ index } post={ post } />
-        ))}
+        )) }
       </div>
     </div>
   );

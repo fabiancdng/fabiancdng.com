@@ -31,7 +31,7 @@ interface headerProps {
 
 const Header = ({ data, statics }: headerProps) => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [screenScreenWidth, setScreenWidth] = useState(window.innerWidth);
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
     // The width (in px) when the mobile nav is used instead.
     const menuBreakpoint = 640;
@@ -41,7 +41,7 @@ const Header = ({ data, statics }: headerProps) => {
             // Update screenWidth state on resize.
             setScreenWidth(window.innerWidth);
             // Auto-toggle mobile menu when not in use anymore.
-            if (screenScreenWidth < menuBreakpoint) setMobileMenuOpen(false);
+            if (screenWidth < menuBreakpoint) setMobileMenuOpen(false);
         };
 
         // Event listener for keeping screenWidth up-to-date.
