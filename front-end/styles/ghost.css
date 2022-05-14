@@ -67,7 +67,7 @@
 }
 
 .ghost-css h2 {
-    @apply text-4xl mb-2;
+    @apply text-4xl font-semibold mb-2;
     margin-top: 30px;
 }
 

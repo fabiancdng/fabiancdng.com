@@ -33,7 +33,11 @@ const BlogPostContent = ({ post }: { post: PostOrPage }) => {
     return (
         <div className="container pt-32 px-7 mx-auto mb-20 max-w-5xl text-black dark:text-white">
             <h1 className="text-5xl font-semibold">{ post.title }</h1>
-
+            <img
+                className="w-full my-5"
+                src={ String(post.feature_image) }
+                alt={ String(post.feature_image_alt) }
+            />
             <div
                 className="ghost-css"
                 id="ghost-page"
@@ -57,7 +61,7 @@ const BlogPost = ({ post, template, statics }: BlogPostProps) => {
     return (
         <>
             <Head>
-                <title>{ post.title + ' | ' + statics.website.name }</title>
+                <title>{ post.title + ' | Blog | ' + statics.website.name }</title>
                 <link
                     rel="icon"
                     href={ statics.STRAPI_URL + statics.website.favicon.data.attributes.url }
