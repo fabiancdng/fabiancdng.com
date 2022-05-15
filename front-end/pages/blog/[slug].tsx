@@ -62,7 +62,7 @@ const BlogPostContent = ({ post }: { post: PostOrPage }) => {
             </div>
 
             <img
-                className="w-full my-5"
+                className="w-full my-5 rounded-lg"
                 src={ String(post.feature_image) }
                 alt={ String(post.feature_image_alt) }
             />
