@@ -65,7 +65,9 @@ const Page = ({ page, template, statics }: PageProps) => {
                 <meta property="og:title" content={ page.title } />
                 <meta property="og:description" content={ page.meta_description ? page.meta_description : page.excerpt } />
                 <meta property="og:url" content={ currentURL } />
-                <meta property="og:type" content="" />
+                <meta property="og:type" content="article" />
+                <meta property="article:published_time" content={ String(page.published_at) } />
+                <meta property="article:modified_time" content={ String(page.updated_at) } />
                 {
                     // Always 'null'.
                     // <meta property="og:image" content={ String(page.feature_image) } />

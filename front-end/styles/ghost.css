@@ -57,6 +57,11 @@
     font-weight: 300;
 }
 
+/* Inline code */
+.ghost-css p code {
+    @apply bg-gray-100 text-red-500 p-1 dark:bg-slate-800;
+}
+
 .ghost-css hr {
     @apply my-10;
 }
@@ -68,7 +73,7 @@
 
 .ghost-css h2 {
     @apply text-4xl font-semibold mb-2;
-    margin-top: 30px;
+    margin-top: 40px;
 }
 
 .ghost-css h3 {

@@ -9,6 +9,7 @@ import { PageTemplate } from '../../types/templates';
 import StaticsData from '../../types/statics';
 import { renderComponent } from '../../utils/dynamic-component';
 import hljs from 'highlight.js';
+import Link from 'next/link';
 
 interface BlogPostProps {
     post: PostOrPage,
@@ -32,12 +33,33 @@ const BlogPostContent = ({ post }: { post: PostOrPage }) => {
 
     return (
         <div className="container pt-32 px-7 mx-auto mb-20 max-w-5xl text-black dark:text-white">
+            { post.primary_tag
+                && <div className="mb-5">
+                    <Link href={ '/blog/tag/' + post.primary_tag.slug }>
+                        <a className="text-blue-800 pl-1 font-semibold text-lg dark:text-slate-400">
+                            { post.primary_tag.name?.toUpperCase() }
+                        </a>
+                    </Link>
+                </div>
+            }
+
             <h1 className="text-5xl font-semibold">{ post.title }</h1>
 
             { post.custom_excerpt
                 && <p className="my-7 text-xl text-gray-500 dark:text-gray-300">{ post.custom_excerpt }</p>
             }
 
+            <div className="flex items-center my-8">
+                <img
+                className="w-12 h-12 -translate-y-0.5 mr-2 rounded-full"
+                src={ String(post.primary_author?.profile_image) }
+                alt={ post.primary_author?.name + '\'s profile picture' }
+                />
+                <div>
+                <h3 className="text-lg font-medium leading-3">{ post.primary_author?.name }</h3>
+                <p className="text-gray-600 text-md dark:text-slate-400">{ new Date(String(post.published_at)).toLocaleString('en-US', { dateStyle: "long" }) }</p>
+                </div>
+            </div>
 
             <img
                 className="w-full my-5"
@@ -85,6 +107,9 @@ const BlogPost = ({ post, template, statics }: BlogPostProps) => {
                 <meta property="og:url" content={ currentURL } />
                 <meta property="og:type" content="article" />
                 <meta property="og:image" content={ String(post.feature_image) } />
+                <meta property="article:published_time" content={ String(post.published_at) } />
+                <meta property="article:modified_time" content={ String(post.updated_at) } />
+                { post.primary_tag !== undefined && <meta property="article:tag" content={ post.primary_tag?.name } /> }
             </Head>
             <div className="bg-white dark:bg-slate-900">
                 {
@@ -170,7 +195,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
     // Try to get post from Ghost by slug.
     try {
         postData = await ghost.posts.read({
-            slug: postSlug,
+            // Query post by slug.
+            slug: postSlug
+        }, {
+            // Include tag and author fields.
+            include: ['authors', 'tags'],
         });
     } catch(error) {
         // Return 404 page if the post doesn't exist.
