@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.1] - 2022-05-10
+
+### Changed
+* SEO and accessibility fixes according to Google Lighthouse analysis.
+
 ## [1.0.0] - 2022-05-10
 
 ### Added
