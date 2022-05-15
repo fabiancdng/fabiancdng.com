@@ -60,8 +60,8 @@ const BlogPostCardSmall = ({ post, index }: { post: PostOrPage, index: number })
           />
         </div>
         <div
-          className="ghost-css"
-          id="ghost-post"
+          className="ghost-css mt-3"
+          id="ghost-excerpt"
           dangerouslySetInnerHTML={{ __html: String(post.excerpt) }}
         />
         <div className="flex items-center my-5">
