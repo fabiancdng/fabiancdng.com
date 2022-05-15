@@ -22,6 +22,9 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "metaDescription": {
+      "type": "text"
     }
   }
 }

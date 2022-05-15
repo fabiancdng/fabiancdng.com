@@ -142,6 +142,7 @@ const Blog = ({ posts, template, statics }: BlogProps) => {
           href={ statics.STRAPI_URL + statics.website.favicon.data.attributes.url }
           type={ statics.website.favicon.data.attributes.mime }
         />
+        <meta name="description" content={ statics.website.metaDescription } />
       </Head>
       {
         contentComponents.map((component: any, index: number) => (

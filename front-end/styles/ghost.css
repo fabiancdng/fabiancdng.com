@@ -59,7 +59,7 @@
 
 /* Inline code */
 .ghost-css p code {
-    @apply bg-gray-100 text-red-500 p-1 dark:bg-slate-800;
+    @apply bg-gray-100 text-red-600 p-1 dark:bg-slate-800;
 }
 
 .ghost-css hr {

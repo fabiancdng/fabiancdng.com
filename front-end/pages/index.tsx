@@ -33,6 +33,7 @@ const Home: NextPage<HomeProps> = ({ pageData, statics }: HomeProps) => {
           href={ statics.STRAPI_URL + statics.website.favicon.data.attributes.url }
           type={ statics.website.favicon.data.attributes.mime }
         />
+        <meta name="description" content={ statics.website.metaDescription } />
       </Head>
 
       {

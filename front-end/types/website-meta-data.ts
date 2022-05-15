@@ -10,4 +10,5 @@ export default interface WebsiteMetaData {
     favicon: {
         data: ImageData,
     },
+    metaDescription: string,
 }

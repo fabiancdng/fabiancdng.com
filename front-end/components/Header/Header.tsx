@@ -78,6 +78,7 @@ const Header = ({ data, statics }: headerProps) => {
                     {/* Icon to toggle dark/light mode */}
                     <DarkModeToggle />
                     <button
+                        aria-label="Toggle menu"
                         onClick={ () => setMobileMenuOpen(!mobileMenuOpen) }
                         className={ `rounded p-2 transition-all
                         ease-in-out duration-200 hover:bg-slate-200 bg-slate-100 dark:bg-slate-600 dark:hover:bg-slate-500 dark:text-white` }
