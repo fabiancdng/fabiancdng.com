@@ -22,7 +22,7 @@ const PageContent = ({ page }: { page: PostOrPage }) => {
     /**
      * The page content (HTML).
      */
-    var pageContent = String(page.html);
+    const pageContent = String(page.html);
 
     return (
         <div className="container pt-32 px-7 mx-auto mb-20 max-w-5xl text-black dark:text-white">
