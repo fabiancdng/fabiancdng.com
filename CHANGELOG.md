@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## 1.0.3 - 2022-07-18
 
+### Changed
+* Utilize Next.js fallback to render static pages from Ghost on the fly if not returned by `getStaticPaths()` but existent.
+
 ## 1.0.2 - 2022-05-10
 
 ### Changed
