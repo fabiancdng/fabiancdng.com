@@ -115,7 +115,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
     return {
         paths,
-        fallback: false,
+        fallback: "blocking",
     };
 }
 
@@ -140,6 +140,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     });
 
     let pageData;
+
     // Try to get page from Ghost by slug.
     try {
         pageData = await ghost.pages.read({
