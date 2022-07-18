@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.1.0 - 2022-07-18
+
+### Changed
+* Add anonymous analytics as stated in privacy policy (only active in production environment).
+
 ## 1.0.3 - 2022-07-18
 
 ### Changed
