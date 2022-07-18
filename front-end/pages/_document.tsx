@@ -1,9 +1,13 @@
 import { Html, Head, Main, NextScript } from 'next/document';
+import { env } from 'process';
 
 const Document = () => {
   return (
     <Html className="min-h-screen" lang="en">
-        <Head />
+        <Head>
+          { env.NODE_ENV === 'production'
+            && <script defer data-domain="fabiancdng.com" src="https://analytics.fabiancdng.com/js/plausible.js"></script> }
+        </Head>
         <body>
           <div className="dark:bg-slate-900 min-h-screen dark:text-white relative">
             <Main />
