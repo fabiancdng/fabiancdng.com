@@ -1,5 +1,4 @@
-import * as BsIcons from 'react-icons/bs';
-import * as FaIcons from 'react-icons/fa';
+import { BsShieldX } from 'react-icons/bs';
 
 interface SocialMediaIconProps {
   title: string;
@@ -22,14 +21,14 @@ const SocialMediaIcon = ({
 
     // Filter correct icon set.
     if (name.startsWith('Bs')) {
-      IconComponent = BsIcons[name];
+      IconComponent = require('react-icons/bs')[name];
     } else if (name.startsWith('Fa')) {
-      IconComponent = FaIcons[name];
+      IconComponent = require('react-icons/fa')[name];
     }
 
     // If the icon is not found, return BsShieldX icon as placeholder.
     if (!IconComponent) {
-      return <BsIcons.BsShieldX />;
+      return <BsShieldX />;
     }
 
     return <IconComponent />;
