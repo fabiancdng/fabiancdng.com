@@ -2,36 +2,49 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.2.0 - 2022-07-19
+
+### Changed
+
+- Add RichTextSection component to be used on pages with support for Markdown text (RichText field in Strapi)
+
 ## 1.1.0 - 2022-07-18
 
 ### Changed
-* Add anonymous analytics as stated in privacy policy (only active in production environment).
+
+- Add anonymous analytics as stated in privacy policy (only active in production environment).
 
 ## 1.0.3 - 2022-07-18
 
 ### Changed
-* Utilize Next.js fallback to render static pages from Ghost on the fly if not returned by `getStaticPaths()` but existent.
+
+- Utilize Next.js fallback to render static pages from Ghost on the fly if not returned by `getStaticPaths()` but existent.
 
 ## 1.0.2 - 2022-05-10
 
 ### Changed
-* Small CSS fixes.
+
+- Small CSS fixes.
 
 ## 1.0.1 - 2022-05-10
 
 ### Changed
-* SEO and accessibility fixes according to Google Lighthouse analysis.
+
+- SEO and accessibility fixes according to Google Lighthouse analysis.
 
 ## 1.0.0 - 2022-05-10
 
 ### Added
-* Styling for blog posts and pages from Ghost CMS
-* Highlight.js for syntax highlighting in code blocks
-* SEO (tags) for pages and blog posts
+
+- Styling for blog posts and pages from Ghost CMS
+- Highlight.js for syntax highlighting in code blocks
+- SEO (tags) for pages and blog posts
 
 ### Changed
-* Overhauled single blog post page
-* Other small design enhancements
+
+- Overhauled single blog post page
+- Other small design enhancements
 
 ## 0.1.0 - 2022-05-10
-* Initial (pre-)release
+
+- Initial (pre-)release
