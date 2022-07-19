@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.3.1 - 2022-07-19
+
+### Changed
+
+- Fix TypeScript error messing with the build
+
 ## 1.3.0 - 2022-07-19
 
 ### Changed
