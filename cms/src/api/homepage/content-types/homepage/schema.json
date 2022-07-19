@@ -18,11 +18,12 @@
     "content": {
       "type": "dynamiczone",
       "components": [
+        "layout.blog-posts-explorer",
+        "layout.footer",
         "layout.header",
         "layout.hero-section",
         "layout.project-explorer",
-        "layout.footer",
-        "layout.blog-posts-explorer"
+        "layout.rich-text-section"
       ]
     }
   }
