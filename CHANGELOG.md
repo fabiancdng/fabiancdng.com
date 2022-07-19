@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.3.0 - 2022-07-19
+
+### Changed
+
+- Add ContactSection component (not yet with contact form)
+
 ## 1.2.0 - 2022-07-19
 
 ### Changed
