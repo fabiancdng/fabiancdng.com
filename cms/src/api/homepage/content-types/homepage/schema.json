@@ -23,7 +23,8 @@
         "layout.header",
         "layout.hero-section",
         "layout.project-explorer",
-        "layout.rich-text-section"
+        "layout.rich-text-section",
+        "layout.contact-section"
       ]
     }
   }
