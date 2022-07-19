@@ -1,20 +1,7 @@
 import ImageData from '../../types/image';
+import SocialButtonData from '../../types/social-button';
 import StaticsData from '../../types/statics';
 import SocialMediaIcon from './SocialMediaIcon';
-
-/**
- * Data of a social media button.
- */
-interface SocialButton {
-  id: number;
-  attributes: {
-    title: string;
-    url: string;
-    icon: string;
-    createdAt: string;
-    updatedAt: string;
-  };
-}
 
 /**
  * Data from the CMS for a HeroSection component.
@@ -33,7 +20,7 @@ interface HeroSectionData {
   };
   htmlAnchor: string;
   socialButtons: {
-    data: SocialButton[] | null;
+    data: SocialButtonData[] | null;
   };
 }
 
@@ -46,7 +33,6 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({ data, statics }: HeroSectionProps) => {
-  console.log(data);
   return (
     <div
       id={data.htmlAnchor}
@@ -78,6 +64,8 @@ const HeroSection = ({ data, statics }: HeroSectionProps) => {
                 title={button.attributes.title}
                 url={button.attributes.url}
                 icon={button.attributes.icon}
+                additonalCSS={`hover:bg-slate-200 bg-slate-100 dark:bg-slate-600 dark:hover:bg-slate-500
+                        border border-slate-300 hover:border-slate-600 dark:border-slate-500 dark:hover:border-slate-200`}
               />
             ))}
           </div>

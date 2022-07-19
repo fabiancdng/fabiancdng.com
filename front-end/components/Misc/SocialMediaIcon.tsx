@@ -5,9 +5,15 @@ interface SocialMediaIconProps {
   title: string;
   icon: string;
   url: string;
+  additonalCSS?: string;
 }
 
-const SocialMediaIcon = ({ title, icon, url }: SocialMediaIconProps) => {
+const SocialMediaIcon = ({
+  title,
+  icon,
+  url,
+  additonalCSS,
+}: SocialMediaIconProps) => {
   /**
    * Get a Bs (Bootstrap) or Fa (Font Awesome) Icon from the react-icons library by its name provided as a string.
    */
@@ -31,7 +37,10 @@ const SocialMediaIcon = ({ title, icon, url }: SocialMediaIconProps) => {
 
   return (
     <a
-      className="hover:bg-slate-300 bg-slate-200 dark:bg-slate-600 dark:hover:bg-slate-500 transition-all duration-500 text-2xl p-3 rounded mr-3"
+      className={
+        'transition-all duration-500 text-2xl p-3 rounded mr-3 ' +
+        String(additonalCSS)
+      }
       href={url}
       target="fabiancdng">
       {getIconByName(icon)}

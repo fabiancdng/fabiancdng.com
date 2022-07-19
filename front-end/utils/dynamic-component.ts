@@ -1,6 +1,7 @@
 import React from 'react';
 import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
+import ContactSection from '../components/Misc/ContactSection';
 import HeroSection from '../components/Misc/HeroSection';
 import RichTextSection from '../components/Misc/RichTextSection';
 import ProjectExplorer from '../components/Projects/ProjectExplorer';
@@ -11,6 +12,7 @@ const componentsTable: { [key: string]: React.FC<any> } = {
   'layout.hero-section': HeroSection,
   'layout.rich-text-section': RichTextSection,
   'layout.project-explorer': ProjectExplorer,
+  'layout.contact-section': ContactSection,
   'layout.footer': Footer,
 };
 

@@ -2,6 +2,9 @@ import Link from 'next/link';
 import StaticsData from '../../types/statics';
 import MarkdownIt from 'markdown-it';
 
+/**
+ * Data a RichTextSection must provide.
+ */
 interface RichTextSectionData {
   id: 1;
   __component: string;
@@ -12,6 +15,9 @@ interface RichTextSectionData {
   htmlAnchor: null | string;
 }
 
+/**
+ * Props for the RichTextSection component.
+ */
 interface RichTextSectionProps {
   data: RichTextSectionData;
   statics: StaticsData;
@@ -24,8 +30,7 @@ const RichTextSection = ({ data, statics }: RichTextSectionProps) => {
   return (
     <div
       id={data.htmlAnchor !== null ? data.htmlAnchor : ''}
-      className="w-screen dark:bg-slate-900"
-    >
+      className="w-screen dark:bg-slate-900">
       {/* Wrapper */}
       <div className="container mx-auto">
         {/* Title */}
@@ -46,6 +51,7 @@ const RichTextSection = ({ data, statics }: RichTextSectionProps) => {
             <p
               className="text-xl leading-10 text-center sm:text-left"
               dangerouslySetInnerHTML={{
+                // Render the markdown content as HTML.
                 __html: markdownIt.render(data.content),
               }}
             />
@@ -57,9 +63,9 @@ const RichTextSection = ({ data, statics }: RichTextSectionProps) => {
           <div className="mt-5 flex flex-row sm:justify-start justify-center">
             <Link href={data.readMoreLink}>
               <a
-                className={`hover:bg-slate-300 bg-slate-200 rounded cursor-pointer px-10 py-3
-                    text-md transition-all duration-500 dark:bg-slate-600 dark:hover:bg-slate-500 dark:text-white`}
-              >
+                className={`hover:bg-slate-200 bg-slate-100 rounded cursor-pointer px-10 py-3
+                    text-md transition-all duration-500 dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-white
+                    border border-slate-300 hover:border-slate-600 dark:border-slate-500 dark:hover:border-slate-300`}>
                 <b className="font-medium">Read more &rarr;</b>
               </a>
             </Link>
