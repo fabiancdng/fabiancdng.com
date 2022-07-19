@@ -54,13 +54,13 @@ const RichTextSection = ({ data, statics }: RichTextSectionProps) => {
 
         {/* Read more link */}
         {data.readMoreLink !== null && (
-          <div className="mt-8 flex flex-row sm:justify-start justify-center">
+          <div className="mt-5 flex flex-row sm:justify-start justify-center">
             <Link href={data.readMoreLink}>
               <a
-                className={`hover:bg-slate-300 bg-slate-200 rounded cursor-pointer sm:px-4 px-10 py-3
+                className={`hover:bg-slate-300 bg-slate-200 rounded cursor-pointer px-10 py-3
                     text-md transition-all duration-500 dark:bg-slate-600 dark:hover:bg-slate-500 dark:text-white`}
               >
-                Read more
+                <b className="font-medium">Read more &rarr;</b>
               </a>
             </Link>
           </div>

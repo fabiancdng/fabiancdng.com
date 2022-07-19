@@ -1,146 +1,167 @@
-import qs from "qs";
-import { PageTemplate, BlogPostTemplate, BlogTemplate } from "../types/templates";
-import HomePageData from "../types/pages/homepage";
+import qs from 'qs';
+import {
+  PageTemplate,
+  BlogPostTemplate,
+  BlogTemplate,
+} from '../types/templates';
+import HomePageData from '../types/pages/homepage';
 
 /**
  * Class for making requests related to pages to the CMS and retrieving data.
  */
 class PageAdapter {
-    /**
-     * URL of the CMS.
-     */
-    private STRAPI_URL: string|undefined;
+  /**
+   * URL of the CMS.
+   */
+  private STRAPI_URL: string | undefined;
 
-    /**
-     * Access token needed to access the CMS's API.
-     */
-    private STRAPI_ACCESS_TOKEN: string|undefined;
+  /**
+   * Access token needed to access the CMS's API.
+   */
+  private STRAPI_ACCESS_TOKEN: string | undefined;
 
-    /**
-     * Constructor for the PageAdapter class.
-     */
-    constructor(STRAPI_URL: string|undefined, STRAPI_ACCESS_TOKEN: string|undefined) {
-        this.STRAPI_URL = STRAPI_URL;
-        this.STRAPI_ACCESS_TOKEN = STRAPI_ACCESS_TOKEN;
-    }
+  /**
+   * Constructor for the PageAdapter class.
+   */
+  constructor(
+    STRAPI_URL: string | undefined,
+    STRAPI_ACCESS_TOKEN: string | undefined
+  ) {
+    this.STRAPI_URL = STRAPI_URL;
+    this.STRAPI_ACCESS_TOKEN = STRAPI_ACCESS_TOKEN;
+  }
 
-    public getHomePageData(): Promise<HomePageData> {
-        // Querystring holding the fields to populate.
-        const querystring = qs.stringify({
-            populate: {
-                // Populate DZ 'content'.
-                content: {
-                    populate: [
-                        '*',
-                        'logo',
-                        'links',
-                        'projects',
-                        'projects.languages',
-                    ]
-                }
-            }
-        }, {
-            encodeValuesOnly: true,
-        });
+  public getHomePageData(): Promise<HomePageData> {
+    // Querystring holding the fields to populate.
+    const querystring = qs.stringify(
+      {
+        populate: {
+          // Populate DZ 'content'.
+          content: {
+            populate: [
+              '*',
+              'logo',
+              'links',
+              'projects',
+              'projects.languages',
+              'socialButtons',
+            ],
+          },
+        },
+      },
+      {
+        encodeValuesOnly: true,
+      }
+    );
 
-        return new Promise(async (resolve, reject) => {
-            // Retrieve homepage data (& content) from CMS.
-            const homepageDataRequest = await fetch(this.STRAPI_URL + '/api/homepage?' + querystring, {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + this.STRAPI_ACCESS_TOKEN,
-                }
-            });
+    return new Promise(async (resolve, reject) => {
+      // Retrieve homepage data (& content) from CMS.
+      const homepageDataRequest = await fetch(
+        this.STRAPI_URL + '/api/homepage?' + querystring,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: 'Bearer ' + this.STRAPI_ACCESS_TOKEN,
+          },
+        }
+      );
 
-            // Parse JSON response and return relevant data.
-            const homepageDataRaw = await homepageDataRequest.json();
-            const data: HomePageData = homepageDataRaw.data.attributes;
+      // Parse JSON response and return relevant data.
+      const homepageDataRaw = await homepageDataRequest.json();
+      const data: HomePageData = homepageDataRaw.data.attributes;
 
-            // TODO: Add error handling.
+      // TODO: Add error handling.
 
-            // Resolve promise and return data.
-            return resolve(data);
-        });
-    }
+      // Resolve promise and return data.
+      return resolve(data);
+    });
+  }
 
+  /**
+   * Get the template for a custom/dynamic page from Strapi.
+   */
+  public getPageTemplate(): Promise<PageTemplate> {
+    // Querystring holding the fields to populate.
+    const querystring = '?populate[content][populate]=*';
 
-    /**
-     * Get the template for a custom/dynamic page from Strapi.
-     */
-    public getPageTemplate(): Promise<PageTemplate> {
-        // Querystring holding the fields to populate.
-        const querystring = '?populate[content][populate]=*';
+    return new Promise(async (resolve, reject) => {
+      // Retrieve page template from Strapi.
+      const pageTemplateRequest = await fetch(
+        this.STRAPI_URL + '/api/page-template' + querystring,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: 'Bearer ' + this.STRAPI_ACCESS_TOKEN,
+          },
+        }
+      );
 
-        return new Promise(async (resolve, reject) => {
-            // Retrieve page template from Strapi.
-            const pageTemplateRequest = await fetch(this.STRAPI_URL + '/api/page-template' + querystring, {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + this.STRAPI_ACCESS_TOKEN,
-                }
-            });
+      // Parse JSON response and return relevant data.
+      const pageTemplateRaw = await pageTemplateRequest.json();
+      const pageTemplate: PageTemplate = pageTemplateRaw.data.attributes;
 
-            // Parse JSON response and return relevant data.
-            const pageTemplateRaw = await pageTemplateRequest.json();
-            const pageTemplate: PageTemplate = pageTemplateRaw.data.attributes;
-            
-            // TODO: Add error handling.
-            return resolve(pageTemplate);
-        });
-    }
+      // TODO: Add error handling.
+      return resolve(pageTemplate);
+    });
+  }
 
+  /**
+   * Get the template for the blog page from Strapi.
+   */
+  public getBlogTemplate(): Promise<BlogTemplate> {
+    // Querystring holding the fields to populate.
+    const querystring = '?populate[content][populate]=*';
 
-    /**
-     * Get the template for the blog page from Strapi.
-     */
-    public getBlogTemplate(): Promise<BlogTemplate> {
-        // Querystring holding the fields to populate.
-        const querystring = '?populate[content][populate]=*';
+    return new Promise(async (resolve, reject) => {
+      // Retrieve blog template from Strapi.
+      const postTemplateRequest = await fetch(
+        this.STRAPI_URL + '/api/blog-template' + querystring,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: 'Bearer ' + this.STRAPI_ACCESS_TOKEN,
+          },
+        }
+      );
 
-        return new Promise(async (resolve, reject) => {
-            // Retrieve blog template from Strapi.
-            const postTemplateRequest = await fetch(this.STRAPI_URL + '/api/blog-template' + querystring, {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + this.STRAPI_ACCESS_TOKEN,
-                }
-            });
+      // Parse JSON response and return relevant data.
+      const blogTemplateRaw = await postTemplateRequest.json();
+      const blogTemplate: BlogPostTemplate = blogTemplateRaw.data.attributes;
 
-            // Parse JSON response and return relevant data.
-            const blogTemplateRaw = await postTemplateRequest.json();
-            const blogTemplate: BlogPostTemplate = blogTemplateRaw.data.attributes;
+      // TODO: Add error handling.
 
-            // TODO: Add error handling.
+      return resolve(blogTemplate);
+    });
+  }
 
-            return resolve(blogTemplate);
-        });
-    }
+  /**
+   * Get the template for a custom/dynamic blog post from Strapi.
+   */
+  public getBlogPostTemplate(): Promise<BlogPostTemplate> {
+    // Querystring holding the fields to populate.
+    const querystring = '?populate[content][populate]=*';
 
-    /**
-     * Get the template for a custom/dynamic blog post from Strapi.
-     */
-    public getBlogPostTemplate(): Promise<BlogPostTemplate> {
-        // Querystring holding the fields to populate.
-        const querystring = '?populate[content][populate]=*';
+    return new Promise(async (resolve, reject) => {
+      // Retrieve post template from Strapi.
+      const postTemplateRequest = await fetch(
+        this.STRAPI_URL + '/api/post-template' + querystring,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: 'Bearer ' + this.STRAPI_ACCESS_TOKEN,
+          },
+        }
+      );
 
-        return new Promise(async (resolve, reject) => {
-            // Retrieve post template from Strapi.
-            const postTemplateRequest = await fetch(this.STRAPI_URL + '/api/post-template' + querystring, {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + this.STRAPI_ACCESS_TOKEN,
-                }
-            });
+      // Parse JSON response and return relevant data.
+      const postTemplateRaw = await postTemplateRequest.json();
+      const postTemplate: BlogPostTemplate = postTemplateRaw.data.attributes;
 
-            // Parse JSON response and return relevant data.
-            const postTemplateRaw = await postTemplateRequest.json();
-            const postTemplate: BlogPostTemplate = postTemplateRaw.data.attributes;
+      // TODO: Add error handling.
 
-            // TODO: Add error handling.
-
-            return resolve(postTemplate);
-        });
-    }
+      return resolve(postTemplate);
+    });
+  }
 }
 
 export default PageAdapter;
