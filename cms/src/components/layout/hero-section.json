@@ -34,6 +34,11 @@
     },
     "htmlAnchor": {
       "type": "string"
+    },
+    "socialButtons": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::social-button.social-button"
     }
   }
 }
