@@ -3,6 +3,7 @@ import ImageData from '../../types/image';
 import HeaderLink, { HeaderLinkData } from './HeaderLink';
 import { FaBars } from 'react-icons/fa';
 import DarkModeToggle from './DarkModeToggle';
+import Link from 'next/link';
 
 /**
  * Data from the CMS for a Header component.
@@ -51,17 +52,20 @@ const Header = ({ data, statics }: headerProps) => {
   return (
     <header className="fixed top-0 left-0 w-full z-20 bg-white dark:bg-slate-800">
       {/* Navigation */}
-      <nav className="flex items-center px-2 sm:px-0 my-2 container mx-auto">
+      <nav className="flex items-center px-2 sm:px-0 my-1 container mx-auto">
         {/* Site title/logo */}
         <div className="w-14 h-14 p-1 flex items-center">
-          <img
-            src={
-              statics.STRAPI_URL
-                ? statics.STRAPI_URL + data.logo.data?.attributes.url
-                : ''
-            }
-            alt=""
-          />
+          <Link href="/">
+            <img
+              className="cursor-pointer"
+              src={
+                statics.STRAPI_URL
+                  ? statics.STRAPI_URL + data.logo.data?.attributes.url
+                  : ''
+              }
+              alt=""
+            />
+          </Link>
           <h2 className="ml-2 text-2xl font-semibold">{data.title}</h2>
         </div>
         {/* Navigation Links */}
@@ -73,7 +77,7 @@ const Header = ({ data, statics }: headerProps) => {
               <li key={index}>
                 <HeaderLink
                   data={link}
-                  additionalCSS="dark:hover:bg-slate-600 dark:text-white hover:bg-slate-200 rounded transition-all duration-500 px-4 py-3"
+                  additionalCSS="dark:hover:bg-slate-600 dark:text-white hover:bg-slate-200 rounded transition-all duration-500 px-4 py-2"
                 />
               </li>
             ))
