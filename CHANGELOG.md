@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.3.2 - 2022-07-20
+
+### Changed
+
+- Enhance header CSS for saving space + better navigation
+
 ## 1.3.1 - 2022-07-19
 
 ### Bugfixes
