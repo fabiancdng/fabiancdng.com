@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.3.3 - 2022-07-20
+
+### Changed
+
+- Further CSS fixes
+
 ## 1.3.2 - 2022-07-20
 
 ### Changed
