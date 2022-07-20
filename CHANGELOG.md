@@ -4,25 +4,25 @@ All notable changes to this project will be documented in this file.
 
 ## 1.3.1 - 2022-07-19
 
-### Changed
+### Bugfixes
 
 - Fix TypeScript error messing with the build
 
 ## 1.3.0 - 2022-07-19
 
-### Changed
+### Added
 
 - Add ContactSection component (not yet with contact form)
 
 ## 1.2.0 - 2022-07-19
 
-### Changed
+### Added
 
 - Add RichTextSection component to be used on pages with support for Markdown text (RichText field in Strapi)
 
 ## 1.1.0 - 2022-07-18
 
-### Changed
+### Added
 
 - Add anonymous analytics as stated in privacy policy (only active in production environment).
 
