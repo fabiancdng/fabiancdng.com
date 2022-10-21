@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
 import ContactSection from '../components/Misc/ContactSection';
 import HeroSection from '../components/Misc/HeroSection';
@@ -147,7 +148,14 @@ const Home: NextPage = () => {
         socialButtons={socials}
       />
 
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      <Footer
+        text="Copyright &copy; 2022 Fabian Reinders"
+        links={[
+          { title: 'Contact', href: '/#contact-me' },
+          { title: 'Imprint', href: '/imprint' },
+          { title: 'Privacy Policy', href: '/privacy-policy' },
+        ]}
+      />
     </>
   );
 };
