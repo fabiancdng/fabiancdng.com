@@ -1,0 +1,99 @@
+/*
+    fabiancdng.com
+    CSS for dynamic HTML from Ghost CMS (pages AND blog posts).
+    https://github.com/fabiancdng/fabiancdng.com
+    Copyright (c) 2022 Fabian Reinders (fabiancdng).
+*/
+
+.ghost-css#ghost-page,
+.ghost-css#ghost-post {
+  @apply text-xl;
+}
+
+.ghost-css a {
+  transition: all 0.2s ease-in-out;
+  font-weight: 400;
+  text-decoration: underline;
+  text-decoration-color: blueviolet;
+  text-decoration-thickness: 2px;
+}
+
+.ghost-css a:hover {
+  transition: all 0.2s ease-in-out;
+  font-size: 1.1em;
+  text-decoration-thickness: 3px;
+}
+
+.ghost-css figure {
+  margin: 35px 0px 40px 0px;
+}
+
+.ghost-css figcaption {
+  @apply text-gray-600 dark:text-gray-300 text-lg italic mt-3 mb-5;
+  text-align: center;
+}
+
+.ghost-css img {
+  @apply rounded-2xl;
+  width: 100%;
+}
+
+.ghost-css pre code {
+  @apply text-base;
+  margin: 20px 0px 20px 0px;
+  border-radius: 10px;
+}
+
+.ghost-css p b,
+.ghost-css p strong {
+  font-weight: 600;
+}
+
+.ghost-css p {
+  @apply mt-4;
+  font-weight: 300;
+}
+
+/* Inline code */
+.ghost-css p code {
+  @apply bg-gray-100 text-red-500 p-1 dark:bg-slate-800;
+}
+
+.ghost-css hr {
+  @apply my-10;
+}
+
+.ghost-css h1 {
+  @apply text-5xl my-2;
+  margin-top: 30px;
+}
+
+.ghost-css h2 {
+  @apply text-4xl font-semibold mb-2;
+  margin-top: 40px;
+}
+
+.ghost-css h3 {
+  @apply text-3xl my-2 mt-6;
+}
+
+.ghost-css h4 {
+  @apply text-2xl my-2 mt-5;
+}
+
+.ghost-css h5 {
+  @apply text-xl my-2 mt-5;
+}
+
+.ghost-css h6 {
+  @apply text-lg my-1 mt-4;
+}
+
+.ghost-css ul {
+  margin-top: 10px;
+  list-style: disc;
+}
+
+.ghost-css ul li {
+  margin-left: 20px;
+}
