@@ -53,7 +53,7 @@ const Home: NextPage = () => {
             title="Hey 👋"
             subtitle="I'm Fabian"
             description="Student & full-stack web developer"
-            logoURL="/logo-circle-upscaled.png"
+            logoURL="/logo-new.jpg"
             htmlAnchor="home"
             socialButtons={socials}
           />

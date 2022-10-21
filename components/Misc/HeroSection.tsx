@@ -59,7 +59,11 @@ const HeroSection = (props: heroSectionProps) => {
 
         {/* Logo */}
         <div className="flex justify-center flex-1 lg:mb-0 z-10">
-          <img src={props.logoURL} className="lg:w-3/6 lg:h-3/6" alt="" />
+          <img
+            src={props.logoURL}
+            className="lg:w-3/6 lg:h-3/6 w-3/4 h-4/4 rounded-full"
+            alt=""
+          />
         </div>
       </div>
     </div>
