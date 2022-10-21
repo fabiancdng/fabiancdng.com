@@ -1,0 +1,58 @@
+name: Build and push Docker image of front end
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  next-build:
+    runs-on: ubuntu-latest
+    container: node:16-alpine
+    name: Build Next.js App
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+      - name: Build the Next.js app
+        env:
+          GHOST_URL: ${{ secrets.GHOST_CMS_URL }}
+          GHOST_CONTENT_API_KEY: ${{ secrets.GHOST_CMS_CONTENT_API_KEY }}
+        run: npm install && npm run build
+      - name: Upload Next.js build as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: |
+            .next
+            public
+          retention-days: 1
+
+  docker-build:
+    needs: next-build
+    runs-on: ubuntu-latest
+    name: Build and push Docker image
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+      - name: Download Next.js build artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+          path: .
+      - name: Login to GitHub Container Registry (ghcr.io)
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\/v/}
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/fabiancdng/fabiancdng-website:latest
+            ghcr.io/fabiancdng/fabiancdng-website:${{ steps.get_version.outputs.VERSION }}

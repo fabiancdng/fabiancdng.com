@@ -1,7 +1,0 @@
-.strapi-updater.json
-package-lock.json
-node_modules/
-.env
-.env.example
-build/
-.cache/
