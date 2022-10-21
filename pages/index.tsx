@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Header from '../components/Header/Header';
 import HeroSection from '../components/Misc/HeroSection';
+import ProjectExplorer from '../components/Projects/ProjectExplorer';
 
 const Home: NextPage = () => {
   return (
@@ -54,6 +55,68 @@ const Home: NextPage = () => {
             title: 'Discord',
             href: 'https://discord.com/users/395613173497069569',
             icon: 'BsDiscord',
+          },
+        ]}
+      />
+
+      <ProjectExplorer
+        title="Projects"
+        subtitle="Here are some of my current projects"
+        htmlAnchor="projects"
+        projects={[
+          {
+            name: 'GoShortrr',
+            slug: 'goshortrr',
+            href: 'https://github.com/fabiancdng/GoShortrr',
+            githubRepo: 'fabiancdng/GoShortrr',
+            shortDescription:
+              '🔗  A fast, simple and powerful URL-Shortener built with Go and React.',
+            longDescription: '',
+            languages: [
+              {
+                name: 'Go',
+                homepage: 'https://go.dev/',
+                colorCode: '#79d4fd',
+              },
+              {
+                name: 'JavaScript',
+                homepage:
+                  'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
+                colorCode: '#ead31d',
+              },
+            ],
+          },
+          {
+            name: 'BeeLogger',
+            slug: 'beelogger',
+            href: 'https://github.com/Programmier-AG/BeeLogger',
+            githubRepo: 'Programmier-AG/BeeLogger',
+            shortDescription:
+              '🐝 A software for beekeepers that provides scripts for recording data (such as weight or temperature), a powerful REST API for processing it and a dashboard for viewing it.',
+            longDescription: '',
+            languages: [
+              {
+                name: 'Python',
+                homepage: 'https://www.python.org/',
+                colorCode: '#3572a5',
+              },
+            ],
+          },
+          {
+            name: 'fabiancdng.com',
+            slug: 'fabiancdng-com',
+            href: 'https://github.com/fabiancdng/fabiancdng.com',
+            githubRepo: 'fabiancdng/fabiancdng.com',
+            shortDescription:
+              '🌐 My personal website and blog built with React, Next.js and Tailwind.',
+            longDescription: '',
+            languages: [
+              {
+                name: 'TypeScript',
+                homepage: 'https://www.typescriptlang.org/',
+                colorCode: '#2b7489',
+              },
+            ],
           },
         ]}
       />
