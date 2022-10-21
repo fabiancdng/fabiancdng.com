@@ -16,8 +16,6 @@ const RichTextSection = (props: richTextSectionProps) => {
   // MarkdownIt object to convert RichtText (markdown) to HTML.
   const markdownIt = new MarkdownIt();
 
-  console.log(props.content);
-
   return (
     <div
       id={props.htmlAnchor !== null ? props.htmlAnchor : ''}
