@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.1 - 2022-10-21
+
+### Changed
+
+- Fix some assets and positioning issues
+
 ## 2.0.0 - 2022-10-21
 
 ### Changed
