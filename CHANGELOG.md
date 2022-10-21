@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.0 - 2022-10-21
+
+### Changed
+
+- Drop Strapi as a base for page structure and some content
+
 ## 1.3.3 - 2022-07-20
 
 ### Changed
