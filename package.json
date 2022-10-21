@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "highlight.js": "^11.6.0",
+    "markdown-it": "^13.0.1",
     "next": "12.3.1",
     "nextjs-progressbar": "^0.0.16",
     "react": "18.2.0",
@@ -17,6 +18,7 @@
     "react-icons": "^4.6.0"
   },
   "devDependencies": {
+    "@types/markdown-it": "^12.2.3",
     "@types/node": "18.11.3",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",

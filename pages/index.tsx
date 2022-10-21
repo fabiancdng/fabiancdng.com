@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Header from '../components/Header/Header';
 import HeroSection from '../components/Misc/HeroSection';
+import RichTextSection from '../components/Misc/RichTextSection';
 import ProjectExplorer from '../components/Projects/ProjectExplorer';
 
 const Home: NextPage = () => {
@@ -57,6 +58,20 @@ const Home: NextPage = () => {
             icon: 'BsDiscord',
           },
         ]}
+      />
+
+      <RichTextSection
+        title="About me"
+        subtitle={null}
+        htmlAnchor="about-me"
+        content={
+          'Hey there 👋\n\n' +
+          "My name is Fabian,  I'm 18 years old and a student and self-taught full-stack developer from Germany.\n\n" +
+          'I mostly use my skills to build and maintain full-stack web applications using JavaScript, Python, and Go.\n\n' +
+          'Besides that, I also develop WordPress plugins with PHP and JavaScript.\n\n' +
+          'Feel free to read more about me on my about page.'
+        }
+        readMoreLink="/about"
       />
 
       <ProjectExplorer
