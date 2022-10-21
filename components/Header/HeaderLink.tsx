@@ -11,8 +11,8 @@ interface headerLinkProps {
 
 const HeaderLink = ({ title, href, additionalCSS }: headerLinkProps) => {
   return (
-    <Link href={href}>
-      <p className={'cursor-pointer ' + additionalCSS}>{title}</p>
+    <Link href={href} passHref={true}>
+      <a className={'cursor-pointer ' + additionalCSS}>{title}</a>
     </Link>
   );
 };
