@@ -11,8 +11,8 @@ import { SbBlokData, storyblokEditable } from '@storyblok/react';
  */
 interface HeroSectionBlock extends SbBlokData {
   title: string;
-  subtitle?: string;
-  description?: string;
+  subtitle: string;
+  description: string;
   avatar?: {
     id: number;
     alt: string;
@@ -24,14 +24,15 @@ interface HeroSectionBlock extends SbBlokData {
     fieldtype: 'asset';
     is_external_url: boolean;
   };
-  htmlAnchor?: string;
+  htmlAnchor: string;
+  additionalCSS: string;
 }
 
 const HeroSection = ({ blok }: { blok: HeroSectionBlock }) => {
   return (
     <div
       id={blok.htmlAnchor}
-      className="h-screen flex flex-col justify-center align-middle dark:bg-slate-900"
+      className={`h-screen flex flex-col justify-center align-middle dark:bg-slate-900 ${blok.additionalCSS}`}
       {...storyblokEditable(blok)}>
       <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center gap-12 mt-10 lg:mt-25">
         {/* Text & Socials */}

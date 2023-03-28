@@ -15,18 +15,19 @@ interface RichTextSectionBlock extends SbBlokData {
   htmlAnchor: string;
   content: ISbRichtext;
   readMoreURL: string;
+  additionalCSS: string;
 }
 
 const RichTextSection = ({ blok }: { blok: RichTextSectionBlock }) => {
   return (
     <div
       id={blok.htmlAnchor}
-      className="w-screen dark:bg-slate-900"
+      className={`w-screen dark:bg-slate-900 ${blok.additionalCSS}`}
       {...storyblokEditable(blok)}>
       {/* Wrapper */}
       <div className="container mx-auto">
         {/* Title */}
-        <h1 className="text-gray-800 dark:text-slate-100 text-5xl font-semibold pt-20 text-center sm:text-left mx-4 sm:mx-0">
+        <h1 className="text-gray-800 dark:text-slate-100 text-5xl font-semibold pt-5 text-center sm:text-left mx-4 sm:mx-0">
           {blok.title}
         </h1>
 

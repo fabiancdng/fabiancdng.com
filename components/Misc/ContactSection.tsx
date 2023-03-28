@@ -1,4 +1,4 @@
-import { SbBlokData } from '@storyblok/react';
+import { SbBlokData, storyblokEditable } from '@storyblok/react';
 import { FaEnvelope } from 'react-icons/fa';
 
 // interface socialButton {
@@ -15,6 +15,7 @@ interface ContactSectionBlock extends SbBlokData {
   subtitle: string;
   htmlAnchor: string;
   destinationEmail: string;
+  additionalCSS: string;
   // socialButtons: socialButton[] | null;
 }
 
@@ -22,7 +23,8 @@ const ContactSection = ({ blok }: { blok: ContactSectionBlock }) => {
   return (
     <div
       id={blok.htmlAnchor}
-      className="w-screen dark:bg-slate-800 bg-slate-100 pb-20">
+      className={`w-screen dark:bg-slate-800 bg-slate-100 pb-20 ${blok.additionalCSS}`}
+      {...storyblokEditable(blok)}>
       {/* Wrapper */}
       <div className="container mx-auto flex flex-col justify-center items-center">
         {/* Title */}
