@@ -23,10 +23,6 @@ const Home: NextPage<PageProps> = (props: PageProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header>
-        <h1>{story ? story.name : 'My Site'}</h1>
-      </header>
-
       <main>
         <StoryblokComponent blok={story.content} />
       </main>

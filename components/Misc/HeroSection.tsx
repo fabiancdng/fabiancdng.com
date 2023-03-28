@@ -38,7 +38,6 @@ interface HeroSectionBlock extends SbBlokData {
 }
 
 const HeroSection = ({ blok }: { blok: HeroSectionBlock }) => {
-  console.log(blok.title);
   return (
     <div
       id={blok.htmlAnchor}
