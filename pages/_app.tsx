@@ -10,13 +10,15 @@ import '../styles/ghost.css';
 import '../styles/global.css';
 import Page from '../components/Storyblok/Page';
 import Grid from '../components/Storyblok/Grid';
+import RichTextSection from '../components/Misc/RichTextSection';
 import HeroSection from '../components/Misc/HeroSection';
 
 // Map Storyblok components to Next.js components.
 const storyblokComponentsMapping: SbReactComponentsMap = {
   grid: Grid,
   page: Page,
-  hero: HeroSection,
+  heroSection: HeroSection,
+  richTextSection: RichTextSection,
 };
 
 // Initialize Storyblok.

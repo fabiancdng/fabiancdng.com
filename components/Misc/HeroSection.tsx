@@ -1,5 +1,4 @@
 import { SbBlokData, storyblokEditable } from '@storyblok/react';
-import SocialMediaIcon from './SocialMediaIcon';
 
 // interface socialButton {
 //   title: string;
@@ -8,17 +7,8 @@ import SocialMediaIcon from './SocialMediaIcon';
 // }
 
 /**
- * Data from the CMS for a HeroSection component.
+ * Data for Hero Section Block Type from Storyblok.
  */
-interface heroSectionProps {
-  title: string;
-  subtitle: string;
-  description: string | null;
-  logoURL: string;
-  htmlAnchor: string;
-  // socialButtons: socialButton[] | null;
-}
-
 interface HeroSectionBlock extends SbBlokData {
   title: string;
   subtitle?: string;
