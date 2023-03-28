@@ -12,6 +12,7 @@ import Page from '../components/Storyblok/Page';
 import Grid from '../components/Storyblok/Grid';
 import RichTextSection from '../components/Misc/RichTextSection';
 import HeroSection from '../components/Misc/HeroSection';
+import ContactSection from '../components/Misc/ContactSection';
 
 // Map Storyblok components to Next.js components.
 const storyblokComponentsMapping: SbReactComponentsMap = {
@@ -19,6 +20,7 @@ const storyblokComponentsMapping: SbReactComponentsMap = {
   page: Page,
   heroSection: HeroSection,
   richTextSection: RichTextSection,
+  contactSection: ContactSection,
 };
 
 // Initialize Storyblok.

@@ -31,7 +31,7 @@ const RichTextSection = ({ blok }: { blok: RichTextSectionBlock }) => {
         </h1>
 
         {/* Subtitle */}
-        {blok.subtitle !== '' && (
+        {blok.subtitle && (
           <h2 className="text-gray-800 dark:text-slate-200 text-2xl mb-10 mt-3 text-center sm:text-left mx-4 sm:mx-0">
             {blok.subtitle}
           </h2>
@@ -49,9 +49,9 @@ const RichTextSection = ({ blok }: { blok: RichTextSectionBlock }) => {
         </div>
 
         {/* Read more link */}
-        {blok.readMoreLink !== null && (
+        {blok.readMoreURL && (
           <div className="mt-5 flex flex-row sm:justify-start justify-center">
-            <Link href={String(blok.readMoreLink)}>
+            <Link href={String(blok.readMoreURL)}>
               <a
                 className={`hover:bg-slate-200 bg-slate-100 rounded cursor-pointer px-10 py-3
                     text-md transition-all duration-500 dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-white
