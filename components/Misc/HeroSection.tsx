@@ -1,10 +1,11 @@
+import { SbBlokData, storyblokEditable } from '@storyblok/react';
 import SocialMediaIcon from './SocialMediaIcon';
 
-interface socialButton {
-  title: string;
-  href: string;
-  icon: string;
-}
+// interface socialButton {
+//   title: string;
+//   href: string;
+//   icon: string;
+// }
 
 /**
  * Data from the CMS for a HeroSection component.
@@ -15,35 +16,55 @@ interface heroSectionProps {
   description: string | null;
   logoURL: string;
   htmlAnchor: string;
-  socialButtons: socialButton[] | null;
+  // socialButtons: socialButton[] | null;
 }
 
-const HeroSection = (props: heroSectionProps) => {
+interface HeroSectionBlock extends SbBlokData {
+  title: string;
+  subtitle?: string;
+  description?: string;
+  avatar?: {
+    id: number;
+    alt: string;
+    name: string;
+    focus: string;
+    title: string;
+    filename: 'https://a.storyblok.com/f/213297/962x901/e636e7c9eb/pb.JPG';
+    copyright: string;
+    fieldtype: 'asset';
+    is_external_url: boolean;
+  };
+  htmlAnchor?: string;
+}
+
+const HeroSection = ({ blok }: { blok: HeroSectionBlock }) => {
+  console.log(blok.title);
   return (
     <div
-      id={props.htmlAnchor}
-      className="h-screen flex flex-col justify-center align-middle dark:bg-slate-900">
+      id={blok.htmlAnchor}
+      className="h-screen flex flex-col justify-center align-middle dark:bg-slate-900"
+      {...storyblokEditable(blok)}>
       <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center gap-12 mt-10 lg:mt-25">
         {/* Text & Socials */}
         <div className="flex flex-1 flex-col items-center lg:items-start">
           <h1
             className="text-4xl lg:text-6xl text-center
                     lg:text-left mb-4 font-bold dark:text-slate-50">
-            {props.title}
+            {blok.title}
           </h1>
           <h2
             className="text-3xl lg:text-5xl text-center lg:text-left text-slate-700
                     mb-4 dark:text-slate-200">
-            {props.subtitle}
+            {blok.subtitle}
           </h2>
           <h3
             className="text-2xl lg:text-3xl text-center lg:text-left mb-7 text-gray-500
                     dark:text-slate-400">
-            {props.description}
+            {blok.description}
           </h3>
 
           {/* Socials */}
-          <div className="flex flex-row justify-center lg:justify-start">
+          {/* <div className="flex flex-row justify-center lg:justify-start">
             {props.socialButtons?.map((button, index) => (
               <SocialMediaIcon
                 key={index}
@@ -54,13 +75,13 @@ const HeroSection = (props: heroSectionProps) => {
                         border border-slate-300 hover:border-slate-600 dark:border-slate-500 dark:hover:border-slate-200`}
               />
             ))}
-          </div>
+          </div> */}
         </div>
 
         {/* Logo */}
         <div className="flex justify-center flex-1 lg:mb-0 z-10">
           <img
-            src={props.logoURL}
+            src={blok.avatar?.filename}
             className="lg:w-3/6 lg:h-3/6 w-3/4 h-4/4 rounded-full"
             alt=""
           />

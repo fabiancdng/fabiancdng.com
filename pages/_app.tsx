@@ -8,6 +8,7 @@ import Page from '../components/Storyblok/Page';
 import Teaser from '../components/Storyblok/Teaser';
 import Grid from '../components/Storyblok/Grid';
 import Feature from '../components/Storyblok/Feature';
+import HeroSection from '../components/Misc/HeroSection';
 
 // Map Storyblok components to Next.js components.
 const storyblokComponents = {
@@ -15,6 +16,7 @@ const storyblokComponents = {
   grid: Grid,
   teaser: Teaser,
   page: Page,
+  hero: HeroSection,
 };
 
 storyblokInit({
