@@ -1,6 +1,10 @@
-import { storyblokEditable } from '@storyblok/react';
+import { SbBlokData, storyblokEditable } from '@storyblok/react';
 
-const Feature = ({ blok }: any) => (
+interface FeatureBlock extends SbBlokData {
+  name: string;
+}
+
+const Feature = ({ blok }: { blok: FeatureBlock }) => (
   <div className="column feature" {...storyblokEditable(blok)}>
     {blok.name}
   </div>
