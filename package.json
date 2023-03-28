@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@storyblok/react": "^2.0.16",
     "@tryghost/content-api": "^1.11.4",
     "highlight.js": "^11.6.0",
     "markdown-it": "^13.0.1",
