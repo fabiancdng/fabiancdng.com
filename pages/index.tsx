@@ -7,6 +7,7 @@ import {
 } from '@storyblok/react';
 import { NextPage } from 'next';
 import Head from 'next/head';
+import Layout from '../components/Misc/Layout';
 
 interface PageProps {
   story: ISbStoryData;
@@ -23,9 +24,9 @@ const Home: NextPage<PageProps> = (props: PageProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <Layout>
         <StoryblokComponent blok={story.content} />
-      </main>
+      </Layout>
     </div>
   );
 };

@@ -29,7 +29,7 @@ interface HeroSectionBlock extends SbBlokData {
     name: string;
     focus: string;
     title: string;
-    filename: 'https://a.storyblok.com/f/213297/962x901/e636e7c9eb/pb.JPG';
+    filename: string;
     copyright: string;
     fieldtype: 'asset';
     is_external_url: boolean;
