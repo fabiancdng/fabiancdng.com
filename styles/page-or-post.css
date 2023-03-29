@@ -1,16 +1,15 @@
 /*
     fabiancdng.com
-    CSS for dynamic HTML from Ghost CMS (pages AND blog posts).
+    CSS for dynamic pages and posts from Storyblok CMS.
     https://github.com/fabiancdng/fabiancdng.com
-    Copyright (c) 2022 Fabian Reinders (fabiancdng).
+    Copyright (c) 2022-2023 Fabian Reinders (fabiancdng).
 */
 
-.ghost-css#ghost-page,
-.ghost-css#ghost-post {
+.rich-text-page-or-post#storyblok-page {
   @apply text-xl;
 }
 
-.ghost-css a {
+.rich-text-page-or-post a {
   transition: all 0.2s ease-in-out;
   font-weight: 400;
   text-decoration: underline;
@@ -18,82 +17,82 @@
   text-decoration-thickness: 2px;
 }
 
-.ghost-css a:hover {
+.rich-text-page-or-post a:hover {
   transition: all 0.2s ease-in-out;
   font-size: 1.1em;
   text-decoration-thickness: 3px;
 }
 
-.ghost-css figure {
+.rich-text-page-or-post figure {
   margin: 35px 0px 40px 0px;
 }
 
-.ghost-css figcaption {
+.rich-text-page-or-post figcaption {
   @apply text-gray-600 dark:text-gray-300 text-lg italic mt-3 mb-5;
   text-align: center;
 }
 
-.ghost-css img {
+.rich-text-page-or-post img {
   @apply rounded-2xl;
   width: 100%;
 }
 
-.ghost-css pre code {
+.rich-text-page-or-post pre code {
   @apply text-base;
   margin: 20px 0px 20px 0px;
   border-radius: 10px;
 }
 
-.ghost-css p b,
-.ghost-css p strong {
+.rich-text-page-or-post p b,
+.rich-text-page-or-post p strong {
   font-weight: 600;
 }
 
-.ghost-css p {
+.rich-text-page-or-post p {
   @apply mt-4;
   font-weight: 300;
 }
 
 /* Inline code */
-.ghost-css p code {
+.rich-text-page-or-post p code {
   @apply bg-gray-100 text-red-500 p-1 dark:bg-slate-800;
 }
 
-.ghost-css hr {
+.rich-text-page-or-post hr {
   @apply my-10;
 }
 
-.ghost-css h1 {
+.rich-text-page-or-post h1 {
   @apply text-5xl my-2;
   margin-top: 30px;
 }
 
-.ghost-css h2 {
+.rich-text-page-or-post h2 {
   @apply text-4xl font-semibold mb-2;
   margin-top: 40px;
 }
 
-.ghost-css h3 {
+.rich-text-page-or-post h3 {
   @apply text-3xl my-2 mt-6;
 }
 
-.ghost-css h4 {
+.rich-text-page-or-post h4 {
   @apply text-2xl my-2 mt-5;
 }
 
-.ghost-css h5 {
+.rich-text-page-or-post h5 {
   @apply text-xl my-2 mt-5;
 }
 
-.ghost-css h6 {
+.rich-text-page-or-post h6 {
   @apply text-lg my-1 mt-4;
 }
 
-.ghost-css ul {
+.rich-text-page-or-post ul {
   margin-top: 10px;
   list-style: disc;
 }
 
-.ghost-css ul li {
+.rich-text-page-or-post ul li {
   margin-left: 20px;
 }

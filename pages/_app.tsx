@@ -6,7 +6,7 @@ import {
   SbReactComponentsMap,
 } from '@storyblok/react';
 import 'highlight.js/styles/atom-one-dark.css';
-import '../styles/ghost.css';
+import '../styles/page-or-post.css';
 import '../styles/global.css';
 import Page from '../components/Storyblok/Page';
 import Grid from '../components/Storyblok/Grid';
