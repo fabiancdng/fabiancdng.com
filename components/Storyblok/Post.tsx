@@ -83,7 +83,7 @@ const Post = ({ blok, story, author }: PostProps) => {
         {blok.content && (
           <div
             id="storyblok-post"
-            className="page-or-post-css text-xl leading-10 text-center sm:text-left"
+            className="page-or-post-css"
             dangerouslySetInnerHTML={{
               // Render the markdown content as HTML.
               __html: renderRichText(blok.content),

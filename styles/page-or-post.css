@@ -5,7 +5,8 @@
     Copyright (c) 2022-2023 Fabian Reinders (fabiancdng).
 */
 
-.page-or-post-css#storyblok-page {
+.page-or-post-css#storyblok-page,
+.page-or-post-css#storyblok-post {
   @apply text-xl;
 }
 
@@ -89,7 +90,7 @@
 }
 
 .page-or-post-css ul {
-  margin-top: 10px;
+  @apply my-4 pl-5;
   list-style: disc;
 }
 
