@@ -3,6 +3,7 @@ import {
   SbBlokData,
   ISbRichtext,
   renderRichText,
+  ISbStoryData,
 } from '@storyblok/react';
 import hljs from 'highlight.js';
 import { useEffect } from 'react';
@@ -21,16 +22,20 @@ interface PostBlock extends SbBlokData {
   _editable: string;
 }
 
-const Post = ({ blok }: { blok: PostBlock }) => {
+const Post = ({ blok, story }: { blok: PostBlock; story: ISbStoryData }) => {
   useEffect(() => {
     // Initialize Highlight.js.
     hljs.highlightAll();
   }, []);
 
   return (
-    <main className="text-center mt-4" {...storyblokEditable(blok)}>
+    <main
+      id="storyblok-post"
+      className="page-or-post-css"
+      {...storyblokEditable(blok)}>
       {/* Content */}
-      <div className="mx-auto mt-5 sm:w-full w-4/5">
+      <div className="container pt-32 px-7 mx-auto mb-20 max-w-5xl text-black dark:text-white">
+        <h1 className="text-5xl font-semibold">{story.name}</h1>
         <div
           className="text-xl leading-10 text-center sm:text-left"
           dangerouslySetInnerHTML={{

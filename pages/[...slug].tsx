@@ -21,12 +21,7 @@ export default function Page({ story }: { story: ISbStoryData }) {
       </Head>
 
       <Layout>
-        <div className="container pt-20 mx-auto mb-20 max-w-5xl text-black dark:text-white">
-          <h1 className="text-5xl font-semibold">{story.name}</h1>
-          <div id="storyblok-page" className="rich-text-page-or-post">
-            <StoryblokComponent blok={story.content} />
-          </div>
-        </div>
+        <StoryblokComponent blok={story.content} story={story} />
       </Layout>
     </div>
   );

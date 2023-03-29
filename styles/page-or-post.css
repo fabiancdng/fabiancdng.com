@@ -5,11 +5,11 @@
     Copyright (c) 2022-2023 Fabian Reinders (fabiancdng).
 */
 
-.rich-text-page-or-post#storyblok-page {
+.page-or-post-css#storyblok-page {
   @apply text-xl;
 }
 
-.rich-text-page-or-post a {
+.page-or-post-css a {
   transition: all 0.2s ease-in-out;
   font-weight: 400;
   text-decoration: underline;
@@ -17,82 +17,82 @@
   text-decoration-thickness: 2px;
 }
 
-.rich-text-page-or-post a:hover {
+.page-or-post-css a:hover {
   transition: all 0.2s ease-in-out;
   font-size: 1.1em;
   text-decoration-thickness: 3px;
 }
 
-.rich-text-page-or-post figure {
+.page-or-post-css figure {
   margin: 35px 0px 40px 0px;
 }
 
-.rich-text-page-or-post figcaption {
+.page-or-post-css figcaption {
   @apply text-gray-600 dark:text-gray-300 text-lg italic mt-3 mb-5;
   text-align: center;
 }
 
-.rich-text-page-or-post img {
+.page-or-post-css img {
   @apply rounded-2xl;
   width: 100%;
 }
 
-.rich-text-page-or-post pre code {
+.page-or-post-css pre code {
   @apply text-base;
   margin: 20px 0px 20px 0px;
   border-radius: 10px;
 }
 
-.rich-text-page-or-post p b,
-.rich-text-page-or-post p strong {
+.page-or-post-css p b,
+.page-or-post-css p strong {
   font-weight: 600;
 }
 
-.rich-text-page-or-post p {
+.page-or-post-css p {
   @apply mt-4;
   font-weight: 300;
 }
 
 /* Inline code */
-.rich-text-page-or-post p code {
+.page-or-post-css p code {
   @apply bg-gray-100 text-red-500 p-1 dark:bg-slate-800;
 }
 
-.rich-text-page-or-post hr {
+.page-or-post-css hr {
   @apply my-10;
 }
 
-.rich-text-page-or-post h1 {
+.page-or-post-css h1 {
   @apply text-5xl my-2;
   margin-top: 30px;
 }
 
-.rich-text-page-or-post h2 {
+.page-or-post-css h2 {
   @apply text-4xl font-semibold mb-2;
   margin-top: 40px;
 }
 
-.rich-text-page-or-post h3 {
+.page-or-post-css h3 {
   @apply text-3xl my-2 mt-6;
 }
 
-.rich-text-page-or-post h4 {
+.page-or-post-css h4 {
   @apply text-2xl my-2 mt-5;
 }
 
-.rich-text-page-or-post h5 {
+.page-or-post-css h5 {
   @apply text-xl my-2 mt-5;
 }
 
-.rich-text-page-or-post h6 {
+.page-or-post-css h6 {
   @apply text-lg my-1 mt-4;
 }
 
-.rich-text-page-or-post ul {
+.page-or-post-css ul {
   margin-top: 10px;
   list-style: disc;
 }
 
-.rich-text-page-or-post ul li {
+.page-or-post-css ul li {
   margin-left: 20px;
 }
