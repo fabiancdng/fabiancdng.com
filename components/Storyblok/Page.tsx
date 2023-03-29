@@ -9,21 +9,63 @@ import {
  * Data for the Page Content Type from Storyblok.
  */
 interface PageBlock extends SbBlokData {
+  _uid: string;
+  component: string;
+  _editable: string;
   body: SbBlokData[];
 }
 
-const Page = ({ blok, story }: { blok: PageBlock; story: ISbStoryData }) => (
-  <main
-    id="storyblok-page"
-    className="page-or-post-css"
-    {...storyblokEditable(blok)}>
-    <div className="container pt-20 mx-auto mb-20 max-w-5xl text-black dark:text-white">
+interface PageProps {
+  blok: PageBlock;
+  story: ISbStoryData;
+}
+
+/**
+ * Page not wrapped in any container.
+ * Makes sense if the page contains a lot of "high-level" components
+ * like the home page.
+ */
+const UnwrappedPage = ({ blok, story }: PageProps) => {
+  return (
+    <main {...storyblokEditable(blok)}>
       {blok.body &&
         blok.body.map((nestedBlok) => (
           <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} />
         ))}
-    </div>
-  </main>
-);
+    </main>
+  );
+};
+
+/**
+ * Page wrapped in a container and a max-width.
+ */
+const WrappedPage = ({ blok, story }: PageProps) => {
+  return (
+    <main
+      id="storyblok-page"
+      className={story.slug !== 'home' ? 'page-or-post-css' : ''}
+      {...storyblokEditable(blok)}>
+      <div className="container pt-20 mx-auto mb-20 max-w-5xl text-black dark:text-white">
+        {blok.body &&
+          blok.body.map((nestedBlok) => (
+            <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} />
+          ))}
+      </div>
+    </main>
+  );
+};
+
+/**
+ * Component rendering out any page.
+ */
+const Page = ({ blok, story }: PageProps) => {
+  const unwrappedPages = ['home'];
+
+  if (unwrappedPages.includes(story.slug)) {
+    return <UnwrappedPage blok={blok} story={story} />;
+  } else {
+    return <WrappedPage blok={blok} story={story} />;
+  }
+};
 
 export default Page;

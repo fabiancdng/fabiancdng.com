@@ -24,7 +24,7 @@ const Home: NextPage<StoryData> = ({ story }: StoryData) => {
       </Head>
 
       <Layout>
-        <StoryblokComponent blok={story.content} />
+        <StoryblokComponent blok={story.content} story={story} />
       </Layout>
     </div>
   );
