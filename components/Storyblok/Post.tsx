@@ -6,6 +6,7 @@ import {
   ISbStoryData,
 } from '@storyblok/react';
 import hljs from 'highlight.js';
+import Link from 'next/link';
 import { useEffect } from 'react';
 import { ImageAsset, PageOrPostAuthor } from '../../types';
 
@@ -40,6 +41,21 @@ const Post = ({ blok, story, author }: PostProps) => {
     <main {...storyblokEditable(blok)}>
       {/* Content */}
       <div className="container pt-32 px-7 mx-auto mb-20 max-w-5xl text-black dark:text-white">
+        {/* Post tags */}
+        {story.tag_list && (
+          <div className="mb-5">
+            {story.tag_list.map((tag, index) => (
+              <div key={index} className="mb-5">
+                {/* <Link href={'/blog/tag/' + post.primary_tag.slug}> */}
+                <a className="text-blue-800 pl-1 font-semibold text-lg dark:text-slate-400">
+                  {tag.toUpperCase()}
+                </a>
+                {/* </Link> */}
+              </div>
+            ))}
+          </div>
+        )}
+
         {/* Post title */}
         {story.name && <h1 className="text-5xl font-semibold">{story.name}</h1>}
 
