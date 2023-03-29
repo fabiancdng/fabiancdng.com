@@ -9,13 +9,12 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import Layout from '../components/Misc/Layout';
 
-interface PageProps {
+interface StoryData {
   story: ISbStoryData;
-  key: number;
 }
 
-const Home: NextPage<PageProps> = (props: PageProps) => {
-  const story = useStoryblokState(props.story);
+const Home: NextPage<StoryData> = ({ story }: StoryData) => {
+  story = useStoryblokState(story);
 
   return (
     <div>

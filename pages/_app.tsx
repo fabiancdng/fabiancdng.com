@@ -13,11 +13,13 @@ import Grid from '../components/Storyblok/Grid';
 import RichTextSection from '../components/Misc/RichTextSection';
 import HeroSection from '../components/Misc/HeroSection';
 import ContactSection from '../components/Misc/ContactSection';
+import Post from '../components/Storyblok/Post';
 
 // Map Storyblok components to Next.js components.
 const storyblokComponentsMapping: SbReactComponentsMap = {
   grid: Grid,
   page: Page,
+  post: Post,
   heroSection: HeroSection,
   richTextSection: RichTextSection,
   contactSection: ContactSection,
