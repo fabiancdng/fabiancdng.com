@@ -1,5 +1,4 @@
 import Head from 'next/head';
-
 import {
   useStoryblokState,
   getStoryblokApi,
@@ -9,8 +8,21 @@ import {
 } from '@storyblok/react';
 import Layout from '../components/Misc/Layout';
 import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next';
+import { PageOrPostAuthor } from '../types';
 
-export default function Page({ story }: { story: ISbStoryData }) {
+interface PageProps {
+  story: ISbStoryData | false;
+  author: PageOrPostAuthor | false;
+  key: string | false;
+}
+
+export default function Page({ story, author }: PageProps) {
+  // Make sure story and author object were passed correctly.
+  if (!story || !author) {
+    return null;
+  }
+
+  // Run story object through the useStoryblokState hook.
   story = useStoryblokState(story);
 
   return (
@@ -21,7 +33,11 @@ export default function Page({ story }: { story: ISbStoryData }) {
       </Head>
 
       <Layout>
-        <StoryblokComponent blok={story.content} story={story} />
+        <StoryblokComponent
+          blok={story.content}
+          story={story}
+          author={author}
+        />
       </Layout>
     </div>
   );
@@ -34,6 +50,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   let sbParams: ISbStoryParams = {
     version: 'draft', // or 'published'
+    resolve_relations: 'author',
   };
 
   const storyblokApi = getStoryblokApi();
@@ -42,6 +59,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       story: data ? data.story : false,
+      author: data.rels[0] ? data.rels[0] : false,
       key: data ? data.story.id : false,
     },
     revalidate: 3600,
