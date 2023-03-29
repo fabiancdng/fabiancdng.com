@@ -1,4 +1,5 @@
 import { SbBlokData, storyblokEditable } from '@storyblok/react';
+import Image from 'next/image';
 import { ImageAsset } from '../../types';
 
 // interface socialButton {
@@ -62,11 +63,13 @@ const HeroSection = ({ blok }: { blok: HeroSectionBlock }) => {
         {/* Logo */}
         {blok.avatar && (
           <div className="flex justify-center flex-1 lg:mb-0 z-10">
-            <img
-              src={blok.avatar?.filename}
-              className="lg:w-3/6 lg:h-3/6 w-3/4 h-4/4 rounded-full"
-              alt=""
-            />
+            <div className="lg:w-3/6 lg:h-3/6 w-6/12 h-6/12">
+              <img
+                src={blok.avatar?.filename}
+                alt={blok.avatar?.alt}
+                className="rounded-full"
+              />
+            </div>
           </div>
         )}
       </div>

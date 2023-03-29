@@ -25,10 +25,10 @@ const BlogPostContent = ({ post }: { post: PostOrPage }) => {
     <div className="container pt-32 px-7 mx-auto mb-20 max-w-5xl text-black dark:text-white">
       {post.primary_tag && (
         <div className="mb-5">
-          <Link href={'/blog/tag/' + post.primary_tag.slug}>
-            <a className="text-blue-800 pl-1 font-semibold text-lg dark:text-slate-400">
-              {post.primary_tag.name?.toUpperCase()}
-            </a>
+          <Link
+            href={'/blog/tag/' + post.primary_tag.slug}
+            className="text-blue-800 pl-1 font-semibold text-lg dark:text-slate-400">
+            {post.primary_tag.name?.toUpperCase()}
           </Link>
         </div>
       )}
