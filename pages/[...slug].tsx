@@ -18,7 +18,7 @@ interface PageProps {
 
 export default function Page({ story, author }: PageProps) {
   // Make sure story and author object were passed correctly.
-  if (!story || !author) {
+  if (!story) {
     return null;
   }
 
