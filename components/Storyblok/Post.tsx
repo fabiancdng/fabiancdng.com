@@ -4,6 +4,8 @@ import {
   ISbRichtext,
   renderRichText,
 } from '@storyblok/react';
+import hljs from 'highlight.js';
+import { useEffect } from 'react';
 
 /**
  * Data for the Post Content Type from Storyblok.
@@ -20,6 +22,11 @@ interface PostBlock extends SbBlokData {
 }
 
 const Post = ({ blok }: { blok: PostBlock }) => {
+  useEffect(() => {
+    // Initialize Highlight.js.
+    hljs.highlightAll();
+  }, []);
+
   return (
     <main className="text-center mt-4" {...storyblokEditable(blok)}>
       {/* Content */}
