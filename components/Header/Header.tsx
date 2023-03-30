@@ -3,6 +3,8 @@ import { FaBars } from 'react-icons/fa';
 import DarkModeToggle from './DarkModeToggle';
 import HeaderLink from './HeaderLink';
 import Link from 'next/link';
+import Image from 'next/image';
+import HeaderImage from '../../public/header-image.png';
 
 /**
  * Data for a specific header link.
@@ -46,7 +48,11 @@ const Header = ({ links }: headerProps) => {
         {/* Site title/logo */}
         <div className="w-14 h-14 p-1 flex items-center">
           <Link href="/">
-            <img className="cursor-pointer" src="/header-image.png" alt="" />
+            <Image
+              className="cursor-pointer"
+              src={HeaderImage}
+              alt="Site logo"
+            />
           </Link>
         </div>
 

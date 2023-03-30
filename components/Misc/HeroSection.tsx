@@ -64,9 +64,11 @@ const HeroSection = ({ blok }: { blok: HeroSectionBlock }) => {
         {blok.avatar && (
           <div className="flex justify-center flex-1 lg:mb-0 z-10">
             <div className="lg:w-3/6 lg:h-3/6 w-6/12 h-6/12">
-              <img
+              <Image
                 src={blok.avatar?.filename}
                 alt={blok.avatar?.alt}
+                width={400}
+                height={400}
                 className="rounded-full"
               />
             </div>

@@ -6,6 +6,7 @@ import {
   ISbStoryData,
 } from '@storyblok/react';
 import hljs from 'highlight.js';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { ImageAsset, PageOrPostAuthor } from '../../types';
@@ -68,9 +69,12 @@ const Post = ({ blok, story, author }: PostProps) => {
 
         {/* Post author */}
         <div className="flex items-center my-8">
-          <img
+          <Image
             className="w-12 h-12 -translate-y-0.5 mr-2 rounded-full"
-            src={author.content.avatar?.filename}
+            width={50}
+            height={50}
+            priority
+            src={author.content.avatar?.filename || ''}
             alt={author.name + "'s profile picture"}
           />
           <div>
@@ -88,11 +92,16 @@ const Post = ({ blok, story, author }: PostProps) => {
 
         {/* Post thumbnail */}
         {blok.thumbnail && (
-          <img
-            className="w-full my-5 rounded-lg"
-            src={blok.thumbnail.filename}
-            alt={blok.thumbnail.alt}
-          />
+          <div className="w-full h-full relative">
+            <Image
+              className="w-full my-5 rounded-lg"
+              width={871}
+              height={489}
+              priority
+              src={blok.thumbnail.filename}
+              alt={blok.thumbnail.alt}
+            />
+          </div>
         )}
 
         {/* Post content */}
