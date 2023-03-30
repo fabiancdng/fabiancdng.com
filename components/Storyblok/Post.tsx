@@ -29,14 +29,19 @@ interface PostBlock extends SbBlokData {
 interface PostProps {
   blok: PostBlock;
   story: ISbStoryData;
-  author: PageOrPostAuthor;
+  relations: any;
 }
 
-const Post = ({ blok, story, author }: PostProps) => {
+const Post = ({ blok, story, relations }: PostProps) => {
   useEffect(() => {
     // Initialize Highlight.js.
     hljs.highlightAll();
   }, []);
+
+  // Filter through the array of relations to find the author object with the matching UUID.
+  const author: PageOrPostAuthor = relations.find(
+    (relation: any) => relation.uuid === story.content.author
+  );
 
   return (
     <main {...storyblokEditable(blok)}>

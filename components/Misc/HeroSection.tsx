@@ -69,6 +69,7 @@ const HeroSection = ({ blok }: { blok: HeroSectionBlock }) => {
                 alt={blok.avatar?.alt}
                 width={400}
                 height={400}
+                priority
                 className="rounded-full"
               />
             </div>

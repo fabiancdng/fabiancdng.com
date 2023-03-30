@@ -11,18 +11,13 @@ import Layout from '../components/Misc/Layout';
 import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next';
 
 interface PageProps {
-  story: ISbStoryData | false; // The story to render out on the page.
+  story: ISbStoryData; // The story to render out on the page.
   relations: any | false; // Resolved relations in the content (for instance authors for posts).
   subStories: ISbStoryData[]; // Other stories in the same folder.
   key: string | false;
 }
 
 export default function Page({ story, relations, subStories }: PageProps) {
-  // Make sure story and author object were passed correctly.
-  if (!story) {
-    return null;
-  }
-
   // Run story object through the useStoryblokState hook.
   story = useStoryblokState(story);
 
@@ -38,7 +33,6 @@ export default function Page({ story, relations, subStories }: PageProps) {
           blok={story.content}
           story={story}
           subStories={subStories}
-          // TODO: Filter by UUID.
           relations={relations}
         />
       </Layout>
@@ -47,16 +41,22 @@ export default function Page({ story, relations, subStories }: PageProps) {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const nextSlug = params?.slug ? Array.from(params?.slug) : Array.from('home');
+  const slugArray = params?.slug
+    ? Array.from(params?.slug)
+    : Array.from('home');
 
-  let slug = nextSlug.join('/');
+  let slug = slugArray.join('/');
 
   let sbParams: ISbStoriesParams = {
     starts_with: slug,
     version: 'draft',
     resolve_relations: 'author',
-    excluding_fields: 'content',
   };
+
+  // Do not query content for blog posts when on the blog overview page.
+  if (slugArray[0] === 'blog' && slugArray.length === 1) {
+    sbParams['excluding_fields'] = 'content';
+  }
 
   const storyblokApi = getStoryblokApi();
   let { data }: ISbStories = await storyblokApi.get(`cdn/stories`, sbParams);
