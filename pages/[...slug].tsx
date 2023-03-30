@@ -53,7 +53,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   let sbParams: ISbStoriesParams = {
     starts_with: slug,
-    version: 'draft',
+    version: process.env.NODE_ENV === 'production' ? 'published' : 'draft',
     resolve_relations: 'author',
   };
 
@@ -77,7 +77,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         subStories: data.stories.slice(1),
         key: data ? story.id : false,
       },
-      revalidate: 3600,
+      revalidate: 30 * 60, // revalidate every 30 minutes.
     };
   } else {
     // No story found for slug, return 404.
@@ -111,7 +111,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   // Get possible slugs from Storyblok.
   const storyblokApi = getStoryblokApi();
   let { data }: { data: LinksData } = await storyblokApi.get('cdn/links/', {
-    version: 'draft',
+    version: process.env.NODE_ENV === 'production' ? 'published' : 'draft',
   });
 
   // Define array of paths and other options (returned from this function).

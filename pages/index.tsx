@@ -34,7 +34,7 @@ export async function getStaticProps() {
 
   // Load the draft version.
   let sbParams: ISbStoryParams = {
-    version: 'draft', // or 'published'
+    version: process.env.NODE_ENV === 'production' ? 'published' : 'draft',
   };
 
   const storyblokApi = getStoryblokApi();
@@ -45,7 +45,7 @@ export async function getStaticProps() {
       story: data ? data.story : false,
       key: data ? data.story.id : false,
     },
-    revalidate: 3600, // revalidate every hour
+    revalidate: 30 * 60, // revalidate every 30 minutes.
   };
 }
 
