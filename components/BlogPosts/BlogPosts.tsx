@@ -1,5 +1,7 @@
 import { SbBlokData } from '@storyblok/react';
-import { BlogPostStoryData } from '../../types';
+import Image from 'next/image';
+import Link from 'next/link';
+import { BlogPostStoryData, PageOrPostAuthor } from '../../types';
 
 /**
  * Data for Blog Posts Block Type from Storyblok.
@@ -9,19 +11,93 @@ interface HeroSectionBlock extends SbBlokData {
   subtitle: string;
 }
 
-interface BlogPostProps {
+/**
+ * Props for the collection component.
+ */
+interface BlogPostsProps {
   blok: HeroSectionBlock;
+  relations: any;
   subStories: BlogPostStoryData[]; // Stores all stories but the currently rendered one in the same folder.
+}
+
+/**
+ * Props for the single item in the collection.
+ */
+interface BlogPostProps {
+  story: BlogPostStoryData;
+  relations: any;
 }
 
 /**
  * Renders a single blog post in the collection (no content, only basic info and link).
  */
-const BlogPost = ({ story }: { story: BlogPostStoryData }) => {
+const BlogPost = ({ story, relations }: BlogPostProps) => {
+  // Filter through the array of relations to find the author object with the matching UUID.
+  const author: PageOrPostAuthor = relations.find(
+    (relation: any) => relation.uuid === story.content.author
+  );
+
+  // Responsive card with image on the left and text on the right.
   return (
-    <div>
-      <h2 className="text-3xl my-5 font-semibold">{story.name}</h2>
-      <p className="text-lg my-5">{story.content.excerpt}</p>
+    <div className="flex flex-col md:flex-row my-10">
+      {/* Thumbnail */}
+      <div className="md:w-1/3">
+        <Link href={`/${story.full_slug}`}>
+          <Image
+            src={story.content.thumbnail.filename}
+            width={600}
+            height={400}
+            alt={story.content.thumbnail.alt}
+            className="rounded-lg"
+          />
+        </Link>
+      </div>
+
+      {/* Post title, author, date excerpt and link */}
+      <div className="md:w-2/3 md:pl-10 md:mt-0 mt-5">
+        {/* Title */}
+        <Link href={`/${story.full_slug}`}>
+          <h2 className="text-3xl font-semibold">{story.name}</h2>
+        </Link>
+
+        {/* Author and date */}
+        {author && (
+          <div className="flex items-center my-5">
+            <Image
+              className="w-12 h-12 -translate-y-0.5 mr-2 rounded-full"
+              width={50}
+              height={50}
+              src={author.content.avatar?.filename || ''}
+              alt={author.name + "'s profile picture"}
+            />
+            <div>
+              <h3 className="text-lg font-normal leading-3 mb-1">
+                {author.name}
+              </h3>
+              <p className="text-gray-600 text-md dark:text-slate-400">
+                {story.published_at &&
+                  new Date(story.published_at).toLocaleString('en-US', {
+                    dateStyle: 'long',
+                  })}
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Excerpt */}
+        <p className="text-gray-600 dark:text-slate-400 my-3">
+          {story.content.excerpt}
+        </p>
+
+        {/* Read more link */}
+        <Link
+          href={`/${story.full_slug}`}
+          className={
+            'text-blue-500 hover:text-blue-600 dark:text-slate-200 dark:hover:text-slate-100'
+          }>
+          Read more &rarr;
+        </Link>
+      </div>
     </div>
   );
 };
@@ -29,15 +105,16 @@ const BlogPost = ({ story }: { story: BlogPostStoryData }) => {
 /**
  * Renders collection of blog posts (no content, only basic info and link).
  */
-const BlogPosts = ({ blok, subStories }: BlogPostProps) => {
+const BlogPosts = ({ blok, relations, subStories }: BlogPostsProps) => {
   return (
-    <div>
+    <div className="container pt-20 mb-20 max-w-5-xl mx-auto px-10 text-black dark:text-white">
       <h1 className="text-5xl my-10 font-semibold">{blok.title}</h1>
       {/* Card for each blog post */}
       {subStories.map((subStory, index) => (
         <BlogPost
           key={index}
           story={subStory} // subStory = The blog post to render (without the content).
+          relations={relations}
         />
       ))}
     </div>

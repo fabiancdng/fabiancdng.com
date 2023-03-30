@@ -9,16 +9,15 @@ import {
 } from '@storyblok/react';
 import Layout from '../components/Misc/Layout';
 import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next';
-import { PageOrPostAuthor } from '../types';
 
 interface PageProps {
   story: ISbStoryData | false; // The story to render out on the page.
-  author: PageOrPostAuthor | false; // The author of the post of the story (if set).
+  relations: any | false; // Resolved relations in the content (for instance authors for posts).
   subStories: ISbStoryData[]; // Other stories in the same folder.
   key: string | false;
 }
 
-export default function Page({ story, author, subStories }: PageProps) {
+export default function Page({ story, relations, subStories }: PageProps) {
   // Make sure story and author object were passed correctly.
   if (!story) {
     return null;
@@ -39,7 +38,8 @@ export default function Page({ story, author, subStories }: PageProps) {
           blok={story.content}
           story={story}
           subStories={subStories}
-          author={author}
+          // TODO: Filter by UUID.
+          relations={relations}
         />
       </Layout>
     </div>
@@ -50,7 +50,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const nextSlug = params?.slug ? Array.from(params?.slug) : Array.from('home');
 
   let slug = nextSlug.join('/');
-  console.log(slug);
 
   let sbParams: ISbStoriesParams = {
     starts_with: slug,
@@ -65,13 +64,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   // If slug has stories, return the first one as the one to render.
   if (data.stories.length > 0) {
     // Get homepage story for this slug.
-    console.log(data);
     const story = data.stories[0];
 
     return {
       props: {
         story: story ? story : false,
-        author: data.rels[0] ? data.rels[0] : false,
+        relations: data.rels ? data.rels : false,
         subStories: data.stories.slice(1),
         key: data ? story.id : false,
       },
