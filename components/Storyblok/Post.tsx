@@ -87,8 +87,8 @@ const Post = ({ blok, story, relations }: PostProps) => {
               {author.name}
             </h3>
             <p className="text-gray-600 text-md dark:text-slate-400">
-              {story.published_at &&
-                new Date(story.published_at).toLocaleString('en-US', {
+              {story.content.date &&
+                new Date(story.content.date).toLocaleString('en-US', {
                   dateStyle: 'long',
                 })}
             </p>

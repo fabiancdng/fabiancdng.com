@@ -39,7 +39,7 @@ const BlogPost = ({ story, relations }: BlogPostProps) => {
 
   // Responsive card with image on the left and text on the right.
   return (
-    <div className="flex flex-col md:flex-row my-10">
+    <div className="flex flex-col md:flex-row mt-14 mb-24">
       {/* Thumbnail */}
       <div className="md:w-1/3">
         <Link href={`/${story.full_slug}`}>
@@ -48,13 +48,28 @@ const BlogPost = ({ story, relations }: BlogPostProps) => {
             width={600}
             height={400}
             alt={story.content.thumbnail.alt}
-            className="rounded-lg"
+            className="rounded-md"
           />
         </Link>
       </div>
 
-      {/* Post title, author, date excerpt and link */}
+      {/* Post tags, title, author, date excerpt and link */}
       <div className="md:w-2/3 md:pl-10 md:mt-0 mt-5">
+        {/* Post tags */}
+        {story.tag_list && (
+          <div>
+            {story.tag_list.map((tag, index) => (
+              <div key={index} className="mb-1">
+                {/* <Link href={'/blog/tag/' + post.primary_tag.slug}> */}
+                <a className="text-blue-800 font-semibold text-lg dark:text-slate-400">
+                  {tag.toUpperCase()}
+                </a>
+                {/* </Link> */}
+              </div>
+            ))}
+          </div>
+        )}
+
         {/* Title */}
         <Link href={`/${story.full_slug}`}>
           <h2 className="text-3xl font-semibold">{story.name}</h2>
@@ -75,8 +90,8 @@ const BlogPost = ({ story, relations }: BlogPostProps) => {
                 {author.name}
               </h3>
               <p className="text-gray-600 text-md dark:text-slate-400">
-                {story.published_at &&
-                  new Date(story.published_at).toLocaleString('en-US', {
+                {story.content.date &&
+                  new Date(story.content.date).toLocaleString('en-US', {
                     dateStyle: 'long',
                   })}
               </p>
@@ -107,7 +122,7 @@ const BlogPost = ({ story, relations }: BlogPostProps) => {
  */
 const BlogPosts = ({ blok, relations, subStories }: BlogPostsProps) => {
   return (
-    <div className="container pt-20 mb-20 max-w-5-xl mx-auto px-10 text-black dark:text-white">
+    <div className="container pt-20 pb-10 max-w-5-xl mx-auto px-10 text-black dark:text-white">
       <h1 className="text-5xl my-10 font-semibold">{blok.title}</h1>
       {/* Card for each blog post */}
       {subStories.map((subStory, index) => (

@@ -94,6 +94,10 @@
   list-style: disc;
 }
 
+.page-or-post-css ul p {
+  @apply mt-0;
+}
+
 .page-or-post-css ul li {
   margin-left: 20px;
 }
