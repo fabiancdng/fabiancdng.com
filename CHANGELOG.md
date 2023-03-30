@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+# 3.0.0 - 2023-03-30
+
+- Complete rework with Storyblok CMS
+- Abandon Ghost and Strapi
+- Dynamic Page structure thanks to Storyblok visual editor
+- All content and asset stored in the cloud
+- Incremental state regeneration to "cache" rendered pages for 30 minutes
+- Many new components
+- Design overhaul
+- SEO concept
+
 ## 2.0.1 - 2022-10-21
 
 ### Changed
