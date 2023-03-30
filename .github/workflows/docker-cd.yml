@@ -8,15 +8,14 @@ on:
 jobs:
   next-build:
     runs-on: ubuntu-latest
-    container: node:16-alpine
+    container: node:18-alpine
     name: Build Next.js App
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
       - name: Build the Next.js app
         env:
-          GHOST_URL: ${{ secrets.GHOST_CMS_URL }}
-          GHOST_CONTENT_API_KEY: ${{ secrets.GHOST_CMS_CONTENT_API_KEY }}
+          STORYBLOK_TOKEN: ${{ secrets.STORYBLOK_TOKEN }}
         run: npm install && npm run build
       - name: Upload Next.js build as artifact
         uses: actions/upload-artifact@v2
