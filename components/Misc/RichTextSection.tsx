@@ -23,7 +23,7 @@ const RichTextSection = ({ blok }: { blok: RichTextSectionBlock }) => {
   return (
     <div
       id={blok.htmlAnchor}
-      className={`w-full dark:bg-slate-900 ${blok.additionalCSS}`}
+      className={`rich-text-section w-full dark:bg-slate-900 ${blok.additionalCSS}`}
       {...storyblokEditable(blok)}>
       {/* Wrapper */}
       <div className="container mx-auto">
@@ -40,7 +40,7 @@ const RichTextSection = ({ blok }: { blok: RichTextSectionBlock }) => {
         )}
 
         {/* Content */}
-        <div className="mx-auto mt-5 sm:w-full w-4/5">
+        <div className="text-content mx-auto mt-5 sm:w-full w-4/5">
           <div
             className="text-xl leading-10 text-center sm:text-left"
             dangerouslySetInnerHTML={{

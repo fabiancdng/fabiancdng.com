@@ -94,7 +94,9 @@ const Project = ({ blok }: { blok: ProjectBlock }) => {
           {/* Description */}
 
           {descriptionParagraphs.map((paragraph, index) => (
-            <p key={index} className="text-gray-600 dark:text-slate-400 my-3">
+            <p
+              key={index}
+              className="text-gray-600 dark:text-slate-400 text-lg my-3">
               {paragraph}
             </p>
           ))}

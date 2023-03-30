@@ -17,7 +17,7 @@ const Layout = ({ children }: { children: JSX.Element }) => {
       {children}
 
       <Footer
-        text="Copyright &copy; 2022 Fabian Reinders"
+        text={`Copyright © 2021-${new Date().getFullYear()} Fabian Reinders`}
         links={[
           { title: 'Contact', href: '/#contact-me' },
           { title: 'Imprint', href: '/imprint' },
