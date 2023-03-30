@@ -7,7 +7,6 @@ import {
 } from '@storyblok/react';
 import hljs from 'highlight.js';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useEffect } from 'react';
 import { ImageAsset, PageOrPostAuthor } from '../../types';
 
