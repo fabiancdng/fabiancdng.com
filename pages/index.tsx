@@ -1,19 +1,15 @@
 import {
   getStoryblokApi,
-  ISbStoryData,
   ISbStoryParams,
   StoryblokComponent,
   useStoryblokState,
 } from '@storyblok/react';
-import { NextPage } from 'next';
 import Head from 'next/head';
 import Layout from '../components/Core/Layout';
+import SeoMetaTags from '../components/Seo/SeoMetaTags';
+import { PageStoryData } from '../types';
 
-interface StoryData {
-  story: ISbStoryData;
-}
-
-const Home: NextPage<StoryData> = ({ story }: StoryData) => {
+const Home = ({ story }: { story: PageStoryData }) => {
   story = useStoryblokState(story);
 
   return (
@@ -22,6 +18,8 @@ const Home: NextPage<StoryData> = ({ story }: StoryData) => {
         <title>{story ? `${story.name} | fabiancdng.com` : 'My Site'}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <SeoMetaTags story={story} />
 
       <Layout>
         <StoryblokComponent blok={story.content} story={story} />

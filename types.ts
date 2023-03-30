@@ -2,7 +2,7 @@
  * Shared types.
  */
 
-import { ISbStoryData } from '@storyblok/react';
+import { ISbStoryData, SbBlokData } from '@storyblok/react';
 
 /**
  * Author object from Storyblok for a page or post.
@@ -52,6 +52,30 @@ export interface ImageAsset {
   copyright: string;
   fieldtype: 'asset';
   is_external_url: boolean;
+}
+
+/**
+ * Data for a story that is representing a page.
+ */
+export interface PageStoryData extends ISbStoryData {
+  content: {
+    _uid: string;
+    body: SbBlokData[];
+    component: string;
+    seoMetaTags: {
+      _uid: string;
+      title: string;
+      plugin: string;
+      og_image: string;
+      og_title: string;
+      description: string;
+      twitter_image: string;
+      twitter_title: string;
+      og_description: string;
+      twitter_description: string;
+    };
+    _editable: string;
+  };
 }
 
 /**

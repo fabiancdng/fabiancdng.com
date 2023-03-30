@@ -9,9 +9,11 @@ import {
 } from '@storyblok/react';
 import Layout from '../components/Core/Layout';
 import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next';
+import { PageStoryData } from '../types';
+import SeoMetaTags from '../components/Seo/SeoMetaTags';
 
 interface PageProps {
-  story: ISbStoryData; // The story to render out on the page.
+  story: PageStoryData; // The story to render out on the page.
   relations: any | false; // Resolved relations in the content (for instance authors for posts).
   subStories: ISbStoryData[]; // Other stories in the same folder.
   key: string | false;
@@ -27,6 +29,8 @@ export default function Page({ story, relations, subStories }: PageProps) {
         <title>{story ? `${story.name} | fabiancdng.com` : 'My Site'}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <SeoMetaTags story={story} />
 
       <Layout>
         <StoryblokComponent
