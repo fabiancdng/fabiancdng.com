@@ -16,6 +16,8 @@ import ContactSection from '../components/Misc/ContactSection';
 import Post from '../components/Core/Post';
 import BlogPosts from '../components/BlogPosts/BlogPosts';
 import Project from '../components/Misc/Project';
+import Skills from '../components/Misc/Skills/Skills';
+import SkillChip from '../components/Misc/Skills/SkillChip';
 
 // Map Storyblok components to Next.js components.
 const storyblokComponentsMapping: SbReactComponentsMap = {
@@ -27,6 +29,8 @@ const storyblokComponentsMapping: SbReactComponentsMap = {
   contactSection: ContactSection,
   blogPosts: BlogPosts,
   project: Project,
+  skills: Skills,
+  skillChip: SkillChip,
 };
 
 // Initialize Storyblok.

@@ -103,7 +103,7 @@ const Project = ({ blok }: { blok: ProjectBlock }) => {
             {/* View code link with BsGitHub icon from 'react-icons' */}
             {blok.gitLink && blok.gitLink !== '' && (
               <a
-                href={blok.demoLink}
+                href={blok.gitLink}
                 target="_blank"
                 className="flex items-center align-baseline w-fit dark:hover:bg-slate-500 dark:bg-slate-700 dark:text-white hover:bg-slate-300 bg-slate-200 rounded transition-all duration-500 px-4 py-2">
                 <BsGithub className="mr-2 text-xl" />
