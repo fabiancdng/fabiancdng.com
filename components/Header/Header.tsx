@@ -39,7 +39,7 @@ const Header = ({ links }: headerProps) => {
 
     // Event listener for keeping screenWidth up-to-date.
     window.addEventListener('resize', handleResize);
-  }, []);
+  }, [screenWidth]);
 
   return (
     <header className="fixed top-0 left-0 w-full z-20 bg-white dark:bg-slate-800">

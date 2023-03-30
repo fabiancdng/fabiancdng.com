@@ -1,4 +1,4 @@
-import Project, { projectProps } from './Project';
+import Project, { projectProps } from './Project.old';
 
 /**
  * Props for the ProjectExplorer component.

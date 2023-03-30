@@ -7,7 +7,7 @@ import {
   ISbStoriesParams,
   ISbStories,
 } from '@storyblok/react';
-import Layout from '../components/Misc/Layout';
+import Layout from '../components/Core/Layout';
 import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next';
 
 interface PageProps {
@@ -24,7 +24,7 @@ export default function Page({ story, relations, subStories }: PageProps) {
   return (
     <div>
       <Head>
-        <title>{story ? story.name : 'My Site'}</title>
+        <title>{story ? `${story.name} | fabiancdng.com` : 'My Site'}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

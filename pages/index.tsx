@@ -7,7 +7,7 @@ import {
 } from '@storyblok/react';
 import { NextPage } from 'next';
 import Head from 'next/head';
-import Layout from '../components/Misc/Layout';
+import Layout from '../components/Core/Layout';
 
 interface StoryData {
   story: ISbStoryData;
@@ -19,7 +19,7 @@ const Home: NextPage<StoryData> = ({ story }: StoryData) => {
   return (
     <div>
       <Head>
-        <title>{story ? story.name : 'My Site'}</title>
+        <title>{story ? `${story.name} | fabiancdng.com` : 'My Site'}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

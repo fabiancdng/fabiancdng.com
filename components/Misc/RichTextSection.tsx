@@ -5,6 +5,7 @@ import {
   SbBlokData,
   storyblokEditable,
 } from '@storyblok/react';
+import { BsLightbulb } from 'react-icons/bs';
 
 /**
  * Data for Rich Text Section Block Type from Storyblok.
@@ -54,10 +55,10 @@ const RichTextSection = ({ blok }: { blok: RichTextSectionBlock }) => {
           <div className="mt-5 flex flex-row sm:justify-start justify-center">
             <Link
               href={String(blok.readMoreURL)}
-              className={`hover:bg-slate-200 bg-slate-100 rounded cursor-pointer px-10 py-3
-                    text-md transition-all duration-500 dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-white
-                    border border-slate-300 hover:border-slate-600 dark:border-slate-500 dark:hover:border-slate-300`}>
-              <b className="font-medium">Read more &rarr;</b>
+              className={`hover:bg-slate-300 bg-slate-200 rounded cursor-pointer px-10 py-3
+                    text-md transition-all duration-500 dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-white flex items-center space-x-2`}>
+              <BsLightbulb className="text-lg dark:text-white" />
+              <b className="font-medium">Read more</b>
             </Link>
           </div>
         )}

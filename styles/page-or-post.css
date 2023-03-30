@@ -34,7 +34,7 @@
 }
 
 .page-or-post-css img {
-  @apply rounded-2xl;
+  @apply rounded-2xl my-10;
   width: 100%;
 }
 
@@ -74,7 +74,7 @@
 }
 
 .page-or-post-css h3 {
-  @apply text-3xl my-2 mt-6;
+  @apply text-3xl;
 }
 
 .page-or-post-css h4 {

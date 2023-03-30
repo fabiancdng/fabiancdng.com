@@ -2,12 +2,6 @@ import { SbBlokData, storyblokEditable } from '@storyblok/react';
 import Image from 'next/image';
 import { ImageAsset } from '../../types';
 
-// interface socialButton {
-//   title: string;
-//   href: string;
-//   icon: string;
-// }
-
 /**
  * Data for Hero Section Block Type from Storyblok.
  */
@@ -44,20 +38,6 @@ const HeroSection = ({ blok }: { blok: HeroSectionBlock }) => {
                     dark:text-slate-400">
             {blok.description}
           </h3>
-
-          {/* Socials */}
-          {/* <div className="flex flex-row justify-center lg:justify-start">
-            {props.socialButtons?.map((button, index) => (
-              <SocialMediaIcon
-                key={index}
-                title={button.title}
-                href={button.href}
-                icon={button.icon}
-                additonalCSS={`hover:bg-slate-200 bg-slate-100 dark:bg-slate-600 dark:hover:bg-slate-500
-                        border border-slate-300 hover:border-slate-600 dark:border-slate-500 dark:hover:border-slate-200`}
-              />
-            ))}
-          </div> */}
         </div>
 
         {/* Logo */}

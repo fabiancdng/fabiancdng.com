@@ -8,13 +8,14 @@ import {
 import 'highlight.js/styles/atom-one-dark.css';
 import '../styles/page-or-post.css';
 import '../styles/global.css';
-import Page from '../components/Storyblok/Page';
+import Page from '../components/Core/Page';
 import Grid from '../components/Storyblok/Grid';
 import RichTextSection from '../components/Misc/RichTextSection';
 import HeroSection from '../components/Misc/HeroSection';
 import ContactSection from '../components/Misc/ContactSection';
-import Post from '../components/Storyblok/Post';
+import Post from '../components/Core/Post';
 import BlogPosts from '../components/BlogPosts/BlogPosts';
+import Project from '../components/Misc/Project';
 
 // Map Storyblok components to Next.js components.
 const storyblokComponentsMapping: SbReactComponentsMap = {
@@ -25,6 +26,7 @@ const storyblokComponentsMapping: SbReactComponentsMap = {
   richTextSection: RichTextSection,
   contactSection: ContactSection,
   blogPosts: BlogPosts,
+  project: Project,
 };
 
 // Initialize Storyblok.
