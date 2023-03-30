@@ -4,6 +4,7 @@ import {
   SbBlokData,
   ISbStoryData,
 } from '@storyblok/react';
+import { BlogPostStoryData } from '../../types';
 
 /**
  * Data for the Page Content Type from Storyblok.
@@ -18,6 +19,7 @@ interface PageBlock extends SbBlokData {
 interface PageProps {
   blok: PageBlock;
   story: ISbStoryData;
+  subStories: BlogPostStoryData[];
 }
 
 /**
@@ -25,12 +27,16 @@ interface PageProps {
  * Makes sense if the page contains a lot of "high-level" components
  * like the home page.
  */
-const UnwrappedPage = ({ blok, story }: PageProps) => {
+const UnwrappedPage = ({ blok, story, subStories }: PageProps) => {
   return (
     <main {...storyblokEditable(blok)}>
       {blok.body &&
         blok.body.map((nestedBlok) => (
-          <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} />
+          <StoryblokComponent
+            blok={nestedBlok}
+            subStories={subStories}
+            key={nestedBlok._uid}
+          />
         ))}
     </main>
   );
@@ -39,7 +45,7 @@ const UnwrappedPage = ({ blok, story }: PageProps) => {
 /**
  * Page wrapped in a container and a max-width.
  */
-const WrappedPage = ({ blok, story }: PageProps) => {
+const WrappedPage = ({ blok, story, subStories }: PageProps) => {
   return (
     <main
       id="storyblok-page"
@@ -48,7 +54,11 @@ const WrappedPage = ({ blok, story }: PageProps) => {
       <div className="container pt-20 mx-auto mb-20 max-w-5xl text-black dark:text-white">
         {blok.body &&
           blok.body.map((nestedBlok) => (
-            <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} />
+            <StoryblokComponent
+              blok={nestedBlok}
+              subStories={subStories}
+              key={nestedBlok._uid}
+            />
           ))}
       </div>
     </main>
@@ -58,13 +68,13 @@ const WrappedPage = ({ blok, story }: PageProps) => {
 /**
  * Component rendering out any page.
  */
-const Page = ({ blok, story }: PageProps) => {
+const Page = ({ blok, story, subStories }: PageProps) => {
   const unwrappedPages = ['home'];
 
   if (unwrappedPages.includes(story.slug)) {
-    return <UnwrappedPage blok={blok} story={story} />;
+    return <UnwrappedPage blok={blok} story={story} subStories={subStories} />;
   } else {
-    return <WrappedPage blok={blok} story={story} />;
+    return <WrappedPage blok={blok} story={story} subStories={subStories} />;
   }
 };
 

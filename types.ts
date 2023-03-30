@@ -2,6 +2,8 @@
  * Shared types.
  */
 
+import { ISbStoryData } from '@storyblok/react';
+
 /**
  * Author object from Storyblok for a page or post.
  * Resolved Relation in 'rels' array.
@@ -50,4 +52,20 @@ export interface ImageAsset {
   copyright: string;
   fieldtype: 'asset';
   is_external_url: boolean;
+}
+
+/**
+ * Data for a story that is specifically a blog post.
+ */
+export interface BlogPostStoryData extends ISbStoryData {
+  content: {
+    _uid: string;
+    date: string;
+    title: string;
+    author: string;
+    excerpt: string;
+    component: string;
+    thumbnail: ImageAsset;
+    _editable: string;
+  };
 }

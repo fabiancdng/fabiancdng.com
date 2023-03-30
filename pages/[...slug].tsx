@@ -14,7 +14,7 @@ import { PageOrPostAuthor } from '../types';
 interface PageProps {
   story: ISbStoryData | false; // The story to render out on the page.
   author: PageOrPostAuthor | false; // The author of the post of the story (if set).
-  subStories: ISbStories; // Other stories in the same folder.
+  subStories: ISbStoryData[]; // Other stories in the same folder.
   key: string | false;
 }
 
@@ -23,8 +23,6 @@ export default function Page({ story, author, subStories }: PageProps) {
   if (!story) {
     return null;
   }
-
-  console.log(subStories);
 
   // Run story object through the useStoryblokState hook.
   story = useStoryblokState(story);
@@ -40,6 +38,7 @@ export default function Page({ story, author, subStories }: PageProps) {
         <StoryblokComponent
           blok={story.content}
           story={story}
+          subStories={subStories}
           author={author}
         />
       </Layout>
@@ -51,9 +50,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const nextSlug = params?.slug ? Array.from(params?.slug) : Array.from('home');
 
   let slug = nextSlug.join('/');
+  console.log(slug);
 
   let sbParams: ISbStoriesParams = {
     starts_with: slug,
+    version: 'draft',
     resolve_relations: 'author',
     excluding_fields: 'content',
   };
@@ -63,6 +64,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   // If slug has stories, return the first one as the one to render.
   if (data.stories.length > 0) {
+    // Get homepage story for this slug.
+    console.log(data);
     const story = data.stories[0];
 
     return {
@@ -112,7 +115,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   // Define array of paths and other options (returned from this function).
   let staticPathsResult: GetStaticPathsResult = {
     paths: [],
-    fallback: false,
+    fallback: 'blocking',
   };
 
   // Go through each link and add it to the array of paths.
