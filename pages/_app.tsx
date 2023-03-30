@@ -1,8 +1,44 @@
 import type { AppProps } from 'next/app';
 import NextNProgress from 'nextjs-progressbar';
+import {
+  storyblokInit,
+  apiPlugin,
+  SbReactComponentsMap,
+} from '@storyblok/react';
 import 'highlight.js/styles/atom-one-dark.css';
-import '../styles/ghost.css';
+import '../styles/page-or-post.css';
 import '../styles/global.css';
+import Page from '../components/Core/Page';
+import Grid from '../components/Storyblok/Grid';
+import RichTextSection from '../components/Misc/RichTextSection';
+import HeroSection from '../components/Misc/HeroSection';
+import ContactSection from '../components/Misc/ContactSection';
+import Post from '../components/Core/Post';
+import BlogPosts from '../components/BlogPosts/BlogPosts';
+import Project from '../components/Misc/Project';
+import Skills from '../components/Misc/Skills/Skills';
+import SkillChip from '../components/Misc/Skills/SkillChip';
+
+// Map Storyblok components to Next.js components.
+const storyblokComponentsMapping: SbReactComponentsMap = {
+  grid: Grid,
+  page: Page,
+  post: Post,
+  heroSection: HeroSection,
+  richTextSection: RichTextSection,
+  contactSection: ContactSection,
+  blogPosts: BlogPosts,
+  project: Project,
+  skills: Skills,
+  skillChip: SkillChip,
+};
+
+// Initialize Storyblok.
+storyblokInit({
+  accessToken: process.env['STORYBLOK_TOKEN'],
+  use: [apiPlugin],
+  components: storyblokComponentsMapping,
+});
 
 function App({ Component, pageProps }: AppProps) {
   return (

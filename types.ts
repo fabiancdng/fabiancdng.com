@@ -1,0 +1,95 @@
+/**
+ * Shared types.
+ */
+
+import { ISbStoryData, SbBlokData } from '@storyblok/react';
+
+/**
+ * Author object from Storyblok for a page or post.
+ * Resolved Relation in 'rels' array.
+ */
+export interface PageOrPostAuthor {
+  name: string;
+  created_at: string;
+  published_at: string;
+  id: number;
+  uuid: string;
+  content: {
+    bio: string;
+    _uid: string;
+    avatar?: ImageAsset;
+    component: string;
+    _editable: string;
+  };
+  slug: string;
+  full_slug: string;
+  sort_by_date: null;
+  position: number;
+  tag_list: string[];
+  is_startpage: boolean;
+  parent_id: number;
+  meta_data: null;
+  group_id: string;
+  first_published_at: string;
+  release_id: null;
+  lang: string;
+  path: null;
+  alternates: [];
+  default_full_slug: null;
+  translated_slugs: null;
+}
+
+/**
+ * Data for an asset field of a block in Storyblok.
+ */
+export interface ImageAsset {
+  id: number;
+  alt: string;
+  name: string;
+  focus: string;
+  title: string;
+  filename: string;
+  copyright: string;
+  fieldtype: 'asset';
+  is_external_url: boolean;
+}
+
+/**
+ * Data for a story that is representing a page.
+ */
+export interface PageStoryData extends ISbStoryData {
+  content: {
+    _uid: string;
+    body: SbBlokData[];
+    component: string;
+    seoMetaTags: {
+      _uid: string;
+      title: string;
+      plugin: string;
+      og_image: string;
+      og_title: string;
+      description: string;
+      twitter_image: string;
+      twitter_title: string;
+      og_description: string;
+      twitter_description: string;
+    };
+    _editable: string;
+  };
+}
+
+/**
+ * Data for a story that is specifically a blog post.
+ */
+export interface BlogPostStoryData extends ISbStoryData {
+  content: {
+    _uid: string;
+    date: string;
+    title: string;
+    author: string;
+    excerpt: string;
+    component: string;
+    thumbnail: ImageAsset;
+    _editable: string;
+  };
+}

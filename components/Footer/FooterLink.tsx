@@ -10,8 +10,8 @@ export interface footerLink {
 
 const FooterLink = ({ title, href }: footerLink) => {
   return (
-    <Link href={href} passHref={true}>
-      <a className="dark:text-slate-300 cursor-pointer">{title}</a>
+    <Link href={href} className="dark:text-slate-300 cursor-pointer">
+      {title}
     </Link>
   );
 };

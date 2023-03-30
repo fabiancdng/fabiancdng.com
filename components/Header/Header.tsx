@@ -3,6 +3,8 @@ import { FaBars } from 'react-icons/fa';
 import DarkModeToggle from './DarkModeToggle';
 import HeaderLink from './HeaderLink';
 import Link from 'next/link';
+import Image from 'next/image';
+import HeaderImage from '../../public/header-image.png';
 
 /**
  * Data for a specific header link.
@@ -37,7 +39,7 @@ const Header = ({ links }: headerProps) => {
 
     // Event listener for keeping screenWidth up-to-date.
     window.addEventListener('resize', handleResize);
-  }, []);
+  }, [screenWidth]);
 
   return (
     <header className="fixed top-0 left-0 w-full z-20 bg-white dark:bg-slate-800">
@@ -46,7 +48,11 @@ const Header = ({ links }: headerProps) => {
         {/* Site title/logo */}
         <div className="w-14 h-14 p-1 flex items-center">
           <Link href="/">
-            <img className="cursor-pointer" src="/header-image.png" alt="" />
+            <Image
+              className="cursor-pointer"
+              src={HeaderImage}
+              alt="Site logo"
+            />
           </Link>
         </div>
 

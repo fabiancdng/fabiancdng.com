@@ -1,18 +1,16 @@
 # 🌐 [fabiancdng.com](https://fabiancdng.com)
 
-### My personal portfolio website and blog built with Next.js, Tailwind CSS, and Ghost.
+### My personal portfolio website and blog built with Next.js, Tailwind, and Storyblok.
 
 ---
 
-### Docker images overview
+### Deployment with Docker
 
-All services of my website are deployed using the following Docker images:
+My website can be deployed using a single Docker image:
 
 - [`fabiancdng-website`](https://github.com/fabiancdng/fabiancdng.com/pkgs/container/fabiancdng-website) - Next.js front end
-- [`ghost`](https://hub.docker.com/_/ghost) - The CMS I use for my blog posts
 
-The continuous builds of the front end image is private for safety reasons.
-However, you can build them yourself using the Dockerfiles provided in the repository.
+There's a continuous build of the Docker image up on the Github container registry. You can build it yourself, however, using the Dockerfile provided in the repository.
 
 ### Docker Compose
 
@@ -20,4 +18,4 @@ I use Docker Compose to separate all services into their own container and allow
 
 ---
 
-**Copyright © 2021 Fabian Reinders (fabiancdng)**
+**Copyright © 2021-2023 Fabian Reinders (fabiancdng)**
