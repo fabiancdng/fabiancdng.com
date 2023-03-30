@@ -4,23 +4,27 @@ import {
   getStoryblokApi,
   StoryblokComponent,
   ISbStoryData,
-  ISbStoryParams,
+  ISbStoriesParams,
+  ISbStories,
 } from '@storyblok/react';
 import Layout from '../components/Misc/Layout';
 import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next';
 import { PageOrPostAuthor } from '../types';
 
 interface PageProps {
-  story: ISbStoryData | false;
-  author: PageOrPostAuthor | false;
+  story: ISbStoryData | false; // The story to render out on the page.
+  author: PageOrPostAuthor | false; // The author of the post of the story (if set).
+  subStories: ISbStories; // Other stories in the same folder.
   key: string | false;
 }
 
-export default function Page({ story, author }: PageProps) {
+export default function Page({ story, author, subStories }: PageProps) {
   // Make sure story and author object were passed correctly.
   if (!story) {
     return null;
   }
+
+  console.log(subStories);
 
   // Run story object through the useStoryblokState hook.
   story = useStoryblokState(story);
@@ -48,22 +52,34 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   let slug = nextSlug.join('/');
 
-  let sbParams: ISbStoryParams = {
-    version: 'draft', // or 'published'
+  let sbParams: ISbStoriesParams = {
+    starts_with: slug,
     resolve_relations: 'author',
+    excluding_fields: 'content',
   };
 
   const storyblokApi = getStoryblokApi();
-  let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
+  let { data }: ISbStories = await storyblokApi.get(`cdn/stories`, sbParams);
 
-  return {
-    props: {
-      story: data ? data.story : false,
-      author: data.rels[0] ? data.rels[0] : false,
-      key: data ? data.story.id : false,
-    },
-    revalidate: 3600,
-  };
+  // If slug has stories, return the first one as the one to render.
+  if (data.stories.length > 0) {
+    const story = data.stories[0];
+
+    return {
+      props: {
+        story: story ? story : false,
+        author: data.rels[0] ? data.rels[0] : false,
+        subStories: data.stories.slice(1),
+        key: data ? story.id : false,
+      },
+      revalidate: 3600,
+    };
+  } else {
+    // No story found for slug, return 404.
+    return {
+      notFound: true,
+    };
+  }
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
