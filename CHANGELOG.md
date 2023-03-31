@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.0.3 - 2023-03-31
+
+- Use only Font Awesome for Icons
+- Include via CSS not SVG/JS components
+- Reduce total size of assets to 1/10
+
 ## 3.0.2 - 2023-03-31
 
 - Further SEO optimizations
