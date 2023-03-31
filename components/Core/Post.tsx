@@ -51,11 +51,9 @@ const Post = ({ blok, story, relations }: PostProps) => {
           <div className="mb-5">
             {story.tag_list.map((tag, index) => (
               <div key={index} className="mb-5">
-                {/* <Link href={'/blog/tag/' + post.primary_tag.slug}> */}
-                <a className="text-blue-800 pl-1 font-semibold text-lg dark:text-slate-400">
+                <p className="text-blue-800 pl-1 font-semibold text-lg dark:text-slate-400">
                   {tag.toUpperCase()}
-                </a>
-                {/* </Link> */}
+                </p>
               </div>
             ))}
           </div>

@@ -42,11 +42,9 @@ const BlogPost = ({ story, relations }: BlogPostProps) => {
           <div>
             {story.tag_list.map((tag, index) => (
               <div key={index} className="mb-1">
-                {/* <Link href={'/blog/tag/' + post.primary_tag.slug}> */}
-                <a className="text-blue-800 font-semibold text-lg dark:text-slate-400">
+                <p className="text-blue-800 font-semibold text-lg dark:text-slate-400">
                   {tag.toUpperCase()}
-                </a>
-                {/* </Link> */}
+                </p>
               </div>
             ))}
           </div>

@@ -77,9 +77,9 @@ const Project = ({ blok }: { blok: ProjectBlock }) => {
             <div className="flex flex-row space-x-3">
               {blok.technologies.map((technology, index) => (
                 <div key={index} className="mb-1">
-                  <a className="text-blue-800 font-semibold text-lg dark:text-slate-400">
+                  <p className="text-blue-800 font-semibold text-lg dark:text-slate-400">
                     {technology.toUpperCase()}
-                  </a>
+                  </p>
                 </div>
               ))}
             </div>
