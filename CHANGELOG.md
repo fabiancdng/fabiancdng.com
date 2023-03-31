@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.0.4 - 2023-03-31
+
+- Fix: Invert colors of SVG fallback icons when in dark mode.
+
 ## 3.0.3 - 2023-03-31
 
 - Use only Font Awesome for Icons
