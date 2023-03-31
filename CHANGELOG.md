@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.0.2 - 2023-03-31
+
+- Further SEO optimizations
+
 ## 3.0.1 - 2023-03-31
 
 Fix: Expose Storyblok token to the front end for
