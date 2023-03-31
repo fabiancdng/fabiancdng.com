@@ -2,7 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
-# 3.0.0 - 2023-03-30
+## 3.0.1 - 2023-03-31
+
+Fix: Expose Storyblok token to the front end for
+
+- A nicer editing experience in the production environment
+- Reducing unused JavaScript on the front end (bad for SEO)
+- Preventing error logs in the console (also bad for SEO)
+
+## 3.0.0 - 2023-03-30
 
 - Complete rework with Storyblok CMS
 - Abandon Ghost and Strapi
