@@ -35,7 +35,7 @@ const storyblokComponentsMapping: SbReactComponentsMap = {
 
 // Initialize Storyblok.
 storyblokInit({
-  accessToken: process.env['STORYBLOK_TOKEN'],
+  accessToken: process.env['NEXT_PUBLIC_STORYBLOK_TOKEN'],
   use: [apiPlugin],
   components: storyblokComponentsMapping,
 });
