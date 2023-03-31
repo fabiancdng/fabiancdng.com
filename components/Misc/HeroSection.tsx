@@ -47,8 +47,11 @@ const HeroSection = ({ blok }: { blok: HeroSectionBlock }) => {
               <Image
                 src={blok.avatar?.filename}
                 alt={blok.avatar?.alt}
-                width={400}
-                height={400}
+                width={900}
+                height={901}
+                sizes="(min-width: 1024px) 25vw
+                        (min-width: 1280px) 35vw,
+                        45vw"
                 priority
                 className="rounded-full"
               />

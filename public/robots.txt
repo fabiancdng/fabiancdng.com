@@ -1,0 +1,8 @@
+# Block all crawlers for /imprint
+User-agent: *
+Disallow: /imprint
+Disallow: /privacy-policy
+
+# Allow all crawlers
+User-agent: *
+Allow: /

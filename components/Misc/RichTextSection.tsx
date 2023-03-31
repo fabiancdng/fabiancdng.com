@@ -16,6 +16,7 @@ interface RichTextSectionBlock extends SbBlokData {
   htmlAnchor: string;
   content: ISbRichtext;
   readMoreURL: string;
+  readMoreLabel: string;
   additionalCSS: string;
 }
 
@@ -58,7 +59,9 @@ const RichTextSection = ({ blok }: { blok: RichTextSectionBlock }) => {
               className={`hover:bg-slate-300 bg-slate-200 rounded cursor-pointer px-10 py-3
                     text-md transition-all duration-500 dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-white flex items-center space-x-2`}>
               <BsLightbulb className="text-lg dark:text-white" />
-              <b className="font-medium">Read more</b>
+              <b className="font-medium">
+                {blok.readMoreLabel ? blok.readMoreLabel : 'Read more'}
+              </b>
             </Link>
           </div>
         )}
