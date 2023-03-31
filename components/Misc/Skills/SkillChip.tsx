@@ -21,6 +21,7 @@ const SkillChip = ({ blok }: { blok: SkillChipBlock }) => {
               alt={blok.svgFallbackIcon.alt}
               width={20}
               height={20}
+              className="svg-fallback-icon"
             />
           )}
         </div>
