@@ -2,7 +2,6 @@ import { SbBlokData } from '@storyblok/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import { BsGithub, BsLink45Deg } from 'react-icons/bs';
 import { ImageAsset } from '../../types';
 
 /**
@@ -59,7 +58,10 @@ const Project = ({ blok }: { blok: ProjectBlock }) => {
 
     // Event listener for keeping screenWidth up-to-date.
     window.addEventListener('resize', handleResize);
-  }, [screenWidth]);
+
+    // Initial call on mount.
+    handleResize();
+  }, [screenWidth, blok.reverseDesign]);
 
   return (
     <div className="container pb-5 xl:max-w-7xl max-w-5xl mx-auto px-10 text-black dark:text-white">
@@ -102,24 +104,24 @@ const Project = ({ blok }: { blok: ProjectBlock }) => {
           ))}
 
           <div className="flex flex-row align-center space-x-4 mt-5">
-            {/* View code link with BsGitHub icon from 'react-icons' */}
+            {/* View code link with GitHub icon */}
             {blok.gitLink && blok.gitLink !== '' && (
               <a
                 href={blok.gitLink}
                 target="_blank"
                 className="flex items-center align-baseline w-fit dark:hover:bg-slate-500 dark:bg-slate-700 dark:text-white hover:bg-slate-300 bg-slate-200 rounded transition-all duration-500 px-4 py-2">
-                <BsGithub className="mr-2 text-xl" />
+                <i className="fa-brands fa-github mr-2 text-xl" />
                 <p className="mr-1">View Code</p>
               </a>
             )}
 
-            {/* View demo link with BsLink45Deg icon from 'react-icons' */}
+            {/* View demo link with icon*/}
             {blok.demoLink && blok.demoLink !== '' && (
               <a
                 href={blok.demoLink}
                 target="_blank"
                 className="flex items-center align-baseline w-fit dark:hover:bg-slate-600 dark:bg-slate-700 dark:text-white hover:bg-slate-300 bg-slate-200 rounded transition-all duration-500 px-4 py-2">
-                <BsLink45Deg className="mr-2 text-xl" />
+                <i className="fa-solid fa-arrow-up-right-from-square mr-2 text-xl" />
                 <p className="mr-1">View Demo</p>
               </a>
             )}

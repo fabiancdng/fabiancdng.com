@@ -47,8 +47,8 @@ const HeroSection = ({ blok }: { blok: HeroSectionBlock }) => {
               <Image
                 src={blok.avatar?.filename}
                 alt={blok.avatar?.alt}
-                width={900}
-                height={901}
+                width={500}
+                height={500}
                 sizes="(min-width: 1024px) 25vw
                         (min-width: 1280px) 35vw,
                         45vw"

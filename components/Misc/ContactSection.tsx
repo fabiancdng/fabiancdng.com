@@ -1,11 +1,4 @@
 import { SbBlokData, storyblokEditable } from '@storyblok/react';
-import { FaEnvelope } from 'react-icons/fa';
-
-// interface socialButton {
-//   title: string;
-//   href: string;
-//   icon: string;
-// }
 
 /**
  * Props for the ContactSection component.
@@ -44,9 +37,9 @@ const ContactSection = ({ blok }: { blok: ContactSectionBlock }) => {
           <div
             className={`hover:bg-slate-300 bg-slate-200 rounded cursor-pointer py-5 px-5
                       text-md mx-auto transition-all duration-500 dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-white
-                      flex flex-row justify-center items-center border border-slate-300 hover:border-slate-600
+                      flex flex-row justify-center items-center align-center border border-slate-300 hover:border-slate-600
                       dark:border-slate-500 dark:hover:border-slate-200`}>
-            <FaEnvelope className="text-2xl mr-5" />
+            <i className="fa-regular fa-envelope text-2xl mr-5" />
             <a
               href={`mailto:${blok.destinationEmail}?subject=Inquiry regarding &body=%0D%0A%0D%0Avia fabiancdng.com`}
               className="font-medium">

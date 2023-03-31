@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { FaMoon, FaRegMoon } from 'react-icons/fa';
 // import { GlobalContext } from '../../contexts/GlobalContext';
 
 /**
@@ -48,12 +47,16 @@ const DarkModeToggle = ({ additionalCSS }: DarkModeToggleProps) => {
       aria-label="Toggle dark mode"
       onClick={changeColorMode}
       className={
-        `hover:bg-slate-200 bg-slate-100 flex flex-col justify-center rounded cursor-pointer px-4 py-2
+        `hover:bg-slate-200 bg-slate-100 flex flex-col justify-center items-center rounded cursor-pointer px-4 py-2
             text-xl transition-all duration-500 dark:bg-slate-600 dark:hover:bg-slate-500 dark:text-white
             border border-slate-300 hover:border-slate-600 dark:border-slate-500 dark:hover:border-slate-200 ` +
         additionalCSS
       }>
-      {colorMode === 'light' ? <FaMoon /> : <FaRegMoon />}
+      {colorMode === 'light' ? (
+        <i className="text-2xl fas fa-moon" />
+      ) : (
+        <i className="text-2xl far fa-moon" />
+      )}
     </button>
   );
 };

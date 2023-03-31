@@ -19,6 +19,11 @@ import Project from '../components/Misc/Project';
 import Skills from '../components/Misc/Skills/Skills';
 import SkillChip from '../components/Misc/Skills/SkillChip';
 
+import '@fortawesome/fontawesome-free/css/fontawesome.min.css';
+import '@fortawesome/fontawesome-free/css/regular.min.css';
+import '@fortawesome/fontawesome-free/css/solid.min.css';
+import '@fortawesome/fontawesome-free/css/brands.min.css';
+
 // Map Storyblok components to Next.js components.
 const storyblokComponentsMapping: SbReactComponentsMap = {
   grid: Grid,
