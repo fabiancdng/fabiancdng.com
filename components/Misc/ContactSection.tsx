@@ -124,7 +124,7 @@ const ContactSection = ({ blok }: { blok: ContactSectionBlock }) => {
         dark:bg-slate-800 bg-slate-100 rounded pb-20 ${blok.additionalCSS}`}
       {...storyblokEditable(blok)}>
       {/* Responsive wrapper left */}
-      <div className="container mx-auto px-16 pt-20 flex flex-col items-center lg:items-start w-full lg:w-5/12">
+      <div className="container mx-auto px-0 md:px-16 pt-20 flex flex-col items-center lg:items-start w-full lg:w-5/12">
         {/* Title */}
         <h1 className="text-gray-800 dark:text-slate-100 text-5xl font-semibold text-center lg:text-start mx-4 sm:mx-0">
           {blok.title}
@@ -155,12 +155,14 @@ const ContactSection = ({ blok }: { blok: ContactSectionBlock }) => {
       </div>
 
       {/* Responsive wrapper right */}
-      <div className="container px-16 pt-10 lg:pt-20 mx-auto flex flex-col items-center lg:items-start w-full lg:w-7/12">
-        <div className="w-full mb-5 mt-10 mx-auto text-center text-gray-800">
+      <div className="container pt-20 px-0 md:px-20 mx-auto flex flex-col items-center lg:items-start w-full lg:w-7/12">
+        <div className="w-full mb-5 mx-auto text-center text-gray-800">
           {/* Text for form submission status */}
-          <p className={`text-start my-4 ${formSubmissionStatus.color}`}>
-            {formSubmissionStatus.message}
-          </p>
+          {formSubmissionStatus.message && (
+            <p className={`text-start my-4 ${formSubmissionStatus.color}`}>
+              {formSubmissionStatus.message}
+            </p>
+          )}
 
           {/* Form containing input fields */}
           <form onSubmit={handleFormSubmission}>
@@ -173,7 +175,7 @@ const ContactSection = ({ blok }: { blok: ContactSectionBlock }) => {
                   setFormData({ ...formData, name: event.target.value })
                 }
                 value={formData.name}
-                className={`form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700
+                className={`form-control block w-full px-3 py-2 text-base font-normal text-gray-700
                     dark:bg-slate-300 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0
                     focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none`}
                 id="contact-form-name-input"
@@ -190,7 +192,7 @@ const ContactSection = ({ blok }: { blok: ContactSectionBlock }) => {
                   setFormData({ ...formData, email: event.target.value })
                 }
                 value={formData.email}
-                className={`form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 dark:bg-slate-300 bg-white bg-clip-padding
+                className={`form-control block w-full px-3 py-2 text-base font-normal text-gray-700 dark:bg-slate-300 bg-white bg-clip-padding
                     border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white
                   focus:border-blue-600 focus:outline-none`}
                 id="contact-form-email-input"
@@ -207,7 +209,7 @@ const ContactSection = ({ blok }: { blok: ContactSectionBlock }) => {
                 }
                 value={formData.message}
                 required
-                className={`form-control block px-3 py-1.5 w-full text-base font-normal text-black dark:bg-slate-300 dark:focus:bg-slate-300 bg-clip-padding
+                className={`form-control block px-3 py-2 w-full text-base font-normal text-black dark:bg-slate-300 dark:focus:bg-slate-300 bg-clip-padding
                   border border-solid border-gray-300 rounded transition ease-in-out m-0
                   focus:bg-white focus:border-blue-600 focus:outline-none`}
                 id="contact-form-message-content"
