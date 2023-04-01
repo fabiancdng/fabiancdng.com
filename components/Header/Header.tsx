@@ -28,6 +28,9 @@ const Header = ({ links }: headerProps) => {
   // The width (in px) when the mobile nav is used instead.
   const menuBreakpoint = 640;
 
+  // State representing if at the top/very beginning of the page or not.
+  const [atTop, setAtTop] = useState(true);
+
   useEffect(() => {
     const handleResize = () => {
       // Update screenWidth state on resize.
@@ -38,10 +41,21 @@ const Header = ({ links }: headerProps) => {
 
     // Event listener for keeping screenWidth up-to-date.
     window.addEventListener('resize', handleResize);
+
+    const handleScroll = () => {
+      setAtTop(document.documentElement.scrollTop === 0);
+    };
+
+    // Event listener for keeping atTop up-to-date.
+    window.addEventListener('scroll', handleScroll);
   }, [screenWidth]);
 
   return (
-    <header className="fixed top-0 left-0 w-full z-20 bg-white dark:bg-slate-800">
+    <header
+      className={`fixed top-0 left-0 w-full z-20 bg-white dark:bg-slate-800 border-slate-500
+                      ${
+                        atTop ? '' : 'drop-shadow-md'
+                      } transition-all ease-in-out duration-500`}>
       {/* Navigation */}
       <nav className="flex items-center px-2 sm:px-0 my-1 container mx-auto">
         {/* Site title/logo */}
@@ -65,7 +79,7 @@ const Header = ({ links }: headerProps) => {
                 <HeaderLink
                   title={link.title}
                   href={link.href}
-                  additionalCSS="dark:hover:bg-slate-600 dark:text-white hover:bg-slate-200 rounded transition-all duration-500 px-4 py-2"
+                  additionalCSS="dark:hover:bg-slate-600 dark:text-white hover:bg-slate-200 rounded transition-all duration-500 px-4 py-3"
                 />
               </li>
             ))

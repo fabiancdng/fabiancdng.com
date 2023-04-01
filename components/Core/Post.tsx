@@ -96,7 +96,7 @@ const Post = ({ blok, story, relations }: PostProps) => {
         {blok.thumbnail && (
           <div className="w-full h-full relative">
             <Image
-              className="w-full my-5 rounded-lg"
+              className="w-full my-16 rounded-lg"
               width={871}
               height={489}
               priority
@@ -110,7 +110,7 @@ const Post = ({ blok, story, relations }: PostProps) => {
         {blok.content && (
           <div
             id="storyblok-post"
-            className="page-or-post-css"
+            className="page-or-post-css max-w-3xl mx-auto"
             dangerouslySetInnerHTML={{
               // Render the markdown content as HTML.
               __html: renderRichText(blok.content),
