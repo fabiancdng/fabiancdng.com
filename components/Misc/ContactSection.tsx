@@ -24,6 +24,7 @@ const ContactSection = ({ blok }: { blok: ContactSectionBlock }) => {
   const [formSubmissionStatus, setFormSubmissionStatus] = useState({
     message: '',
     color: '',
+    status: 'not_submitted',
   });
 
   /**
@@ -35,6 +36,13 @@ const ContactSection = ({ blok }: { blok: ContactSectionBlock }) => {
     // Prevent form from being submitted via redirect.
     event.preventDefault();
 
+    // Set submission status to processing.
+    setFormSubmissionStatus({
+      message: '',
+      color: '',
+      status: 'processing_submission',
+    });
+
     // Make sure all values in formData are set and not empty.
     if (
       formData.name.length <= 0 ||
@@ -45,6 +53,7 @@ const ContactSection = ({ blok }: { blok: ContactSectionBlock }) => {
       setFormSubmissionStatus({
         message: 'Please fill in all the fields.',
         color: 'text-red-500',
+        status: 'not_submitted',
       });
       return;
     }
@@ -70,12 +79,14 @@ const ContactSection = ({ blok }: { blok: ContactSectionBlock }) => {
         setFormSubmissionStatus({
           message: `${responseBody.message} Code: ${response.status}`,
           color: 'text-red-500',
+          status: 'not_submitted',
         });
       } else {
         // No message returned by API, use fallback.
         setFormSubmissionStatus({
           message: `Something went wrong. Please try again later or send an email directly. Code: ${response.status}`,
           color: 'text-red-500',
+          status: 'not_submitted',
         });
       }
       return;
@@ -87,16 +98,18 @@ const ContactSection = ({ blok }: { blok: ContactSectionBlock }) => {
       setFormSubmissionStatus({
         message: responseBody.message,
         color: 'text-green-500',
+        status: 'not_submitted',
       });
     } else {
       // Display generic success message.
       setFormSubmissionStatus({
         message: 'Message sent successfully!',
         color: 'text-green-500',
+        status: 'not_submitted',
       });
     }
 
-    // Rest form data.
+    // Reset form data.
     setFormData({
       name: '',
       email: '',
@@ -159,6 +172,7 @@ const ContactSection = ({ blok }: { blok: ContactSectionBlock }) => {
                 onChange={(event) =>
                   setFormData({ ...formData, name: event.target.value })
                 }
+                value={formData.name}
                 className={`form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700
                     dark:bg-slate-300 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0
                     focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none`}
@@ -175,6 +189,7 @@ const ContactSection = ({ blok }: { blok: ContactSectionBlock }) => {
                 onChange={(event) =>
                   setFormData({ ...formData, email: event.target.value })
                 }
+                value={formData.email}
                 className={`form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 dark:bg-slate-300 bg-white bg-clip-padding
                     border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white
                   focus:border-blue-600 focus:outline-none`}
@@ -186,10 +201,11 @@ const ContactSection = ({ blok }: { blok: ContactSectionBlock }) => {
             {/* Message textarea */}
             <div className="form-group w-full mb-6">
               <textarea
-                w-full
+                w-full="true"
                 onChange={(event) =>
                   setFormData({ ...formData, message: event.target.value })
                 }
+                value={formData.message}
                 required
                 className={`form-control block px-3 py-1.5 w-full text-base font-normal text-black dark:bg-slate-300 dark:focus:bg-slate-300 bg-clip-padding
                   border border-solid border-gray-300 rounded transition ease-in-out m-0
@@ -202,12 +218,26 @@ const ContactSection = ({ blok }: { blok: ContactSectionBlock }) => {
             {/* Submit button */}
             <button
               type="submit"
+              disabled={formSubmissionStatus.status === 'processing_submission'}
               className={`w-full hover:bg-slate-300 bg-slate-200 rounded cursor-pointer
               text-md mx-auto transition-all duration-500 dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-white
               flex flex-row justify-center space-x-3 items-center align-center border border-slate-300 hover:border-slate-600
               dark:border-slate-500 dark:hover:border-slate-200 py-2`}>
-              <i className="fa-regular fa-paper-plane" />
-              <p>Send</p>
+              {/* Submission processing */}
+              {formSubmissionStatus.status === 'processing_submission' && (
+                <>
+                  <i className="fa-solid fa-spinner fa-spin" />
+                  <p>Processing</p>
+                </>
+              )}
+
+              {/* Not yet submitted */}
+              {formSubmissionStatus.status === 'not_submitted' && (
+                <>
+                  <i className="fa-regular fa-paper-plane" />
+                  <p>Send</p>
+                </>
+              )}
             </button>
           </form>
         </div>

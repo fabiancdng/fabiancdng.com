@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.4.0",
+    "@sendgrid/mail": "^7.7.0",
     "@storyblok/react": "^2.0.16",
     "@tryghost/content-api": "^1.11.4",
+    "express-rate-limit": "^6.7.0",
     "highlight.js": "^11.6.0",
     "next": "^13.2.4",
     "nextjs-progressbar": "^0.0.16",
