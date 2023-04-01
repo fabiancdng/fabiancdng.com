@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.1.0 - 2023-04-01
+
+- Design overhaul for section components
+- Contact form with SendGrid integration
+
 ## 3.0.4 - 2023-03-31
 
 - Fix: Invert colors of SVG fallback icons when in dark mode.
