@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.1.1 - 2023-04-01
+
+- Fix spacing and contrast issues
+
 ## 3.1.0 - 2023-04-01
 
 - Design overhaul for section components
