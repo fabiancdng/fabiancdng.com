@@ -26,15 +26,15 @@ const RichTextSection = ({ blok }: { blok: RichTextSectionBlock }) => {
       className={`rich-text-section w-full dark:bg-slate-900 ${blok.additionalCSS}`}
       {...storyblokEditable(blok)}>
       {/* Wrapper */}
-      <div className="container mx-auto">
+      <div className="container xl:max-w-7xl max-w-5xl mx-auto px-10 rounded">
         {/* Title */}
-        <h1 className="text-gray-800 dark:text-slate-100 text-5xl font-semibold pt-5 text-center sm:text-left mx-4 sm:mx-0">
+        <h1 className="text-gray-800 dark:text-slate-100 text-5xl font-semibold pt-5 text-center sm:text-left mx-0">
           {blok.title}
         </h1>
 
         {/* Subtitle */}
         {blok.subtitle && (
-          <h2 className="text-gray-800 dark:text-slate-200 text-2xl mb-10 mt-3 text-center sm:text-left mx-4 sm:mx-0">
+          <h2 className="text-gray-800 dark:text-slate-200 text-2xl mb-10 mt-3 text-center sm:text-left mx-0">
             {blok.subtitle}
           </h2>
         )}
