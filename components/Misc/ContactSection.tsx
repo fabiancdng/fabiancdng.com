@@ -1,4 +1,5 @@
 import { SbBlokData, storyblokEditable } from '@storyblok/react';
+import { useState } from 'react';
 
 /**
  * Props for the ContactSection component.
@@ -12,11 +13,102 @@ interface ContactSectionBlock extends SbBlokData {
 }
 
 const ContactSection = ({ blok }: { blok: ContactSectionBlock }) => {
+  // State for form data.
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+
+  // State for form submission status message.
+  const [formSubmissionStatus, setFormSubmissionStatus] = useState({
+    message: '',
+    color: '',
+  });
+
+  /**
+   * Handles the form submission.
+   */
+  const handleFormSubmission = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
+    // Prevent form from being submitted via redirect.
+    event.preventDefault();
+
+    // Make sure all values in formData are set and not empty.
+    if (
+      formData.name.length <= 0 ||
+      formData.email.length <= 0 ||
+      formData.message.length <= 0
+    ) {
+      // Display error message.
+      setFormSubmissionStatus({
+        message: 'Please fill in all the fields.',
+        color: 'text-red-500',
+      });
+      return;
+    }
+
+    // Send form data to Next.js API route.
+    const formDataJSON = JSON.stringify(formData);
+
+    const request = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: formDataJSON,
+    };
+
+    const response = await fetch('/api/contact', request);
+    const responseBody = await response.json();
+
+    if (!response.ok || responseBody.success !== true) {
+      // Display error message.
+      if (responseBody.message) {
+        // Message returned by API.
+        setFormSubmissionStatus({
+          message: `${responseBody.message} Code: ${response.status}`,
+          color: 'text-red-500',
+        });
+      } else {
+        // No message returned by API, use fallback.
+        setFormSubmissionStatus({
+          message: `Something went wrong. Please try again later or send an email directly. Code: ${response.status}`,
+          color: 'text-red-500',
+        });
+      }
+      return;
+    }
+
+    // Success!
+    if (responseBody.message) {
+      // Display success message by API.
+      setFormSubmissionStatus({
+        message: responseBody.message,
+        color: 'text-green-500',
+      });
+    } else {
+      // Display generic success message.
+      setFormSubmissionStatus({
+        message: 'Message sent successfully!',
+        color: 'text-green-500',
+      });
+    }
+
+    // Rest form data.
+    setFormData({
+      name: '',
+      email: '',
+      message: '',
+    });
+  };
+
   return (
     <div
       id={blok.htmlAnchor}
       className={`w-screen flex flex-col lg:flex-row container xl:max-w-7xl max-w-5xl mx-auto px-10
-        dark:bg-slate-800 bg-slate-100 pb-20 ${blok.additionalCSS}`}
+        dark:bg-slate-800 bg-slate-100 rounded pb-20 ${blok.additionalCSS}`}
       {...storyblokEditable(blok)}>
       {/* Responsive wrapper left */}
       <div className="container mx-auto px-16 pt-20 flex flex-col items-center lg:items-start w-full lg:w-5/12">
@@ -52,15 +144,25 @@ const ContactSection = ({ blok }: { blok: ContactSectionBlock }) => {
       {/* Responsive wrapper right */}
       <div className="container px-16 pt-10 lg:pt-20 mx-auto flex flex-col items-center lg:items-start w-full lg:w-7/12">
         <div className="w-full mb-5 mt-10 mx-auto text-center text-gray-800">
-          <form>
+          {/* Text for form submission status */}
+          <p className={`text-start my-4 ${formSubmissionStatus.color}`}>
+            {formSubmissionStatus.message}
+          </p>
+
+          {/* Form containing input fields */}
+          <form onSubmit={handleFormSubmission}>
             {/* Name input */}
             <div className="form-group mb-6">
               <input
                 type="text"
+                required
+                onChange={(event) =>
+                  setFormData({ ...formData, name: event.target.value })
+                }
                 className={`form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700
                     dark:bg-slate-300 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0
                     focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none`}
-                id="exampleInput7"
+                id="contact-form-name-input"
                 placeholder="Name"
               />
             </div>
@@ -69,10 +171,14 @@ const ContactSection = ({ blok }: { blok: ContactSectionBlock }) => {
             <div className="form-group mb-6">
               <input
                 type="email"
+                required
+                onChange={(event) =>
+                  setFormData({ ...formData, email: event.target.value })
+                }
                 className={`form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 dark:bg-slate-300 bg-white bg-clip-padding
                     border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white
                   focus:border-blue-600 focus:outline-none`}
-                id="exampleInput8"
+                id="contact-form-email-input"
                 placeholder="Email address"
               />
             </div>
@@ -81,10 +187,14 @@ const ContactSection = ({ blok }: { blok: ContactSectionBlock }) => {
             <div className="form-group w-full mb-6">
               <textarea
                 w-full
+                onChange={(event) =>
+                  setFormData({ ...formData, message: event.target.value })
+                }
+                required
                 className={`form-control block px-3 py-1.5 w-full text-base font-normal text-black dark:bg-slate-300 dark:focus:bg-slate-300 bg-clip-padding
                   border border-solid border-gray-300 rounded transition ease-in-out m-0
                   focus:bg-white focus:border-blue-600 focus:outline-none`}
-                id="exampleFormControlTextarea13"
+                id="contact-form-message-content"
                 rows={3}
                 placeholder="Message"></textarea>
             </div>
