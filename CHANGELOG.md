@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.2.0 - 2023-04-01
+
+- Add support for some additional inline CSS in Storyblok
+- Remove unnecessary wrapper divs
+- Add `storyblokEditable()` call where missing in components
+
 ## 3.1.1 - 2023-04-01
 
 - Fix spacing and contrast issues
