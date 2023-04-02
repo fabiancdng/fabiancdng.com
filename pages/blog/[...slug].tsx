@@ -1,21 +1,23 @@
-import Head from 'next/head';
 import {
-  useStoryblokState,
-  getStoryblokApi,
-  StoryblokComponent,
   ISbStoriesParams,
   ISbStory,
+  ISbStoryData,
+  StoryblokComponent,
+  getStoryblokApi,
+  useStoryblokState,
 } from '@storyblok/react';
-import Layout from '../components/Core/Layout';
+import { PageStoryData } from '../../types';
+import Head from 'next/head';
+import SeoMetaTags from '../../components/Seo/SeoMetaTags';
+import Layout from '../../components/Core/Layout';
 import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next';
-import { PageStoryData } from '../types';
-import SeoMetaTags from '../components/Seo/SeoMetaTags';
 
 interface PageProps {
   story: PageStoryData; // The story to render out on the page.
+  relations: ISbStoryData[]; // The relations for the story.
 }
 
-export default function Page({ story }: PageProps) {
+export default function BlogPage({ story, relations }: PageProps) {
   // Run story object through the useStoryblokState hook.
   story = useStoryblokState(story);
 
@@ -29,7 +31,11 @@ export default function Page({ story }: PageProps) {
       <SeoMetaTags story={story} />
 
       <Layout>
-        <StoryblokComponent blok={story.content} story={story} />
+        <StoryblokComponent
+          blok={story.content}
+          story={story}
+          relations={relations}
+        />
       </Layout>
     </div>
   );
@@ -38,7 +44,7 @@ export default function Page({ story }: PageProps) {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slugArray = params?.slug
     ? Array.from(params?.slug)
-    : Array.from('home');
+    : Array.from('blog');
 
   let slug = slugArray.join('/');
 
@@ -51,7 +57,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   // Retrieve the story for the slug.
   let { data }: ISbStory = await storyblokApi.get(
-    `cdn/stories/${slug}`,
+    `cdn/stories/blog/${slug}`,
     sbParams
   );
 
@@ -99,17 +105,17 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   // Go through each link and add it to the array of paths.
   Object.keys(data.links).forEach((linkKey) => {
-    // Skip folders and home page.
+    // Skip folders and other pages.
     if (
       data.links[linkKey].is_folder ||
-      data.links[linkKey].slug === 'home' ||
-      data.links[linkKey].slug.startsWith('blog')
+      data.links[linkKey].is_startpage ||
+      !data.links[linkKey].slug.startsWith('blog')
     ) {
       return;
     }
 
     // Split nested links into array.
-    const slug = data.links[linkKey].slug;
+    const slug = data.links[linkKey].slug.replace('blog/', '');
     let slugArray = slug.split('/');
 
     staticPathsResult.paths.push({ params: { slug: slugArray } });

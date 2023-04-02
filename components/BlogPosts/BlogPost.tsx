@@ -24,15 +24,18 @@ const BlogPost = ({ story, relations }: BlogPostProps) => {
     <div className="flex flex-col md:flex-row mt-14 mb-24">
       {/* Thumbnail */}
       <div className="md:w-1/3">
-        <Link href={`/${story.full_slug}`}>
-          <Image
-            src={story.content.thumbnail.filename}
-            width={600}
-            height={400}
-            alt={story.content.thumbnail.alt}
-            className="rounded-md"
-          />
-        </Link>
+        {/* If the thumbnail is not set, use a placeholder image. */}
+        {story.content.thumbnail && (
+          <Link href={`/${story.full_slug}`}>
+            <Image
+              src={story.content.thumbnail.filename}
+              width={600}
+              height={400}
+              alt={story.content.thumbnail.alt}
+              className="rounded-md"
+            />
+          </Link>
+        )}
       </div>
 
       {/* Post tags, title, author, date excerpt and link */}

@@ -4,7 +4,6 @@ import {
   SbBlokData,
   ISbStoryData,
 } from '@storyblok/react';
-import { BlogPostStoryData } from '../../types';
 
 /**
  * Data for the Page Content Type from Storyblok.
@@ -19,8 +18,8 @@ interface PageBlock extends SbBlokData {
 interface PageProps {
   blok: PageBlock;
   story: ISbStoryData;
-  relations: any;
-  subStories: BlogPostStoryData[];
+  relations: ISbStoryData[];
+  payload: any;
 }
 
 /**
@@ -28,7 +27,7 @@ interface PageProps {
  * Makes sense if the page contains a lot of "high-level" components
  * like the home page.
  */
-const UnwrappedPage = ({ blok, story, relations, subStories }: PageProps) => {
+const UnwrappedPage = ({ blok, story, relations, payload }: PageProps) => {
   return (
     <main {...storyblokEditable(blok)}>
       {blok.body &&
@@ -36,7 +35,7 @@ const UnwrappedPage = ({ blok, story, relations, subStories }: PageProps) => {
           <StoryblokComponent
             blok={nestedBlok}
             relations={relations}
-            subStories={subStories}
+            payload={payload}
             key={nestedBlok._uid}
           />
         ))}
@@ -47,7 +46,7 @@ const UnwrappedPage = ({ blok, story, relations, subStories }: PageProps) => {
 /**
  * Page wrapped in a container and a max-width.
  */
-const WrappedPage = ({ blok, story, relations, subStories }: PageProps) => {
+const WrappedPage = ({ blok, story, relations, payload }: PageProps) => {
   return (
     <main
       id="storyblok-page"
@@ -59,7 +58,7 @@ const WrappedPage = ({ blok, story, relations, subStories }: PageProps) => {
             <StoryblokComponent
               blok={nestedBlok}
               relations={relations}
-              subStories={subStories}
+              payload={payload}
               key={nestedBlok._uid}
             />
           ))}
@@ -71,7 +70,7 @@ const WrappedPage = ({ blok, story, relations, subStories }: PageProps) => {
 /**
  * Component rendering out any page.
  */
-const Page = ({ blok, story, relations, subStories }: PageProps) => {
+const Page = ({ blok, story, relations, payload }: PageProps) => {
   // Array of page slugs that handle their own wrapping.
   const unwrappedPages = ['home', 'blog'];
 
@@ -82,7 +81,7 @@ const Page = ({ blok, story, relations, subStories }: PageProps) => {
         blok={blok}
         story={story}
         relations={relations}
-        subStories={subStories}
+        payload={payload}
       />
     );
   } else {
@@ -91,7 +90,7 @@ const Page = ({ blok, story, relations, subStories }: PageProps) => {
         blok={blok}
         story={story}
         relations={relations}
-        subStories={subStories}
+        payload={payload}
       />
     );
   }
