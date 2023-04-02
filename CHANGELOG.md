@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.3.0 - 2023-04-02
+
+- `/blog` is now rendered via SSR
+- Pagination for blog post overview
+- Fix some spacing issues
+
 ## 3.2.1 - 2023-04-02
 
 - Fix Some Empty HTML Elements + Style Props
