@@ -1,8 +1,9 @@
-import { SbBlokData } from '@storyblok/react';
+import { SbBlokData, storyblokEditable } from '@storyblok/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { ImageAsset } from '../../types';
+import ParseAdditionalCSS from '../../utils/parse-additional-css';
 
 /**
  * Data for Project Block Type from Storyblok.
@@ -16,6 +17,7 @@ interface ProjectBlock extends SbBlokData {
   gitLink: string;
   demoLink: string;
   reverseDesign: boolean;
+  additionalStyles: string;
 }
 
 const ProjectThumbnail = ({ blok }: { blok: ProjectBlock }) => {
@@ -64,7 +66,12 @@ const Project = ({ blok }: { blok: ProjectBlock }) => {
   }, [screenWidth, blok.reverseDesign]);
 
   return (
-    <div className="container pb-5 xl:max-w-7xl max-w-5xl mx-auto px-10 text-black dark:text-white">
+    <div
+      style={
+        blok.additionalStyles ? ParseAdditionalCSS(blok.additionalStyles) : {}
+      }
+      className="container pb-5 xl:max-w-7xl max-w-5xl mx-auto px-10 text-black dark:text-white"
+      {...storyblokEditable(blok)}>
       <div className="flex flex-col md:flex-row mt-14 mb-24">
         {/* Thumbnail (if not reversed) */}
         {!reverseDesign && <ProjectThumbnail blok={blok} />}

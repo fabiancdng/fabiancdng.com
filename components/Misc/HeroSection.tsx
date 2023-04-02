@@ -1,6 +1,7 @@
 import { SbBlokData, storyblokEditable } from '@storyblok/react';
 import Image from 'next/image';
 import { ImageAsset } from '../../types';
+import ParseAdditionalCSS from '../../utils/parse-additional-css';
 
 /**
  * Data for Hero Section Block Type from Storyblok.
@@ -11,14 +12,18 @@ interface HeroSectionBlock extends SbBlokData {
   description: string;
   avatar?: ImageAsset;
   htmlAnchor: string;
-  additionalCSS: string;
+  // additionalCSS: string; - Deprecated.
+  additionalStyles: string;
 }
 
 const HeroSection = ({ blok }: { blok: HeroSectionBlock }) => {
   return (
     <div
       id={blok.htmlAnchor}
-      className={`h-screen flex flex-col justify-center align-middle dark:bg-slate-900 ${blok.additionalCSS}`}
+      style={
+        blok.additionalStyles ? ParseAdditionalCSS(blok.additionalStyles) : {}
+      }
+      className={`h-screen flex flex-col justify-center align-middle dark:bg-slate-900`}
       {...storyblokEditable(blok)}>
       <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center gap-12 mt-10 lg:mt-25">
         {/* Text & Socials */}

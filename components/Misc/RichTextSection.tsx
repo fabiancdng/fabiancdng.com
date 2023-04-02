@@ -5,6 +5,7 @@ import {
   SbBlokData,
   storyblokEditable,
 } from '@storyblok/react';
+import ParseAdditionalCSS from '../../utils/parse-additional-css';
 
 /**
  * Data for Rich Text Section Block Type from Storyblok.
@@ -16,14 +17,18 @@ interface RichTextSectionBlock extends SbBlokData {
   content: ISbRichtext;
   readMoreURL: string;
   readMoreLabel: string;
-  additionalCSS: string;
+  // additionalCSS: string; - Deprecated.
+  additionalStyles: string;
 }
 
 const RichTextSection = ({ blok }: { blok: RichTextSectionBlock }) => {
   return (
     <div
       id={blok.htmlAnchor}
-      className={`rich-text-section w-full dark:bg-slate-900 ${blok.additionalCSS}`}
+      style={
+        blok.additionalStyles ? ParseAdditionalCSS(blok.additionalStyles) : {}
+      }
+      className={`rich-text-section w-full dark:bg-slate-900`}
       {...storyblokEditable(blok)}>
       {/* Wrapper */}
       <div className="container xl:max-w-7xl max-w-5xl mx-auto px-10 rounded">

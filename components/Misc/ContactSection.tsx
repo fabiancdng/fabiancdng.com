@@ -1,5 +1,6 @@
 import { SbBlokData, storyblokEditable } from '@storyblok/react';
 import { useState } from 'react';
+import ParseAdditionalCSS from '../../utils/parse-additional-css';
 
 /**
  * Props for the ContactSection component.
@@ -9,7 +10,8 @@ interface ContactSectionBlock extends SbBlokData {
   subtitle: string;
   htmlAnchor: string;
   destinationEmail: string;
-  additionalCSS: string;
+  // additionalCSS: string; - Deprecated.
+  additionalStyles: string;
 }
 
 const ContactSection = ({ blok }: { blok: ContactSectionBlock }) => {
@@ -120,8 +122,11 @@ const ContactSection = ({ blok }: { blok: ContactSectionBlock }) => {
   return (
     <div
       id={blok.htmlAnchor}
+      style={
+        blok.additionalStyles ? ParseAdditionalCSS(blok.additionalStyles) : {}
+      }
       className={`w-screen flex flex-col lg:flex-row container xl:max-w-7xl max-w-5xl mx-auto px-10
-        dark:bg-slate-800 bg-slate-100 rounded pb-20 ${blok.additionalCSS}`}
+        dark:bg-slate-800 bg-slate-100 rounded pb-20`}
       {...storyblokEditable(blok)}>
       {/* Responsive wrapper left */}
       <div className="container mx-auto px-0 md:px-16 pt-20 flex flex-col items-center lg:items-start w-full lg:w-5/12">
