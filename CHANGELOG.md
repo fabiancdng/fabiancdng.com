@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.2.1 - 2023-04-02
+
+- Fix Some Empty HTML Elements + Style Props
+
 ## 3.2.0 - 2023-04-01
 
 - Add support for some additional inline CSS in Storyblok
