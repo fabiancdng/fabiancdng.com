@@ -11,15 +11,13 @@
 }
 
 .page-or-post-css a {
+  @apply border-b-2 border-violet-700;
   transition: all 0.2s ease-in-out;
-  text-decoration: underline;
-  text-decoration-color: blueviolet;
-  text-decoration-thickness: 2px;
 }
 
 .page-or-post-css a:hover {
   transition: all 0.2s ease-in-out;
-  font-size: 1.1em;
+  font-size: 1.05em;
   text-decoration-thickness: 3px;
 }
 
@@ -67,8 +65,7 @@
 }
 
 .page-or-post-css h2 {
-  @apply text-3xl font-semibold mb-4 mt-9;
-  margin-top: 40px;
+  @apply text-3xl font-semibold mb-4 mt-16;
 }
 
 .page-or-post-css h3 {
