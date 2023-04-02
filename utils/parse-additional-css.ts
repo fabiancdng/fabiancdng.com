@@ -35,10 +35,14 @@ const ParseAdditionalCSS = (additionalCSS: string) => {
 
   const styles: any = {};
 
+  // Convert inline CSS expressions to style prop object.
   additionalCSS.split(';').forEach((style) => {
     const [property, value] = style.split(':');
     if (property && value) {
-      styles[property.trim()] = value.trim();
+      const camelCaseProperty = property
+        .trim()
+        .replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
+      styles[camelCaseProperty] = value.trim();
     }
   });
 
