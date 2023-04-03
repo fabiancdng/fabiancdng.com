@@ -13,23 +13,39 @@ import SeoMetaTags from '../components/Seo/SeoMetaTags';
 
 interface PageProps {
   story: PageStoryData; // The story to render out on the page.
+  relations: any; // Relations for the story.
 }
 
-export default function Page({ story }: PageProps) {
+export default function Page({ story, relations }: PageProps) {
   // Run story object through the useStoryblokState hook.
   story = useStoryblokState(story);
 
   return (
     <div>
       <Head>
-        <title>{story ? `${story.name} | fabiancdng.com` : 'My Site'}</title>
+        <title>
+          {story
+            ? `${story.name} ${
+                story.full_slug.startsWith('blog') ? '| Blog ' : ''
+              } | fabiancdng.com`
+            : 'My Site'}
+        </title>
         <link rel="icon" href="/favicon.ico" />
+
+        <link
+          rel="canonical"
+          href={`${process.env.NEXT_PUBLIC_DOMAIN}/${story.full_slug}`}
+        />
       </Head>
 
       <SeoMetaTags story={story} />
 
       <Layout>
-        <StoryblokComponent blok={story.content} story={story} />
+        <StoryblokComponent
+          blok={story.content}
+          story={story}
+          relations={relations}
+        />
       </Layout>
     </div>
   );

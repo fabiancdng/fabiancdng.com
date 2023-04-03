@@ -12,7 +12,6 @@ import SeoMetaTags from '../../../components/Seo/SeoMetaTags';
 import Layout from '../../../components/Core/Layout';
 import { PageStoryData } from '../../../types';
 import Pagination from '../../../components/BlogPosts/Pagination';
-import { useRouter } from 'next/router';
 
 interface PaginatedBlogOverviewPageProps {
   story: PageStoryData; // Story for the blog overview page.
@@ -26,15 +25,13 @@ interface PaginatedBlogOverviewPageProps {
   };
 }
 
-const POSTS_PER_PAGE = 1;
+const POSTS_PER_PAGE = 15;
 
 /**
  * Paginated blog overview page (eg. /blog/posts/3).
  * Posts are still being rendered by [...slug].tsx.
  */
 const PaginatedBlogOverviewPage = (props: PaginatedBlogOverviewPageProps) => {
-  const router = useRouter();
-
   return (
     <div>
       <Head>
@@ -42,6 +39,31 @@ const PaginatedBlogOverviewPage = (props: PaginatedBlogOverviewPageProps) => {
           {props.story ? `${props.story.name} | fabiancdng.com` : 'My Site'}
         </title>
         <link rel="icon" href="/favicon.ico" />
+
+        <link
+          rel="canonical"
+          href={`${process.env.NEXT_PUBLIC_DOMAIN}/blog/posts/${props.pagination.currentPage}`}
+        />
+
+        {props.pagination.currentPage > 1 && (
+          <link
+            rel="prev"
+            href={`${process.env.NEXT_PUBLIC_DOMAIN}/blog/posts${
+              props.pagination.currentPage - 1 === 1
+                ? ''
+                : '/' + (props.pagination.currentPage - 1).toString()
+            }`}
+          />
+        )}
+
+        {props.pagination.currentPage < props.pagination.totalPages && (
+          <link
+            rel="next"
+            href={`${process.env.NEXT_PUBLIC_DOMAIN}/blog/posts/${
+              props.pagination.currentPage + 1
+            }`}
+          />
+        )}
       </Head>
 
       <SeoMetaTags story={props.story} />
@@ -72,16 +94,6 @@ const PaginatedBlogOverviewPage = (props: PaginatedBlogOverviewPageProps) => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const page = parseInt(String(params?.page));
 
-  // If page is 1, redirect to /blog/posts.
-  if (page === 1) {
-    return {
-      redirect: {
-        destination: '/blog/posts',
-        permanent: true,
-      },
-    };
-  }
-
   const storyblokApi = getStoryblokApi();
 
   // Calculate how many blog posts there are by counting all links starting with 'blog/'.
@@ -102,6 +114,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (page > totalPages) {
     return {
       notFound: true,
+      revalidate: 30 * 60, // revalidate every 30 minutes.
     };
   }
 
@@ -118,7 +131,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     excluding_fields: 'content', // Don't query content for all blog posts.
     excluding_slugs: 'blog/', // Don't query the blog overview page.
     per_page: POSTS_PER_PAGE,
-    page: page ? page : 1,
+    page: page ? page : 2,
   };
 
   // Retrieve stories for all blog posts (without content).
@@ -130,6 +143,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (blogPosts.stories.length === 0) {
     return {
       notFound: true,
+      revalidate: 30 * 60, // revalidate every 30 minutes.
     };
   }
 
@@ -141,9 +155,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       blogPostsRelations: blogPosts.rels ? blogPosts.rels : false,
       pagination: {
         currentPage: sbParams['page'],
-        totalPages: Math.ceil(blogPostTotalCount / POSTS_PER_PAGE),
+        totalPages: totalPages,
       },
     },
+    revalidate: 30 * 60, // revalidate every 30 minutes.
   };
 };
 
@@ -156,6 +171,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     {
       starts_with: 'blog/',
       version: process.env.NODE_ENV === 'production' ? 'published' : 'draft',
+      excluding_slugs: 'blog/', // Don't query the blog overview page.
     }
   );
 
@@ -171,7 +187,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     fallback: 'blocking',
   };
 
-  for (let i = 1; i < totalPages; i++) {
+  for (let i = 2; i < totalPages + 1; i++) {
     staticPathsResult.paths.push({
       params: {
         page: i.toString(),

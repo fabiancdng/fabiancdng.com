@@ -9,7 +9,7 @@ const Layout = ({ children }: { children: JSX.Element }) => {
         links={[
           { title: 'Home', href: '/', active: true },
           { title: 'Projects', href: '/#projects', active: false },
-          { title: 'Blog', href: '/blog', active: false },
+          { title: 'Blog', href: '/blog/posts', active: false },
           { title: 'About', href: '/about', active: false },
         ]}
       />

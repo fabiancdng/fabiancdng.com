@@ -12,7 +12,6 @@ import SeoMetaTags from '../../../components/Seo/SeoMetaTags';
 import Layout from '../../../components/Core/Layout';
 import { PageStoryData } from '../../../types';
 import Pagination from '../../../components/BlogPosts/Pagination';
-import { useRouter } from 'next/router';
 
 interface BlogOverviewPageProps {
   story: PageStoryData; // Story for the blog overview page.
@@ -26,22 +25,30 @@ interface BlogOverviewPageProps {
   };
 }
 
-const POSTS_PER_PAGE = 1;
+const POSTS_PER_PAGE = 15;
 
 /**
  * Blog overview page.
  * Posts are still being rendered by [...slug].tsx.
  */
 const BlogOverviewPage = (props: BlogOverviewPageProps) => {
-  const router = useRouter();
-
   return (
     <div>
       <Head>
-        <title>
-          {props.story ? `${props.story.name} | fabiancdng.com` : 'My Site'}
-        </title>
+        <title>{`Blog | fabiancdng.com`}</title>
         <link rel="icon" href="/favicon.ico" />
+
+        <link
+          rel="canonical"
+          href={`${process.env.NEXT_PUBLIC_DOMAIN}/blog/posts`}
+        />
+
+        {props.pagination.totalPages > 1 && (
+          <link
+            rel="next"
+            href={`${process.env.NEXT_PUBLIC_DOMAIN}/blog/posts/2`}
+          />
+        )}
       </Head>
 
       <SeoMetaTags story={props.story} />
@@ -81,7 +88,11 @@ export const getStaticProps: GetStaticProps = async () => {
     }
   );
 
+  // Total count of blog posts in Storyblok.
   const blogPostTotalCount = Object.keys(blogPostLinks.links).length - 1; // -1 because the blog overview page is also counted.
+
+  // Total number of /blog/posts pages (including index).
+  const totalPages = Math.ceil(blogPostTotalCount / POSTS_PER_PAGE);
 
   // Retrieve story for the blog overview page.
   let { data }: ISbStory = await storyblokApi.get(`cdn/stories/blog`, {
@@ -108,6 +119,7 @@ export const getStaticProps: GetStaticProps = async () => {
   if (blogPosts.stories.length === 0) {
     return {
       notFound: true,
+      revalidate: 30 * 60, // revalidate every 30 minutes.
     };
   }
 
@@ -119,11 +131,10 @@ export const getStaticProps: GetStaticProps = async () => {
       blogPostsRelations: blogPosts.rels ? blogPosts.rels : false,
       pagination: {
         currentPage: sbParams['page'],
-        totalPages: Math.ceil(
-          blogPostTotalCount / Number(sbParams['per_page'])
-        ),
+        totalPages: totalPages,
       },
     },
+    revalidate: 30 * 60, // revalidate every 30 minutes.
   };
 };
 
