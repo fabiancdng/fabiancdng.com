@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.4.0 - 2023-04-02
+
+- `/blog` is now `/blog/posts` and supports pagination via dynamic routes (e.g. `/blog/posts/4`)
+- Implementing `/blog/posts` in SEO strategy
+
 ## 3.3.0 - 2023-04-02
 
 - `/blog` is now rendered via SSR
