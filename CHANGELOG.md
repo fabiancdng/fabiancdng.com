@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## 3.4.0 - 2023-04-02
+## 3.4.1 - 2023-04-03
+
+- Fix: `NEXT_PUBLIC_DOMAIN` environment variable not set during initial build
+
+## 3.4.0 - 2023-04-03
 
 - `/blog` is now `/blog/posts` and supports pagination via dynamic routes (e.g. `/blog/posts/4`)
 - Implementing `/blog/posts` in SEO strategy
