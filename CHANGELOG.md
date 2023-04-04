@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.5.2 - 2023-04-04
+
+- Fix: Initial build for blog post pages not being done
+
 ## 3.5.1 - 2023-04-04
 
 - Fix: Unwanted URLs in Sitemap (308 redirect)
