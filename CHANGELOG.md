@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.5.3 - 2023-04-04
+
+- Fix: Add Debug Logs on Server
+
 ## 3.5.2 - 2023-04-04
 
 - Fix: Initial build for blog post pages not being done
