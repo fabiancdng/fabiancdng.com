@@ -37,10 +37,14 @@ const SeoMetaTags = ({ story }: { story: PageStoryData }) => {
 
       {/* Twitter title */}
       {story.content.seoMetaTags['twitter_title'] && (
-        <meta
-          name="twitter:title"
-          content={story.content.seoMetaTags['twitter_title']}
-        />
+        <>
+          <meta name="twitter:card" content="summary" />
+
+          <meta
+            name="twitter:title"
+            content={story.content.seoMetaTags['twitter_title']}
+          />
+        </>
       )}
 
       {/* Twitter description */}
