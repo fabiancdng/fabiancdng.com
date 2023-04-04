@@ -8,6 +8,7 @@ import Head from 'next/head';
 import Layout from '../components/Core/Layout';
 import SeoMetaTags from '../components/Seo/SeoMetaTags';
 import { PageStoryData } from '../types';
+import GetCurrentTimestamp from '../utils/get-time-stamp';
 
 const Home = ({ story }: { story: PageStoryData }) => {
   story = useStoryblokState(story);
@@ -36,7 +37,9 @@ export async function getStaticProps() {
 
   // Console log on the server-side for easy maintenance.
   if (process.env.NODE_ENV === 'production') {
-    console.log('getStaticProps() executing for index...');
+    console.log(
+      `[${GetCurrentTimestamp()}] getStaticProps() executing for index...`
+    );
   }
 
   // Load the draft version.

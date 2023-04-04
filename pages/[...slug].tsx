@@ -10,6 +10,7 @@ import Layout from '../components/Core/Layout';
 import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next';
 import { PageStoryData } from '../types';
 import SeoMetaTags from '../components/Seo/SeoMetaTags';
+import GetCurrentTimestamp from '../utils/get-time-stamp';
 
 interface PageProps {
   story: PageStoryData; // The story to render out on the page.
@@ -54,7 +55,9 @@ export default function Page({ story, relations }: PageProps) {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   // Console log on the server-side for easy maintenance.
   if (process.env.NODE_ENV === 'production') {
-    console.log('getStaticProps() executing for [...slug]...');
+    console.log(
+      `[${GetCurrentTimestamp()}] getStaticProps() executing for [...slug]...`
+    );
   }
 
   const slugArray = params?.slug
@@ -97,7 +100,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 export const getStaticPaths: GetStaticPaths = async () => {
   // Console log on the server-side for easy maintenance.
   if (process.env.NODE_ENV === 'production') {
-    console.log('getStaticPaths() executing for [...slug]...');
+    console.log(
+      `[${GetCurrentTimestamp()}] getStaticPaths() executing for [...slug]...`
+    );
   }
 
   interface Link {

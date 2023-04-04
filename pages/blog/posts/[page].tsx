@@ -12,6 +12,7 @@ import SeoMetaTags from '../../../components/Seo/SeoMetaTags';
 import Layout from '../../../components/Core/Layout';
 import { PageStoryData } from '../../../types';
 import Pagination from '../../../components/BlogPosts/Pagination';
+import GetCurrentTimestamp from '../../../utils/get-time-stamp';
 
 interface PaginatedBlogOverviewPageProps {
   story: PageStoryData; // Story for the blog overview page.
@@ -98,7 +99,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   // Console log on the server-side for easy maintenance.
   if (process.env.NODE_ENV === 'production') {
-    console.log('getStaticPaths() executing for /blog/posts/[page]...');
+    console.log(
+      `[${GetCurrentTimestamp()}] getStaticPaths() executing for /blog/posts/[page]...`
+    );
   }
 
   // Calculate how many blog posts there are by counting all links starting with 'blog/'.
@@ -172,7 +175,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   // Console log on the server-side for easy maintenance.
   if (process.env.NODE_ENV === 'production') {
-    console.log('getStaticPaths() executing for /blog/posts/[page]...');
+    console.log(
+      `[${GetCurrentTimestamp()}] getStaticPaths() executing for /blog/posts/[page]...`
+    );
   }
 
   // Calculate how many blog posts there are by counting all links starting with 'blog/'.
