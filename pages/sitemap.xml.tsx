@@ -1,5 +1,6 @@
 import { ISbStories, getStoryblokApi } from '@storyblok/react';
 import { GetServerSideProps } from 'next';
+import GetCurrentTimestamp from '../utils/get-time-stamp';
 
 const getPageAndPostSlugs = async () => {
   interface Link {
@@ -116,18 +117,10 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   const pageAndPostSlugs = await getPageAndPostSlugs();
   const blogPostPaginationSlugs = await getBlogPostPaginationSlugs();
 
-  // Log to keep track of request.
-  const timestamp = new Date().toLocaleString('de-DE', {
-    timeZone: 'Europe/Amsterdam',
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-  });
-
-  console.log(`[${timestamp}] Dynamic sitemap generated.`);
+  // Log the time on the server when the function is called.
+  console.log(
+    `[${GetCurrentTimestamp()}] getServerSideProps() executing for sitemap.xml.`
+  );
 
   // Merge the slugs into one array.
   const slugs = [...blogPostPaginationSlugs, ...pageAndPostSlugs];

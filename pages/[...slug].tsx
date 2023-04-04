@@ -52,6 +52,11 @@ export default function Page({ story, relations }: PageProps) {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+  // Console log on the server-side for easy maintenance.
+  if (process.env.NODE_ENV === 'production') {
+    console.log('getStaticProps() executing for [...slug]...');
+  }
+
   const slugArray = params?.slug
     ? Array.from(params?.slug)
     : Array.from('home');
@@ -84,12 +89,17 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     // Return 404 and cache for 30 minutes.
     return {
       notFound: true,
-      revalidate: 30 * 60, // revalidate every 30 minutes.
+      revalidate: 5 * 60, // revalidate every 5 minutes.
     };
   }
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  // Console log on the server-side for easy maintenance.
+  if (process.env.NODE_ENV === 'production') {
+    console.log('getStaticPaths() executing for [...slug]...');
+  }
+
   interface Link {
     id: number;
     slug: string;

@@ -96,6 +96,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const storyblokApi = getStoryblokApi();
 
+  // Console log on the server-side for easy maintenance.
+  if (process.env.NODE_ENV === 'production') {
+    console.log('getStaticPaths() executing for /blog/posts/[page]...');
+  }
+
   // Calculate how many blog posts there are by counting all links starting with 'blog/'.
   const { data: blogPostLinks }: ISbStories = await storyblokApi.get(
     `cdn/links`,
@@ -114,7 +119,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (page > totalPages) {
     return {
       notFound: true,
-      revalidate: 30 * 60, // revalidate every 30 minutes.
+      revalidate: 5 * 60, // revalidate every 5 minutes.
     };
   }
 
@@ -143,7 +148,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (blogPosts.stories.length === 0) {
     return {
       notFound: true,
-      revalidate: 30 * 60, // revalidate every 30 minutes.
+      revalidate: 5 * 60, // revalidate every 5 minutes.
     };
   }
 
@@ -164,6 +169,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const storyblokApi = getStoryblokApi();
+
+  // Console log on the server-side for easy maintenance.
+  if (process.env.NODE_ENV === 'production') {
+    console.log('getStaticPaths() executing for /blog/posts/[page]...');
+  }
 
   // Calculate how many blog posts there are by counting all links starting with 'blog/'.
   const { data: blogPostLinks }: ISbStories = await storyblokApi.get(

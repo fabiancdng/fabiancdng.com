@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import sendgrid from '@sendgrid/mail';
 import { rateLimit } from 'express-rate-limit';
+import GetCurrentTimestamp from '../../utils/get-time-stamp';
 
 /**
  * Constant of Express.js middlewares to run (needed for rate limiting).
@@ -112,15 +113,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
                   <hr />
 
-                  <p>Received: ${new Date().toLocaleString('de-DE', {
-                    timeZone: 'Europe/Amsterdam',
-                    day: '2-digit',
-                    month: '2-digit',
-                    year: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    second: '2-digit',
-                  })}</p>
+                  <p>Received: ${GetCurrentTimestamp()}</p>
               </div>
           `,
     });

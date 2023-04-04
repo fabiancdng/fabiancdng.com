@@ -119,7 +119,7 @@ export const getStaticProps: GetStaticProps = async () => {
   if (blogPosts.stories.length === 0) {
     return {
       notFound: true,
-      revalidate: 30 * 60, // revalidate every 30 minutes.
+      revalidate: 5 * 60, // revalidate every 5 minutes.
     };
   }
 

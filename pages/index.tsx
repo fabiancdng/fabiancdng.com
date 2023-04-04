@@ -34,6 +34,11 @@ export async function getStaticProps() {
   // Default slug for the homepage in Storyblok.
   let slug = 'home';
 
+  // Console log on the server-side for easy maintenance.
+  if (process.env.NODE_ENV === 'production') {
+    console.log('getStaticProps() executing for index...');
+  }
+
   // Load the draft version.
   let sbParams: ISbStoryParams = {
     version: process.env.NODE_ENV === 'production' ? 'published' : 'draft',
