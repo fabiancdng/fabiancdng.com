@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.5.1 - 2023-04-04
+
+- Fix: Unwanted URLs in Sitemap (308 redirect)
+
 ## 3.5.0 - 2023-04-04
 
 - Fix: `404` instead of `500` if fallback page doesn't exist
