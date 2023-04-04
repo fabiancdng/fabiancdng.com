@@ -7,6 +7,15 @@ import { PageStoryData } from '../../types';
 const SeoMetaTags = ({ story }: { story: PageStoryData }) => {
   if (!story.content.seoMetaTags) return null;
 
+  let slugArray = story.full_slug.split('/');
+  let twitterCardStyle = 'summary';
+
+  console.log(slugArray);
+
+  if (slugArray[0] === 'blog' && slugArray[1] !== '') {
+    twitterCardStyle = 'summary_large_image';
+  }
+
   return (
     <Head>
       {/* Most important meta tags for SEO. */}
@@ -38,7 +47,7 @@ const SeoMetaTags = ({ story }: { story: PageStoryData }) => {
       {/* Twitter title */}
       {story.content.seoMetaTags['twitter_title'] && (
         <>
-          <meta name="twitter:card" content="summary" />
+          <meta name="twitter:card" content={twitterCardStyle} />
 
           <meta
             name="twitter:title"
