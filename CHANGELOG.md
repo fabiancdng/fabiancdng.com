@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.5.5 - 2023-04-04
+
+- Fix: SEO: Add Twitter card tag
+
 ## 3.5.4 - 2023-04-04
 
 - Fix: Timestamp alongside logs
