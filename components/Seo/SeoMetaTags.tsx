@@ -10,8 +10,6 @@ const SeoMetaTags = ({ story }: { story: PageStoryData }) => {
   let slugArray = story.full_slug.split('/');
   let twitterCardStyle = 'summary';
 
-  console.log(slugArray);
-
   if (slugArray[0] === 'blog' && slugArray[1] !== '') {
     twitterCardStyle = 'summary_large_image';
   }
