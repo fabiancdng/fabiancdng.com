@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.5.0 - 2023-04-04
+
+- Fix: `404` instead of `500` if fallback page doesn't exist
+- Cache `404` response for URL for 30 minutes
+- Add dynamic XML sitemap
+
 ## 3.4.1 - 2023-04-03
 
 - Fix: `NEXT_PUBLIC_DOMAIN` environment variable not set during initial build
