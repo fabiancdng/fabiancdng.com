@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.5.4 - 2023-04-04
+
+- Fix: Timestamp alongside logs
+
 ## 3.5.3 - 2023-04-04
 
 - Fix: Add Debug Logs on Server
