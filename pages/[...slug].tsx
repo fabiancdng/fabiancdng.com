@@ -114,6 +114,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const storyblokApi = getStoryblokApi();
   let { data }: { data: LinksData } = await storyblokApi.get('cdn/links/', {
     version: process.env.NODE_ENV === 'production' ? 'published' : 'draft',
+    excluding_slugs: 'blog/',
   });
 
   // Define array of paths and other options (returned from this function).
@@ -127,8 +128,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
     // Skip folders and home page.
     if (
       data.links[linkKey].is_folder ||
-      data.links[linkKey].slug === 'home' ||
-      data.links[linkKey].slug.startsWith('blog')
+      data.links[linkKey].is_startpage ||
+      data.links[linkKey].slug === 'home'
     ) {
       return;
     }
