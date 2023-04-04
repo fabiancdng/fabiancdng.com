@@ -28,6 +28,7 @@ const getPageAndPostSlugs = async () => {
   const storyblokApi = getStoryblokApi();
   let { data }: { data: LinksData } = await storyblokApi.get('cdn/links/', {
     version: process.env.NODE_ENV === 'production' ? 'published' : 'draft',
+    excluding_slugs: 'blog/',
   });
 
   // Go through each link and add it to the array of paths.
@@ -35,6 +36,7 @@ const getPageAndPostSlugs = async () => {
     // Skip folders and home page.
     if (
       data.links[linkKey].is_folder ||
+      data.links[linkKey].is_startpage ||
       data.links[linkKey].slug === 'home' ||
       data.links[linkKey].slug.startsWith('author')
     ) {
