@@ -66,18 +66,27 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const storyblokApi = getStoryblokApi();
 
   // Retrieve the story for the slug.
-  let { data }: ISbStory = await storyblokApi.get(
-    `cdn/stories/${slug}`,
-    sbParams
-  );
+  try {
+    let { data }: ISbStory = await storyblokApi.get(
+      `cdn/stories/${slug}`,
+      sbParams
+    );
 
-  return {
-    props: {
-      story: data.story ? data.story : false,
-      relations: data.rels ? data.rels : false,
-    },
-    revalidate: 30 * 60, // revalidate every 30 minutes.
-  };
+    return {
+      props: {
+        story: data.story ? data.story : false,
+        relations: data.rels ? data.rels : false,
+      },
+      revalidate: 30 * 60, // revalidate every 30 minutes.
+    };
+  } catch (e) {
+    // Retrieving the story failed, probably not found.
+    // Return 404 and cache for 30 minutes.
+    return {
+      notFound: true,
+      revalidate: 30 * 60, // revalidate every 30 minutes.
+    };
+  }
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
