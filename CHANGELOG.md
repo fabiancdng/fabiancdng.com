@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.5.8 - 2023-04-04
+
+- Fix: SEO: Use HTML5 tags like `header`, `main`, `article`
+- Fix: SEO: Consistently use OpenGraph `type` and `article:` properties
+
 ## 3.5.7 - 2023-04-04
 
 - Fix: SEO: Headings
