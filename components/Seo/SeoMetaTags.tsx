@@ -1,10 +1,14 @@
 import Head from 'next/head';
-import { PageStoryData } from '../../types';
+import { PageStoryData, PostOrPageAuthor } from '../../types';
 
 /**
  * Some SEO tags generated with info from Storyblok SEO plugin.
  */
-const SeoMetaTags = ({ story }: { story: PageStoryData }) => {
+const SeoMetaTags = ({
+  story,
+}: {
+  story: PageStoryData | PostOrPageAuthor;
+}) => {
   if (!story.content.seoMetaTags) return null;
 
   let slugArray = story.full_slug.split('/');

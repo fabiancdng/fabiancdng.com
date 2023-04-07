@@ -38,8 +38,7 @@ const getPageAndPostSlugs = async () => {
     if (
       data.links[linkKey].is_folder ||
       data.links[linkKey].is_startpage ||
-      data.links[linkKey].slug === 'home' ||
-      data.links[linkKey].slug.startsWith('author')
+      data.links[linkKey].slug === 'home'
     ) {
       return;
     }

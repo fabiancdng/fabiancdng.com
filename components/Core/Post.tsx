@@ -8,8 +8,9 @@ import {
 import hljs from 'highlight.js';
 import Image from 'next/image';
 import { useEffect } from 'react';
-import { ImageAsset, PageOrPostAuthor } from '../../types';
+import { ImageAsset, PostOrPageAuthor } from '../../types';
 import Head from 'next/head';
+import Link from 'next/link';
 
 /**
  * Data for the Post Content Type from Storyblok.
@@ -38,7 +39,7 @@ const Post = ({ blok, story, relations }: PostProps) => {
   }, []);
 
   // Filter through the array of relations to find the author object with the matching UUID.
-  const author: PageOrPostAuthor = relations.find(
+  const author: PostOrPageAuthor = relations.find(
     (relation: any) => relation.uuid === story.content.author
   );
 
@@ -67,6 +68,7 @@ const Post = ({ blok, story, relations }: PostProps) => {
             <meta key={index} property="article:tag" content={tag} />
           ))}
       </Head>
+
       <main {...storyblokEditable(blok)}>
         {/* Content */}
         <article className="container pt-32 px-7 mx-auto mb-20 max-w-5xl text-black dark:text-white">
@@ -98,26 +100,33 @@ const Post = ({ blok, story, relations }: PostProps) => {
             )}
 
             {/* Post author */}
-            <div className="flex items-center my-8">
-              <Image
-                className="w-12 h-12 -translate-y-0.5 mr-2 rounded-full"
-                width={50}
-                height={50}
-                priority
-                src={author.content.avatar?.filename || ''}
-                alt={author.name + "'s profile picture"}
-              />
-              <div>
-                <h3 className="text-lg font-medium leading-3 mb-1">
-                  {author.name}
-                </h3>
-                <p className="text-gray-600 text-md dark:text-slate-400">
-                  {story.first_published_at &&
-                    new Date(story.first_published_at).toLocaleString('en-US', {
-                      dateStyle: 'long',
-                    })}
-                </p>
-              </div>
+            <div className="w-fit">
+              <Link href={`/authors/${author.slug}`} className="w-fit">
+                <div className="flex items-center my-8">
+                  <Image
+                    className="w-12 h-12 -translate-y-0.5 mr-2 rounded-full"
+                    width={50}
+                    height={50}
+                    priority
+                    src={author.content.avatar?.filename || ''}
+                    alt={author.name + "'s profile picture"}
+                  />
+                  <div>
+                    <h3 className="text-lg font-medium leading-3 mb-1">
+                      {author.name}
+                    </h3>
+                    <p className="text-gray-600 text-md dark:text-slate-400">
+                      {story.first_published_at &&
+                        new Date(story.first_published_at).toLocaleString(
+                          'en-US',
+                          {
+                            dateStyle: 'long',
+                          }
+                        )}
+                    </p>
+                  </div>
+                </div>
+              </Link>
             </div>
           </header>
 

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { BlogPostStoryData, PageOrPostAuthor } from '../../types';
+import { BlogPostStoryData, PostOrPageAuthor } from '../../types';
 
 /**
  * Props for the single item in the collection (BlockPosts.tsx).
@@ -15,7 +15,7 @@ interface BlogPostProps {
  */
 const BlogPost = ({ story, relations }: BlogPostProps) => {
   // Filter through the array of relations to find the author object with the matching UUID.
-  const author: PageOrPostAuthor = relations.find(
+  const author: PostOrPageAuthor = relations.find(
     (relation: any) => relation.uuid === story.content.author
   );
 
@@ -55,9 +55,9 @@ const BlogPost = ({ story, relations }: BlogPostProps) => {
           )}
 
           {/* Title */}
-          <Link href={`/${story.full_slug}`}>
-            <h2 className="text-3xl font-semibold">{story.name}</h2>
-          </Link>
+          <h2 className="text-3xl font-semibold">
+            <Link href={`/${story.full_slug}`}>{story.name}</Link>
+          </h2>
 
           {/* Author and date */}
           {author && (
@@ -69,6 +69,7 @@ const BlogPost = ({ story, relations }: BlogPostProps) => {
                 src={author.content.avatar?.filename || ''}
                 alt={author.name + "'s profile picture"}
               />
+
               <div>
                 <h3 className="text-lg font-normal leading-3 mb-1">
                   {author.name}
