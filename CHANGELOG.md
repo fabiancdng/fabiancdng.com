@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.6.0 - 2023-04-07
+
+- Add author page (`/authors/handle`)
+
 ## 3.5.9 - 2023-04-07
 
 - Fix: Storyblok changed CDN URL

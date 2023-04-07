@@ -7,7 +7,7 @@ import {
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Layout from '../../components/Core/Layout';
 import Head from 'next/head';
-import { ImageAsset, PostOrPageAuthor } from '../../types';
+import { PostOrPageAuthor } from '../../types';
 import Image from 'next/image';
 import GetCurrentTimestamp from '../../utils/get-time-stamp';
 import Link from 'next/link';
@@ -25,6 +25,11 @@ const AuthorPage = ({ author, posts }: AuthorPageProps) => {
     <>
       <Head>
         <title>{`${author.name} | Authors | fabiancdng.com`}</title>
+
+        <link
+          rel="canonical"
+          href={`${process.env.NEXT_PUBLIC_DOMAIN}/${author.full_slug}`}
+        />
 
         <meta property="og:type" content="website" />
       </Head>
@@ -116,24 +121,24 @@ const AuthorPage = ({ author, posts }: AuthorPageProps) => {
               Latest blog posts by {author.name.split(' ')[0]}
             </h2>
 
-            <div className="grid grid-cols-1 gap-20 md:gap-10 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-x-20 gap-y-20 md:gap-x-10 md:grid-cols-2 lg:grid-cols-3">
               {posts.map((post) => (
                 <article
                   key={post.id}
                   className="flex flex-col items-center md:items-start justify-between space-y-5">
                   {/* The post's thumbnail */}
-                  <div className="flex flex-col items-center md:items-start space-y-5">
+                  <div className="flex flex-col items-center md:items-start space-y-7">
                     {post.content.thumbnail.filename && (
                       <div className="overflow-hidden rounded-lg">
                         <Link href={`/blog/${post.slug}`}>
                           <Image
                             src={post.content.thumbnail.filename}
                             alt={post.content.thumbnail.alt}
-                            width={500}
+                            width={600}
                             height={400}
-                            sizes="(min-width: 1024px) 25vw
-                                  (min-width: 1280px) 35vw,
-                                  45vw"
+                            sizes="(max-width: 1024px) 35vw
+                                  (max-width: 768px) 25vw,
+                                  90vw"
                             className="rounded-lg"
                           />
                         </Link>
