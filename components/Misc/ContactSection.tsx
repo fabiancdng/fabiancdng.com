@@ -131,15 +131,15 @@ const ContactSection = ({ blok }: { blok: ContactSectionBlock }) => {
       {/* Responsive wrapper left */}
       <div className="container mx-auto px-0 md:px-16 pt-20 flex flex-col items-center lg:items-start w-full lg:w-5/12">
         {/* Title */}
-        <h1 className="text-gray-800 dark:text-slate-100 text-5xl font-semibold text-center lg:text-start mx-4 sm:mx-0">
+        <h2 className="text-gray-800 dark:text-slate-100 text-5xl font-semibold text-center lg:text-start mx-4 sm:mx-0">
           {blok.title}
-        </h1>
+        </h2>
 
         {/* Subtitle */}
         {blok.subtitle && (
-          <h2 className="text-gray-800 dark:text-slate-200 text-2xl mb-10 mt-3 mx-4 text-center lg:text-start sm:mx-0">
+          <h3 className="text-gray-800 dark:text-slate-200 text-2xl mb-10 mt-3 mx-4 text-center lg:text-start sm:mx-0">
             {blok.subtitle}
-          </h2>
+          </h3>
         )}
 
         {/* Destination Email */}

@@ -19,6 +19,7 @@ interface RichTextSectionBlock extends SbBlokData {
   readMoreLabel: string;
   // additionalCSS: string; - Deprecated.
   additionalStyles: string;
+  makeTitleH1: boolean;
 }
 
 const RichTextSection = ({ blok }: { blok: RichTextSectionBlock }) => {
@@ -33,16 +34,28 @@ const RichTextSection = ({ blok }: { blok: RichTextSectionBlock }) => {
       {/* Wrapper */}
       <div className="container xl:max-w-7xl max-w-5xl mx-auto px-10 rounded">
         {/* Title */}
-        <h1 className="text-gray-800 dark:text-slate-100 text-5xl font-semibold pt-5 text-center sm:text-left mx-0">
-          {blok.title}
-        </h1>
-
-        {/* Subtitle */}
-        {blok.subtitle && (
-          <h2 className="text-gray-800 dark:text-slate-200 text-2xl mb-10 mt-3 text-center sm:text-left mx-0">
-            {blok.subtitle}
+        {blok.makeTitleH1 ? (
+          <h1 className="text-gray-800 dark:text-slate-100 text-5xl font-semibold pt-5 text-center sm:text-left mx-4 sm:mx-0">
+            {blok.title}
+          </h1>
+        ) : (
+          <h2 className="text-gray-800 dark:text-slate-100 text-5xl font-semibold pt-5 text-center sm:text-left mx-4 sm:mx-0">
+            {blok.title}
           </h2>
         )}
+
+        {/* Subtitle */}
+
+        {blok.subtitle &&
+          (blok.makeTitleH1 ? (
+            <h2 className="text-gray-800 dark:text-slate-200 text-2xl mb-10 mt-3 text-center sm:text-left mx-4 sm:mx-0">
+              {blok.subtitle}
+            </h2>
+          ) : (
+            <h3 className="text-gray-800 dark:text-slate-200 text-2xl mb-10 mt-3 text-center sm:text-left mx-4 sm:mx-0">
+              {blok.subtitle}
+            </h3>
+          ))}
 
         {/* Content */}
         <div className="text-content mx-auto mt-5 sm:w-full w-4/5">
