@@ -1,27 +1,27 @@
 import { useEffect, useState } from 'react';
 import DarkModeToggle from './DarkModeToggle';
-import HeaderLink from './HeaderLink';
+import NavbarLink from './NavbarLink';
 import Link from 'next/link';
 import Image from 'next/image';
-import HeaderImage from '../../public/header-image.png';
+import NavbarImage from '../../public/navbar-image.png';
 
 /**
- * Data for a specific header link.
+ * Data for a specific navbar link.
  */
-interface headerLink {
+interface navbarLink {
   title: string;
   href: string;
   active: boolean;
 }
 
 /**
- * Data passed as props to the Header component.
+ * Data passed as props to the Navbar component.
  */
-interface headerProps {
-  links: headerLink[];
+interface navbarProps {
+  links: navbarLink[];
 }
 
-const Header = ({ links }: headerProps) => {
+const Navbar = ({ links }: navbarProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [screenWidth, setScreenWidth] = useState(0);
 
@@ -63,7 +63,7 @@ const Header = ({ links }: headerProps) => {
           <Link href="/">
             <Image
               className="cursor-pointer"
-              src={HeaderImage}
+              src={NavbarImage}
               alt="Site logo"
             />
           </Link>
@@ -72,11 +72,11 @@ const Header = ({ links }: headerProps) => {
         {/* Navigation Links */}
         <ul className="hidden left-0 sm:flex flex-1 justify-end items-center gap-5 text mr-7 uppercase text-md">
           {
-            // Render all header links (separate `HeaderLink` component).
+            // Render all nav links (separate `NavbarLink` component).
             links.map((link, index) => (
               // Single Navigation Link
               <li key={index}>
-                <HeaderLink
+                <NavbarLink
                   title={link.title}
                   href={link.href}
                   additionalCSS="dark:hover:bg-slate-600 dark:text-white hover:bg-slate-200 rounded transition-all duration-500 px-4 py-3"
@@ -110,7 +110,7 @@ const Header = ({ links }: headerProps) => {
       {mobileMenuOpen && (
         <ul className="p-4 mt-2 block space-y-3 md:hidden bg-slate-100 dark:bg-slate-700">
           {
-            // Render all header links (separate `HeaderLink` component).
+            // Render all nav links (separate `NavbarLink` component).
             links.map((link, index) => (
               // Single Navigation Link
               <li
@@ -118,7 +118,7 @@ const Header = ({ links }: headerProps) => {
                 onClick={() => setMobileMenuOpen(false)}
                 className="rounded bg-slate-200 hover:bg-slate-300 transition
                             ease-in-out duration-300 dark:bg-slate-600 dark:hover:bg-slate-500">
-                <HeaderLink
+                <NavbarLink
                   title={link.title}
                   href={link.href}
                   additionalCSS="block w-full px-3 py-2"
@@ -132,4 +132,4 @@ const Header = ({ links }: headerProps) => {
   );
 };
 
-export default Header;
+export default Navbar;

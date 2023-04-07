@@ -1,11 +1,11 @@
 import React from 'react';
 import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
+import Navbar from '../Navbar/Navbar';
 
 const Layout = ({ children }: { children: JSX.Element }) => {
   return (
     <>
-      <Header
+      <Navbar
         links={[
           { title: 'Home', href: '/', active: true },
           { title: 'Projects', href: '/#projects', active: false },

@@ -19,7 +19,7 @@ const Footer = ({ text, links }: footerProps) => {
           </p>
           <ul className="flex">
             {
-              // Render all header links (separate `FooterLink` component).
+              // Render all footer links (separate `FooterLink` component).
               links?.map((link, index) => (
                 <li
                   key={index}

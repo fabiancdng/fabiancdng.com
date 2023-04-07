@@ -21,7 +21,7 @@ const BlogPost = ({ story, relations }: BlogPostProps) => {
 
   // Responsive card with image on the left and text on the right.
   return (
-    <div className="flex flex-col md:flex-row mt-14 mb-24">
+    <article className="flex flex-col md:flex-row mt-14 mb-24">
       {/* Thumbnail */}
       <div className="md:w-1/3">
         {/* If the thumbnail is not set, use a placeholder image. */}
@@ -40,47 +40,49 @@ const BlogPost = ({ story, relations }: BlogPostProps) => {
 
       {/* Post tags, title, author, date excerpt and link */}
       <div className="md:w-2/3 md:pl-10 md:mt-0 mt-5">
-        {/* Post tags */}
-        {story.tag_list && (
-          <div>
-            {story.tag_list.map((tag, index) => (
-              <div key={index} className="mb-1">
-                <p className="text-blue-800 font-semibold text-lg dark:text-slate-400">
-                  {tag.toUpperCase()}
+        <header>
+          {/* Post tags */}
+          {story.tag_list && (
+            <div>
+              {story.tag_list.map((tag, index) => (
+                <div key={index} className="mb-1">
+                  <p className="text-blue-800 font-semibold text-lg dark:text-slate-400">
+                    {tag.toUpperCase()}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Title */}
+          <Link href={`/${story.full_slug}`}>
+            <h2 className="text-3xl font-semibold">{story.name}</h2>
+          </Link>
+
+          {/* Author and date */}
+          {author && (
+            <div className="flex items-center my-5">
+              <Image
+                className="w-12 h-12 -translate-y-0.5 mr-2 rounded-full"
+                width={50}
+                height={50}
+                src={author.content.avatar?.filename || ''}
+                alt={author.name + "'s profile picture"}
+              />
+              <div>
+                <h3 className="text-lg font-normal leading-3 mb-1">
+                  {author.name}
+                </h3>
+                <p className="text-gray-600 text-md dark:text-slate-400">
+                  {story.first_published_at &&
+                    new Date(story.first_published_at).toLocaleString('en-US', {
+                      dateStyle: 'long',
+                    })}
                 </p>
               </div>
-            ))}
-          </div>
-        )}
-
-        {/* Title */}
-        <Link href={`/${story.full_slug}`}>
-          <h2 className="text-3xl font-semibold">{story.name}</h2>
-        </Link>
-
-        {/* Author and date */}
-        {author && (
-          <div className="flex items-center my-5">
-            <Image
-              className="w-12 h-12 -translate-y-0.5 mr-2 rounded-full"
-              width={50}
-              height={50}
-              src={author.content.avatar?.filename || ''}
-              alt={author.name + "'s profile picture"}
-            />
-            <div>
-              <h3 className="text-lg font-normal leading-3 mb-1">
-                {author.name}
-              </h3>
-              <p className="text-gray-600 text-md dark:text-slate-400">
-                {story.content.date &&
-                  new Date(story.content.date).toLocaleString('en-US', {
-                    dateStyle: 'long',
-                  })}
-              </p>
             </div>
-          </div>
-        )}
+          )}
+        </header>
 
         {/* Excerpt */}
         <p className="text-gray-600 dark:text-slate-400 my-3">
@@ -96,7 +98,7 @@ const BlogPost = ({ story, relations }: BlogPostProps) => {
           Read more &rarr;
         </Link>
       </div>
-    </div>
+    </article>
   );
 };
 

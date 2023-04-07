@@ -84,7 +84,6 @@ export interface PageStoryData extends ISbStoryData {
 export interface BlogPostStoryData extends ISbStoryData {
   content: {
     _uid: string;
-    date: string;
     title: string;
     author: string;
     excerpt: string;

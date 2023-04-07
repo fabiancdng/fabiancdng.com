@@ -1,15 +1,15 @@
 import Link from 'next/link';
 
 /**
- * Props for the HeaderLink component.
+ * Props for the NavbarLink component.
  */
-interface headerLinkProps {
+interface navbarLinkProps {
   title: string;
   href: string;
   additionalCSS: string;
 }
 
-const HeaderLink = ({ title, href, additionalCSS }: headerLinkProps) => {
+const NavbarLink = ({ title, href, additionalCSS }: navbarLinkProps) => {
   return (
     <Link href={href} className={'cursor-pointer ' + additionalCSS}>
       {title}
@@ -17,4 +17,4 @@ const HeaderLink = ({ title, href, additionalCSS }: headerLinkProps) => {
   );
 };
 
-export default HeaderLink;
+export default NavbarLink;
