@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.7.2 - 2023-04-08
+
+- Fix: Wrong Return Value for `getStaticPaths()`
+
 ## 3.7.1 - 2023-04-08
 
 - Fix: Add Tag Slugs to `sitemap.xml`
