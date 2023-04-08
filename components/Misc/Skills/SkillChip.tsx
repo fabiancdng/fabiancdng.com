@@ -22,9 +22,9 @@ const SkillChip = ({ blok }: { blok: SkillChipBlock }) => {
             <i className={blok.icon} />
           </div>
         )}
-        <div className="text-gray-800 dark:text-slate-100 font-semibold">
+        <p className="text-gray-800 dark:text-slate-100 font-semibold">
           {blok.title}
-        </div>
+        </p>
       </div>
     </div>
   );

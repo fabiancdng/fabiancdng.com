@@ -23,6 +23,7 @@ import '@fortawesome/fontawesome-free/css/fontawesome.min.css';
 import '@fortawesome/fontawesome-free/css/regular.min.css';
 import '@fortawesome/fontawesome-free/css/solid.min.css';
 import '@fortawesome/fontawesome-free/css/brands.min.css';
+import TagFilter from '../components/BlogPosts/TagFilter';
 
 // Map Storyblok components to Next.js components.
 const storyblokComponentsMapping: SbReactComponentsMap = {
@@ -36,6 +37,7 @@ const storyblokComponentsMapping: SbReactComponentsMap = {
   project: Project,
   skills: Skills,
   skillChip: SkillChip,
+  blogTagFilter: TagFilter,
 };
 
 // Initialize Storyblok.

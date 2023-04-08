@@ -112,7 +112,7 @@ const AuthorPage = ({ author, posts }: AuthorPageProps) => {
           </article>
 
           <div className="container mx-auto px-10">
-            <hr className="my-20" />
+            <hr className="w-full border-gray-300 dark:border-slate-600 my-10" />
           </div>
 
           {/* Author's latest blog posts */}
