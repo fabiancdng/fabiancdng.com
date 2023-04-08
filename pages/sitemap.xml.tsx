@@ -1,6 +1,7 @@
 import { ISbStories, getStoryblokApi } from '@storyblok/react';
 import { GetServerSideProps } from 'next';
 import GetCurrentTimestamp from '../utils/get-time-stamp';
+import { IsbTags } from '../types';
 
 const getPageAndPostSlugs = async () => {
   interface Link {
@@ -50,6 +51,16 @@ const getPageAndPostSlugs = async () => {
   });
 
   return slugs;
+};
+
+const getTagSlugs = async () => {
+  // Get all tags from Storyblok.
+  const storyblokApi = getStoryblokApi();
+  const { data: tags }: IsbTags = await storyblokApi.get(`cdn/tags`, {
+    starts_with: 'blog/',
+  });
+
+  return tags.tags.map((tag) => 'blog/tags/' + tag.name);
 };
 
 const getBlogPostPaginationSlugs = async () => {
@@ -115,6 +126,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   // We make an API call to gather the URLs for our site
   const pageAndPostSlugs = await getPageAndPostSlugs();
   const blogPostPaginationSlugs = await getBlogPostPaginationSlugs();
+  const tagSlugs = await getTagSlugs();
 
   // Log the time on the server when the function is called.
   console.log(
@@ -122,8 +134,8 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   );
 
   // Merge the slugs into one array.
-  const slugs = [...blogPostPaginationSlugs, ...pageAndPostSlugs];
-
+  const slugs = [...blogPostPaginationSlugs, ...pageAndPostSlugs, ...tagSlugs];
+  console.log(slugs);
   // We generate the XML sitemap with the posts data
   const sitemap = generateSiteMap(slugs);
 
