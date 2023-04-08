@@ -176,6 +176,13 @@ const AuthorPage = ({ author, posts }: AuthorPageProps) => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const storyblokApi = getStoryblokApi();
 
+  // Console log on the server-side for easy maintenance.
+  if (process.env.NODE_ENV === 'production') {
+    console.log(
+      `[${GetCurrentTimestamp()}] getStaticProps() executing for /blog/authors/[slug]...`
+    );
+  }
+
   // Get author from params.
   const authorSlug = params?.slug as string;
 
@@ -220,7 +227,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   // Console log on the server-side for easy maintenance.
   if (process.env.NODE_ENV === 'production') {
     console.log(
-      `[${GetCurrentTimestamp()}] getStaticPaths() executing for /blog/posts/[page]...`
+      `[${GetCurrentTimestamp()}] getStaticPaths() executing for /blog/authors/[slug]...`
     );
   }
 

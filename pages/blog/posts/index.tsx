@@ -12,6 +12,7 @@ import SeoMetaTags from '../../../components/Seo/SeoMetaTags';
 import Layout from '../../../components/Core/Layout';
 import { PageStoryData } from '../../../types';
 import Pagination from '../../../components/BlogPosts/Pagination';
+import GetCurrentTimestamp from '../../../utils/get-time-stamp';
 
 interface BlogOverviewPageProps {
   story: PageStoryData; // Story for the blog overview page.
@@ -78,6 +79,13 @@ const BlogOverviewPage = (props: BlogOverviewPageProps) => {
 
 export const getStaticProps: GetStaticProps = async () => {
   const storyblokApi = getStoryblokApi();
+
+  // Console log on the server-side for easy maintenance.
+  if (process.env.NODE_ENV === 'production') {
+    console.log(
+      `[${GetCurrentTimestamp()}] getStaticProps() executing for /blog/postså...`
+    );
+  }
 
   // Calculate how many blog posts there are by counting all links starting with 'blog/'.
   const { data: blogPostLinks }: ISbStories = await storyblokApi.get(

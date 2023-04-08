@@ -100,7 +100,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   // Console log on the server-side for easy maintenance.
   if (process.env.NODE_ENV === 'production') {
     console.log(
-      `[${GetCurrentTimestamp()}] getStaticPaths() executing for /blog/posts/[page]...`
+      `[${GetCurrentTimestamp()}] getStaticProps() executing for /blog/posts/[page]...`
     );
   }
 
