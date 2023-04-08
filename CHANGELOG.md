@@ -2,9 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.7.0 - 2023-04-08
+
+- Add tag pages (`/blog/tags/tag`)
+
 ## 3.6.0 - 2023-04-07
 
-- Add author page (`/authors/handle`)
+- Add author pages (`/authors/handle`)
 
 ## 3.5.9 - 2023-04-07
 
