@@ -135,7 +135,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 
   // Merge the slugs into one array.
   const slugs = [...blogPostPaginationSlugs, ...pageAndPostSlugs, ...tagSlugs];
-  console.log(slugs);
+
   // We generate the XML sitemap with the posts data
   const sitemap = generateSiteMap(slugs);
 
