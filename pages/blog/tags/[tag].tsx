@@ -150,7 +150,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   // Create an array of paths for each author.
   const paths = data.tags.map((tag) => ({
-    params: { tag: `/blog/tags/${tag.name}` },
+    params: { tag: tag.name },
   }));
 
   return {
