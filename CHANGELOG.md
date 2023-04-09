@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.7.5 - 2023-04-09
+
+- Redesign blog front page
+
 ## 3.7.4 - 2023-04-09
 
 - Fix: Imprint -> Legal notice

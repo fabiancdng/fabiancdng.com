@@ -97,29 +97,29 @@ const BlogOverviewPage = (props: BlogOverviewPageProps) => {
               src={codeBannerJpg}
               priority
               alt="Code banner background image"
-              className="z-0 object-cover object-center"
+              className="z-0 object-cover object-center blur-sm scale-105"
               fill
             />
             <div className="relative max-w-6xl mx-auto mt-12 z-1">
-              <h1 className="text-5xl mt-5 text-white font-bold text-center sm:text-left z-1">
+              <h1 className="text-6xl mt-5 text-white font-bold text-center sm:text-left z-1">
                 Blog
               </h1>
-              <h2 className="text-3xl mt-5 font-semibold text-center sm:text-left text-white z-1">
+              <h2 className="text-4xl mt-5 font-semibold text-center sm:text-left text-white z-1">
                 Welcome to my blog!
               </h2>
-              <h3 className="text-2xl mt-5 font-normal text-center sm:text-left text-white z-1">
-                Posts here mostly revolve around web development, my projects,
-                and coding adventures.
+              <h3 className="text-2xl mt-5 font-semibold text-center sm:text-left text-white z-1">
+                Posts about web development, my projects, and my learnings.
               </h3>
 
               <p className="relative mt-5 text-center sm:text-left z-1 text-white">
-                <Link className="text-xl underline" href="/about">
+                <Link className="text-xl font-medium underline" href="/about">
                   Read more about me and this blog.
                 </Link>
               </p>
             </div>
           </div>
-          <div className="mt-10">
+
+          <div className="mt-24 mb-5">
             <TagFilter tags={props.tags} currentTopic="" />
           </div>
 

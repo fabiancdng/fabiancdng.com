@@ -25,7 +25,9 @@ const TagFilter = ({
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {
-      setDropdownOpen(false);
+      if (!event.target.closest('[data-dropdown-toggle="tagFilterDropdown"]')) {
+        setDropdownOpen(false);
+      }
     };
     document.addEventListener('click', handleClickOutside, true);
     return () => {
@@ -50,8 +52,10 @@ const TagFilter = ({
           className="text-slate-700 dark:text-slate-100 dark:hover:bg-slate-500 text-lg w-full bg-slate-200 hover:bg-slate-300 dark:bg-slate-600 font-medium rounded-lg px-4 py-2.5 mt-7
                     text-center inline-flex justify-between items-center transition duration-200 ease-in-out"
           type="button"
-          data-dropdown-toggle="dropdown"
-          onClick={(e) => setDropdownOpen(!dropdownOpen)}>
+          data-dropdown-toggle="tagFilterDropdown"
+          onClick={(e) => {
+            setDropdownOpen(!dropdownOpen);
+          }}>
           {currentTopic === '' ? 'All topics' : currentTopic}
           {/* Font Awesome arrow down */}
           {dropdownOpen ? (
@@ -66,16 +70,16 @@ const TagFilter = ({
             !dropdownOpen && 'hidden'
           } absolute origin-top-right right-0 z-10 bg-white dark:bg-slate-600 w-full text-base list-none divide-y divide-gray-100 rounded shadow my-2
             max-h-64 overflow-auto`}
-          id="dropdown"
+          id="tagFilterDropdown"
           aria-hidden={!dropdownOpen}>
-          <ul className="py-1" aria-labelledby="dropdown">
+          <ul className="py-1" aria-labelledby="tagFilterDropdown">
             {currentTopic !== '' && (
               <li>
                 <Link
                   href="/blog/posts"
-                  className="text-md hover:bg-slate-200 dark:hover:bg-slate-500 text-gray-700 dark:text-slate-100 block px-4 py-2"
+                  className="text-xl hover:bg-slate-200 dark:hover:bg-slate-500 text-gray-700 dark:text-slate-100 block px-4 py-2"
                   onClick={(e) => setDropdownOpen(false)}>
-                  <span className="font-semibold">All topics</span>
+                  <span className="font-medium">All topics</span>
                 </Link>
               </li>
             )}
@@ -84,10 +88,12 @@ const TagFilter = ({
               <li key={index}>
                 <Link
                   href={`/blog/tags/${tag.name}`}
-                  className="text-md hover:bg-slate-200 dark:hover:bg-slate-500 text-gray-700 dark:text-slate-100 block px-4 py-2"
+                  className="text-xl hover:bg-slate-200 dark:hover:bg-slate-500 text-gray-700 dark:text-slate-100 px-4 py-2 inline-flex items-center w-full justify-between"
                   onClick={(e) => setDropdownOpen(false)}>
-                  <span className="font-semibold">{tag.name}</span> (
-                  {tag.taggings_count})
+                  <p className="font-medium">{tag.name}</p>
+                  <p className="bg-slate-500 dark:bg-slate-700 dark:text-slate-100 text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">
+                    {tag.taggings_count}
+                  </p>
                 </Link>
               </li>
             ))}
