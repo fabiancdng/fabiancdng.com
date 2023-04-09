@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.7.3 - 2023-04-09
+
+- Fix: Storyblok Cache Invalidation
+
 ## 3.7.2 - 2023-04-08
 
 - Fix: Wrong Return Value for `getStaticPaths()`
