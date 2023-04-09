@@ -45,6 +45,12 @@ storyblokInit({
   accessToken: process.env['NEXT_PUBLIC_STORYBLOK_TOKEN'],
   use: [apiPlugin],
   components: storyblokComponentsMapping,
+  apiOptions: {
+    cache: {
+      clear: process.env.NODE_ENV === 'production' ? 'auto' : 'manual',
+      type: 'memory',
+    },
+  },
 });
 
 function App({ Component, pageProps }: AppProps) {
