@@ -5,14 +5,16 @@ import Head from 'next/head';
 import GetCurrentTimestamp from '../../../utils/get-time-stamp';
 import { BlogPostStoryData, IsbTags, Tag } from '../../../types';
 import BlogPosts from '../../../components/BlogPosts/BlogPosts';
+import TagFilter from '../../../components/BlogPosts/TagFilter';
 
 interface TagPageProps {
   tag: Tag;
+  tags: Tag[];
   posts: BlogPostStoryData[];
   rels: ISbStoryData[];
 }
 
-const TagPage = ({ tag, posts, rels }: TagPageProps) => {
+const TagPage = ({ tag, tags, posts, rels }: TagPageProps) => {
   if (!tag) return null;
 
   return (
@@ -56,15 +58,21 @@ const TagPage = ({ tag, posts, rels }: TagPageProps) => {
       </Head>
 
       <Layout>
-        <main className="mt-36 container mx-auto flex flex-col items-center md:items-start px-10 pb-20">
-          <h1 className="text-5xl text-center md:text-start font-semibold">
-            {tag.name}
-          </h1>
+        <main className="mt-20 container mx-auto flex flex-col items-center md:items-start pb-20">
+          <div className="container pt-20 max-w-5-xl mx-auto px-10">
+            <h1 className="text-5xl text-center md:text-start font-semibold">
+              {tag.name}
+            </h1>
 
-          <h2 className="text-2xl lg:text-3xl text-center lg:text-left text-gray-500 dark:text-slate-400 mt-5">
-            {tag.taggings_count} post{tag.taggings_count > 1 && 's'} tagged with{' '}
-            {tag.name}
-          </h2>
+            <h2 className="text-2xl lg:text-3xl text-center lg:text-left text-gray-500 dark:text-slate-400 mt-5">
+              {tag.taggings_count} post{tag.taggings_count > 1 && 's'} tagged
+              with {tag.name}.
+            </h2>
+          </div>
+
+          <div className="mt-14 w-full">
+            <TagFilter tags={tags} currentTopic={tag.name} />
+          </div>
 
           {/* Posts for this tag */}
           <BlogPosts blogPosts={posts} blogPostsRelations={rels} />
@@ -114,6 +122,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       return {
         props: {
           tag: tag,
+          tags: tags.tags,
           posts: posts.stories ? posts.stories : [],
           rels: posts.rels ? posts.rels : [],
         },

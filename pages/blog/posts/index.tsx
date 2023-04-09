@@ -11,6 +11,10 @@ import { BlogPostStoryData, IsbTags } from '../../../types';
 import Pagination from '../../../components/BlogPosts/Pagination';
 import GetCurrentTimestamp from '../../../utils/get-time-stamp';
 import BlogPosts from '../../../components/BlogPosts/BlogPosts';
+import TagFilter from '../../../components/BlogPosts/TagFilter';
+import Link from 'next/link';
+import codeBannerJpg from '../../../public/code-banner.jpg';
+import Image from 'next/image';
 
 interface BlogPostStories extends ISbStories {
   data: {
@@ -55,7 +59,7 @@ const BlogOverviewPage = (props: BlogOverviewPageProps) => {
         <meta
           name="description"
           content={`Overview of my blog posts revolving around web and app development/programming.
-                  I write tutorials, guides and overall issues and projects I work on.`}
+                  I write tutorials, guides and overall on issues and projects I work on.`}
         />
 
         <meta property="og:type" content="website" />
@@ -65,7 +69,7 @@ const BlogOverviewPage = (props: BlogOverviewPageProps) => {
         <meta
           property="og:description"
           content={`Overview of my blog posts revolving around web and app development/programming.
-                  I write tutorials, guides and overall issues and projects I work on.`}
+                  I write tutorials, guides and on overall issues and projects I work on.`}
         />
 
         <meta property="twitter:card" content="summary" />
@@ -75,7 +79,7 @@ const BlogOverviewPage = (props: BlogOverviewPageProps) => {
         <meta
           property="twitter:description"
           content={`Overview of my blog posts revolving around web and app development/programming.
-                  I write tutorials, guides and overall issues and projects I work on.`}
+                  I write tutorials, guides and overall on issues and projects I work on.`}
         />
 
         {props.pagination.totalPages > 1 && (
@@ -88,10 +92,35 @@ const BlogOverviewPage = (props: BlogOverviewPageProps) => {
 
       <Layout>
         <main>
-          <div className="container pt-20 max-w-5-xl mx-auto px-10">
-            <h1 className="text-5xl mt-16 font-semibold text-center sm:text-left">
-              Blog
-            </h1>
+          <div className="relative py-28 px-20 mx-auto shadow-lg">
+            <Image
+              src={codeBannerJpg}
+              priority
+              alt="Code banner background image"
+              className="z-0 object-cover object-center"
+              fill
+            />
+            <div className="relative max-w-6xl mx-auto mt-12 z-1">
+              <h1 className="text-5xl mt-5 text-white font-bold text-center sm:text-left z-1">
+                Blog
+              </h1>
+              <h2 className="text-3xl mt-5 font-semibold text-center sm:text-left text-white z-1">
+                Welcome to my blog!
+              </h2>
+              <h3 className="text-2xl mt-5 font-normal text-center sm:text-left text-white z-1">
+                Posts here mostly revolve around web development, my projects,
+                and coding adventures.
+              </h3>
+
+              <p className="relative mt-5 text-center sm:text-left z-1 text-white">
+                <Link className="text-xl underline" href="/about">
+                  Read more about me and this blog.
+                </Link>
+              </p>
+            </div>
+          </div>
+          <div className="mt-10">
+            <TagFilter tags={props.tags} currentTopic="" />
           </div>
 
           <BlogPosts
@@ -159,10 +188,16 @@ export const getStaticProps: GetStaticProps = async () => {
     };
   }
 
+  // Retrieve all tags from Storyblok.
+  const { data: tags }: IsbTags = await storyblokApi.get(`cdn/tags`, {
+    version: process.env.NODE_ENV === 'production' ? 'published' : 'draft',
+  });
+
   return {
     props: {
       blogPosts: blogPosts.stories ? blogPosts.stories : false,
       blogPostsRelations: blogPosts.rels ? blogPosts.rels : false,
+      tags: tags.tags ? tags.tags : false,
       pagination: {
         currentPage: sbParams['page'],
         totalPages: totalPages,
