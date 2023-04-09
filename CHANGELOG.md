@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.7.4 - 2023-04-09
+
+- Fix: Imprint -> Legal notice
+- Fix: Update robots.txt
+
 ## 3.7.3 - 2023-04-09
 
 - Fix: Storyblok Cache Invalidation

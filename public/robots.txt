@@ -1,6 +1,6 @@
 # Block all crawlers for /imprint
 User-agent: *
-Disallow: /imprint
+Disallow: /legal-notice
 Disallow: /privacy-policy
 
 # Allow all crawlers
