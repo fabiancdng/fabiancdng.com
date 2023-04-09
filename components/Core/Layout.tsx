@@ -20,7 +20,7 @@ const Layout = ({ children }: { children: JSX.Element }) => {
         text={`Copyright © 2021-${new Date().getFullYear()} Fabian Reinders`}
         links={[
           { title: 'Contact', href: '/#contact-me' },
-          { title: 'Imprint', href: '/imprint' },
+          { title: 'Legal Notice', href: '/legal-notice' },
           { title: 'Privacy Policy', href: '/privacy-policy' },
         ]}
       />
