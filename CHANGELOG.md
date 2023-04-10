@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.8.1 - 2023-04-10
+
+- Fix: Sitemap has wrong URL to blog
+
 ## 3.8.0 - 2023-04-10
 
 - Blog homepage is now editable through Storyblok
