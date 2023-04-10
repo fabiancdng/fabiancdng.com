@@ -1,23 +1,53 @@
-import { SbBlokData } from '@storyblok/react';
+import { SbBlokData, storyblokEditable } from '@storyblok/react';
 import { Tag } from '../../types';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import ParseAdditionalCSS from '../../utils/parse-additional-css';
 
 /**
  * Data for Blog Tag Filter Block Type from Storyblok.
  */
 interface TagFilter extends SbBlokData {
   title: string;
+  subtitle: string;
   additionalStyles: string;
 }
 
-const TagFilter = ({
-  tags,
-  currentTopic,
+/**
+ * Wrapper when used as Storyblok block type.
+ */
+export const SbTagFilter = ({
+  blok,
+  payload,
 }: {
+  blok: TagFilter;
+  payload: any;
+}) => {
+  return (
+    <div
+      className="storyblok-tag-filter-wrapper"
+      {...storyblokEditable(blok)}
+      style={
+        blok.additionalStyles ? ParseAdditionalCSS(blok.additionalStyles) : {}
+      }>
+      <TagFilter
+        title={blok.title}
+        subtitle={blok.subtitle}
+        tags={payload.tags}
+        currentTopic={payload.currentTopic}
+      />
+    </div>
+  );
+};
+
+interface TagFilterProps {
+  title: string;
+  subtitle: string;
   tags: Tag[];
   currentTopic: string;
-}) => {
+}
+
+const TagFilter = ({ title, subtitle, tags, currentTopic }: TagFilterProps) => {
   // Filter out the current topic.
   tags = tags.filter((tag) => tag.name !== currentTopic);
 
@@ -39,17 +69,17 @@ const TagFilter = ({
     <div className="container mx-auto px-10 py-10 w-full dark:bg-slate-800 bg-slate-100 rounded">
       {/* Title */}
       <h2 className="text-gray-800 dark:text-slate-100 text-3xl font-semibold text-center sm:text-left mx-4 sm:mx-0">
-        Topics
+        {title}
       </h2>
 
       <h3 className="text-gray-800 dark:text-slate-200 text-lg mt-3 text-center sm:text-left mx-4 sm:mx-0">
-        Browse a specific topic.
+        {subtitle}
       </h3>
 
       {/* Tags */}
       <div className="relative inline-block w-full">
         <button
-          className="text-slate-700 dark:text-slate-100 dark:hover:bg-slate-500 text-lg w-full bg-slate-200 hover:bg-slate-300 dark:bg-slate-600 font-medium rounded-lg px-4 py-2.5 mt-7
+          className="text-slate-700 dark:text-slate-100 dark:hover:bg-slate-500 text-xl w-full bg-slate-200 hover:bg-slate-300 dark:bg-slate-600 font-medium rounded-lg px-4 py-2.5 mt-7
                     text-center inline-flex justify-between items-center transition duration-200 ease-in-out"
           type="button"
           data-dropdown-toggle="tagFilterDropdown"
@@ -76,7 +106,7 @@ const TagFilter = ({
             {currentTopic !== '' && (
               <li>
                 <Link
-                  href="/blog/posts"
+                  href="/blog"
                   className="text-xl hover:bg-slate-200 dark:hover:bg-slate-500 text-gray-700 dark:text-slate-100 block px-4 py-2"
                   onClick={(e) => setDropdownOpen(false)}>
                   <span className="font-medium">All topics</span>
@@ -91,7 +121,7 @@ const TagFilter = ({
                   className="text-xl hover:bg-slate-200 dark:hover:bg-slate-500 text-gray-700 dark:text-slate-100 px-4 py-2 inline-flex items-center w-full justify-between"
                   onClick={(e) => setDropdownOpen(false)}>
                   <p className="font-medium">{tag.name}</p>
-                  <p className="bg-slate-500 dark:bg-slate-700 dark:text-slate-100 text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">
+                  <p className="bg-slate-500 dark:bg-slate-800 dark:text-slate-100 text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">
                     {tag.taggings_count}
                   </p>
                 </Link>

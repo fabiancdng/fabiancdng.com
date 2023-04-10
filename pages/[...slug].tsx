@@ -24,15 +24,6 @@ export default function Page({ story, relations }: PageProps) {
   return (
     <div>
       <Head>
-        <title>
-          {story
-            ? `${story.name} ${
-                story.full_slug.startsWith('blog') ? '| Blog ' : ''
-              } | fabiancdng.com`
-            : 'My Site'}
-        </title>
-        <link rel="icon" href="/favicon.ico" />
-
         <link
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_DOMAIN}/${story.full_slug}`}

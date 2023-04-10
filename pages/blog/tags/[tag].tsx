@@ -4,8 +4,8 @@ import Layout from '../../../components/Core/Layout';
 import Head from 'next/head';
 import GetCurrentTimestamp from '../../../utils/get-time-stamp';
 import { BlogPostStoryData, IsbTags, Tag } from '../../../types';
-import BlogPosts from '../../../components/BlogPosts/BlogPosts';
-import TagFilter from '../../../components/BlogPosts/TagFilter';
+import BlogPosts from '../../../components/Blog/BlogPosts';
+import TagFilter from '../../../components/Blog/TagFilter';
 
 interface TagPageProps {
   tag: Tag;
@@ -71,7 +71,12 @@ const TagPage = ({ tag, tags, posts, rels }: TagPageProps) => {
           </div>
 
           <div className="mt-14 w-full">
-            <TagFilter tags={tags} currentTopic={tag.name} />
+            <TagFilter
+              title="Topics"
+              subtitle="Browse a specific topic."
+              tags={tags}
+              currentTopic={tag.name}
+            />
           </div>
 
           {/* Posts for this tag */}

@@ -79,6 +79,7 @@ const Navbar = ({ links }: navbarProps) => {
                 <NavbarLink
                   title={link.title}
                   href={link.href}
+                  active={link.active}
                   additionalCSS="dark:hover:bg-slate-600 dark:text-white hover:bg-slate-200 rounded transition-all duration-500 px-4 py-3"
                 />
               </li>
@@ -121,6 +122,7 @@ const Navbar = ({ links }: navbarProps) => {
                 <NavbarLink
                   title={link.title}
                   href={link.href}
+                  active={false}
                   additionalCSS="block w-full px-3 py-2"
                 />
               </li>

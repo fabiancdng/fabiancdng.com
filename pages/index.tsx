@@ -16,9 +16,6 @@ const Home = ({ story }: { story: PageStoryData }) => {
   return (
     <div>
       <Head>
-        <title>{story ? `${story.name} | fabiancdng.com` : 'My Site'}</title>
-        <link rel="icon" href="/favicon.ico" />
-
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_DOMAIN}`} />
       </Head>
 

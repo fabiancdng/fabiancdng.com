@@ -64,7 +64,9 @@ const getTagSlugs = async () => {
 };
 
 const getBlogPostPaginationSlugs = async () => {
-  const POSTS_PER_PAGE = 15;
+  const POSTS_PER_PAGE = process.env.POSTS_PER_PAGE
+    ? parseInt(process.env.POSTS_PER_PAGE)
+    : 15;
 
   const storyblokApi = getStoryblokApi();
 

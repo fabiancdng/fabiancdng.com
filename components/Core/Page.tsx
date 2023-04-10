@@ -35,6 +35,7 @@ const UnwrappedPage = ({ blok, story, relations, payload }: PageProps) => {
         blok.body.map((nestedBlok) => (
           <StoryblokComponent
             blok={nestedBlok}
+            story={story}
             relations={relations}
             payload={payload}
             key={nestedBlok._uid}
@@ -58,6 +59,7 @@ const WrappedPage = ({ blok, story, relations, payload }: PageProps) => {
           blok.body.map((nestedBlok) => (
             <StoryblokComponent
               blok={nestedBlok}
+              story={story}
               relations={relations}
               payload={payload}
               key={nestedBlok._uid}

@@ -14,7 +14,7 @@ import RichTextSection from '../components/Misc/RichTextSection';
 import HeroSection from '../components/Misc/HeroSection';
 import ContactSection from '../components/Misc/ContactSection';
 import Post from '../components/Core/Post';
-import BlogPosts from '../components/BlogPosts/BlogPosts';
+import { SbBlogPosts } from '../components/Blog/BlogPosts';
 import Project from '../components/Misc/Project';
 import Skills from '../components/Misc/Skills/Skills';
 import SkillChip from '../components/Misc/Skills/SkillChip';
@@ -23,21 +23,30 @@ import '@fortawesome/fontawesome-free/css/fontawesome.min.css';
 import '@fortawesome/fontawesome-free/css/regular.min.css';
 import '@fortawesome/fontawesome-free/css/solid.min.css';
 import '@fortawesome/fontawesome-free/css/brands.min.css';
-import TagFilter from '../components/BlogPosts/TagFilter';
+import TagFilter, { SbTagFilter } from '../components/Blog/TagFilter';
+import BlogBanner from '../components/Blog/BlogBanner';
 
 // Map Storyblok components to Next.js components.
 const storyblokComponentsMapping: SbReactComponentsMap = {
+  // Versatile.
   grid: Grid,
+  richTextSection: RichTextSection,
+
+  // Content types.
   page: Page,
   post: Post,
+
+  // Portfolio.
   heroSection: HeroSection,
-  richTextSection: RichTextSection,
   contactSection: ContactSection,
-  blogPosts: BlogPosts,
   project: Project,
   skills: Skills,
   skillChip: SkillChip,
-  blogTagFilter: TagFilter,
+
+  // Blog.
+  blogBanner: BlogBanner,
+  blogPosts: SbBlogPosts,
+  blogTagFilter: SbTagFilter,
 };
 
 // Initialize Storyblok.

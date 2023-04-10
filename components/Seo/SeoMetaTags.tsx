@@ -20,6 +20,11 @@ const SeoMetaTags = ({
 
   return (
     <Head>
+      {/* Title */}
+      {story.content.seoMetaTags['title'] && (
+        <title>{story.content.seoMetaTags.title}</title>
+      )}
+
       {/* Most important meta tags for SEO. */}
       {story.content.seoMetaTags['description'] && (
         <meta
