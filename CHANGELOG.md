@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.8.0 - 2023-04-10
+
+- Blog homepage is now editable through Storyblok
+- Metadata from blog homepage is being used in paginated blog feed
+- `/blog/posts` is now `/blog`
+
 ## 3.7.5 - 2023-04-09
 
 - Redesign blog front page
