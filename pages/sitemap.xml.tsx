@@ -103,7 +103,7 @@ const generateSiteMap = (slugs: string[]) => {
        <loc>${process.env.NEXT_PUBLIC_DOMAIN}</loc>
      </url>
      <url>
-       <loc>${process.env.NEXT_PUBLIC_DOMAIN}/blog/posts</loc>
+       <loc>${process.env.NEXT_PUBLIC_DOMAIN}/blog</loc>
      </url>
 
      <!-- Dynamic map -->
