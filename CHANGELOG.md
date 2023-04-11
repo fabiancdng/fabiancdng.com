@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.8.3 - 2023-04-11
+
+- Improved Logging on the Server-Side
+
 ## 3.8.2 - 2023-04-10
 
 - Fix: Add sitemap.xml link to `robots.txt`
