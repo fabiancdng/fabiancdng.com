@@ -35,7 +35,7 @@ export async function getStaticProps() {
   // Console log on the server-side for easy maintenance.
   if (process.env.NODE_ENV === 'production') {
     console.log(
-      `[${GetCurrentTimestamp()}] getStaticProps() executing for index...`
+      `[${GetCurrentTimestamp()}] getStaticProps() executing for /...`
     );
   }
 

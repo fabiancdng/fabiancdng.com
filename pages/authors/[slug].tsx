@@ -174,17 +174,17 @@ const AuthorPage = ({ author, posts }: AuthorPageProps) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const storyblokApi = getStoryblokApi();
+  // Get author from params.
+  const authorSlug = params?.slug as string;
 
   // Console log on the server-side for easy maintenance.
   if (process.env.NODE_ENV === 'production') {
     console.log(
-      `[${GetCurrentTimestamp()}] getStaticProps() executing for /blog/authors/[slug]...`
+      `[${GetCurrentTimestamp()}] getStaticProps() executing for /blog/authors/${authorSlug} (/blog/authors/[slug])...`
     );
   }
 
-  // Get author from params.
-  const authorSlug = params?.slug as string;
+  const storyblokApi = getStoryblokApi();
 
   // Get the author from Storyblok.
   try {
@@ -214,6 +214,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       revalidate: 30 * 60, // Revalidate every 30 minutes.
     };
   } catch (error) {
+    // Console log on the server-side for easy maintenance.
+    if (process.env.NODE_ENV === 'production') {
+      console.log(
+        `[${GetCurrentTimestamp()}] getStaticProps() resulted in 404 for /blog/authors/${authorSlug} (/blog/authors/[slug])...`
+      );
+    }
+
     return {
       notFound: true,
       revalidate: 5 * 60, // Revalidate every 5 minutes.

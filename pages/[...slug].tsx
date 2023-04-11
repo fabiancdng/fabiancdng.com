@@ -44,18 +44,18 @@ export default function Page({ story, relations }: PageProps) {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  // Console log on the server-side for easy maintenance.
-  if (process.env.NODE_ENV === 'production') {
-    console.log(
-      `[${GetCurrentTimestamp()}] getStaticProps() executing for [...slug]...`
-    );
-  }
-
   const slugArray = params?.slug
     ? Array.from(params?.slug)
     : Array.from('home');
 
   let slug = slugArray.join('/');
+
+  // Console log on the server-side for easy maintenance.
+  if (process.env.NODE_ENV === 'production') {
+    console.log(
+      `[${GetCurrentTimestamp()}] getStaticProps() executing for /${slug} (/[...slug])...`
+    );
+  }
 
   let sbParams: ISbStoriesParams = {
     version: process.env.NODE_ENV === 'production' ? 'published' : 'draft',
@@ -80,7 +80,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     };
   } catch (e) {
     // Retrieving the story failed, probably not found.
-    // Return 404 and cache for 30 minutes.
+
+    // Console log on the server-side for easy maintenance.
+    if (process.env.NODE_ENV === 'production') {
+      console.log(
+        `[${GetCurrentTimestamp()}] getStaticProps() resulted in 404 for /${slug} (/[...slug])...`
+      );
+    }
+
     return {
       notFound: true,
       revalidate: 5 * 60, // revalidate every 5 minutes.

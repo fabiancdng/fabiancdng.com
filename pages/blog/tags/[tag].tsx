@@ -88,17 +88,17 @@ const TagPage = ({ tag, tags, posts, rels }: TagPageProps) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const storyblokApi = getStoryblokApi();
+  // Get tag from params.
+  const tagName = params?.tag as string;
 
   // Console log on the server-side for easy maintenance.
   if (process.env.NODE_ENV === 'production') {
     console.log(
-      `[${GetCurrentTimestamp()}] getStaticProps() executing for /blog/tags/[tag]...`
+      `[${GetCurrentTimestamp()}] getStaticProps() executing for /blog/tags/${tagName} (/blog/tags/[tag])...`
     );
   }
 
-  // Get tag from params.
-  const tagName = params?.tag as string;
+  const storyblokApi = getStoryblokApi();
 
   // Retrieve tag from Storyblok by name.
   try {
@@ -134,12 +134,26 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         revalidate: 30 * 60, // Revalidate every 30 minutes.
       };
     } catch (error) {
+      // Console log on the server-side for easy maintenance.
+      if (process.env.NODE_ENV === 'production') {
+        console.log(
+          `[${GetCurrentTimestamp()}] getStaticProps() resulted in 404 for /blog/tags/${tagName} (/blog/tags/[tag])...`
+        );
+      }
+
       return {
         notFound: true,
         revalidate: 5 * 60, // Revalidate every 5 minutes.
       };
     }
   } catch (error) {
+    // Console log on the server-side for easy maintenance.
+    if (process.env.NODE_ENV === 'production') {
+      console.log(
+        `[${GetCurrentTimestamp()}] getStaticProps() resulted in 404 for /blog/tags/${tagName} (/blog/tags/[tag])...`
+      );
+    }
+
     return {
       notFound: true,
       revalidate: 5 * 60, // Revalidate every 5 minutes.

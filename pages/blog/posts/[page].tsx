@@ -110,7 +110,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   // Console log on the server-side for easy maintenance.
   if (process.env.NODE_ENV === 'production') {
     console.log(
-      `[${GetCurrentTimestamp()}] getStaticProps() executing for /blog/posts/[page]...`
+      `[${GetCurrentTimestamp()}] getStaticProps() executing for /blog/posts/${page} (/blog/posts/[page])...`
     );
   }
 
@@ -162,6 +162,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     );
 
     if (blogPosts.stories.length === 0) {
+      // Console log on the server-side for easy maintenance.
+      if (process.env.NODE_ENV === 'production') {
+        console.log(
+          `[${GetCurrentTimestamp()}] getStaticProps() resulted in 404 for /blog/posts/${page} (/blog/posts/[page])...`
+        );
+      }
+
       return {
         notFound: true,
         revalidate: 5 * 60, // revalidate every 5 minutes.
@@ -183,7 +190,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       revalidate: 30 * 60, // revalidate every 30 minutes.
     };
   } catch (error) {
-    console.error(error);
+    // Console log on the server-side for easy maintenance.
+    if (process.env.NODE_ENV === 'production') {
+      console.log(
+        `[${GetCurrentTimestamp()}] getStaticProps() resulted in 404 for /blog/posts/${page} (/blog/posts/[page])...`
+      );
+    }
+
     return {
       notFound: true,
       revalidate: 5 * 60, // revalidate every 5 minutes.
