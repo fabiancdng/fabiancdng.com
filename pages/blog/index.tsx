@@ -9,7 +9,7 @@ import {
 } from '@storyblok/react';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
-import Layout from '../../components/Core/Layout';
+import Layout from '../../components/Misc/Layout';
 import { BlogPostStoryData, IsbTags } from '../../types';
 import Pagination from '../../components/Blog/Pagination';
 import GetCurrentTimestamp from '../../utils/get-time-stamp';

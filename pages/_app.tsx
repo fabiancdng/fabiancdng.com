@@ -8,16 +8,16 @@ import {
 import 'highlight.js/styles/atom-one-dark.css';
 import '../styles/page-or-post.css';
 import '../styles/global.css';
-import Page from '../components/Core/Page';
-import Grid from '../components/Storyblok/Grid';
+import Page from '../components/ContentTypes/Page';
+import Grid from '../components/Misc/Grid';
 import RichTextSection from '../components/Misc/RichTextSection';
-import HeroSection from '../components/Misc/HeroSection';
-import ContactSection from '../components/Misc/ContactSection';
-import Post from '../components/Core/Post';
+import HeroSection from '../components/Homepage/HeroSection';
+import ContactSection from '../components/Homepage/ContactSection';
+import Post from '../components/ContentTypes/Post';
 import { SbBlogPosts } from '../components/Blog/BlogPosts';
-import Project from '../components/Misc/Project';
-import Skills from '../components/Misc/Skills/Skills';
-import SkillChip from '../components/Misc/Skills/SkillChip';
+import Project from '../components/Homepage/Projects/Project';
+import Skills from '../components/Homepage/Skills/Skills';
+import SkillChip from '../components/Homepage/Skills/SkillChip';
 
 import '@fortawesome/fontawesome-free/css/fontawesome.min.css';
 import '@fortawesome/fontawesome-free/css/regular.min.css';
@@ -25,6 +25,8 @@ import '@fortawesome/fontawesome-free/css/solid.min.css';
 import '@fortawesome/fontawesome-free/css/brands.min.css';
 import TagFilter, { SbTagFilter } from '../components/Blog/TagFilter';
 import BlogBanner from '../components/Blog/BlogBanner';
+import Projects from '../components/Homepage/Projects/Projects';
+import { GlobalsProvider } from '../context/Globals';
 
 // Map Storyblok components to Next.js components.
 const storyblokComponentsMapping: SbReactComponentsMap = {
@@ -36,10 +38,11 @@ const storyblokComponentsMapping: SbReactComponentsMap = {
   page: Page,
   post: Post,
 
-  // Portfolio.
+  // Homepage / Portfolio.
   heroSection: HeroSection,
   contactSection: ContactSection,
   project: Project,
+  projects: Projects,
   skills: Skills,
   skillChip: SkillChip,
 
@@ -64,16 +67,18 @@ storyblokInit({
 
 function App({ Component, pageProps }: AppProps) {
   return (
-    <div className="app overflow-x-hidden">
-      {/* Progress bar when (re)loading page */}
-      <NextNProgress
-        options={{
-          template:
-            '<div class="bar" role="bar"><div class="peg"></div></div></div>',
-        }}
-      />
-      <Component {...pageProps} />
-    </div>
+    <GlobalsProvider>
+      <div className="app overflow-x-hidden">
+        {/* Progress bar when (re)loading page */}
+        <NextNProgress
+          options={{
+            template:
+              '<div class="bar" role="bar"><div class="peg"></div></div></div>',
+          }}
+        />
+        <Component {...pageProps} />
+      </div>
+    </GlobalsProvider>
   );
 }
 

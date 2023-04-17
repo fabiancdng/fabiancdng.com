@@ -6,7 +6,7 @@ import {
   ISbStoriesParams,
   ISbStory,
 } from '@storyblok/react';
-import Layout from '../components/Core/Layout';
+import Layout from '../components/Misc/Layout';
 import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next';
 import { PageStoryData } from '../types';
 import SeoMetaTags from '../components/Seo/SeoMetaTags';

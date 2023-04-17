@@ -1,6 +1,6 @@
 import { ISbStories, ISbStoryData, getStoryblokApi } from '@storyblok/react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import Layout from '../../../components/Core/Layout';
+import Layout from '../../../components/Misc/Layout';
 import Head from 'next/head';
 import GetCurrentTimestamp from '../../../utils/get-time-stamp';
 import { BlogPostStoryData, IsbTags, Tag } from '../../../types';

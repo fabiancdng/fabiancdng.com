@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { GlobalsContext } from '../../context/Globals';
 // import { GlobalContext } from '../../contexts/GlobalContext';
 
 /**
@@ -10,8 +11,7 @@ interface DarkModeToggleProps {
 
 const DarkModeToggle = ({ additionalCSS }: DarkModeToggleProps) => {
   // Get color mode state from global context.
-  // const { colorMode, setColorMode } = useContext(GlobalContext);
-  const [colorMode, setColorMode] = useState('light');
+  const { colorMode, setColorMode } = useContext(GlobalsContext);
 
   const changeColorMode = () => {
     // The new color mode to apply.
@@ -26,9 +26,10 @@ const DarkModeToggle = ({ additionalCSS }: DarkModeToggleProps) => {
 
   useEffect(() => {
     // Set initial color mode according to user's preferences (if set).
-    const storedColorMode = window.localStorage.getItem('colorMode');
+    const storedColorMode =
+      window.localStorage.getItem('colorMode') === 'dark' ? 'dark' : 'light';
     if (storedColorMode !== null) {
-      setColorMode(String(storedColorMode));
+      setColorMode(storedColorMode);
     }
   }, []);
 

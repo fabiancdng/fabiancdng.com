@@ -1,9 +1,8 @@
 import { SbBlokData, storyblokEditable } from '@storyblok/react';
 import Image from 'next/image';
-import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import { ImageAsset } from '../../types';
-import ParseAdditionalCSS from '../../utils/parse-additional-css';
+import { ImageAsset } from '../../../types';
+import ParseAdditionalCSS from '../../../utils/parse-additional-css';
 
 /**
  * Data for Project Block Type from Storyblok.
@@ -63,6 +62,9 @@ const Project = ({ blok }: { blok: ProjectBlock }) => {
 
     // Initial call on mount.
     handleResize();
+
+    // Cleanup resource-hungry event listeners after unmount.
+    return () => window.removeEventListener('resize', handleResize);
   }, [screenWidth, blok.reverseDesign]);
 
   return (

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Footer from '../Footer/Footer';
 import Navbar from '../Navbar/Navbar';
-import { useRouter } from 'next/router';
+import { GlobalsContext } from '../../context/Globals';
 
 const Layout = ({ children }: { children: JSX.Element }) => {
-  const router = useRouter();
+  // Get global website values for active nav item.
+  const globals = useContext(GlobalsContext);
 
   return (
     <>
@@ -13,22 +14,22 @@ const Layout = ({ children }: { children: JSX.Element }) => {
           {
             title: 'Home',
             href: '/',
-            active: router.asPath === '/',
+            active: globals.activeNavItem === '/',
           },
           {
             title: 'Projects',
             href: '/#projects',
-            active: router.asPath.startsWith('/#projects'),
+            active: globals.activeNavItem.includes('#projects'),
           },
           {
             title: 'Blog',
             href: '/blog',
-            active: router.asPath.startsWith('/blog'),
+            active: globals.activeNavItem.startsWith('/blog'),
           },
           {
             title: 'About',
             href: '/about',
-            active: router.asPath.startsWith('/about'),
+            active: globals.activeNavItem.startsWith('/about'),
           },
         ]}
       />

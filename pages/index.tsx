@@ -5,7 +5,7 @@ import {
   useStoryblokState,
 } from '@storyblok/react';
 import Head from 'next/head';
-import Layout from '../components/Core/Layout';
+import Layout from '../components/Misc/Layout';
 import SeoMetaTags from '../components/Seo/SeoMetaTags';
 import { PageStoryData } from '../types';
 import GetCurrentTimestamp from '../utils/get-time-stamp';
