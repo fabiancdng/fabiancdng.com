@@ -31,6 +31,8 @@ const DarkModeToggle = ({ additionalCSS }: DarkModeToggleProps) => {
     if (storedColorMode !== null) {
       setColorMode(storedColorMode);
     }
+    // Disable exhaustive-deps warning because setter is not needed in dependency array.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

@@ -5,7 +5,6 @@ import {
 } from '@storyblok/react';
 import ParseAdditionalCSS from '../../../utils/parse-additional-css';
 import { useContext, useEffect, useRef } from 'react';
-import { useRouter } from 'next/router';
 import { GlobalsContext } from '../../../context/Globals';
 
 /**
@@ -22,7 +21,6 @@ interface ProjectBlock extends SbBlokData {
  * Wrapper for a single <Project /> component.
  */
 const Projects = ({ blok }: { blok: ProjectBlock }) => {
-  const router = useRouter();
   const projectsSectionRef = useRef<HTMLDivElement>(null);
 
   // Get values from global website context to set active nav item.
@@ -30,15 +28,18 @@ const Projects = ({ blok }: { blok: ProjectBlock }) => {
 
   useEffect(() => {
     // Create IntersectionObserver to change active nav item based on section in viewport.
-    const observer = new IntersectionObserver(async (entries) => {
-      if (entries[0].isIntersecting) {
-        // Add #projects to URL.
-        setActiveNavItem('/#projects');
-      } else if (!entries[0].isIntersecting) {
-        // Remove #projects from URL.
-        setActiveNavItem('/');
-      }
-    });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          // Add #projects to URL.
+          setActiveNavItem('/#projects');
+        } else if (!entries[0].isIntersecting) {
+          // Remove #projects from URL.
+          setActiveNavItem('/');
+        }
+      },
+      { threshold: 0.2 }
+    );
 
     // Observe whether #projects section is in viewport.
     observer.observe(projectsSectionRef.current!);
@@ -47,7 +48,10 @@ const Projects = ({ blok }: { blok: ProjectBlock }) => {
       // Disconnect observer when component unmounts.
       observer.disconnect();
     };
-  }, []);
+    // Disable exhaustive-deps warning because setter is not needed in dependency array.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [projectsSectionRef]);
+
   return (
     <div
       id="projects"

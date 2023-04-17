@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.9.0 - 2023-04-17
+
+- Add global state for global values on the website
+
 ## 3.8.3 - 2023-04-11
 
 - Improved Logging on the Server-Side
