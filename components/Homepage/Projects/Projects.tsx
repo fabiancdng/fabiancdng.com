@@ -31,10 +31,8 @@ const Projects = ({ blok }: { blok: ProjectBlock }) => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          // Add #projects to URL.
           setActiveNavItem('/#projects');
-        } else if (!entries[0].isIntersecting) {
-          // Remove #projects from URL.
+        } else {
           setActiveNavItem('/');
         }
       },
@@ -48,9 +46,7 @@ const Projects = ({ blok }: { blok: ProjectBlock }) => {
       // Disconnect observer when component unmounts.
       observer.disconnect();
     };
-    // Disable exhaustive-deps warning because setter is not needed in dependency array.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [projectsSectionRef]);
+  }, [setActiveNavItem]);
 
   return (
     <div
