@@ -2,15 +2,19 @@ import {
   storyblokEditable,
   SbBlokData,
   ISbRichtext,
-  renderRichText,
   ISbStoryData,
 } from '@storyblok/react';
 import hljs from 'highlight.js';
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { Children, useEffect } from 'react';
 import { ImageAsset, PostOrPageAuthor } from '../../types';
 import Head from 'next/head';
 import Link from 'next/link';
+import {
+  NODE_IMAGE,
+  NODE_PARAGRAPH,
+  render,
+} from 'storyblok-rich-text-react-renderer';
 
 /**
  * Data for the Post Content Type from Storyblok.
@@ -150,12 +154,58 @@ const Post = ({ blok, story, relations }: PostProps) => {
           {blok.content && (
             <div
               id="storyblok-post"
-              className="page-or-post-css max-w-3xl mx-auto"
-              dangerouslySetInnerHTML={{
-                // Render the markdown content as HTML.
-                __html: renderRichText(blok.content),
-              }}
-            />
+              className="page-or-post-css max-w-3xl mx-auto">
+              {render(blok.content, {
+                // Custom node resolvers to render images without surrounding <p> tags and as optimized Next.js Image components.
+                nodeResolvers: {
+                  [NODE_PARAGRAPH]: (children) => {
+                    if (Children.count(children) === 1) {
+                      // Probably ReactElement.
+                      const child: any = Children.toArray(children)[0];
+
+                      if (
+                        child.type === 'div' &&
+                        child.props.className.includes('image-container')
+                      ) {
+                        return <div>{children}</div>;
+                      }
+                    }
+                    return <p>{children}</p>;
+                  },
+                  [NODE_IMAGE]: (children, props) => {
+                    let image = {
+                      source: props.src,
+                      title: props.title,
+                      alt: props.alt,
+                      width: props.src
+                        ? parseInt(props.src.split('/')[5].split('x')[0])
+                        : 871,
+                      height: props.src
+                        ? parseInt(props.src.split('/')[5].split('x')[1])
+                        : 489,
+                    };
+
+                    return (
+                      <div className="image-container">
+                        {image.source && (
+                          <Image
+                            src={image.source ? image.source : ''}
+                            title={image.title ? image.title : ''}
+                            width={image.width}
+                            height={image.height}
+                            alt={
+                              image.alt
+                                ? image.alt
+                                : 'No alt text for this image.'
+                            }
+                          />
+                        )}
+                      </div>
+                    );
+                  },
+                },
+              })}
+            </div>
           )}
         </article>
       </main>

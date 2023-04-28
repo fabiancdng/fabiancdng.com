@@ -18,7 +18,8 @@
     "nextjs-progressbar": "^0.0.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sharp": "^0.32.0"
+    "sharp": "^0.32.0",
+    "storyblok-rich-text-react-renderer": "^2.8.0"
   },
   "devDependencies": {
     "@types/markdown-it": "^12.2.3",
