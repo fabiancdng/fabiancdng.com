@@ -118,7 +118,7 @@ const AuthorPage = ({ author, posts }: AuthorPageProps) => {
           {/* Author's latest blog posts */}
           <section className="container mx-auto flex flex-col items-center md:items-start px-10">
             <h2 className="text-4xl text-center md:text-start font-semibold mb-14">
-              Latest blog posts by {author.name.split(' ')[0]}
+              Latest posts by {author.name.split(' ')[0]}
             </h2>
 
             <div className="grid grid-cols-1 gap-x-20 gap-y-20 md:gap-x-10 md:grid-cols-2 lg:grid-cols-3">

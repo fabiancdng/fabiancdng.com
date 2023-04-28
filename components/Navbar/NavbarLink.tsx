@@ -20,7 +20,9 @@ const NavbarLink = ({
     <Link href={href} className={`cursor-pointer ${additionalCSS}`}>
       <span
         className={
-          active ? 'border-b-2 px-0.5 pb-1 border-b-slate-500' : 'px-0.5'
+          active
+            ? 'border-b-2 px-0.5 pb-1 border-b-slate-500 dark:border-b-slate-300'
+            : 'px-0.5'
         }>
         {title}
       </span>

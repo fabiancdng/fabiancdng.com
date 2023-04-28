@@ -11,6 +11,7 @@ import { ImageAsset, PostOrPageAuthor } from '../../types';
 import Head from 'next/head';
 import Link from 'next/link';
 import {
+  MARK_LINK,
   NODE_IMAGE,
   NODE_PARAGRAPH,
   render,
@@ -156,6 +157,16 @@ const Post = ({ blok, story, relations }: PostProps) => {
               id="storyblok-post"
               className="page-or-post-css max-w-3xl mx-auto">
               {render(blok.content, {
+                // Mark resolver to add target to all links.
+                markResolvers: {
+                  [MARK_LINK]: (children, props) => {
+                    return (
+                      <a href={props.href} target="_blank">
+                        {children}
+                      </a>
+                    );
+                  },
+                },
                 // Custom node resolvers to render images without surrounding <p> tags and as optimized Next.js Image components.
                 nodeResolvers: {
                   [NODE_PARAGRAPH]: (children) => {

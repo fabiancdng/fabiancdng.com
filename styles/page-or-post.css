@@ -12,13 +12,12 @@
 
 .page-or-post-css a {
   @apply border-b-2 border-violet-700;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.15s ease-in-out;
 }
 
 .page-or-post-css a:hover {
-  transition: all 0.2s ease-in-out;
-  font-size: 1.05em;
-  text-decoration-thickness: 3px;
+  @apply border-b-[3px];
+  transition: all 0.15s ease-in-out;
 }
 
 .page-or-post-css figure {

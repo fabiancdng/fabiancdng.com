@@ -6,6 +6,7 @@ import {
   storyblokEditable,
 } from '@storyblok/react';
 import ParseAdditionalCSS from '../../utils/parse-additional-css';
+import { NODE_HR, render } from 'storyblok-rich-text-react-renderer';
 
 /**
  * Data for Rich Text Section Block Type from Storyblok.
@@ -59,13 +60,15 @@ const RichTextSection = ({ blok }: { blok: RichTextSectionBlock }) => {
 
         {/* Content */}
         <div className="text-content mx-auto mt-5 sm:w-full w-4/5">
-          <div
-            className="text-xl leading-8 text-center sm:text-left"
-            dangerouslySetInnerHTML={{
-              // Render the markdown content as HTML.
-              __html: renderRichText(blok.content),
-            }}
-          />
+          <div className="text-xl leading-8 text-center sm:text-left">
+            {render(blok.content, {
+              nodeResolvers: {
+                [NODE_HR]: () => (
+                  <hr className="w-full border-gray-300 dark:border-slate-600 my-10" />
+                ),
+              },
+            })}
+          </div>
         </div>
 
         {/* Read more link */}

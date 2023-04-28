@@ -2,25 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* TODO: Use module CSS files for this */
 html {
   scroll-behavior: smooth !important;
-}
-
-.rich-text-section .text-content p {
-  @apply mt-3;
-}
-
-.rich-text-section .text-content a {
-  transition: all 0.2s ease-in-out;
-  font-weight: 400;
-  text-decoration: underline;
-  text-decoration-color: blueviolet;
-  text-decoration-thickness: 2px;
-}
-
-.rich-text-section .text-content a:hover {
-  transition: all 0.2s ease-in-out;
-  font-size: 1.1em;
-  text-decoration-thickness: 3px;
 }
