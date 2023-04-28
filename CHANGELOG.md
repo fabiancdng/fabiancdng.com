@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.10.1 - 2023-04-28
+
+- Fix: Styling for links
+- Fix: Unified styling for `<hr />` tags
+- Fix: Set target attribute for links in blog posts
+- Fix: Active navlink color on darkmode
+
 ## 3.10.0 - 2023-04-28
 
 - Add Next.js image optimization on blog posts
