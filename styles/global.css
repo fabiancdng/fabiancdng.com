@@ -5,3 +5,7 @@
 html {
   scroll-behavior: smooth !important;
 }
+
+.rich-text-section p {
+  @apply mt-3;
+}

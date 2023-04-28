@@ -28,19 +28,20 @@ const HeroSection = ({ blok }: { blok: HeroSectionBlock }) => {
       <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center gap-12 mt-10 lg:mt-25">
         {/* Text & Socials */}
         <div className="flex flex-1 flex-col items-center lg:items-start">
-          <h1
-            className="text-4xl lg:text-6xl text-center
-                    lg:text-left mb-4 font-bold dark:text-slate-50">
-            {blok.title}
-          </h1>
           <h2
-            className="text-3xl lg:text-5xl text-center lg:text-left text-slate-700
-                    mb-4 dark:text-slate-200">
+            className="text-4xl lg:text-5xl text-center font-semibold lg:text-left text-slate-700
+                dark:text-slate-200">
             {blok.subtitle}
           </h2>
+          <h1
+            className="text-5xl lg:text-6xl text-center
+                    lg:text-left my-5 font-bold 
+                    bg-gradient-to-br from-blue-500 to-purple-500 dark:from-blue-400 dark:to-purple-500 bg-clip-text text-transparent">
+            {blok.title}
+          </h1>
           <h3
-            className="text-2xl lg:text-3xl text-center lg:text-left mb-7 text-gray-500
-                    dark:text-slate-400">
+            className="text-2xl lg:text-3xl text-center font-medium lg:text-left mb-7 text-gray-700
+                    dark:text-slate-300">
             {blok.description}
           </h3>
         </div>
