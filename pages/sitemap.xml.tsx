@@ -33,13 +33,15 @@ const getPageAndPostSlugs = async () => {
     excluding_slugs: 'blog/',
   });
 
+  const skipPageSlugs = ['home', 'legal-notice', 'privacy-policy'];
+
   // Go through each link and add it to the array of paths.
   Object.keys(data.links).forEach((linkKey) => {
     // Skip folders and home page.
     if (
       data.links[linkKey].is_folder ||
       data.links[linkKey].is_startpage ||
-      data.links[linkKey].slug === 'home'
+      skipPageSlugs.includes(data.links[linkKey].slug)
     ) {
       return;
     }
