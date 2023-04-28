@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.11.0 - 2023-04-28
+
+- New HeroSection Design
+
 ## 3.10.1 - 2023-04-28
 
 - Fix: Styling for links
