@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.10.0 - 2023-04-28
+
+- Add Next.js image optimization on blog posts
+
 ## 3.9.1 - 2023-04-26
 
 - Fix: `IntersectionObserver` in projects section not working
