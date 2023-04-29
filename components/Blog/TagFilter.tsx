@@ -66,7 +66,7 @@ const TagFilter = ({ title, subtitle, tags, currentTopic }: TagFilterProps) => {
   }, []);
 
   return (
-    <div className="container mx-auto px-10 py-10 w-full dark:bg-slate-800 bg-slate-100 rounded">
+    <div className="container mx-auto max-w-7xl px-10 py-10 w-full dark:bg-slate-800 bg-slate-100 rounded">
       {/* Title */}
       <h2 className="text-gray-800 dark:text-slate-100 text-3xl font-semibold text-center sm:text-left mx-4 sm:mx-0">
         {title}

@@ -27,7 +27,7 @@ export const SbBlogPosts = ({
 }) => {
   return (
     <div
-      className="container pt-14 pb-10 max-w-5-xl mx-auto px-10"
+      className="container pt-14 pb-10 max-w-7xl mx-auto px-10"
       {...storyblokEditable(blok)}>
       {/* Card for each blog post */}
       {payload.blogPosts.map((blogPost: BlogPostStoryData, index: number) => (
@@ -46,7 +46,7 @@ export const SbBlogPosts = ({
  */
 const BlogPosts = ({ blogPosts, blogPostsRelations }: BlogPostsProps) => {
   return (
-    <div className="container pt-14 pb-10 max-w-5-xl mx-auto px-10">
+    <div className="container pt-14 pb-10 max-w-7xl mx-auto px-10">
       {/* Card for each blog post */}
       {blogPosts.map((blogPost: BlogPostStoryData, index) => (
         <BlogPost key={index} story={blogPost} relations={blogPostsRelations} />

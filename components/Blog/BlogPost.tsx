@@ -21,7 +21,7 @@ const BlogPost = ({ story, relations }: BlogPostProps) => {
 
   // Responsive card with image on the left and text on the right.
   return (
-    <article className="flex flex-col md:flex-row mt-5 mb-24">
+    <article className="flex flex-col md:flex-row space-y-2 mt-5 mb-24">
       {/* Thumbnail */}
       <div className="md:w-1/3">
         {/* If the thumbnail is not set, use a placeholder image. */}
@@ -92,7 +92,7 @@ const BlogPost = ({ story, relations }: BlogPostProps) => {
         </header>
 
         {/* Excerpt */}
-        <p className="text-gray-600 dark:text-slate-400 my-3">
+        <p className="text-gray-600 dark:text-slate-400 my-5">
           {story.content.excerpt}
         </p>
 
