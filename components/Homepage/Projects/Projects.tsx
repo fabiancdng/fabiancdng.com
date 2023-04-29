@@ -31,9 +31,9 @@ const Projects = ({ blok }: { blok: ProjectBlock }) => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          setActiveNavItem('/#projects');
+          setActiveNavItem('projects');
         } else {
-          setActiveNavItem('/');
+          setActiveNavItem('home');
         }
       },
       { threshold: 0.2 }

@@ -14,22 +14,22 @@ const Layout = ({ children }: { children: JSX.Element }) => {
           {
             title: 'Home',
             href: '/',
-            active: globals.activeNavItem === '/',
+            active: globals.activeNavItem === 'home',
           },
           {
             title: 'Projects',
             href: '/#projects',
-            active: globals.activeNavItem.includes('#projects'),
+            active: globals.activeNavItem === 'projects',
           },
           {
             title: 'Blog',
             href: '/blog',
-            active: globals.activeNavItem.startsWith('/blog'),
+            active: globals.activeNavItem === 'blog',
           },
           {
             title: 'About',
             href: '/about',
-            active: globals.activeNavItem.startsWith('/about'),
+            active: globals.activeNavItem === 'about',
           },
         ]}
       />
