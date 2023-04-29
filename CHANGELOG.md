@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.11.1 - 2023-04-29
+
+- Improve mobile responsiveness (fix some space waste)
+- Fix some routing/active nav link issues
+
 ## 3.11.0 - 2023-04-28
 
 - New HeroSection Design
