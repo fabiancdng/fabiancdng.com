@@ -24,7 +24,7 @@ const Skills = ({ blok }: { blok: SkillsBlock }) => {
       style={
         blok.additionalStyles ? ParseAdditionalCSS(blok.additionalStyles) : {}
       }
-      className="container xl:max-w-7xl max-w-5xl mx-auto px-10 py-10 w-full dark:bg-slate-800 bg-slate-100 rounded"
+      className="container xl:max-w-7xl max-w-5xl mx-auto px-0 sm:px-10 py-10 w-full dark:bg-slate-800 bg-slate-100 rounded"
       {...storyblokEditable(blok)}>
       {/* Title */}
       <h2 className="text-gray-800 dark:text-slate-100 text-5xl font-semibold pt-5 text-center sm:text-left mx-4 sm:mx-0">
@@ -33,7 +33,7 @@ const Skills = ({ blok }: { blok: SkillsBlock }) => {
 
       {/* Subtitle */}
       {blok.subtitle && (
-        <h3 className="text-gray-800 dark:text-slate-200 text-2xl mb-10 mt-3 text-center sm:text-left mx-4 sm:mx-0">
+        <h3 className="text-gray-800 dark:text-slate-200 px-10 sm:px-0 text-2xl mb-10 mt-3 text-center sm:text-left mx-4 sm:mx-0">
           {blok.subtitle}
         </h3>
       )}

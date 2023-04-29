@@ -33,7 +33,7 @@ const RichTextSection = ({ blok }: { blok: RichTextSectionBlock }) => {
       className={`rich-text-section w-full dark:bg-slate-900`}
       {...storyblokEditable(blok)}>
       {/* Wrapper */}
-      <div className="container xl:max-w-7xl max-w-5xl mx-auto px-10 rounded">
+      <div className="container xl:max-w-7xl max-w-5xl mx-auto sm:px-10 px-0 rounded">
         {/* Title */}
         {blok.makeTitleH1 ? (
           <h1 className="text-gray-800 dark:text-slate-100 text-5xl font-semibold pt-5 text-center sm:text-left mx-4 sm:mx-0">

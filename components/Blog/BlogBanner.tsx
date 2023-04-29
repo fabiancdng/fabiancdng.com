@@ -14,7 +14,7 @@ interface BlogBannerBlock extends SbBlokData {
 const BlogBanner = ({ blok }: { blok: BlogBannerBlock }) => {
   return (
     <div
-      className="relative py-28 px-20 mx-auto shadow-lg"
+      className="relative py-28 sm:px-20 px-10 mx-auto shadow-lg"
       {...storyblokEditable(blok)}>
       <Image
         src={codeBannerJpg}

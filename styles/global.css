@@ -7,5 +7,5 @@ html {
 }
 
 .rich-text-section p {
-  @apply mt-3;
+  @apply mt-5;
 }
