@@ -8,12 +8,12 @@ import {
 import 'highlight.js/styles/atom-one-dark.css';
 import '../styles/page-or-post.css';
 import '../styles/global.css';
-import Page from '../components/ContentTypes/Page';
+import Page from '../components/Entities/Page';
 import Grid from '../components/Misc/Grid';
 import RichTextSection from '../components/Misc/RichTextSection';
 import HeroSection from '../components/Homepage/HeroSection';
 import ContactSection from '../components/Homepage/ContactSection';
-import Post from '../components/ContentTypes/Post';
+import Post from '../components/Entities/Post';
 import { SbBlogPosts } from '../components/Blog/BlogPosts';
 import Project from '../components/Homepage/Projects/Project';
 import Skills from '../components/Homepage/Skills/Skills';

@@ -10,6 +10,15 @@ import {
 } from '@storyblok/react';
 
 /**
+ * Data for a specific navbar link.
+ */
+export interface NavigationLink {
+  title: string;
+  href: string;
+  active: boolean;
+}
+
+/**
  * Author object from Storyblok for a page or post.
  * Resolved Relation in 'rels' array.
  */

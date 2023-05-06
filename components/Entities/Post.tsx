@@ -16,6 +16,7 @@ import {
   NODE_PARAGRAPH,
   render,
 } from 'storyblok-rich-text-react-renderer';
+import GetImageObject from '../../utils/image-parser';
 
 /**
  * Data for the Post Content Type from Storyblok.
@@ -184,17 +185,13 @@ const Post = ({ blok, story, relations }: PostProps) => {
                     return <p>{children}</p>;
                   },
                   [NODE_IMAGE]: (children, props) => {
-                    let image = {
-                      source: props.src,
-                      title: props.title,
-                      alt: props.alt,
-                      width: props.src
-                        ? parseInt(props.src.split('/')[5].split('x')[0])
-                        : 871,
-                      height: props.src
-                        ? parseInt(props.src.split('/')[5].split('x')[1])
-                        : 489,
-                    };
+                    if (!props.src) return null;
+
+                    const image = GetImageObject(
+                      props.src,
+                      props.alt,
+                      props.title
+                    );
 
                     return (
                       <div className="image-container">
