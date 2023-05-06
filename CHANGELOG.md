@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.13.1 - 2023-05-06
+
+- Fix: Tag list always slightly different
+
 ## 3.13.0 - 2023-05-06
 
 - Enhance mobile responsiveness
