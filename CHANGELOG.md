@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.13.0 - 2023-05-06
+
+- Enhance mobile responsiveness
+- Image parser utility function for less image parsing code
+
 ## 3.12.0 - 2023-05-01
 
 - Add request logging middleware (`ip` or `body` are not logged!)
