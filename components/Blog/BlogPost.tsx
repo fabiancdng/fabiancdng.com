@@ -51,7 +51,9 @@ const BlogPost = ({ story, relations }: BlogPostProps) => {
       <div className="lg:w-2/3 lg:pl-10">
         <header>
           {/* Post tags */}
-          {story.tag_list && <TagList tagList={story.tag_list} />}
+          {story.tag_list && (
+            <TagList addCSSClasses="mt-5 lg:mt-0" tagList={story.tag_list} />
+          )}
 
           {/* Title */}
           <h2 className="text-3xl font-semibold mt-2">
