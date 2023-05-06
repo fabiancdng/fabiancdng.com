@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.13.2 - 2023-05-06
+
+- Fix: Margin on Blog Posts overview page
+
 ## 3.13.1 - 2023-05-06
 
 - Fix: Tag list always slightly different
