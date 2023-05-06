@@ -80,7 +80,7 @@ const Post = ({ blok, story, relations }: PostProps) => {
         {/* Content */}
         <article className="container pt-32 px-7 mx-auto mb-20 max-w-5xl text-black dark:text-white">
           {/* Header containing headline, excerpt and other introductory metadata */}
-          <header>
+          <header className="lg:w-11/12 w-full px-0 sm:px-7 mx-auto">
             {/* Post tags */}
             {story.tag_list && (
               <TagList addCSSClasses="my-5" tagList={story.tag_list} />
@@ -131,9 +131,9 @@ const Post = ({ blok, story, relations }: PostProps) => {
 
           {/* Post thumbnail */}
           {blok.thumbnail && (
-            <div className="w-full h-full relative">
+            <div className="w-full px-0 sm:px-7 h-full">
               <Image
-                className="w-full my-16 rounded-lg"
+                className="lg:w-11/12 w-full mx-auto my-16 rounded-lg"
                 width={871}
                 height={489}
                 priority
@@ -147,7 +147,7 @@ const Post = ({ blok, story, relations }: PostProps) => {
           {blok.content && (
             <div
               id="storyblok-post"
-              className="page-or-post-css max-w-3xl mx-auto">
+              className="page-or-post-css max-w-3xl px-0 sm:px-7 mx-auto">
               {render(blok.content, {
                 // Mark resolver to add target to all links.
                 markResolvers: {
