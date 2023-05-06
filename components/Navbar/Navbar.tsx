@@ -8,7 +8,7 @@ import NavbarImage from '../../public/navbar-image.png';
 /**
  * Data for a specific navbar link.
  */
-interface navbarLink {
+interface NavigationLink {
   title: string;
   href: string;
   active: boolean;
@@ -17,11 +17,11 @@ interface navbarLink {
 /**
  * Data passed as props to the Navbar component.
  */
-interface navbarProps {
-  links: navbarLink[];
+interface NavbarProps {
+  links: NavigationLink[];
 }
 
-const Navbar = ({ links }: navbarProps) => {
+const Navbar = ({ links }: NavbarProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [screenWidth, setScreenWidth] = useState(0);
 
@@ -57,7 +57,7 @@ const Navbar = ({ links }: navbarProps) => {
                         atTop ? '' : 'drop-shadow-md'
                       } transition-all ease-in-out duration-500`}>
       {/* Navigation */}
-      <nav className="flex items-center px-2 sm:px-0 my-1 container mx-auto">
+      <nav className="flex items-center my-1 px-6 mx-auto">
         {/* Site title/logo */}
         <div className="w-14 h-14 p-1 flex items-center">
           <Link href="/">
@@ -69,8 +69,8 @@ const Navbar = ({ links }: navbarProps) => {
           </Link>
         </div>
 
-        {/* Navigation Links */}
-        <ul className="hidden left-0 sm:flex flex-1 justify-end items-center gap-5 text mr-7 uppercase text-md">
+        {/* Desktop: Navigation Links */}
+        <ul className="hidden left-0 lg:flex flex-1 justify-end items-center gap-5 text mr-7 uppercase text-md">
           {
             // Render all nav links (separate `NavbarLink` component).
             links.map((link, index) => (
@@ -87,19 +87,19 @@ const Navbar = ({ links }: navbarProps) => {
           }
         </ul>
 
-        {/* Icon to toggle dark/light mode */}
-        <div className="hidden sm:flex">
+        {/* Desktop: Icon to toggle dark/light mode */}
+        <div className="hidden lg:flex">
           <DarkModeToggle additionalCSS="w-14" />
         </div>
 
-        {/* Mobile menu toggler (icon) */}
-        <div className="flex sm:hidden space-x-4 flex-1 justify-end text-3xl">
+        {/* Mobile menu toggler (icon) and dark mode switch */}
+        <div className="flex lg:hidden space-x-4 flex-1 justify-end text-3xl">
           {/* Icon to toggle dark/light mode */}
-          <DarkModeToggle additionalCSS="w-14" />
+          <DarkModeToggle additionalCSS="w-14 m-2" />
           <button
             aria-label="Toggle menu"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={`rounded p-2 w-14 transition-all
+            className={`rounded p-1 m-2 w-14 transition-all
                         ease-in-out duration-200 hover:bg-slate-200 bg-slate-100 dark:bg-slate-600 dark:hover:bg-slate-500 dark:text-white
                         border border-slate-300 hover:border-slate-600 dark:border-slate-500 dark:hover:border-slate-200`}>
             <i className="fa-solid fa-bars" />
@@ -109,7 +109,7 @@ const Navbar = ({ links }: navbarProps) => {
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <ul className="p-4 mt-2 block space-y-3 md:hidden bg-slate-100 dark:bg-slate-700">
+        <ul className="p-4 mt-2 block space-y-3 lg:hidden bg-slate-100 dark:bg-slate-700">
           {
             // Render all nav links (separate `NavbarLink` component).
             links.map((link, index) => (

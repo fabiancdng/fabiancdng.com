@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { BlogPostStoryData, PostOrPageAuthor } from '../../types';
+import GetImageObject from '../../utils/image-parser';
 
 /**
  * Props for the single item in the collection (BlockPosts.tsx).
@@ -19,19 +20,26 @@ const BlogPost = ({ story, relations }: BlogPostProps) => {
     (relation: any) => relation.uuid === story.content.author
   );
 
+  const thumbnail = GetImageObject(
+    story.content.thumbnail.filename,
+    story.content.thumbnail.alt,
+    story.content.thumbnail.title
+  );
+
   // Responsive card with image on the left and text on the right.
   return (
-    <article className="flex flex-col md:flex-row space-y-2 mt-5 mb-24">
+    <article className="flex flex-col lg:flex-row lg:p-0 space-y-2 mt-5 mb-28">
       {/* Thumbnail */}
-      <div className="md:w-1/3">
+      <div className="lg:w-1/3 w-full">
         {/* If the thumbnail is not set, use a placeholder image. */}
-        {story.content.thumbnail && (
+        {thumbnail?.source && (
           <Link href={`/${story.full_slug}`}>
             <Image
-              src={story.content.thumbnail.filename}
-              width={600}
-              height={400}
-              alt={story.content.thumbnail.alt}
+              src={thumbnail.source}
+              width={thumbnail.width}
+              height={thumbnail.height}
+              title={thumbnail.title}
+              alt={thumbnail.alt}
               className="rounded-md"
             />
           </Link>
@@ -39,16 +47,16 @@ const BlogPost = ({ story, relations }: BlogPostProps) => {
       </div>
 
       {/* Post tags, title, author, date excerpt and link */}
-      <div className="md:w-2/3 md:pl-10 md:mt-0 mt-5">
+      <div className="lg:w-2/3 lg:pl-10 lg:mt-0 mt-5">
         <header>
           {/* Post tags */}
           {story.tag_list && (
-            <div>
+            <div className="lg:mt-0 mt-5">
               {story.tag_list.map((tag, index) => (
                 <Link
                   key={index}
                   href={`/blog/tags/${tag}`}
-                  className="text-blue-800 font-semibold text-lg dark:text-slate-400">
+                  className="text-blue-800 mr-3 font-semibold text-lg dark:text-slate-400">
                   {tag.toUpperCase()}
                 </Link>
               ))}

@@ -25,7 +25,7 @@ export const SbTagFilter = ({
 }) => {
   return (
     <div
-      className="storyblok-tag-filter-wrapper"
+      className="storyblok-tag-filter-wrapper md:px-10"
       {...storyblokEditable(blok)}
       style={
         blok.additionalStyles ? ParseAdditionalCSS(blok.additionalStyles) : {}

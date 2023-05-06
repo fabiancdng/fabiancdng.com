@@ -60,7 +60,7 @@ const TagPage = ({ tag, tags, posts, rels }: TagPageProps) => {
       <Layout>
         <main className="mt-20 container mx-auto flex flex-col items-center md:items-start pb-20">
           <div className="container pt-20 max-w-5-xl mx-auto px-10">
-            <h1 className="text-5xl text-center md:text-start font-semibold">
+            <h1 className="text-5xl text-center lg:text-start font-semibold">
               {tag.name}
             </h1>
 
