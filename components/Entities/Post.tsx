@@ -17,6 +17,7 @@ import {
   render,
 } from 'storyblok-rich-text-react-renderer';
 import GetImageObject from '../../utils/image-parser';
+import TagList from '../Blog/TagList';
 
 /**
  * Data for the Post Content Type from Storyblok.
@@ -82,17 +83,7 @@ const Post = ({ blok, story, relations }: PostProps) => {
           <header>
             {/* Post tags */}
             {story.tag_list && (
-              <div className="mb-5">
-                {story.tag_list.map((tag, index) => (
-                  <div key={index} className="mb-5">
-                    <Link
-                      href={`/blog/tags/${tag}`}
-                      className="text-blue-800 pl-1 font-semibold text-lg dark:text-slate-400">
-                      {tag.toUpperCase()}
-                    </Link>
-                  </div>
-                ))}
-              </div>
+              <TagList addCSSClasses="my-5" tagList={story.tag_list} />
             )}
 
             {/* Post title */}

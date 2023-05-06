@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { BlogPostStoryData, PostOrPageAuthor } from '../../types';
 import GetImageObject from '../../utils/image-parser';
+import TagList from './TagList';
 
 /**
  * Props for the single item in the collection (BlockPosts.tsx).
@@ -47,21 +48,10 @@ const BlogPost = ({ story, relations }: BlogPostProps) => {
       </div>
 
       {/* Post tags, title, author, date excerpt and link */}
-      <div className="lg:w-2/3 lg:pl-10 lg:mt-0 mt-5">
+      <div className="lg:w-2/3 lg:pl-10">
         <header>
           {/* Post tags */}
-          {story.tag_list && (
-            <div className="lg:mt-0 mt-5">
-              {story.tag_list.map((tag, index) => (
-                <Link
-                  key={index}
-                  href={`/blog/tags/${tag}`}
-                  className="text-blue-800 mr-3 font-semibold text-lg dark:text-slate-400">
-                  {tag.toUpperCase()}
-                </Link>
-              ))}
-            </div>
-          )}
+          {story.tag_list && <TagList tagList={story.tag_list} />}
 
           {/* Title */}
           <h2 className="text-3xl font-semibold mt-2">
