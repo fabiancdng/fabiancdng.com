@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.13.4 - 2023-05-07
+
+- Fix: Blog post thumbnail getting too big
+
 ## 3.13.3 - 2023-05-06
 
 - Fix: Add redirects to avoid broken links
