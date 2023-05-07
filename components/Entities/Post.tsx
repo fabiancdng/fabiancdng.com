@@ -80,7 +80,7 @@ const Post = ({ blok, story, relations }: PostProps) => {
         {/* Content */}
         <article className="container pt-32 px-7 mx-auto mb-20 max-w-5xl text-black dark:text-white">
           {/* Header containing headline, excerpt and other introductory metadata */}
-          <header className="lg:w-11/12 w-full px-0 sm:px-7 mx-auto">
+          <header className="w-full px-0 sm:px-7 mx-auto">
             {/* Post tags */}
             {story.tag_list && (
               <TagList addCSSClasses="my-5" tagList={story.tag_list} />
@@ -111,9 +111,9 @@ const Post = ({ blok, story, relations }: PostProps) => {
                     alt={author.name + "'s profile picture"}
                   />
                   <div>
-                    <h3 className="text-lg font-medium leading-3 mb-1">
+                    <p className="text-lg font-medium leading-3 mb-1">
                       {author.name}
-                    </h3>
+                    </p>
                     <p className="text-gray-600 text-md dark:text-slate-400">
                       {story.first_published_at &&
                         new Date(story.first_published_at).toLocaleString(

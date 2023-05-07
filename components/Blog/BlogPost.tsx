@@ -73,9 +73,9 @@ const BlogPost = ({ story, relations }: BlogPostProps) => {
                 />
 
                 <div>
-                  <h3 className="text-lg font-normal leading-3 mb-1">
+                  <p className="text-lg font-medium leading-3 mb-1">
                     {author.name}
-                  </h3>
+                  </p>
                   <p className="text-gray-600 text-md dark:text-slate-400">
                     {story.first_published_at &&
                       new Date(story.first_published_at).toLocaleString(
