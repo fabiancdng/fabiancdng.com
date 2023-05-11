@@ -88,7 +88,9 @@ const Post = ({ blok, story, relations }: PostProps) => {
 
             {/* Post title */}
             {story.name && (
-              <h1 className="text-5xl font-semibold">{story.name}</h1>
+              <h1 className="text-5xl leading-[3.5rem] font-semibold">
+                {story.name}
+              </h1>
             )}
 
             {/* Post excerpt */}

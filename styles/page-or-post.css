@@ -59,28 +59,28 @@
 }
 
 .page-or-post-css h1 {
-  @apply text-4xl mb-4 mt-9;
+  @apply text-4xl mt-20;
   margin-top: 30px;
 }
 
 .page-or-post-css h2 {
-  @apply text-3xl font-semibold mb-4 mt-16;
+  @apply text-3xl font-semibold mt-20;
 }
 
 .page-or-post-css h3 {
-  @apply text-2xl font-medium mb-4 mt-9;
+  @apply text-2xl font-medium mt-[4rem];
 }
 
 .page-or-post-css h4 {
-  @apply text-2xl my-7 mb-4 mt-9;
+  @apply text-2xl mt-16;
 }
 
 .page-or-post-css h5 {
-  @apply text-2xl mb-4 mt-9;
+  @apply text-2xl mt-12;
 }
 
 .page-or-post-css h6 {
-  @apply text-2xl mb-4 mt-9;
+  @apply text-2xl mt-12;
 }
 
 .page-or-post-css ul {

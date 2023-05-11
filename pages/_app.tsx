@@ -59,8 +59,8 @@ storyblokInit({
   components: storyblokComponentsMapping,
   apiOptions: {
     cache: {
-      clear: process.env.NODE_ENV === 'production' ? 'auto' : 'manual',
-      type: 'memory',
+      clear: 'auto',
+      type: 'none',
     },
   },
 });
