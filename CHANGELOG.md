@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.13.6 - 2023-05-11
+
+- Fix spacing and caching bugs
+
 ## 3.13.5 - 2023-05-07
 
 - Fix: Layout and SEO issues
