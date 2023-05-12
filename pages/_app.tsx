@@ -14,7 +14,7 @@ import RichTextSection from '../components/Misc/RichTextSection';
 import HeroSection from '../components/Homepage/HeroSection';
 import ContactSection from '../components/Homepage/ContactSection';
 import Post from '../components/Entities/Post';
-import { SbBlogPosts } from '../components/Blog/BlogPosts';
+import { SbBlogFeed } from '../components/Blog/Feed/BlogFeed';
 import Project from '../components/Homepage/Projects/Project';
 import Skills from '../components/Homepage/Skills/Skills';
 import SkillChip from '../components/Homepage/Skills/SkillChip';
@@ -23,8 +23,8 @@ import '@fortawesome/fontawesome-free/css/fontawesome.min.css';
 import '@fortawesome/fontawesome-free/css/regular.min.css';
 import '@fortawesome/fontawesome-free/css/solid.min.css';
 import '@fortawesome/fontawesome-free/css/brands.min.css';
-import TagFilter, { SbTagFilter } from '../components/Blog/TagFilter';
-import BlogBanner from '../components/Blog/BlogBanner';
+import TagFilter, { SbTagFilter } from '../components/Blog/Overview/TagFilter';
+import BlogBanner from '../components/Blog/Overview/BlogBanner';
 import Projects from '../components/Homepage/Projects/Projects';
 import { GlobalsProvider } from '../context/Globals';
 
@@ -48,7 +48,7 @@ const storyblokComponentsMapping: SbReactComponentsMap = {
 
   // Blog.
   blogBanner: BlogBanner,
-  blogPosts: SbBlogPosts,
+  blogFeed: SbBlogFeed,
   blogTagFilter: SbTagFilter,
 };
 

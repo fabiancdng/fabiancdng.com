@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-const TagList = ({
+const PostTagList = ({
   tagList,
   addCSSClasses,
 }: {
@@ -29,4 +29,4 @@ const TagList = ({
   );
 };
 
-export default TagList;
+export default PostTagList;

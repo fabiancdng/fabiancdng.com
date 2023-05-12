@@ -1,8 +1,8 @@
 import { SbBlokData, storyblokEditable } from '@storyblok/react';
-import { Tag } from '../../types';
+import { Tag } from '../../../types';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import ParseAdditionalCSS from '../../utils/parse-additional-css';
+import ParseAdditionalCSS from '../../../utils/parse-additional-css';
 
 /**
  * Data for Blog Tag Filter Block Type from Storyblok.

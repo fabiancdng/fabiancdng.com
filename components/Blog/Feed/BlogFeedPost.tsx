@@ -1,21 +1,21 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { BlogPostStoryData, PostOrPageAuthor } from '../../types';
-import GetImageObject from '../../utils/image-parser';
-import TagList from './TagList';
+import { BlogPostStoryData, PostOrPageAuthor } from '../../../types';
+import GetImageObject from '../../../utils/image-parser';
+import PostTagList from '../Post/PostTagList';
 
 /**
- * Props for the single item in the collection (BlockPosts.tsx).
+ * Props for the single item in the collection (BlogFeed.tsx).
  */
-interface BlogPostProps {
+interface BlogFeedPostProps {
   story: BlogPostStoryData;
   relations: any;
 }
 
 /**
- * Renders a single blog post in the collection (BlockPosts.tsx) (no content, only basic info and link).
+ * Renders a single blog post in the feed collection (BlogFeed.tsx) (no content, only basic info and link).
  */
-const BlogPost = ({ story, relations }: BlogPostProps) => {
+const BlogFeedPost = ({ story, relations }: BlogFeedPostProps) => {
   // Filter through the array of relations to find the author object with the matching UUID.
   const author: PostOrPageAuthor = relations.find(
     (relation: any) => relation.uuid === story.content.author
@@ -52,7 +52,10 @@ const BlogPost = ({ story, relations }: BlogPostProps) => {
         <header>
           {/* Post tags */}
           {story.tag_list && (
-            <TagList addCSSClasses="mt-5 lg:mt-0" tagList={story.tag_list} />
+            <PostTagList
+              addCSSClasses="mt-5 lg:mt-0"
+              tagList={story.tag_list}
+            />
           )}
 
           {/* Title */}
@@ -109,4 +112,4 @@ const BlogPost = ({ story, relations }: BlogPostProps) => {
   );
 };
 
-export default BlogPost;
+export default BlogFeedPost;

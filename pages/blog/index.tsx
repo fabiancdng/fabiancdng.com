@@ -11,11 +11,10 @@ import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Layout from '../../components/Misc/Layout';
 import { BlogPostStoryData, IsbTags } from '../../types';
-import Pagination from '../../components/Blog/Pagination';
+import Pagination from '../../components/Blog/Overview/Pagination';
 import GetCurrentTimestamp from '../../utils/get-time-stamp';
 import SeoMetaTags from '../../components/Seo/SeoMetaTags';
 import { PageStoryData } from '../../types';
-import { PostOrPageAuthor } from '../../types';
 
 interface BlogPostStories extends ISbStories {
   data: {

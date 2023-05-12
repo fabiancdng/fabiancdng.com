@@ -9,10 +9,10 @@ import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next';
 import Head from 'next/head';
 import Layout from '../../../components/Misc/Layout';
 import { BlogPostStoryData, PageStoryData } from '../../../types';
-import Pagination from '../../../components/Blog/Pagination';
+import Pagination from '../../../components/Blog/Overview/Pagination';
 import GetCurrentTimestamp from '../../../utils/get-time-stamp';
-import BlogPosts from '../../../components/Blog/BlogPosts';
 import SeoMetaTags from '../../../components/Seo/SeoMetaTags';
+import BlogFeed from '../../../components/Blog/Feed/BlogFeed';
 
 interface PaginatedBlogOverviewPageProps {
   blogPostHomePageStory: PageStoryData;
@@ -85,7 +85,7 @@ const PaginatedBlogOverviewPage = (props: PaginatedBlogOverviewPageProps) => {
             </h2>
           </div>
 
-          <BlogPosts
+          <BlogFeed
             blogPosts={props.blogPosts}
             blogPostsRelations={props.blogPostsRelations}
           />

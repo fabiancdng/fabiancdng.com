@@ -4,8 +4,8 @@ import Layout from '../../../components/Misc/Layout';
 import Head from 'next/head';
 import GetCurrentTimestamp from '../../../utils/get-time-stamp';
 import { BlogPostStoryData, IsbTags, Tag } from '../../../types';
-import BlogPosts from '../../../components/Blog/BlogPosts';
-import TagFilter from '../../../components/Blog/TagFilter';
+import TagFilter from '../../../components/Blog/Overview/TagFilter';
+import BlogFeed from '../../../components/Blog/Feed/BlogFeed';
 
 interface TagPageProps {
   tag: Tag;
@@ -80,7 +80,7 @@ const TagPage = ({ tag, tags, posts, rels }: TagPageProps) => {
           </div>
 
           {/* Posts for this tag */}
-          <BlogPosts blogPosts={posts} blogPostsRelations={rels} />
+          <BlogFeed blogPosts={posts} blogPostsRelations={rels} />
         </main>
       </Layout>
     </>

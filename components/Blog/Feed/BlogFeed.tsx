@@ -1,6 +1,6 @@
 import { ISbStoryData, SbBlokData, storyblokEditable } from '@storyblok/react';
-import { BlogPostStoryData } from '../../types';
-import BlogPost from './BlogPost';
+import { BlogPostStoryData } from '../../../types';
+import BlogPost from './BlogFeedPost';
 
 /**
  * Props for the collection component.
@@ -13,16 +13,16 @@ interface BlogPostsProps {
 /**
  * Data for the Blog Posts block type from Storyblok.
  */
-interface BlogPostsBlock extends SbBlokData {}
+interface BlogFeedBlock extends SbBlokData {}
 
 /**
  * Renders collection of blog posts as a Storyblok block type.
  */
-export const SbBlogPosts = ({
+export const SbBlogFeed = ({
   blok,
   payload,
 }: {
-  blok: BlogPostsBlock;
+  blok: BlogFeedBlock;
   payload: any;
 }) => {
   return (
@@ -44,7 +44,7 @@ export const SbBlogPosts = ({
 /**
  * Renders collection of blog posts (no content, only basic info and link).
  */
-const BlogPosts = ({ blogPosts, blogPostsRelations }: BlogPostsProps) => {
+const BlogFeed = ({ blogPosts, blogPostsRelations }: BlogPostsProps) => {
   return (
     <div className="container pt-20 max-w-5-xl mx-auto px-10 md:px-24 lg:px-10">
       {/* Card for each blog post */}
@@ -55,4 +55,4 @@ const BlogPosts = ({ blogPosts, blogPostsRelations }: BlogPostsProps) => {
   );
 };
 
-export default BlogPosts;
+export default BlogFeed;
