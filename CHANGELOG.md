@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.14.1 - 2023-05-13
+
+- Fix: New Docker image
+
 ## 3.14.0 - 2023-05-13
 
 - Add API to export content (for cross-posting).
