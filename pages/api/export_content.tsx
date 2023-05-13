@@ -55,17 +55,59 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         );
       },
       replacement: function (content, node: any) {
+        const escapeHtml = (unsafe: string) => {
+          return unsafe
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+        };
         var language = node.firstChild.className.match(/language-(\w+)/)[1];
-        return '```' + language + '\n' + node.firstChild.textContent + '\n```';
+        return (
+          '```' +
+          language +
+          '\n' +
+          escapeHtml(node.firstChild.textContent) +
+          '\n```'
+        );
       },
     });
 
     const contentMarkdown = turndown.turndown(contentHTML);
 
     if (req.query.format === 'markdown') {
-      return res.status(200).send(contentMarkdown);
+      res.setHeader('Content-Type', 'text/html');
+
+      return res.send(
+        `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="utf-8">
+            <title>${story.story.name}</title>
+          </head>
+          <body>
+            <pre>${contentMarkdown}</pre>
+          </body>
+        </html>
+        `
+      );
     } else if (req.query.format === 'html') {
-      return res.status(200).send(contentHTML);
+      res.setHeader('Content-Type', 'text/html');
+
+      return res.status(200).send(`
+          <DOCTYPE html>
+          <html>
+            <head>
+              <meta charset="utf-8">
+              <title>${story.story.name}</title>
+            </head>
+            <body>
+              ${contentHTML}
+            </body>
+          </html>
+      `);
     } else {
       return res.status(200).json({
         html: contentHTML,
