@@ -55,4 +55,5 @@ jobs:
           push: true
           tags: |
             ghcr.io/fabiancdng/fabiancdng-website:latest
-            ghcr.io/fabiancdng/fabiancdng-website:${{ steps.get_version.outputs.VERSION }}
+
+# ghcr.io/fabiancdng/fabiancdng-website:${{ steps.get_version.outputs.VERSION }}
