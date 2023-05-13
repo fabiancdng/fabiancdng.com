@@ -11,7 +11,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   // Get GET parameter 'slug' from URL of the blog post to export.
   const slug = req.query.slug;
 
-  if (req.query.token !== process.env.NEXT_PUBLIC_STORYBLOK_TOKEN) {
+  if (req.query.token !== process.env.EXPORT_CONTENT_API_KEY) {
     return res.status(401).json({
       message: 'Unauthorized.',
     });
