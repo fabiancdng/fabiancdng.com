@@ -2,13 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.14.2 - 2023-05-13
+
+- Fix: Add Styling for `blockquote` and social media buttons
+
 ## 3.14.1 - 2023-05-13
 
 - Fix: New Docker image
 
 ## 3.14.0 - 2023-05-13
 
-- Add API to export content (for cross-posting).
+- Add API to export content (for cross-posting)
 
 ## 3.13.6 - 2023-05-11
 
