@@ -1,6 +1,6 @@
 {
   "name": "fabiancdng.com",
-  "version": "3.14.2",
+  "version": "3.14.3",
   "private": true,
   "scripts": {
     "dev": "next dev",

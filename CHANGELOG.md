@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.14.3 - 2023-05-14
+
+- Fix: Styling: Margin for `blockquote`
+
 ## 3.14.2 - 2023-05-13
 
 - Fix: Add Styling for `blockquote` and social media buttons
