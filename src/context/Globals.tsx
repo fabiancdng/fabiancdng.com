@@ -1,5 +1,7 @@
-import { Router, useRouter } from 'next/router';
+'use client';
+
 import { createContext, useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 /**
  * Data passed as props to the GlobalsProvider component.
@@ -30,29 +32,29 @@ export const GlobalsContext = createContext<globalsContext>({
  * Provider for the GlobalsContext.
  */
 export const GlobalsProvider = ({ children }: globalsProviderProps) => {
-  const router = useRouter();
+  const path = usePathname();
   const [colorMode, setColorMode] = useState<'light' | 'dark'>('light');
   const [activeNavItem, setActiveNavItem] = useState<string>('');
 
   useEffect(() => {
     // Set active nav item state based on the current route (/ parts of it).
-    if (router.asPath === '/' || router.asPath.includes('#contact-me')) {
+    if (path === '/') {
       // On homepage (including contact-me section).
       setActiveNavItem('home');
-    } else if (router.asPath === '/about') {
+    } else if (path === '/about') {
       // Custom about page.
       setActiveNavItem('about');
-    } else if (router.asPath.includes('#projects')) {
+    } else if (path.includes('#projects')) {
       // On homepage in the projects section.
       setActiveNavItem('projects');
-    } else if (router.asPath.includes('/blog')) {
+    } else if (path.includes('/blog')) {
       // On any page matching /blog*.
       setActiveNavItem('blog');
     } else {
       // Not on any page matching a navlink. Clear state.
       setActiveNavItem('');
     }
-  }, [router.asPath]);
+  }, []);
 
   return (
     <GlobalsContext.Provider

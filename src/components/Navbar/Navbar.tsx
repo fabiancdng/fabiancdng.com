@@ -1,17 +1,20 @@
-import { useEffect, useState } from 'react';
+'use client';
+
+import { useContext, useEffect, useState } from 'react';
 import DarkModeToggle from './DarkModeToggle';
 import NavbarLink from './NavbarLink';
 import Link from 'next/link';
 import Image from 'next/image';
-import NavbarImage from '../../public/navbar-image.png';
+import NavbarImage from '../../../public/img/navbar-image.png';
+import { GlobalsContext } from '@/context/Globals';
 
 /**
  * Data for a specific navbar link.
  */
 interface NavigationLink {
   title: string;
+  name: string;
   href: string;
-  active: boolean;
 }
 
 /**
@@ -22,6 +25,9 @@ interface NavbarProps {
 }
 
 const Navbar = ({ links }: NavbarProps) => {
+  // Get active nav item from globals context.
+  const { activeNavItem } = useContext(GlobalsContext);
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [screenWidth, setScreenWidth] = useState(0);
 
@@ -53,19 +59,13 @@ const Navbar = ({ links }: NavbarProps) => {
   return (
     <header
       className={`fixed top-0 left-0 w-full z-20 bg-white dark:bg-slate-800 border-slate-500
-                      ${
-                        atTop ? '' : 'drop-shadow-md'
-                      } transition-all ease-in-out duration-500`}>
+                      ${atTop ? '' : 'drop-shadow-md'} transition-all ease-in-out duration-500`}>
       {/* Navigation */}
       <nav className="flex items-center my-1 px-6 mx-auto">
         {/* Site title/logo */}
         <div className="w-14 h-14 p-1 flex items-center">
           <Link href="/">
-            <Image
-              className="cursor-pointer"
-              src={NavbarImage}
-              alt="Site logo"
-            />
+            <Image className="cursor-pointer" src={NavbarImage} alt="Site logo" />
           </Link>
         </div>
 
@@ -79,7 +79,7 @@ const Navbar = ({ links }: NavbarProps) => {
                 <NavbarLink
                   title={link.title}
                   href={link.href}
-                  active={link.active}
+                  active={link.name === activeNavItem}
                   additionalCSS="dark:hover:bg-slate-600 dark:text-white hover:bg-slate-200 rounded transition-all duration-500 px-4 py-3"
                 />
               </li>
@@ -119,12 +119,7 @@ const Navbar = ({ links }: NavbarProps) => {
                 onClick={() => setMobileMenuOpen(false)}
                 className="rounded bg-slate-200 hover:bg-slate-300 transition
                             ease-in-out duration-300 dark:bg-slate-600 dark:hover:bg-slate-500">
-                <NavbarLink
-                  title={link.title}
-                  href={link.href}
-                  active={false}
-                  additionalCSS="block w-full px-3 py-2"
-                />
+                <NavbarLink title={link.title} href={link.href} active={false} additionalCSS="block w-full px-3 py-2" />
               </li>
             ))
           }

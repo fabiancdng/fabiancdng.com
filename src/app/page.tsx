@@ -1,17 +1,25 @@
 import { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_URL || 'https://fabiancdng.com'),
-  title: 'Homepage | fabiancdng.com',
-  description:
-    "I'm Fabian Reinders, a student and full-stack web developer. On this website, I introduce myself, my projects, and my skills and write blog posts.",
+import Avatar from '../../public/img/avatar.jpg';
+import HeroSection from '@/components/Homepage/HeroSection';
 
-  twitter: {
-    card: 'summary',
-    images: ['/img/logo-circle-upscaled.png'],
-  },
+export const metadata: Metadata = {
+  title: 'Homepage | fabiancdng.com',
 };
 
 export default function Home() {
-  return <div></div>;
+  return (
+    <HeroSection
+      title="Fabian Reinders"
+      subtitle="Hello, I'm"
+      description="Student & Full-Stack Web Developer"
+      logo={{
+        src: Avatar,
+        alt: 'Fabian profile picture',
+        sizes: `(min-width: 1024px) 25vw
+                (min-width: 1280px) 35vw,
+                45vw`,
+      }}
+    />
+  );
 }
