@@ -45,6 +45,11 @@ const nextConfig = {
         destination: '/blog/scaling-next-js-web-apps-with-docker',
         permanent: true,
       },
+      {
+        source: '/blog/scaling-next-js-web-apps-with-docker',
+        destination: '/blog/scaling-node-js-web-apps-with-docker',
+        permanent: true,
+      },
     ];
   },
 };
