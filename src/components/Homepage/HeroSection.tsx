@@ -39,7 +39,7 @@ const HeroSection = ({ title, subtitle, description, logo }: HeroSectionProps) =
           {/* Logo */}
           {logo && (
             <div className="flex justify-center flex-1 lg:mb-0 z-10">
-              <div className="lg:w-3/6 lg:h-3/6 w-6/12 h-6/12">
+              <div className="lg:w-3/6 w-5/12">
                 <Image src={logo.src} alt={logo.alt} sizes={logo.sizes} priority className="rounded-full" />
               </div>
             </div>

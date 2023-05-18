@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <HeroSection
-      title="Fabian Reinders"
-      subtitle="Hello, I'm"
+      title="I'm Fabian"
+      subtitle="Hey!"
       description="Student & Full-Stack Web Developer"
       logo={{
         src: Avatar,
