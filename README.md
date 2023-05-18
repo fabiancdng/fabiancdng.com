@@ -1,6 +1,15 @@
 # 🌐 [fabiancdng.com](https://fabiancdng.com)
 
-### My personal portfolio website and blog built with Next.js, Tailwind, and Storyblok.
+### My personal portfolio website and blog built with Next.js and Tailwind.
+
+This is the fourth iteration of my website.
+
+|     |                                                                                                       |
+| --- | ----------------------------------------------------------------------------------------------------- |
+| v1  | Strapi + Ghost as a CMS, Next.js 12 front end                                                         |
+| v2  | Ghost as a CMS for the blog, other content hard-coded; Next.js 12 front end                           |
+| v3  | Rewrite with Storyblok as a CMS, Next.js 13 on the front end                                          |
+| v3  | Rewrite without CMS; Content in Markdown files; Next.js 13.4 on the front end with Next.js App Router |
 
 ---
 
