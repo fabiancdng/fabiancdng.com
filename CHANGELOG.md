@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.14.4 - 2023-05-18
+
+- Fix broken link `/blog/scaling-next-js-web-apps-with-docker` due to slug update
+
 ## 3.14.3 - 2023-05-14
 
 - Fix: Styling: Margin for `blockquote`
