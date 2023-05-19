@@ -1,33 +1,14 @@
-import { readFile } from 'fs/promises';
-import matter from 'gray-matter';
-import { PostMetadata } from '@/types';
 import Post from '@/components/Blog/Post/Post';
+import { getPostBySlug } from '@/adapters/ContentAdapter';
 
 const BlogPostPage = async ({ params }: { params: { slug: string } }) => {
-  const absPath = process.cwd();
+  const post = await getPostBySlug(params.slug);
 
-  // Read the file.
-  const file = await readFile(`${absPath}/content/blog/${params.slug}/post.md`).catch((err) => {
-    return err;
-  });
-
-  const postMd = file.toString();
-
-  // Strip and parse metadata.
-  const postMatter = matter(postMd, {
-    excerpt: true,
-  });
-
-  const postData: PostMetadata = postMatter.data as PostMetadata;
-
-  let postContent;
-  if (postMatter.excerpt) {
-    postContent = postMatter.content.slice(postMatter.excerpt?.length + 3);
-  } else {
-    postContent = postMatter.content;
+  if (!post) {
+    return <h1 className="text-red-800 mt-20">404 - Not Found.</h1>;
   }
 
-  return <Post metadata={postData} content={postContent} />;
+  return <Post metadata={post['metadata']} content={post.content} />;
 };
 
 /**
