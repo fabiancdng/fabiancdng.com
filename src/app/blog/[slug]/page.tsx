@@ -20,8 +20,6 @@ const BlogPostPage = async ({ params }: { params: { slug: string } }) => {
 
   const postData: PostMetadata = postMatter.data as PostMetadata;
 
-  console.log(postMatter.excerpt?.trim());
-
   let postContent;
   if (postMatter.excerpt) {
     postContent = postMatter.content.slice(postMatter.excerpt?.length + 3);
