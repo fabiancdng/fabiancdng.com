@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: 'Homepage | fabiancdng.com',
 };
 
-export default function Home() {
+const HomePage = () => {
   return (
     <HeroSection
       title="I'm Fabian"
@@ -22,4 +22,6 @@ export default function Home() {
       }}
     />
   );
-}
+};
+
+export default HomePage;

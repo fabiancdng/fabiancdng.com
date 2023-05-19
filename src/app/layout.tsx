@@ -56,43 +56,45 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <GlobalsProvider>
-          <Navbar
-            links={[
-              {
-                title: 'Home',
-                name: 'home',
-                href: '/',
-              },
-              {
-                title: 'Projects',
-                name: 'projects',
-                href: '/#projects',
-              },
-              {
-                title: 'Blog',
-                name: 'blog',
-                href: '/blog',
-              },
-              {
-                title: 'About',
-                name: 'about',
-                href: '/about',
-              },
-            ]}
-          />
+        <div className="app overflow-x-hidden dark:bg-slate-900 min-h-screen dark:text-white">
+          <GlobalsProvider>
+            <Navbar
+              links={[
+                {
+                  title: 'Home',
+                  name: 'home',
+                  href: '/',
+                },
+                {
+                  title: 'Projects',
+                  name: 'projects',
+                  href: '/#projects',
+                },
+                {
+                  title: 'Blog',
+                  name: 'blog',
+                  href: '/blog',
+                },
+                {
+                  title: 'About',
+                  name: 'about',
+                  href: '/about',
+                },
+              ]}
+            />
 
-          <main className="app overflow-x-hidden dark:bg-slate-900 min-h-screen dark:text-white">{children}</main>
+            <main>{children}</main>
 
-          <Footer
-            text={`Copyright © 2021-${new Date().getFullYear()} Fabian Reinders`}
-            links={[
-              { title: 'Contact', href: '/#contact-me' },
-              { title: 'Legal Notice', href: '/legal-notice' },
-              { title: 'Privacy Policy', href: '/privacy-policy' },
-            ]}
-          />
-        </GlobalsProvider>
+            <Footer
+              text={`Copyright © 2021-${new Date().getFullYear()} Fabian Reinders`}
+              links={[
+                { title: 'Contact', href: '/#contact-me' },
+                { title: 'Legal Notice', href: '/legal-notice' },
+                { title: 'Privacy Policy', href: '/privacy-policy' },
+              ]}
+            />
+          </GlobalsProvider>
+        </div>
       </body>
     </html>
   );

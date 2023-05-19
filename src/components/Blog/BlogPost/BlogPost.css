@@ -1,0 +1,94 @@
+#blog-post,
+#blog-post {
+  @apply text-xl;
+}
+
+#blog-post a {
+  @apply border-b-2 border-violet-700;
+  transition: all 0.15s ease-in-out;
+}
+
+#blog-post a:hover {
+  @apply border-b-[3px];
+  transition: all 0.15s ease-in-out;
+}
+
+#blog-post figure {
+  margin: 35px 0px 40px 0px;
+}
+
+#blog-post figcaption {
+  @apply text-gray-600 dark:text-gray-300 text-lg italic mt-3 mb-5;
+  text-align: center;
+}
+
+#blog-post img {
+  @apply rounded-2xl my-10;
+  width: 100%;
+}
+
+#blog-post pre code {
+  @apply text-base;
+  margin: 20px 0px 20px 0px;
+  border-radius: 10px;
+}
+
+#blog-post p b,
+#blog-post p strong {
+  font-weight: 600;
+}
+
+#blog-post p {
+  @apply my-7;
+}
+
+/* Inline code */
+#blog-post p code {
+  @apply bg-gray-100 text-red-500 p-1 dark:bg-slate-800;
+}
+
+#blog-post hr {
+  @apply my-10;
+}
+
+#blog-post h1 {
+  @apply text-4xl mt-20;
+  margin-top: 30px;
+}
+
+#blog-post h2 {
+  @apply text-3xl font-semibold mt-20;
+}
+
+#blog-post h3 {
+  @apply text-2xl font-medium mt-[4rem];
+}
+
+#blog-post h4 {
+  @apply text-2xl mt-16;
+}
+
+#blog-post h5 {
+  @apply text-2xl mt-12;
+}
+
+#blog-post h6 {
+  @apply text-2xl mt-12;
+}
+
+#blog-post ul {
+  @apply my-7 pl-5;
+  list-style: disc;
+}
+
+#blog-post ul p {
+  @apply my-3;
+}
+
+#blog-post ul li {
+  margin-left: 20px;
+}
+
+#blog-post blockquote {
+  @apply px-5 py-1 my-5 rounded-md border-l-4 border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-slate-800;
+}
