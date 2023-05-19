@@ -11,7 +11,7 @@ const Post = ({ slug, post }: { slug: string; post: Post }) => {
       <Header metadata={post.metadata} excerpt={post.excerpt} />
       <Thumbnail slug={slug} />
       <div className="post-body max-w-3xl mx-auto">
-        <Markdown content={post.content} />
+        <Markdown slug={slug} content={post.content} />
       </div>
     </article>
   );
