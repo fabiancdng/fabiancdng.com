@@ -1,14 +1,14 @@
 import { readFile } from 'fs/promises';
 import matter from 'gray-matter';
 import { PostMetadata } from '@/types';
-import BlogPost from '@/components/Blog/BlogPost/BlogPost';
+import Post from '@/components/Blog/Post/Post';
 
 const BlogPostPage = async ({ params }: { params: { slug: string } }) => {
   const absPath = process.cwd();
 
   // Read the file.
   const file = await readFile(`${absPath}/content/blog/${params.slug}/post.md`).catch((err) => {
-    return { notFound: true };
+    return err;
   });
 
   const postMd = file.toString();
@@ -27,7 +27,13 @@ const BlogPostPage = async ({ params }: { params: { slug: string } }) => {
     postContent = postMatter.content;
   }
 
-  return <BlogPost metadata={postData} content={postContent} />;
+  return <Post metadata={postData} content={postContent} />;
 };
+
+/**
+ * Revalidate page every 60 seconds.
+ * Prevents parser from re-parsing the file on every request.
+ */
+export const revalidate = 60;
 
 export default BlogPostPage;

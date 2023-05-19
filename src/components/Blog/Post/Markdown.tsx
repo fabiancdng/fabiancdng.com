@@ -24,12 +24,25 @@ const renderNodeCode: CodeComponent = ({ node, inline, className, children, ...p
 };
 
 /**
+ * Renders <pre> tag.
+ * Removes surrounding <pre> tag, if <pre> tag contains only one <code> tag.
+ */
+const renderNodePre = ({ children }: { children: JSX.Element[] }): JSX.Element => {
+  if (children.length === 1 && children[0].type === 'code') {
+    return children[0];
+  }
+
+  return <pre>{children}</pre>;
+};
+
+/**
  * Markdown content to be rendered.
  */
 const Markdown = ({ content }: { content: string }) => {
   // Map of nodes and their custom render function.
-  const renderMap = {
+  const renderMap: any = {
     code: renderNodeCode,
+    pre: renderNodePre,
   };
 
   return <ReactMarkdown children={content} components={renderMap} />;
