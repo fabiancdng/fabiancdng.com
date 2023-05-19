@@ -1,9 +1,4 @@
-import {
-  ISbRichtext,
-  ISbStory,
-  getStoryblokApi,
-  renderRichText,
-} from '@storyblok/react';
+import { ISbRichtext, ISbStory, getStoryblokApi, renderRichText } from '@storyblok/react';
 import { NextApiRequest, NextApiResponse } from 'next';
 import TurndownService from 'turndown';
 
@@ -11,7 +6,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   // Get GET parameter 'slug' from URL of the blog post to export.
   const slug = req.query.slug;
 
-  if (req.query.token !== process.env.EXPORT_CONTENT_API_KEY) {
+  if (req.query.token !== process.env.PUBLIC_IMAGE_API_KEY) {
     return res.status(401).json({
       message: 'Unauthorized.',
     });
@@ -21,9 +16,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const storyblokApi = getStoryblokApi();
 
   try {
-    const { data: story }: ISbStory = await storyblokApi.get(
-      `cdn/stories/${slug}`
-    );
+    const { data: story }: ISbStory = await storyblokApi.get(`cdn/stories/${slug}`);
 
     // Get the content field in the story (if it has one).
     if (!story.story.content) {
@@ -48,29 +41,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     turndown.addRule('codeBlock', {
       filter: function (node: any) {
         return (
-          node.nodeName === 'PRE' &&
-          node.firstChild &&
-          node.firstChild.nodeName === 'CODE' &&
-          /language-/.test(node.firstChild.className)
+          node.nodeName === 'PRE' && node.firstChild && node.firstChild.nodeName === 'CODE' && /language-/.test(node.firstChild.className)
         );
       },
       replacement: function (content, node: any) {
         const escapeHtml = (unsafe: string) => {
-          return unsafe
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#039;');
+          return unsafe.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
         };
         var language = node.firstChild.className.match(/language-(\w+)/)[1];
-        return (
-          '```' +
-          language +
-          '\n' +
-          escapeHtml(node.firstChild.textContent) +
-          '\n```'
-        );
+        return '```' + language + '\n' + escapeHtml(node.firstChild.textContent) + '\n```';
       },
     });
 
