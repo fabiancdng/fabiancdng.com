@@ -1,7 +1,6 @@
-import CodeBlock from './CodeBlock';
 import { CodeComponent } from 'react-markdown/lib/ast-to-react';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
-import CodeBlockShiki from './CodeBlockShiki';
+import CodeBlock from './CodeBlock';
 
 /**
  * Custom code block renderer.
@@ -15,7 +14,8 @@ const renderNodeCode: CodeComponent = ({ node, inline, className, children, ...p
   const language = match ? match[1] : 'text';
 
   return !inline && match ? (
-    <CodeBlockShiki code={code} language={language} />
+    /* @ts-expect-error Server Component */
+    <CodeBlock code={code} language={language} />
   ) : (
     <code {...props} className={className}>
       {children}

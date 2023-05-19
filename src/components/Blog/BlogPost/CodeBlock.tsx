@@ -1,11 +1,13 @@
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { getHighlighter } from 'shiki';
 
-/**
- * Multi-line code block to render and highlight.
- */
-const CodeBlock = ({ code, language }: { code: string; language: string }) => {
-  return <SyntaxHighlighter children={code} style={atomDark} language={language} />;
+const CodeBlock = async ({ code, language }: { code: string; language: string }) => {
+  const shikiHighlighter = await getHighlighter({
+    theme: 'one-dark-pro',
+  });
+
+  const codeHighlighted = shikiHighlighter.codeToHtml(code, { lang: language });
+
+  return <div dangerouslySetInnerHTML={{ __html: codeHighlighted }} />;
 };
 
 export default CodeBlock;
