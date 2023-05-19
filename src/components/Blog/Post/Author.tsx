@@ -1,8 +1,8 @@
 import { getAuthorBySlug } from '@/adapters/ContentAdapter';
 import Image from 'next/image';
 
-const Author = async ({ slug, publishedAt }: { slug: string; publishedAt: Date }) => {
-  const author = await getAuthorBySlug(slug);
+const Author = ({ slug, publishedAt }: { slug: string; publishedAt: Date }) => {
+  const author = getAuthorBySlug(slug);
 
   if (!author) return null;
 
@@ -10,14 +10,8 @@ const Author = async ({ slug, publishedAt }: { slug: string; publishedAt: Date }
     <div className="post-author w-fit">
       <a className="w-fit" href="/authors/fabiancdng">
         <div className="flex items-center my-8">
-          {/* <img
-            alt="Fabian Reinders's profile picture"
-            className="w-12 h-12 mr-2 rounded-full"
-            src="/_next/image?url=https%3A%2F%2Fs3.amazonaws.com%2Fa.storyblok.com%2Ff%2F213297%2F962x901%2Fe636e7c9eb%2Fpb.JPG&amp;w=128&amp;q=75"
-          /> */}
-
           <Image
-            src={`/api/content/images/authors/${slug}/img/avatar.jpg?token=${process.env.PUBLIC_IMAGE_API_KEY}`}
+            src={`/api/content/images/authors/${slug}/img/avatar.jpg?token=${process.env.NEXT_PUBLIC_CONTENT_IMAGE_API_KEY}`}
             alt={`${author.metadata.name} profile picture`}
             width={200}
             height={200}

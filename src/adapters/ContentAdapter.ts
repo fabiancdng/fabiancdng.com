@@ -1,53 +1,56 @@
 import { AuthorMetadata, Post, PostMetadata } from '@/types';
-import { readFile } from 'fs/promises';
 import matter from 'gray-matter';
 import { Author } from '@/types';
+import { readFileSync } from 'fs';
 
-export async function getPostBySlug(slug: string): Promise<Post | null> {
+export const API_URL =
+  process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_DOMAIN || 'https://fabiancdng.com' : 'http://localhost:3000';
+
+export function getPostBySlug(slug: string): Post | null {
   const absPath = process.cwd();
+  // Get markdown from content API.
+  // Load the markdown file using fs and send it back as a response.
+  try {
+    const markdown = readFileSync(`${absPath}/content/blog/${slug}/post.md`);
 
-  // Read the file.
-  const file = await readFile(`${absPath}/content/blog/${slug}/post.md`).catch(() => {
+    // Strip and parse metadata.
+    const postMatter = matter(markdown, {
+      excerpt: true,
+    });
+
+    const content = postMatter.excerpt ? postMatter.content.slice(postMatter.excerpt.length + 3) : postMatter.content;
+    const metadata = postMatter.data as PostMetadata;
+
+    return {
+      metadata,
+      content,
+      excerpt: postMatter.excerpt,
+    };
+  } catch (err) {
     return null;
-  });
-
-  if (!file) return null;
-
-  // Strip and parse metadata.
-  const postMatter = matter(file.toString(), {
-    excerpt: true,
-  });
-
-  const content = postMatter.excerpt ? postMatter.content.slice(postMatter.excerpt.length + 3) : postMatter.content;
-  const metadata = postMatter.data as PostMetadata;
-
-  return {
-    metadata,
-    content,
-    excerpt: postMatter.excerpt,
-  };
+  }
 }
 
-export async function getAuthorBySlug(slug: string): Promise<Author | null> {
+export function getAuthorBySlug(slug: string): Author | null {
   const absPath = process.cwd();
+  // Get markdown from content API.
+  // Load the markdown file using fs and send it back as a response.
+  try {
+    const markdown = readFileSync(`${absPath}/content/authors/${slug}/author.md`);
 
-  // Read the file.
-  const file = await readFile(`${absPath}/content/authors/${slug}/author.md`).catch(() => {
+    // Strip and parse metadata.
+    const authorMatter = matter(markdown, {
+      excerpt: false,
+    });
+
+    const content = authorMatter.content;
+    const metadata = authorMatter.data as AuthorMetadata;
+
+    return {
+      metadata,
+      content,
+    };
+  } catch (err) {
     return null;
-  });
-
-  if (!file) return null;
-
-  // Strip and parse metadata.
-  const authorMatter = matter(file.toString(), {
-    excerpt: false,
-  });
-
-  const content = authorMatter.content;
-  const metadata = authorMatter.data as AuthorMetadata;
-
-  return {
-    metadata,
-    content,
-  };
+  }
 }

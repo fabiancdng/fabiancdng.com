@@ -9,7 +9,7 @@ export async function GET(request: Request, { params }: { params: { slug: string
 
   // Make sure request is authorized.
   const authorizationToken = url.searchParams.get('token');
-  if (authorizationToken !== process.env.PUBLIC_IMAGE_API_KEY) {
+  if (authorizationToken !== process.env.NEXT_PUBLIC_CONTENT_IMAGE_API_KEY) {
     return new Response('Unauthorized', { status: 401 });
   }
 
