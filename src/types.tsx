@@ -1,4 +1,5 @@
 export interface Post {
+  slug?: string;
   metadata: PostMetadata;
   content: string;
   excerpt?: string;

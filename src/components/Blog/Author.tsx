@@ -9,7 +9,7 @@ const Author = ({ slug, publishedAt }: { slug: string; publishedAt: Date }) => {
   return (
     <div className="post-author w-fit">
       <a className="w-fit" href="/authors/fabiancdng">
-        <div className="flex items-center my-8">
+        <div className="flex items-center my-4">
           <Image
             src={`/api/content/images/authors/${slug}/img/avatar.jpg?token=${process.env.NEXT_PUBLIC_CONTENT_IMAGE_API_KEY}`}
             alt={`${author.metadata.name} profile picture`}

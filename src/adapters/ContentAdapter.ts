@@ -1,7 +1,7 @@
 import { AuthorMetadata, Post, PostMetadata } from '@/types';
 import matter from 'gray-matter';
 import { Author } from '@/types';
-import { readFileSync } from 'fs';
+import { readFileSync, readdirSync } from 'fs';
 
 export const API_URL =
   process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_DOMAIN || 'https://fabiancdng.com' : 'http://localhost:3000';
@@ -53,4 +53,40 @@ export function getAuthorBySlug(slug: string): Author | null {
   } catch (err) {
     return null;
   }
+}
+
+/**
+ *  Iterate over all files in the `content/blog` directory and create array with data needed to
+ *  display the blog in a feed.
+ */
+export function getAllBlogPosts(): Post[] {
+  const absPath = process.cwd();
+
+  const posts: Post[] = [];
+
+  const dirs = readdirSync(`${absPath}/content/blog`);
+  dirs.forEach((dir) => {
+    let markdown;
+    try {
+      markdown = readFileSync(`${absPath}/content/blog/${dir}/post.md`);
+    } catch (err) {
+      return;
+    }
+
+    // Strip and parse metadata.
+    const postMatter = matter(markdown, {
+      excerpt: true,
+    });
+
+    const metadata = postMatter.data as PostMetadata;
+
+    posts.push({
+      slug: dir,
+      metadata,
+      content: '', // We don't need the content for the feed.
+      excerpt: postMatter.excerpt,
+    });
+  });
+
+  return posts;
 }

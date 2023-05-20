@@ -40,9 +40,7 @@ interface BlogHomePageProps {
   };
 }
 
-const POSTS_PER_PAGE = process.env.POSTS_PER_PAGE
-  ? parseInt(process.env.POSTS_PER_PAGE)
-  : 15;
+const POSTS_PER_PAGE = process.env.POSTS_PER_PAGE ? parseInt(process.env.POSTS_PER_PAGE) : 15;
 
 /**
  * Blog home page.
@@ -59,12 +57,7 @@ const BlogHomePage = (props: BlogHomePageProps) => {
 
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_DOMAIN}/blog`} />
 
-        {props.pagination.totalPages > 1 && (
-          <link
-            rel="next"
-            href={`${process.env.NEXT_PUBLIC_DOMAIN}/blog/posts/2`}
-          />
-        )}
+        {props.pagination.totalPages > 1 && <link rel="next" href={`${process.env.NEXT_PUBLIC_DOMAIN}/blog/posts/2`} />}
       </Head>
 
       <SeoMetaTags story={story} />
@@ -85,10 +78,7 @@ const BlogHomePage = (props: BlogHomePageProps) => {
           />
 
           {props.pagination.totalPages > 1 && (
-            <Pagination
-              currentPage={props.pagination.currentPage}
-              totalPages={props.pagination.totalPages}
-            />
+            <Pagination currentPage={props.pagination.currentPage} totalPages={props.pagination.totalPages} />
           )}
         </main>
       </Layout>
@@ -101,28 +91,20 @@ export const getStaticProps: GetStaticProps = async () => {
 
   // Console log on the server-side for easy maintenance.
   if (process.env.NODE_ENV === 'production') {
-    console.log(
-      `[${GetCurrentTimestamp()}] getStaticProps() executing for /blog...`
-    );
+    console.log(`[${GetCurrentTimestamp()}] getStaticProps() executing for /blog...`);
   }
 
   // Get the blog overview page story from Storyblok.
   try {
-    const { data: story }: ISbStory = await storyblokApi.get(
-      `cdn/stories/blog`,
-      {
-        version: process.env.NODE_ENV === 'production' ? 'published' : 'draft',
-      }
-    );
+    const { data: story }: ISbStory = await storyblokApi.get(`cdn/stories/blog`, {
+      version: process.env.NODE_ENV === 'production' ? 'published' : 'draft',
+    });
 
     // Calculate how many blog posts there are by counting all links starting with 'blog/'.
-    const { data: blogPostLinks }: ISbStories = await storyblokApi.get(
-      `cdn/links`,
-      {
-        starts_with: 'blog/',
-        version: process.env.NODE_ENV === 'production' ? 'published' : 'draft',
-      }
-    );
+    const { data: blogPostLinks }: ISbStories = await storyblokApi.get(`cdn/links`, {
+      starts_with: 'blog/',
+      version: process.env.NODE_ENV === 'production' ? 'published' : 'draft',
+    });
 
     // Total count of blog posts in Storyblok.
     const blogPostTotalCount = Object.keys(blogPostLinks.links).length - 1; // -1 because the blog overview page is also counted.
@@ -141,10 +123,7 @@ export const getStaticProps: GetStaticProps = async () => {
     };
 
     // Retrieve stories for all blog posts (without content).
-    const { data: blogPosts }: BlogPostStories = await storyblokApi.get(
-      `cdn/stories`,
-      sbParams
-    );
+    const { data: blogPosts }: BlogPostStories = await storyblokApi.get(`cdn/stories`, sbParams);
 
     if (blogPosts.stories.length === 0) {
       return {

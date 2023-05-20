@@ -17,15 +17,9 @@ interface BlogFeedPostProps {
  */
 const BlogFeedPost = ({ story, relations }: BlogFeedPostProps) => {
   // Filter through the array of relations to find the author object with the matching UUID.
-  const author: PostOrPageAuthor = relations.find(
-    (relation: any) => relation.uuid === story.content.author
-  );
+  const author: PostOrPageAuthor = relations.find((relation: any) => relation.uuid === story.content.author);
 
-  const thumbnail = GetImageObject(
-    story.content.thumbnail.filename,
-    story.content.thumbnail.alt,
-    story.content.thumbnail.title
-  );
+  const thumbnail = GetImageObject(story.content.thumbnail.filename, story.content.thumbnail.alt, story.content.thumbnail.title);
 
   // Responsive card with image on the left and text on the right.
   return (
@@ -51,12 +45,7 @@ const BlogFeedPost = ({ story, relations }: BlogFeedPostProps) => {
       <div className="lg:w-2/3 lg:pl-10">
         <header>
           {/* Post tags */}
-          {story.tag_list && (
-            <PostTagList
-              addCSSClasses="mt-5 lg:mt-0"
-              tagList={story.tag_list}
-            />
-          )}
+          {story.tag_list && <PostTagList addCSSClasses="mt-5 lg:mt-0" tagList={story.tag_list} />}
 
           {/* Title */}
           <h2 className="text-3xl font-semibold mt-2">
@@ -76,17 +65,12 @@ const BlogFeedPost = ({ story, relations }: BlogFeedPostProps) => {
                 />
 
                 <div>
-                  <p className="text-lg font-medium leading-3 mb-1">
-                    {author.name}
-                  </p>
+                  <p className="text-lg font-medium leading-3 mb-1">{author.name}</p>
                   <p className="text-gray-600 text-md dark:text-slate-400">
                     {story.first_published_at &&
-                      new Date(story.first_published_at).toLocaleString(
-                        'en-US',
-                        {
-                          dateStyle: 'long',
-                        }
-                      )}
+                      new Date(story.first_published_at).toLocaleString('en-US', {
+                        dateStyle: 'long',
+                      })}
                   </p>
                 </div>
               </div>
@@ -95,16 +79,10 @@ const BlogFeedPost = ({ story, relations }: BlogFeedPostProps) => {
         </header>
 
         {/* Excerpt */}
-        <p className="text-gray-600 dark:text-slate-400 my-5">
-          {story.content.excerpt}
-        </p>
+        <p className="text-gray-600 dark:text-slate-400 my-5">{story.content.excerpt}</p>
 
         {/* Read more link */}
-        <Link
-          href={`/${story.full_slug}`}
-          className={
-            'text-blue-500 hover:text-blue-600 dark:text-slate-200 dark:hover:text-slate-100'
-          }>
+        <Link href={`/${story.full_slug}`} className={'text-blue-500 hover:text-blue-600 dark:text-slate-200 dark:hover:text-slate-100'}>
           Read more &rarr;
         </Link>
       </div>
