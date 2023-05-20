@@ -2,8 +2,8 @@ import { getAllBlogPosts } from '@/adapters/ContentAdapter';
 import BlogBanner from '@/components/Blog/Feed/BlogBanner';
 import PostPreview from '@/components/Blog/Feed/PostPreview';
 
-const BlogPage = () => {
-  const blogPosts = getAllBlogPosts();
+const BlogPage = async () => {
+  const blogPosts = await getAllBlogPosts();
   return (
     <>
       <BlogBanner

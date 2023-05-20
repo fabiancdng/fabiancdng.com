@@ -7,9 +7,9 @@ import { getImageDimensions } from '@/adapters/ImageAdapter';
 const PostPreview = ({ post }: { post: Post }) => {
   const thumbnailDimensions = getImageDimensions(`/content/blog/${post.slug}/img/thumbnail.jpg`);
   return (
-    <article className="flex flex-col lg:flex-row lg:p-0 space-y-2 mt-5 mb-28 items-center">
+    <article className="flex flex-col lg:flex-row lg:p-0 space-y-2 mt-36 mb-28 items-start">
       {/* Thumbnail */}
-      <div className="lg:w-1/3 w-full">
+      <div className="lg:w-1/3 mt-2 w-full">
         <Link href={`/blog/${post.slug}`}>
           <Image
             src={`/api/content/images/blog/${post.slug}/img/thumbnail.jpg?token=${process.env.NEXT_PUBLIC_CONTENT_IMAGE_API_KEY}`}

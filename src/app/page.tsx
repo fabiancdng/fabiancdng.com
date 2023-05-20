@@ -9,18 +9,20 @@ export const metadata: Metadata = {
 
 const HomePage = () => {
   return (
-    <HeroSection
-      title="I'm Fabian"
-      subtitle="Hey!"
-      description="Student & Full-Stack Web Developer"
-      logo={{
-        src: Avatar,
-        alt: 'Fabian profile picture',
-        sizes: `(min-width: 1024px) 25vw
+    <main>
+      <HeroSection
+        title="I'm Fabian"
+        subtitle="Hey!"
+        description="Student & Full-Stack Web Developer"
+        logo={{
+          src: Avatar,
+          alt: 'Fabian profile picture',
+          sizes: `(min-width: 1024px) 25vw
                 (min-width: 1280px) 35vw,
                 45vw`,
-      }}
-    />
+        }}
+      />
+    </main>
   );
 };
 

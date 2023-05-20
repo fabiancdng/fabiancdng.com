@@ -12,7 +12,7 @@ interface BlogBannerProps {
 
 const BlogBanner = ({ title, subtitle, description, linkTitle, link }: BlogBannerProps) => {
   return (
-    <div className="relative py-28 sm:px-20 px-10 mx-auto shadow-lg">
+    <div className="relative py-24 sm:px-20 px-10 mx-auto shadow-lg">
       <Image
         src={codeBannerJpg}
         priority

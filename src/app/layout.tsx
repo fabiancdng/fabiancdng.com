@@ -83,7 +83,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               ]}
             />
 
-            <main>{children}</main>
+            {children}
 
             <Footer
               text={`Copyright © 2021-${new Date().getFullYear()} Fabian Reinders`}

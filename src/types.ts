@@ -25,3 +25,9 @@ export interface AuthorMetadata {
   twitter: string;
   github: string;
 }
+
+export interface Tag {
+  slug: string;
+  name: string;
+  emoji: string;
+}

@@ -1,8 +1,8 @@
 import { getAuthorBySlug } from '@/adapters/ContentAdapter';
 import Image from 'next/image';
 
-const Author = ({ slug, publishedAt }: { slug: string; publishedAt: Date }) => {
-  const author = getAuthorBySlug(slug);
+const Author = async ({ slug, publishedAt }: { slug: string; publishedAt: Date }) => {
+  const author = await getAuthorBySlug(slug);
 
   if (!author) return null;
 

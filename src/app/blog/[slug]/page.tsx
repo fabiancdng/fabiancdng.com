@@ -8,28 +8,32 @@ import { getAllBlogPostSlugs, getPostBySlug } from '@/adapters/ContentAdapter';
 export const dynamicParams = true;
 
 /**
- * Cache the page for 20 seconds to prevent disk reads and re-parsing on every request.
+ * Cache the page for 30 minutes to prevent disk reads and re-parsing on every request.
  */
-export const revalidate = 20;
+export const revalidate = 30 * 60;
 
 /**
  * A single blog post page.
  */
-const BlogPostPage = ({ params }: { params: { slug: string } }) => {
-  const post = getPostBySlug(params.slug);
+const BlogPostPage = async ({ params }: { params: { slug: string } }) => {
+  const post = await getPostBySlug(params.slug);
 
   if (!post) {
     return <h1 className="text-red-800 mt-20">404 - Not Found.</h1>;
   }
 
-  return <Post slug={params.slug} post={post} />;
+  return (
+    <main>
+      <Post slug={params.slug} post={post} />
+    </main>
+  );
 };
 
 /**
  * Export possible paths for this page.
  */
 export async function generateStaticParams() {
-  return getAllBlogPostSlugs();
+  return await getAllBlogPostSlugs();
 }
 
 export default BlogPostPage;

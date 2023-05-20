@@ -1,69 +1,65 @@
-import { AuthorMetadata, Post, PostMetadata } from '@/types';
+import { AuthorMetadata, Post, PostMetadata, Tag } from '@/types';
 import matter from 'gray-matter';
 import { Author } from '@/types';
-import { readFileSync, readdirSync } from 'fs';
+import { readFile, readdir } from 'fs/promises';
 
 export const API_URL =
   process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_DOMAIN || 'https://fabiancdng.com' : 'http://localhost:3000';
 
-export function getPostBySlug(slug: string): Post | null {
+export async function getPostBySlug(slug: string): Promise<Post | null> {
   const absPath = process.cwd();
+
   // Get markdown from content API.
   // Load the markdown file using fs and send it back as a response.
-  try {
-    const markdown = readFileSync(`${absPath}/content/blog/${slug}/post.md`);
+  const markdown = await readFile(`${absPath}/content/blog/${slug}/post.md`);
 
-    // Strip and parse metadata.
-    const postMatter = matter(markdown, {
-      excerpt: true,
-    });
+  // Strip and parse metadata.
+  const postMatter = matter(markdown, {
+    excerpt: true,
+  });
 
-    const content = postMatter.excerpt ? postMatter.content.slice(postMatter.excerpt.length + 3) : postMatter.content;
-    const metadata = postMatter.data as PostMetadata;
+  const content = postMatter.excerpt ? postMatter.content.slice(postMatter.excerpt.length + 3) : postMatter.content;
+  const metadata = postMatter.data as PostMetadata;
 
-    return {
-      metadata,
-      content,
-      excerpt: postMatter.excerpt,
-    };
-  } catch (err) {
-    return null;
-  }
+  return {
+    metadata,
+    content,
+    excerpt: postMatter.excerpt,
+  };
 }
 
-export function getAuthorBySlug(slug: string): Author | null {
+export async function getAuthorBySlug(slug: string): Promise<Author | null> {
   const absPath = process.cwd();
+
   // Get markdown from content API.
   // Load the markdown file using fs and send it back as a response.
-  try {
-    const markdown = readFileSync(`${absPath}/content/authors/${slug}/author.md`);
+  const markdown = await readFile(`${absPath}/content/authors/${slug}/author.md`).catch((err) => null);
 
-    // Strip and parse metadata.
-    const authorMatter = matter(markdown, {
-      excerpt: false,
-    });
+  if (!markdown) return null;
 
-    const content = authorMatter.content;
-    const metadata = authorMatter.data as AuthorMetadata;
+  // Strip and parse metadata.
+  const authorMatter = matter(markdown, {
+    excerpt: false,
+  });
 
-    return {
-      metadata,
-      content,
-    };
-  } catch (err) {
-    return null;
-  }
+  const content = authorMatter.content;
+  const metadata = authorMatter.data as AuthorMetadata;
+
+  return {
+    metadata,
+    content,
+  };
 }
 
 /**
  * Iterates over all files in the `content/blog` directory and creates array with slugs.
  */
-export function getAllBlogPostSlugs() {
+export async function getAllBlogPostSlugs() {
   const absPath = process.cwd();
 
   const slugs: string[] = [];
 
-  const dirs = readdirSync(`${absPath}/content/blog`);
+  const dirs = (await readdir(`${absPath}/content/blog`)).filter((dir) => !dir.startsWith('.'));
 
   dirs.forEach((dir) => slugs.push(dir));
 
@@ -74,19 +70,17 @@ export function getAllBlogPostSlugs() {
  *  Iterates over all files in the `content/blog` directory and create array with data needed to
  *  display the blog in a feed.
  */
-export function getAllBlogPosts(): Post[] {
+export async function getAllBlogPosts(): Promise<Post[]> {
   const absPath = process.cwd();
 
   const posts: Post[] = [];
 
-  const slugs = getAllBlogPostSlugs();
-  slugs.forEach((slug) => {
-    let markdown;
-    try {
-      markdown = readFileSync(`${absPath}/content/blog/${slug}/post.md`);
-    } catch (err) {
-      return;
-    }
+  const slugs = await getAllBlogPostSlugs();
+
+  for (const slug of slugs) {
+    const markdown = await readFile(`${absPath}/content/blog/${slug}/post.md`).catch((err) => null);
+
+    if (!markdown) continue;
 
     // Strip and parse metadata.
     const postMatter = matter(markdown, {
@@ -101,7 +95,36 @@ export function getAllBlogPosts(): Post[] {
       content: '', // We don't need the content for the feed.
       excerpt: postMatter.excerpt,
     });
-  });
+  }
 
   return posts;
+}
+
+/**
+ * Iterates over all files in the `content/tags` directory and returns array with its slug
+ * and other data specified in the matter.
+ */
+export async function getAllTags() {
+  const absPath = process.cwd();
+
+  const tags: Tag[] = [];
+
+  const dirs = (await readdir(`${absPath}/content/tags`)).filter((dir) => !dir.startsWith('.'));
+
+  for (const dir of dirs) {
+    const markdown = await readFile(`${absPath}/content/tags/${dir}/tag.md`).catch((err) => null);
+
+    if (!markdown) continue;
+
+    const tagMatter = matter(markdown, {
+      excerpt: false,
+    });
+
+    const tag = tagMatter.data as Tag;
+    tag.slug = dir;
+
+    tags.push(tag);
+  }
+
+  return tags;
 }

@@ -5,8 +5,6 @@ export async function GET(request: Request, { params }: { params: { slug: string
   const url = new URL(request.url);
   const path = params.slug.join('/');
 
-  console.log(params.slug);
-
   // Make sure request is authorized.
   const authorizationToken = url.searchParams.get('token');
   if (authorizationToken !== process.env.NEXT_PUBLIC_CONTENT_IMAGE_API_KEY) {
