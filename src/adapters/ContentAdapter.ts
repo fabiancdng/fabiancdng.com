@@ -56,7 +56,22 @@ export function getAuthorBySlug(slug: string): Author | null {
 }
 
 /**
- *  Iterate over all files in the `content/blog` directory and create array with data needed to
+ * Iterates over all files in the `content/blog` directory and creates array with slugs.
+ */
+export function getAllBlogPostSlugs() {
+  const absPath = process.cwd();
+
+  const slugs: string[] = [];
+
+  const dirs = readdirSync(`${absPath}/content/blog`);
+
+  dirs.forEach((dir) => slugs.push(dir));
+
+  return slugs;
+}
+
+/**
+ *  Iterates over all files in the `content/blog` directory and create array with data needed to
  *  display the blog in a feed.
  */
 export function getAllBlogPosts(): Post[] {
@@ -64,11 +79,11 @@ export function getAllBlogPosts(): Post[] {
 
   const posts: Post[] = [];
 
-  const dirs = readdirSync(`${absPath}/content/blog`);
-  dirs.forEach((dir) => {
+  const slugs = getAllBlogPostSlugs();
+  slugs.forEach((slug) => {
     let markdown;
     try {
-      markdown = readFileSync(`${absPath}/content/blog/${dir}/post.md`);
+      markdown = readFileSync(`${absPath}/content/blog/${slug}/post.md`);
     } catch (err) {
       return;
     }
@@ -81,7 +96,7 @@ export function getAllBlogPosts(): Post[] {
     const metadata = postMatter.data as PostMetadata;
 
     posts.push({
-      slug: dir,
+      slug: slug,
       metadata,
       content: '', // We don't need the content for the feed.
       excerpt: postMatter.excerpt,
