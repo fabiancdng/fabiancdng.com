@@ -12,7 +12,7 @@ interface BlogBannerProps {
 
 const BlogBanner = ({ title, description, linkTitle, link }: BlogBannerProps) => {
   return (
-    <div className="banner relative pt-24 py-12 sm:px-20 px-10 mx-auto shadow-lg">
+    <div className="banner relative pt-24 py-16 sm:px-20 px-10 mx-auto shadow-lg">
       <Image
         src={codeBannerJpg}
         priority
@@ -20,7 +20,7 @@ const BlogBanner = ({ title, description, linkTitle, link }: BlogBannerProps) =>
         className="z-0 object-cover object-center blur-sm brightness-75 scale-105"
         fill
       />
-      <div className="relative flex flex-col space-y-10 items-center max-w-6xl mx-auto mt-12 z-1">
+      <div className="relative flex flex-col space-y-12 items-center max-w-6xl mx-auto mt-12 z-1">
         <h1 className="text-6xl text-center text-white font-bold z-1">{title}</h1>
         <h3 className="text-3xl text-center font-semibold text-white z-1">{description}</h3>
 

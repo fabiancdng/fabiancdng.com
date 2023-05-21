@@ -1,4 +1,4 @@
-import { getAllBlogPostSlugs, getAllPageSlugs, getPageBySlug, getPostBySlug } from '@/adapters/ContentAdapter';
+import { getAllPageSlugs, getPageBySlug } from '@/adapters/ContentAdapter';
 import { Metadata } from 'next';
 import { openGraphBaseMetadata, twitterBaseMetadata } from '@/app/metadata';
 import Page from '@/components/Page/Page';
@@ -26,16 +26,16 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     title: `${page.metadata.title} | fabiancdng.com`,
     description: page.metadata.description,
     alternates: {
-      canonical: `/blog/${page.slug}`,
+      canonical: `/${page.slug}`,
     },
     twitter: {
       ...twitterBaseMetadata,
-      title: `${page.metadata.title} | Blog | fabiancdng.com`,
+      title: `${page.metadata.title} | fabiancdng.com`,
       description: page.metadata.description,
     },
     openGraph: {
       ...openGraphBaseMetadata,
-      title: `${page.metadata.title} | Blog | fabiancdng.com`,
+      title: `${page.metadata.title} | fabiancdng.com`,
       description: page.metadata.description,
     },
   };

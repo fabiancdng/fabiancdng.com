@@ -85,7 +85,7 @@
 }
 
 .markdown-content ul li {
-  margin-left: 20px;
+  @apply ml-3 my-5;
 }
 
 .markdown-content blockquote {
