@@ -2,7 +2,7 @@ import { CodeComponent } from 'react-markdown/lib/ast-to-react';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import CodeBlock from './CodeBlock';
 import Image from 'next/image';
-import { getImageDimensions } from '@/adapters/ImageAdapter';
+import { getImage, getImageDimensions } from '@/adapters/ImageAdapter';
 
 /**
  * Markdown content to be rendered.
@@ -46,16 +46,9 @@ const Markdown = ({ slug, content }: { slug: string; content: string }) => {
    * Makes use of Next.js image optimization.
    */
   const renderNodeImage = ({ node, src, alt }: any) => {
-    const dimensions = getImageDimensions(`/content/blog/${slug}/${src}`);
-    return (
-      <Image
-        src={`/api/content/images/blog/${slug}/${src}?token=${process.env.NEXT_PUBLIC_CONTENT_IMAGE_API_KEY}`}
-        title={alt}
-        alt={alt}
-        width={dimensions.width}
-        height={dimensions.height}
-      />
-    );
+    const image = getImage(`/blog/${slug}`, src.split('/').pop()!);
+
+    return <Image src={image.source} title={alt} alt={alt} width={image.dimensions.width} height={image.dimensions.height} />;
   };
 
   // Map of nodes and their custom render function.

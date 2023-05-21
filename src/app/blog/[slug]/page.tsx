@@ -1,5 +1,7 @@
 import Post from '@/components/Blog/Post/Post';
-import { getAllBlogPostSlugs, getPostBySlug } from '@/adapters/ContentAdapter';
+import { getAllBlogPostSlugs, getAuthorBySlug, getBlogPostThumbnail, getPostBySlug } from '@/adapters/ContentAdapter';
+import { Metadata } from 'next';
+import { openGraphBaseMetadata, twitterBaseMetadata } from '@/app/metadata';
 
 /**
  * If a request comes in to a page that exists in the file system, but has not been built yet,
@@ -11,6 +13,57 @@ export const dynamicParams = true;
  * Cache the page for 30 minutes to prevent disk reads and re-parsing on every request.
  */
 export const revalidate = 30 * 60;
+
+/**
+ * Dynamically/statically generate metadata for the blog post.
+ */
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata | null> {
+  const post = await getPostBySlug(params.slug);
+  const baseUrl = process.env.NEXT_PUBLIC_URL || 'https://fabiancdng.com';
+
+  if (!post) return null;
+
+  const author = await getAuthorBySlug(post.metadata.author);
+  const thumbnail = getBlogPostThumbnail(post.slug);
+
+  return {
+    title: `${post.metadata.title} | Blog | fabiancdng.com`,
+    description: post.metadata.description,
+    alternates: {
+      canonical: new URL(`${baseUrl}/blog/${post.slug}`),
+    },
+    twitter: {
+      ...twitterBaseMetadata,
+      title: `${post.metadata.title} | Blog | fabiancdng.com`,
+      description: post.metadata.description,
+      creator: author ? `@${author.metadata.twitter}` : undefined,
+      images: [
+        {
+          type: 'image/jpeg',
+          url: thumbnail.source,
+          width: thumbnail.dimensions.width,
+          height: thumbnail.dimensions.height,
+          alt: 'Thumbnail of the blog post',
+        },
+      ],
+    },
+    openGraph: {
+      ...openGraphBaseMetadata,
+      title: `${post.metadata.title} | Blog | fabiancdng.com`,
+      description: post.metadata.description,
+      type: 'article',
+      images: [
+        {
+          type: 'image/jpeg',
+          url: thumbnail.source,
+          width: thumbnail.dimensions.width,
+          height: thumbnail.dimensions.height,
+          alt: 'Thumbnail of the blog post',
+        },
+      ],
+    },
+  };
+}
 
 /**
  * A single blog post page.

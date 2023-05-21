@@ -21,3 +21,19 @@ export function getImageSource(slug: string, filename: string) {
   const source = `/api/content/images${slug}/img/${filename}?token=${process.env.NEXT_PUBLIC_CONTENT_IMAGE_API_KEY}`;
   return source;
 }
+
+/**
+ * Returns the absolute path, source URL and dimensions of the thumbnail of any image in the content
+ * directory.
+ */
+export function getImage(slug: string, filename: string) {
+  const thumbnailPath = getImagePath(slug, filename);
+  const thumbnailSource = getImageSource(slug, filename);
+  const thumbnailDimensions = getImageDimensions(thumbnailPath);
+
+  return {
+    path: thumbnailPath,
+    source: thumbnailSource,
+    dimensions: thumbnailDimensions,
+  };
+}

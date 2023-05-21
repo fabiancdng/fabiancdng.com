@@ -2,6 +2,7 @@ import { AuthorMetadata, Post, PostMetadata, Tag } from '@/types';
 import matter from 'gray-matter';
 import { Author } from '@/types';
 import { readFile, readdir } from 'fs/promises';
+import { getImage, getImageDimensions, getImagePath, getImageSource } from './ImageAdapter';
 
 export const API_URL =
   process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_DOMAIN || 'https://fabiancdng.com' : 'http://localhost:3000';
@@ -22,10 +23,18 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
   const metadata = postMatter.data as PostMetadata;
 
   return {
+    slug: slug,
     metadata,
     content,
     excerpt: postMatter.excerpt,
   };
+}
+
+/**
+ * Returns the absolute path, source URL and dimensions of the thumbnail of a blog post.
+ */
+export function getBlogPostThumbnail(slug: string) {
+  return getImage(`/blog/${slug}`, 'thumbnail.jpg');
 }
 
 export async function getAuthorBySlug(slug: string): Promise<Author | null> {

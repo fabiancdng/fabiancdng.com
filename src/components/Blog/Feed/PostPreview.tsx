@@ -2,10 +2,10 @@ import { Post } from '@/types';
 import PostHeader from '../PostHeader';
 import Link from 'next/link';
 import Image from 'next/image';
-import { getImageDimensions } from '@/adapters/ImageAdapter';
+import { getBlogPostThumbnail } from '@/adapters/ContentAdapter';
 
 const PostPreview = ({ post }: { post: Post }) => {
-  const thumbnailDimensions = getImageDimensions(`/content/blog/${post.slug}/img/thumbnail.jpg`);
+  const thumbnail = getBlogPostThumbnail(post.slug);
 
   return (
     <article className="flex flex-col lg:flex-row lg:p-0 space-y-7 lg:space-y-2 mt-36 mb-28 px-14 items-start">
@@ -13,9 +13,9 @@ const PostPreview = ({ post }: { post: Post }) => {
       <div className="lg:w-2/3 w-full px-0 sm:px-7 mx-auto">
         <Link href={`/blog/${post.slug}`}>
           <Image
-            src={`/api/content/images/blog/${post.slug}/img/thumbnail.jpg?token=${process.env.NEXT_PUBLIC_CONTENT_IMAGE_API_KEY}`}
-            width={thumbnailDimensions.width}
-            height={thumbnailDimensions.height}
+            src={thumbnail.source}
+            width={thumbnail.dimensions.width}
+            height={thumbnail.dimensions.height}
             alt={'Thumbnail for the blog post'}
             className="rounded-md"
           />

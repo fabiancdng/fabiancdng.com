@@ -1,14 +1,19 @@
+import { getImageDimensions, getImagePath, getImageSource } from '@/adapters/ImageAdapter';
 import Image from 'next/image';
 
 const Thumbnail = ({ slug }: { slug: string }) => {
+  const thumbnailPath = getImagePath(`/blog/${slug}`, 'thumbnail.jpg');
+  const thumbnailSource = getImageSource(`/blog/${slug}`, 'thumbnail.jpg');
+  const thumbnailDimensions = getImageDimensions(thumbnailPath);
+
   return (
     <div className="w-full px-0 sm:px-7 h-full">
       <Image
-        src={`/api/content/images/blog/${slug}/img/thumbnail.jpg?token=${process.env.NEXT_PUBLIC_CONTENT_IMAGE_API_KEY}`}
+        src={thumbnailSource}
         alt="Thumbnail of the blog post"
         className="lg:w-11/12 w-full mx-auto my-16 rounded-lg"
-        width="871"
-        height="489"
+        width={thumbnailDimensions.width}
+        height={thumbnailDimensions.height}
       />
     </div>
   );
