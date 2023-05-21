@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   title: 'fabiancdng.com',
   description:
     "I'm Fabian Reinders, a student and full-stack web developer. On this website, I introduce myself, my projects, and my skills and write blog posts.",
-  keywords: ['full stack', 'web developer', 'web development', 'developer', 'blog', 'portfolio'],
+  //keywords: ['full stack', 'web developer', 'web development', 'developer', 'blog', 'portfolio'],
   twitter: twitterBaseMetadata,
   openGraph: openGraphBaseMetadata,
 };
