@@ -37,6 +37,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       title: `${post.metadata.title} | Blog | fabiancdng.com`,
       description: post.metadata.description,
       creator: author ? `@${author.metadata.twitter}` : undefined,
+      card: 'summary_large_image',
       images: [
         {
           type: 'image/jpeg',
@@ -79,7 +80,7 @@ const BlogPostPage = async ({ params }: { params: { slug: string } }) => {
 
   return (
     <main>
-      <Post slug={params.slug} post={post} />
+      <Post post={post} />
     </main>
   );
 };

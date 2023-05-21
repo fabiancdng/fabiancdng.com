@@ -2,7 +2,9 @@ import { CodeComponent } from 'react-markdown/lib/ast-to-react';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import CodeBlock from './CodeBlock';
 import Image from 'next/image';
-import { getImage, getImageDimensions } from '@/adapters/ImageAdapter';
+import { getImage } from '@/adapters/ImageAdapter';
+
+import './Markdown.css';
 
 /**
  * Markdown content to be rendered.
@@ -58,7 +60,7 @@ const Markdown = ({ slug, content }: { slug: string; content: string }) => {
     img: renderNodeImage,
   };
 
-  return <ReactMarkdown children={content} components={renderMap} />;
+  return <ReactMarkdown className="markdown-content" children={content} components={renderMap} />;
 };
 
 export default Markdown;

@@ -1,12 +1,15 @@
-import { AuthorMetadata, Post, PostMetadata, Tag } from '@/types';
+import { AuthorMetadata, Page, Post, PostMetadata, Tag } from '@/types';
 import matter from 'gray-matter';
 import { Author } from '@/types';
 import { readFile, readdir } from 'fs/promises';
-import { getImage, getImageDimensions, getImagePath, getImageSource } from './ImageAdapter';
+import { getImage } from './ImageAdapter';
 
 export const API_URL =
   process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_DOMAIN || 'https://fabiancdng.com' : 'http://localhost:3000';
 
+/**
+ * Retrieves a single blog post (content + metadata) by its slug.
+ */
 export async function getPostBySlug(slug: string): Promise<Post | null> {
   const absPath = process.cwd();
 
@@ -37,6 +40,9 @@ export function getBlogPostThumbnail(slug: string) {
   return getImage(`/blog/${slug}`, 'thumbnail.jpg');
 }
 
+/**
+ * Retrieves an author (content + metadata) by its slug.
+ */
 export async function getAuthorBySlug(slug: string): Promise<Author | null> {
   const absPath = process.cwd();
 
@@ -182,4 +188,44 @@ export async function getTags(slugs: string[]) {
   }
 
   return tags;
+}
+
+/**
+ * Retrieves a single blog post (content + metadata) by its slug.
+ */
+export async function getPageBySlug(slug: string): Promise<Page | null> {
+  const absPath = process.cwd();
+
+  // Get markdown from content API.
+  // Load the markdown file using fs and send it back as a response.
+  const markdown = await readFile(`${absPath}/content/pages/${slug}/page.md`);
+
+  // Strip and parse metadata.
+  const postMatter = matter(markdown, {
+    excerpt: false,
+  });
+
+  const content = postMatter.excerpt ? postMatter.content.slice(postMatter.excerpt.length + 3) : postMatter.content;
+  const metadata = postMatter.data as PostMetadata;
+
+  return {
+    slug: slug,
+    metadata,
+    content,
+  };
+}
+
+/**
+ * Iterates over all files in the `content/pages` directory and creates array with slugs.
+ */
+export async function getAllPageSlugs() {
+  const absPath = process.cwd();
+
+  const slugs: string[] = [];
+
+  const dirs = (await readdir(`${absPath}/content/pages`)).filter((dir) => !dir.startsWith('.'));
+
+  dirs.forEach((dir) => slugs.push(dir));
+
+  return slugs;
 }

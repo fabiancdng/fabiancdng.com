@@ -1,95 +1,94 @@
-#blog-post .post-body,
-#blog-post .post-body {
+.markdown-content,
+.markdown-content {
   @apply text-xl;
 }
 
-#blog-post .post-body a {
+.markdown-content a {
   @apply border-b-2 border-violet-700;
   transition: all 0.15s ease-in-out;
 }
 
-#blog-post .post-body a:hover {
+.markdown-content a:hover {
   @apply border-b-[3px];
   transition: all 0.15s ease-in-out;
 }
 
-#blog-post .post-body figure {
+.markdown-content figure {
   margin: 35px 0px 40px 0px;
 }
 
-#blog-post .post-body figcaption {
+.markdown-content figcaption {
   @apply text-gray-600 dark:text-gray-300 text-lg italic mt-3 mb-5;
   text-align: center;
 }
 
-#blog-post .post-body img {
+.markdown-content img {
   @apply rounded-2xl my-10;
   width: 100%;
 }
 
-#blog-post .post-body pre code {
+.markdown-content pre code {
   @apply text-base;
   margin: 20px 0px 20px 0px;
   border-radius: 10px;
 }
 
-#blog-post .post-body p b,
-#blog-post .post-body p strong {
+.markdown-content p b,
+.markdown-content p strong {
   font-weight: 600;
 }
 
-#blog-post .post-body p {
+.markdown-content p {
   @apply my-7;
 }
 
 /* Inline code */
-#blog-post .post-body p code {
+.markdown-content p code {
   @apply bg-gray-100 text-red-500 p-1 dark:bg-slate-800;
 }
 
-#blog-post .post-body hr {
+.markdown-content hr {
   @apply my-10;
 }
 
-#blog-post .post-body h1 {
-  @apply text-4xl mt-20;
-  margin-top: 30px;
+.markdown-content h1 {
+  @apply text-5xl my-10 leading-[3.5rem] font-semibold;
 }
 
-#blog-post .post-body h2 {
+.markdown-content h2 {
   @apply text-3xl font-semibold mt-20;
 }
 
-#blog-post .post-body h3 {
+.markdown-content h3 {
   @apply text-2xl font-medium mt-[4rem];
 }
 
-#blog-post .post-body h4 {
+.markdown-content h4 {
   @apply text-2xl mt-16;
 }
 
-#blog-post .post-body h5 {
+.markdown-content h5 {
   @apply text-2xl mt-12;
 }
 
-#blog-post .post-body h6 {
+.markdown-content h6 {
   @apply text-2xl mt-12;
 }
 
-#blog-post .post-body ul {
+.markdown-content ul {
   @apply my-7 pl-5;
   list-style: disc;
 }
 
-#blog-post .post-body ul p {
+.markdown-content ul p {
   @apply my-3;
 }
 
-#blog-post .post-body ul li {
+.markdown-content ul li {
   margin-left: 20px;
 }
 
-#blog-post .post-body blockquote {
+.markdown-content blockquote {
   @apply px-5 py-1 my-5 rounded-md border-l-4 border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-slate-800;
 }
 

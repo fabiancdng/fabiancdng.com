@@ -1,0 +1,68 @@
+import { getAllBlogPostSlugs, getAllPageSlugs, getPageBySlug, getPostBySlug } from '@/adapters/ContentAdapter';
+import { Metadata } from 'next';
+import { openGraphBaseMetadata, twitterBaseMetadata } from '@/app/metadata';
+import Page from '@/components/Page/Page';
+
+/**
+ * If a request comes in to a page that exists in the file system, but has not been built yet,
+ * generate the page on the fly and cache it.
+ */
+export const dynamicParams = true;
+
+/**
+ * Cache the page for 30 minutes to prevent disk reads and re-parsing on every request.
+ */
+export const revalidate = 30 * 60;
+
+/**
+ * Dynamically/statically generate metadata for the page.
+ */
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata | null> {
+  const page = await getPageBySlug(params.slug);
+
+  if (!page) return null;
+
+  return {
+    title: `${page.metadata.title} | fabiancdng.com`,
+    description: page.metadata.description,
+    alternates: {
+      canonical: `/blog/${page.slug}`,
+    },
+    twitter: {
+      ...twitterBaseMetadata,
+      title: `${page.metadata.title} | Blog | fabiancdng.com`,
+      description: page.metadata.description,
+    },
+    openGraph: {
+      ...openGraphBaseMetadata,
+      title: `${page.metadata.title} | Blog | fabiancdng.com`,
+      description: page.metadata.description,
+    },
+  };
+}
+
+/**
+ * A page dynamically/statically generated from Markdown.
+ */
+const DynamicPage = async ({ params }: { params: { slug: string } }) => {
+  const page = await getPageBySlug(params.slug);
+
+  if (!page) {
+    return <h1 className="text-red-800 mt-20">404 - Not Found.</h1>;
+  }
+
+  return (
+    <main>
+      <Page page={page} />
+    </main>
+  );
+};
+
+/**
+ * Export possible paths for this page.
+ */
+export async function generateStaticParams() {
+  return await getAllPageSlugs();
+}
+
+export default DynamicPage;
