@@ -2,6 +2,7 @@ import { getAllPageSlugs, getPageBySlug } from '@/adapters/ContentAdapter';
 import { Metadata } from 'next';
 import { openGraphBaseMetadata, twitterBaseMetadata } from '@/app/metadata';
 import Page from '@/components/Page/Page';
+import { notFound } from 'next/navigation';
 
 /**
  * If a request comes in to a page that exists in the file system, but has not been built yet,
@@ -47,8 +48,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 const DynamicPage = async ({ params }: { params: { slug: string } }) => {
   const page = await getPageBySlug(params.slug);
 
+  // If the page doesn't exist, return a 404.
   if (!page) {
-    return <h1 className="text-red-800 mt-20">404 - Not Found.</h1>;
+    return notFound();
   }
 
   return (

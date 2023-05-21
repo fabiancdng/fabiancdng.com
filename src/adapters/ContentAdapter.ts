@@ -15,7 +15,9 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 
   // Get markdown from content API.
   // Load the markdown file using fs and send it back as a response.
-  const markdown = await readFile(`${absPath}/content/blog/${slug}/post.md`);
+  const markdown = await readFile(`${absPath}/content/blog/${slug}/post.md`).catch((err) => null);
+
+  if (!markdown) return null;
 
   // Strip and parse metadata.
   const postMatter = matter(markdown, {
@@ -198,7 +200,9 @@ export async function getPageBySlug(slug: string): Promise<Page | null> {
 
   // Get markdown from content API.
   // Load the markdown file using fs and send it back as a response.
-  const markdown = await readFile(`${absPath}/content/pages/${slug}/page.md`);
+  const markdown = await readFile(`${absPath}/content/pages/${slug}/page.md`).catch((err) => null);
+
+  if (!markdown) return null;
 
   // Strip and parse metadata.
   const postMatter = matter(markdown, {
@@ -223,7 +227,7 @@ export async function getAllPageSlugs() {
 
   const slugs: string[] = [];
 
-  const dirs = (await readdir(`${absPath}/content/pages`)).filter((dir) => !dir.startsWith('.'));
+  const dirs = (await readdir(`${absPath}/content/pages`)).filter((dir) => !dir.startsWith('.') && dir !== 'homepage');
 
   dirs.forEach((dir) => slugs.push(dir));
 
