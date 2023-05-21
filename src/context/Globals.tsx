@@ -54,7 +54,7 @@ export const GlobalsProvider = ({ children }: globalsProviderProps) => {
       // Not on any page matching a navlink. Clear state.
       setActiveNavItem('');
     }
-  }, []);
+  }, [path]);
 
   return (
     <GlobalsContext.Provider
