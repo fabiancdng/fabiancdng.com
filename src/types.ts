@@ -1,3 +1,5 @@
+import { ISizeCalculationResult } from 'image-size/dist/types/interface';
+
 export interface Post {
   slug: string;
   content: string;
@@ -28,6 +30,12 @@ export interface PageMetadata {
   updated_at: Date;
 }
 
+export interface Image {
+  path: string;
+  source: string;
+  dimensions: ISizeCalculationResult;
+}
+
 export interface Author {
   metadata: AuthorMetadata;
   content: string;
@@ -44,4 +52,23 @@ export interface Tag {
   slug: string;
   name: string;
   emoji: string;
+}
+
+export interface Project {
+  slug: string;
+  metadata: ProjectMetadata;
+  thumbnail: Image;
+  content: string;
+}
+
+export interface ProjectMetadata {
+  title: string;
+  subtitle: string;
+  author: string;
+  description: string;
+  published_at: Date;
+  updated_at: Date;
+  technologies: string[];
+  demo: string;
+  github: string;
 }

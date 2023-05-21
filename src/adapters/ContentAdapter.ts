@@ -1,11 +1,8 @@
-import { AuthorMetadata, Page, Post, PostMetadata, Tag } from '@/types';
+import { AuthorMetadata, Page, Post, PostMetadata, Project, ProjectMetadata, Tag } from '@/types';
 import matter from 'gray-matter';
 import { Author } from '@/types';
 import { readFile, readdir } from 'fs/promises';
 import { getImage } from './ImageAdapter';
-
-export const API_URL =
-  process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_DOMAIN || 'https://fabiancdng.com' : 'http://localhost:3000';
 
 /**
  * Retrieves a single blog post (content + metadata) by its slug.
@@ -232,4 +229,71 @@ export async function getAllPageSlugs() {
   dirs.forEach((dir) => slugs.push(dir));
 
   return slugs;
+}
+
+/**
+ * Iterates over all files in the `content/projects` directory and returns array with all slug.
+ */
+export async function getAllProjectSlugs() {
+  const absPath = process.cwd();
+
+  const slugs: string[] = [];
+
+  const dirs = (await readdir(`${absPath}/content/projects`)).filter((dir) => !dir.startsWith('.'));
+
+  dirs.forEach((dir) => slugs.push(dir));
+
+  return slugs;
+}
+
+/**
+ * Returns the absolute path, source URL and dimensions of the thumbnail of a project.
+ */
+export function getProjectThumbnail(slug: string) {
+  return getImage(`/projects/${slug}`, 'thumbnail.jpg');
+}
+
+/**
+ * Iterates over all files in the `content/projects` directory and create array with data needed to
+ * display the project in a feed.
+ */
+export async function getAllProjects() {
+  const absPath = process.cwd();
+
+  const projects: Project[] = [];
+
+  const slugs = await getAllProjectSlugs();
+
+  for (const slug of slugs) {
+    const markdown = await readFile(`${absPath}/content/projects/${slug}/project.md`).catch((err) => null);
+
+    if (!markdown) continue;
+
+    // Strip and parse metadata.
+    const projectMatter = matter(markdown, {
+      excerpt: false,
+    });
+
+    const metadata = projectMatter.data as ProjectMetadata;
+    const content = projectMatter.content;
+    const thumbnail = getProjectThumbnail(slug);
+
+    projects.push({
+      slug: slug,
+      metadata,
+      thumbnail,
+      content,
+    });
+  }
+
+  // Sort the array of projects descending by their metadata.published_at date.
+  projects.sort((a, b) => {
+    if (a.metadata.published_at < b.metadata.published_at) {
+      return -1;
+    } else {
+      return 1;
+    }
+  });
+
+  return projects;
 }

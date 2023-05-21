@@ -1,7 +1,4 @@
 import React, { useContext } from 'react';
-import Footer from '../Footer/Footer';
-import Navbar from '../Navbar/Navbar';
-import { GlobalsContext } from '../../context/Globals';
 
 const Layout = ({ children }: { children: JSX.Element }) => {
   // Get global website values for active nav item.

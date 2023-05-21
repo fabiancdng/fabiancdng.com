@@ -76,8 +76,7 @@
 }
 
 .markdown-content ul {
-  @apply my-7 pl-5;
-  list-style: disc;
+  @apply my-7 pl-5 list-disc;
 }
 
 .markdown-content ul p {
