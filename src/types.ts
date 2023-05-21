@@ -9,7 +9,7 @@ export interface PostMetadata {
   title: string;
   author: string;
   published_at: Date;
-  updated_at: string;
+  updated_at: Date;
   tags: string[];
   description: string;
 }

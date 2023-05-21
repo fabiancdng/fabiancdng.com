@@ -94,5 +94,5 @@
 }
 
 pre.shiki {
-  @apply overflow-x-scroll;
+  @apply overflow-x-scroll p-6 rounded-lg;
 }

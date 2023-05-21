@@ -9,7 +9,7 @@ import { openGraphBaseMetadata, twitterBaseMetadata } from './metadata';
 export const metadata: Metadata = {
   title: 'Homepage | fabiancdng.com',
   alternates: {
-    canonical: new URL(process.env.NEXT_PUBLIC_URL || 'https://fabiancdng.com'),
+    canonical: '/',
   },
   twitter: {
     ...twitterBaseMetadata,

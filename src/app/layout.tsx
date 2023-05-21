@@ -14,7 +14,7 @@ import '@fortawesome/fontawesome-free/css/brands.min.css';
  * Global and default metadata.
  */
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_URL || 'https://fabiancdng.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN || 'https://fabiancdng.com'),
   title: 'fabiancdng.com',
   description:
     "I'm Fabian Reinders, a student and full-stack web developer. On this website, I introduce myself, my projects, and my skills and write blog posts.",

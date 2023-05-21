@@ -1,5 +1,5 @@
 import { Post } from '@/types';
-import PostHeader from '../PostHeader';
+import Header from '../Post/Header';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getBlogPostThumbnail } from '@/adapters/ContentAdapter';
@@ -16,7 +16,7 @@ const PostPreview = ({ post }: { post: Post }) => {
             src={thumbnail.source}
             width={thumbnail.dimensions.width}
             height={thumbnail.dimensions.height}
-            alt={'Thumbnail for the blog post'}
+            alt={post.metadata.title}
             className="rounded-md"
             priority
           />
@@ -26,7 +26,7 @@ const PostPreview = ({ post }: { post: Post }) => {
       {/* Post tags, title, author, date excerpt and link */}
       <div className="lg:w-fit lg:pl-10">
         {/* @ts-expect-error Server Component */}
-        <PostHeader post={post} metadata={post.metadata} excerpt={post.excerpt} preview={true} />
+        <Header post={post} metadata={post.metadata} excerpt={post.excerpt} preview={true} />
         {/* 'Read the article' link */}
         <Link className="text-blue-800 font-semibold block mt-7 text-lg dark:text-slate-400 uppercase sm:px-7" href={`/blog/${post.slug}`}>
           Read the article

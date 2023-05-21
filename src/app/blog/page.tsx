@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: 'Blog | fabiancdng.com',
   description: 'A blog about web development, my projects, and my learnings as a full-stack web developer.',
   alternates: {
-    canonical: new URL(process.env.NEXT_PUBLIC_DOMAIN + '/blog' || 'https://fabiancdng.com/blog'),
+    canonical: '/blog',
   },
   twitter: {
     ...twitterBaseMetadata,

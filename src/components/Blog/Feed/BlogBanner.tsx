@@ -39,11 +39,14 @@ const BlogBanner = ({ title, description, linkTitle, link }: BlogBannerProps) =>
           to know when there's new content.
         </p>
 
+        {/*
+        TODO: Remove?
         <p className="relative mt-5 text-center sm:text-left z-1 text-white">
           <Link className="text-lg font-medium underline" href={link}>
             {linkTitle}
           </Link>
         </p>
+        */}
       </div>
     </div>
   );

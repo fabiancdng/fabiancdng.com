@@ -1,5 +1,3 @@
-import { Metadata } from 'next';
-
 /**
  * Shared metadata to be inherited and then overwritten by the components.
  */
@@ -11,6 +9,7 @@ export const twitterBaseMetadata = {
   site: '@fabiancdng',
   images: [
     {
+      type: 'image/png',
       url: '/img/logo.png',
       width: 232,
       height: 232,
@@ -29,6 +28,7 @@ export const openGraphBaseMetadata = {
   siteName: process.env.NEXT_PUBLIC_SITENAME || 'fabiancdng.com',
   images: [
     {
+      type: 'image/png',
       url: '/img/logo.png',
       width: 232,
       height: 232,

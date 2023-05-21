@@ -19,7 +19,6 @@ export const revalidate = 30 * 60;
  */
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata | null> {
   const post = await getPostBySlug(params.slug);
-  const baseUrl = process.env.NEXT_PUBLIC_URL || 'https://fabiancdng.com';
 
   if (!post) return null;
 
@@ -29,8 +28,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   return {
     title: `${post.metadata.title} | Blog | fabiancdng.com`,
     description: post.metadata.description,
+    authors: [{ name: author?.metadata.name, url: author?.metadata.homepage }],
     alternates: {
-      canonical: new URL(`${baseUrl}/blog/${post.slug}`),
+      canonical: `/blog/${post.slug}`,
     },
     twitter: {
       ...twitterBaseMetadata,
@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
           url: thumbnail.source,
           width: thumbnail.dimensions.width,
           height: thumbnail.dimensions.height,
-          alt: 'Thumbnail of the blog post',
+          alt: post.metadata.title,
         },
       ],
     },
@@ -52,13 +52,15 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       title: `${post.metadata.title} | Blog | fabiancdng.com`,
       description: post.metadata.description,
       type: 'article',
+      publishedTime: post.metadata.published_at.toISOString(),
+      modifiedTime: post.metadata.updated_at.toISOString(),
       images: [
         {
           type: 'image/jpeg',
           url: thumbnail.source,
           width: thumbnail.dimensions.width,
           height: thumbnail.dimensions.height,
-          alt: 'Thumbnail of the blog post',
+          alt: post.metadata.title,
         },
       ],
     },
