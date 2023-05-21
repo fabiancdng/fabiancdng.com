@@ -97,6 +97,15 @@ export async function getAllBlogPosts(): Promise<Post[]> {
     });
   }
 
+  // Sort the array of posts descending by their metadata.published_at date.
+  posts.sort((a, b) => {
+    if (a.metadata.published_at < b.metadata.published_at) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
+
   return posts;
 }
 
@@ -122,6 +131,43 @@ export async function getAllTags() {
 
     const tag = tagMatter.data as Tag;
     tag.slug = dir;
+
+    tags.push(tag);
+  }
+
+  return tags;
+}
+
+/**
+ * Returns a single tag by its slug.
+ */
+export async function getTag(slug: string) {
+  const absPath = process.cwd();
+
+  const markdown = await readFile(`${absPath}/content/tags/${slug}/tag.md`).catch((err) => null);
+
+  if (!markdown) return null;
+
+  const tagMatter = matter(markdown, {
+    excerpt: false,
+  });
+
+  const tag = tagMatter.data as Tag;
+  tag.slug = slug;
+
+  return tag;
+}
+
+/**
+ * Returns an array of tags by their slugs.
+ */
+export async function getTags(slugs: string[]) {
+  const tags: Tag[] = [];
+
+  for (const slug of slugs) {
+    const tag = await getTag(slug);
+
+    if (!tag) continue;
 
     tags.push(tag);
   }
