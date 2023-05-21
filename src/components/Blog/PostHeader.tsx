@@ -36,12 +36,12 @@ const PostHeader = async ({ post, metadata, excerpt, preview }: PostHeaderProps)
       )}
 
       {/* @ts-expect-error Server Component */}
-      {preview && <Author slug={metadata.author} publishedAt={metadata.published_at} />}
+      {preview && <Author slug={metadata.author} publishedAt={metadata.published_at} preview={true} />}
 
       <p className="my-4 text-xl text-gray-500 dark:text-gray-300">{excerpt || metadata.description}</p>
 
       {/* @ts-expect-error Server Component */}
-      {!preview && <Author slug={metadata.author} publishedAt={metadata.published_at} />}
+      {!preview && <Author slug={metadata.author} publishedAt={metadata.published_at} preview={false} />}
     </header>
   );
 };

@@ -1,7 +1,7 @@
 import { getAuthorBySlug } from '@/adapters/ContentAdapter';
 import Image from 'next/image';
 
-const Author = async ({ slug, publishedAt }: { slug: string; publishedAt: Date }) => {
+const Author = async ({ slug, publishedAt, preview }: { slug: string; publishedAt: Date; preview?: boolean }) => {
   const author = await getAuthorBySlug(slug);
 
   if (!author) return null;
@@ -16,6 +16,7 @@ const Author = async ({ slug, publishedAt }: { slug: string; publishedAt: Date }
             width={200}
             height={200}
             className="w-14 h-14 mr-2 rounded-full"
+            priority={preview ? false : true}
           />
 
           <div className="block py-4 mt-1 ml-1">
