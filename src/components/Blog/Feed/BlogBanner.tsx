@@ -12,7 +12,7 @@ interface BlogBannerProps {
 
 const BlogBanner = ({ title, description, linkTitle, link }: BlogBannerProps) => {
   return (
-    <div className="relative py-24 sm:px-20 px-10 mx-auto shadow-lg">
+    <div className="banner relative pt-24 py-12 sm:px-20 px-10 mx-auto shadow-lg">
       <Image
         src={codeBannerJpg}
         priority
@@ -26,6 +26,18 @@ const BlogBanner = ({ title, description, linkTitle, link }: BlogBannerProps) =>
 
         {/*  Sign up to newsletter input */}
         <SignUpForm />
+
+        <p className="text-sm text-center text-slate-200 mt-2 sm:mt-0 sm:ml-5">
+          Newsletter currently under maintenance, follow me on{' '}
+          <a className="text-slate-200 underline" href="https://dev.to/fabiancdng" target="_blank">
+            dev.to
+          </a>{' '}
+          or{' '}
+          <a className="text-slate-200 underline" href="https://twitter.com/fabiancdng" target="_blank">
+            Twitter
+          </a>{' '}
+          to know when there's new content.
+        </p>
 
         <p className="relative mt-5 text-center sm:text-left z-1 text-white">
           <Link className="text-lg font-medium underline" href={link}>

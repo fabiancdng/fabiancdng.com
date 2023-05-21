@@ -7,6 +7,7 @@ const SignUpForm = () => {
         placeholder="Enter your email"
         disabled
       />
+
       <button
         disabled
         className="w-full sm:w-auto px-5 py-3 mt-5 sm:mt-0 sm:ml-5 text-lg text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">
