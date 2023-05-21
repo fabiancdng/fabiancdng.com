@@ -1,4 +1,6 @@
 import { Metadata } from 'next';
+import { GlobalsProvider } from '@/context/Globals';
+import { openGraphBaseMetadata, twitterBaseMetadata } from '@/app/metadata';
 import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/components/Footer/Footer';
 
@@ -7,46 +9,18 @@ import '@fortawesome/fontawesome-free/css/fontawesome.min.css';
 import '@fortawesome/fontawesome-free/css/regular.min.css';
 import '@fortawesome/fontawesome-free/css/solid.min.css';
 import '@fortawesome/fontawesome-free/css/brands.min.css';
-import { GlobalsProvider } from '@/context/Globals';
 
 /**
  * Global and default metadata.
  */
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_URL || 'https://fabiancdng.com'),
-  alternates: {
-    canonical: new URL(process.env.NEXT_PUBLIC_URL || 'https://fabiancdng.com'),
-  },
   title: 'fabiancdng.com',
   description:
     "I'm Fabian Reinders, a student and full-stack web developer. On this website, I introduce myself, my projects, and my skills and write blog posts.",
-  authors: [{ name: 'Fabian Reinders', url: 'https://fabiancdng.com' }],
   keywords: ['full stack', 'web developer', 'web development', 'developer', 'blog', 'portfolio'],
-  twitter: {
-    card: 'summary',
-    site: '@fabiancdng',
-    images: [
-      {
-        url: '/img/logo.png',
-        width: 232,
-        height: 232,
-        alt: 'fabiancdng.com Logo',
-      },
-    ],
-  },
-
-  openGraph: {
-    type: 'website',
-    siteName: process.env.NEXT_PUBLIC_SITENAME || 'fabiancdng.com',
-    images: [
-      {
-        url: '/img/logo.png',
-        width: 232,
-        height: 232,
-        alt: 'fabiancdng.com Logo',
-      },
-    ],
-  },
+  twitter: twitterBaseMetadata,
+  openGraph: openGraphBaseMetadata,
 };
 
 /**
