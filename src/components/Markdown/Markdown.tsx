@@ -58,6 +58,7 @@ const Markdown = ({ slug, content }: { slug: string; content: string }) => {
     code: renderNodeCode,
     pre: renderNodePre,
     img: renderNodeImage,
+    hr: () => <hr className="w-full border-gray-300 dark:border-slate-600 my-10" />,
   };
 
   return <ReactMarkdown className="markdown-content" children={content} components={renderMap} />;

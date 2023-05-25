@@ -5,8 +5,8 @@ import { openGraphBaseMetadata, twitterBaseMetadata } from './metadata';
 import Projects from '@/components/Homepage/Projects/Projects';
 import { getAllProjects } from '@/adapters/ContentAdapter';
 import SingleProject from '@/components/Homepage/Projects/Project';
-import Markdown from '@/components/Markdown/Markdown';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
+import Introduction from '@/components/Homepage/Introduction';
 
 /**
  * Set some metadata for the page for SEO.
@@ -43,6 +43,9 @@ const HomePage = async () => {
                 45vw`,
         }}
       />
+
+      {/* @ts-expect-error Server Component */}
+      <Introduction />
 
       {/* Client Component: Uses IntersectionObserver to sync scroll position with activeNavLink state in GlobalsContext. */}
       <Projects title="Projects" subtitle="Some of the work I'm involved in.">
