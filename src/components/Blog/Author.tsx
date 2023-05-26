@@ -1,20 +1,22 @@
 import { getAuthorBySlug } from '@/adapters/ContentAdapter';
+import { getImage } from '@/adapters/ImageAdapter';
 import Image from 'next/image';
 
 const Author = async ({ slug, publishedAt, preview }: { slug: string; publishedAt: Date; preview?: boolean }) => {
   const author = await getAuthorBySlug(slug);
+  const authorImage = getImage(`/authors/${slug}`, 'avatar.jpg');
 
   if (!author) return null;
 
   return (
     <div className="post-author w-fit">
-      <a className="w-fit" href="/authors/fabiancdng">
+      <a className="w-fit" href="/author/fabiancdng">
         <div className="flex items-center my-4">
           <Image
-            src={`/api/content/images/authors/${slug}/img/avatar.jpg?token=${process.env.NEXT_PUBLIC_CONTENT_IMAGE_API_KEY}`}
+            src={authorImage.source}
             alt={`${author.metadata.name} profile picture`}
-            width={200}
-            height={200}
+            width={authorImage.dimensions.width}
+            height={authorImage.dimensions.height}
             className="w-14 h-14 mr-2 rounded-full"
             priority={preview ? false : true}
           />

@@ -57,7 +57,7 @@ export async function getAuthorBySlug(slug: string): Promise<Author | null> {
   });
 
   const content = authorMatter.content;
-  const metadata = authorMatter.data as AuthorMetadata;
+  const metadata = { slug, ...authorMatter.data } as AuthorMetadata;
 
   return {
     metadata,
@@ -169,7 +169,52 @@ export async function getAllBlogPostsByTag(tag: string): Promise<Post[]> {
 }
 
 /**
- * Iterates over all files in the `content/tags` directory and returns array with its slug
+ * Iterates over all files in the `content/blog` directory and create array with data needed to
+ * display the blog in a feed filtered by a specific author.
+ */
+export async function getAllBlogPostsByAuthor(authorSlug: string) {
+  const absPath = process.cwd();
+
+  const posts: Post[] = [];
+
+  const slugs = await getAllBlogPostSlugs();
+
+  for (const slug of slugs) {
+    const markdown = await readFile(`${absPath}/content/blog/${slug}/post.md`).catch((err) => null);
+
+    if (!markdown) continue;
+
+    // Strip and parse metadata.
+    const postMatter = matter(markdown, {
+      excerpt: true,
+    });
+
+    const metadata = postMatter.data as PostMetadata;
+
+    if (metadata.author === authorSlug) {
+      posts.push({
+        slug: slug,
+        metadata,
+        content: '', // We don't need the content for the feed.
+        excerpt: postMatter.excerpt,
+      });
+    }
+  }
+
+  // Sort the array of posts descending by their metadata.published_at date.
+  posts.sort((a, b) => {
+    if (a.metadata.published_at < b.metadata.published_at) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
+
+  return posts;
+}
+
+/**
+ * Iterates over all files in the `content/tag` directory and returns array with its slug
  * and other data specified in the matter.
  */
 export async function getAllTags() {
@@ -198,7 +243,7 @@ export async function getAllTags() {
 }
 
 /**
- * Iterates over all files in the `content/tags` directory and creates array with slugs.
+ * Iterates over all files in the `content/tag` directory and creates array with slugs.
  */
 export async function getAllTagSlugs() {
   const absPath = process.cwd();
@@ -372,4 +417,19 @@ export async function getIntroduction() {
   const content = introductionMatter.content;
 
   return content;
+}
+
+/**
+ * Iterates over all files in the `content/author` directory and returns array with all slug.
+ */
+export async function getAllAuthorSlugs() {
+  const absPath = process.cwd();
+
+  const slugs: string[] = [];
+
+  const dirs = (await readdir(`${absPath}/content`)).filter((dir) => !dir.startsWith('.'));
+
+  dirs.forEach((dir) => slugs.push(dir));
+
+  return slugs;
 }

@@ -42,6 +42,7 @@ export interface Author {
 }
 
 export interface AuthorMetadata {
+  slug: string;
   name: string;
   homepage: string;
   twitter: string;

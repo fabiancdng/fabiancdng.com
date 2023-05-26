@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     title: `${tag.name} | Blog | fabiancdng.com`,
     description: `All posts tagged with '${tag.name}}'.`,
     alternates: {
-      canonical: `/blog/tags/${tag.slug}`,
+      canonical: `/blog/tag/${tag.slug}`,
     },
     twitter: {
       ...twitterBaseMetadata,
