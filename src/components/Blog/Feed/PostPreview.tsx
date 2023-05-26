@@ -24,7 +24,7 @@ const PostPreview = ({ post }: { post: Post }) => {
       </div>
 
       {/* Post tags, title, author, date excerpt and link */}
-      <div className="lg:w-fit lg:pl-10">
+      <div className="lg:w-fit">
         {/* @ts-expect-error Server Component */}
         <Header post={post} metadata={post.metadata} excerpt={post.excerpt} preview={true} />
         {/* Read more link */}
