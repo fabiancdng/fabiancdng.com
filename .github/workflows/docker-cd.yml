@@ -34,6 +34,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
+        # Make sure submodules are cloned too.
+        # Submodule is private, so we need to use an access token.
+        with:
+          submodules: true
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Download Next.js build artifact
         uses: actions/download-artifact@v2
         with:
@@ -45,9 +50,9 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Get the version
-        id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\/v/}
+      # - name: Get the version
+      #   id: get_version
+      #   run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\/v/}
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:

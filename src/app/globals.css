@@ -5,3 +5,7 @@
 html {
   scroll-behavior: smooth;
 }
+
+pre.shiki {
+  @apply overflow-x-scroll p-6 rounded-lg;
+}

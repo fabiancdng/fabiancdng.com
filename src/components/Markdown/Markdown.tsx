@@ -3,9 +3,9 @@ import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import CodeBlock from './CodeBlock';
 import Image from 'next/image';
 import { getImage } from '@/adapters/ImageAdapter';
-
-import './Markdown.css';
 import Link from 'next/link';
+
+import styles from './Markdown.module.css';
 
 /**
  * Markdown content to be rendered.
@@ -26,7 +26,7 @@ const Markdown = ({ slug, content }: { slug: string; content: string }) => {
       /* @ts-expect-error Server Component */
       <CodeBlock code={code} language={language} />
     ) : (
-      <code {...props} className={className}>
+      <code {...props} className={`${className || ''} bg-gray-100 text-red-600 dark:text-red-400 p-1 dark:bg-slate-800`}>
         {children}
       </code>
     );
@@ -67,7 +67,7 @@ const Markdown = ({ slug, content }: { slug: string; content: string }) => {
     ),
   };
 
-  return <ReactMarkdown className="markdown-content" children={content} components={renderMap} />;
+  return <ReactMarkdown className={styles.markdownContent} children={content} components={renderMap} />;
 };
 
 export default Markdown;
