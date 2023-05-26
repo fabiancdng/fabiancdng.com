@@ -16,7 +16,7 @@ const Introduction = async () => {
             />
           ),
           p: ({ node, ...props }) => (
-            <p className="text-gray-800 dark:text-slate-100 text-center sm:text-left text-xl leading-10 my-4" {...props} />
+            <p className="text-gray-800 dark:text-slate-100 text-center sm:text-left text-xl leading-9 my-4" {...props} />
           ),
           strong: ({ node, ...props }) => <b className="underline" {...props} />,
           a: ({ node, ...props }) => <a className="underline" {...props} />,

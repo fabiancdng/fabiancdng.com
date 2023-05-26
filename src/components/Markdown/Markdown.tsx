@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { getImage } from '@/adapters/ImageAdapter';
 
 import './Markdown.css';
+import Link from 'next/link';
 
 /**
  * Markdown content to be rendered.
@@ -59,6 +60,11 @@ const Markdown = ({ slug, content }: { slug: string; content: string }) => {
     pre: renderNodePre,
     img: renderNodeImage,
     hr: () => <hr className="w-full border-gray-300 dark:border-slate-600 my-10" />,
+    a: ({ children, href }: { children: JSX.Element[]; href: string }) => (
+      <Link href={href} target="_blank">
+        {children}
+      </Link>
+    ),
   };
 
   return <ReactMarkdown className="markdown-content" children={content} components={renderMap} />;

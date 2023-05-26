@@ -53,7 +53,7 @@ const SingleProject = ({ project, reverseDesign, children }: SingleProjectProps)
   }, [screenWidth, reverseDesign]);
 
   return (
-    <div className="container pb-5 max-w-6xl mx-auto mt-24 text-black dark:text-white">
+    <div className="container pb-5  mx-auto mt-24 text-black dark:text-white">
       <div className="flex flex-col md:flex-row mt-14 mb-14">
         {/* Thumbnail (if not reversed) */}
         {!reverseDesignState && <ProjectThumbnail project={project} />}

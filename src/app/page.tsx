@@ -7,6 +7,7 @@ import { getAllProjects } from '@/adapters/ContentAdapter';
 import SingleProject from '@/components/Homepage/Projects/Project';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import Introduction from '@/components/Homepage/Introduction';
+import Contact from '@/components/Homepage/Contact';
 
 /**
  * Set some metadata for the page for SEO.
@@ -63,6 +64,8 @@ const HomePage = async () => {
           </SingleProject>
         ))}
       </Projects>
+
+      <Contact title="Contact me" subtitle="Feel free to contact me using the email below or the contact form." />
     </main>
   );
 };
