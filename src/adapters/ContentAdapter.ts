@@ -124,6 +124,51 @@ export async function getAllBlogPosts(): Promise<Post[]> {
 }
 
 /**
+ * Iterates over all files in the `content/blog` directory and create array with data needed to
+ * display the blog in a feed filtered by a specific tag.
+ */
+export async function getAllBlogPostsByTag(tag: string): Promise<Post[]> {
+  const absPath = process.cwd();
+
+  const posts: Post[] = [];
+
+  const slugs = await getAllBlogPostSlugs();
+
+  for (const slug of slugs) {
+    const markdown = await readFile(`${absPath}/content/blog/${slug}/post.md`).catch((err) => null);
+
+    if (!markdown) continue;
+
+    // Strip and parse metadata.
+    const postMatter = matter(markdown, {
+      excerpt: true,
+    });
+
+    const metadata = postMatter.data as PostMetadata;
+
+    if (metadata.tags.includes(tag)) {
+      posts.push({
+        slug: slug,
+        metadata,
+        content: '', // We don't need the content for the feed.
+        excerpt: postMatter.excerpt,
+      });
+    }
+  }
+
+  // Sort the array of posts descending by their metadata.published_at date.
+  posts.sort((a, b) => {
+    if (a.metadata.published_at < b.metadata.published_at) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
+
+  return posts;
+}
+
+/**
  * Iterates over all files in the `content/tags` directory and returns array with its slug
  * and other data specified in the matter.
  */
@@ -153,9 +198,24 @@ export async function getAllTags() {
 }
 
 /**
+ * Iterates over all files in the `content/tags` directory and creates array with slugs.
+ */
+export async function getAllTagSlugs() {
+  const absPath = process.cwd();
+
+  const slugs: string[] = [];
+
+  const dirs = (await readdir(`${absPath}/content/tags`)).filter((dir) => !dir.startsWith('.'));
+
+  dirs.forEach((dir) => slugs.push(dir));
+
+  return slugs;
+}
+
+/**
  * Returns a single tag by its slug.
  */
-export async function getTag(slug: string) {
+export async function getTagBySlug(slug: string) {
   const absPath = process.cwd();
 
   const markdown = await readFile(`${absPath}/content/tags/${slug}/tag.md`).catch((err) => null);
@@ -179,7 +239,7 @@ export async function getTags(slugs: string[]) {
   const tags: Tag[] = [];
 
   for (const slug of slugs) {
-    const tag = await getTag(slug);
+    const tag = await getTagBySlug(slug);
 
     if (!tag) continue;
 

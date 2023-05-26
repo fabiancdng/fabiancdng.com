@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 const BlogPage = async () => {
   const blogPosts = await getAllBlogPosts();
   return (
-    <>
+    <main>
       <BlogBanner
         title="Fabian's Blog"
         description="A blog about web development, my projects, and my learnings."
@@ -46,7 +46,7 @@ const BlogPage = async () => {
           <PostPreview key={index} post={post} />
         ))}
       </div>
-    </>
+    </main>
   );
 };
 export default BlogPage;

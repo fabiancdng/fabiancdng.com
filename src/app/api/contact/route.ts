@@ -105,7 +105,7 @@ export async function POST(request: NextRequest) {
   try {
     await sendgrid.send({
       to: process.env.NEXT_PUBLIC_CONTACT_EMAIL,
-      from: process.env.NEXT_PUBLIC_CONTACT_EMAIL ? process.env.NEXT_PUBLIC_CONTACT_EMAIL : '',
+      from: process.env.NEXT_PUBLIC_CONTACT_EMAIL || '',
       subject: 'Message via fabiancdng.com',
       replyTo: body.email,
       html: `
