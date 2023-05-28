@@ -20,8 +20,9 @@ jobs:
           token: ${{ secrets.WEBSITE_BUILD_AT }}
       - name: Build the Next.js app
         env:
-          NEXT_PUBLIC_DOMAIN: ${{ secrets.DOMAIN_NAME }}
-          NEXT_PUBLIC_STORYBLOK_TOKEN: ${{ secrets.STORYBLOK_TOKEN }}
+          NEXT_PUBLIC_DOMAIN: ${{ env.NEXT_PUBLIC_DOMAIN }}
+          NEXT_PUBLIC_CONTACT_EMAIL: ${{ env.NEXT_PUBLIC_CONTACT_EMAIL }}
+          NEXT_PUBLIC_CONTENT_IMAGE_API_KEY: ${{ secrets.NEXT_PUBLIC_CONTENT_IMAGE_API_KEY }}
         run: npm install && npm run build
       - name: Upload Next.js build as artifact
         uses: actions/upload-artifact@v2
