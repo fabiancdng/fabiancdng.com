@@ -15,17 +15,19 @@ import { MetadataRoute } from 'next';
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const sitemap: MetadataRoute.Sitemap = [];
 
+  const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'https://fabiancdng.com';
+
   /**
    * Statics
    */
   sitemap.push({
-    url: `${process.env.NEXT_PUBLIC_DOMAIN}`,
+    url: `${DOMAIN}`,
   });
 
   const allBlogPostSlugs = await getAllBlogPostSlugs();
   const latestBlogPost = await getPostBySlug(allBlogPostSlugs[0]);
   sitemap.push({
-    url: `${process.env.NEXT_PUBLIC_DOMAIN}/blog`,
+    url: `${DOMAIN}/blog`,
     lastModified: latestBlogPost ? latestBlogPost.metadata.updated_at : undefined,
   });
 
@@ -40,7 +42,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     if (!page) continue;
 
     sitemap.push({
-      url: `${process.env.NEXT_PUBLIC_DOMAIN}/${pageSlug}`,
+      url: `${DOMAIN}/${pageSlug}`,
       lastModified: page.metadata.updated_at,
     });
   }
@@ -56,7 +58,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     if (!post) continue;
 
     sitemap.push({
-      url: `${process.env.NEXT_PUBLIC_DOMAIN}/blog/${blogPostSlug}`,
+      url: `${DOMAIN}/blog/${blogPostSlug}`,
       lastModified: post.metadata.updated_at,
     });
   }
@@ -73,7 +75,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const posts = await getAllBlogPostsByTag(tag.slug);
 
     sitemap.push({
-      url: `${process.env.NEXT_PUBLIC_DOMAIN}/blog/tags/${tagSlug}`,
+      url: `${DOMAIN}/blog/tags/${tagSlug}`,
       lastModified: posts[0].metadata.updated_at,
     });
   }
@@ -90,7 +92,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const posts = await getAllBlogPostsByAuthor(author.metadata.slug);
 
     sitemap.push({
-      url: `${process.env.NEXT_PUBLIC_DOMAIN}/blog/authors/${author.metadata.slug}`,
+      url: `${DOMAIN}/blog/authors/${author.metadata.slug}`,
       lastModified: posts[0].metadata.updated_at,
     });
   }
