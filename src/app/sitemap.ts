@@ -39,7 +39,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const pageSlug of pageSlugs) {
     const page = await getPageBySlug(pageSlug);
 
-    if (!page) continue;
+    if (!page || !page.metadata.search_engine_index) continue;
 
     sitemap.push({
       url: `${DOMAIN}/${pageSlug}`,

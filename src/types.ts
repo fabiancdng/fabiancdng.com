@@ -28,6 +28,7 @@ export interface PageMetadata {
   description: string;
   published_at: Date;
   updated_at: Date;
+  search_engine_index: boolean;
 }
 
 export interface Image {

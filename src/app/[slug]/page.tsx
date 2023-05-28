@@ -26,6 +26,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   return {
     title: `${page.metadata.title} | fabiancdng.com`,
     description: page.metadata.description,
+    robots: !page.metadata.search_engine_index ? 'noindex, follow' : undefined,
     alternates: {
       canonical: `/${page.slug}`,
     },
