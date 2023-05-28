@@ -30,20 +30,10 @@ const PostShareButton = ({ label, href, icon }: PostShareButtonProps) => {
  */
 const PostShare = ({ link, text }: { link: string; text: string }) => {
   return (
-    <div
-      id="blog-post-share"
-      className="flex flex-row max-w-3xl justify-evenly mt-20 mx-auto">
-      <PostShareButton
-        label="Share on Facebook"
-        href={`https://www.facebook.com/sharer/sharer.php?u=${link}`}
-        icon="fab fa-facebook-f"
-      />
+    <div id="blog-post-share" className="flex flex-row max-w-3xl justify-evenly mt-20 mx-auto">
+      <PostShareButton label="Share on Facebook" href={`https://www.facebook.com/sharer/sharer.php?u=${link}`} icon="fab fa-facebook-f" />
 
-      <PostShareButton
-        label="Share on Twitter"
-        href={`https://twitter.com/intent/tweet?text=${text}&url=${link}`}
-        icon="fab fa-twitter"
-      />
+      <PostShareButton label="Share on Twitter" href={`https://twitter.com/intent/tweet?text=${text}&url=${link}`} icon="fab fa-twitter" />
 
       <PostShareButton
         label="Share on Reddit"
