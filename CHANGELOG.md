@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 4.0.1 - 2023-05-28
+
+- Fix: Add Fallback Domain for `sitemap.xml`
+
 ## 4.0.0 - 2023-05-28
 
 - Rewrite with Next.js 13.4 (App Router)
