@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file.
 
+## 4.1.0 - 2023-05-28
+
 ## 4.0.1 - 2023-05-28
 
 - Fix: Add Fallback Domain for `sitemap.xml`
