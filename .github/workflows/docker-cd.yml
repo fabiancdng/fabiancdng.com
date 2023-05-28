@@ -13,6 +13,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
+        # Make sure submodules are cloned too.
+        # Submodule is private, so we need to use an access token.
+        with:
+          submodules: true
+          token: ${{ secrets.WEBSITE_BUILD_AT }}
       - name: Build the Next.js app
         env:
           NEXT_PUBLIC_DOMAIN: ${{ secrets.DOMAIN_NAME }}
@@ -38,7 +43,7 @@ jobs:
         # Submodule is private, so we need to use an access token.
         with:
           submodules: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.WEBSITE_BUILD_AT }}
       - name: Download Next.js build artifact
         uses: actions/download-artifact@v2
         with:
