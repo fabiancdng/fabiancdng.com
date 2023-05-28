@@ -14,7 +14,7 @@ interface HeroSectionProps {
 const HeroSection = ({ title, subtitle, description, logo }: HeroSectionProps) => {
   return (
     <div className="container mx-auto mb-20">
-      <div className="h-screen flex flex-col justify-center align-middle dark:bg-slate-900">
+      <div className="min-h-screen flex flex-col justify-center align-middle dark:bg-slate-900">
         <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center gap-12 mt-10 lg:mt-25">
           {/* Text & Socials */}
           <div className="flex flex-1 flex-col items-center lg:items-start">

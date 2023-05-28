@@ -17,33 +17,23 @@ const nextConfig = {
 
       // v3 -> v4 changed the permalink structure.
       {
-        source: '/authors/fabiancdng',
-        destination: '/author/fabiancdng',
-        permanent: true,
-      },
-      {
         source: '/blog/tags/WordPress',
-        destination: '/blog/tag/wordpress',
+        destination: '/blog/tags/wordpress',
         permanent: true,
       },
       {
         source: '/blog/tags/Next.js',
-        destination: '/blog/tag/next-js',
-        permanent: true,
-      },
-      {
-        source: '/blog/tags/Docker',
-        destination: '/blog/tag/docker',
+        destination: '/blog/tags/next-js',
         permanent: true,
       },
       {
         source: '/blog/tags/SEO',
-        destination: '/blog/tag/seo',
+        destination: '/blog/tags/seo',
         permanent: true,
       },
       {
         source: '/blog/tags/Node.js',
-        destination: '/blog/tag/node-js',
+        destination: '/blog/tags/node-js',
         permanent: true,
       },
 

@@ -2,7 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
+html,
+body,
+#__next {
+  min-height: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
   scroll-behavior: smooth;
 }
 

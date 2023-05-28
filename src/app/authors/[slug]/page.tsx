@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     title: `${author.metadata.name} | Author | fabiancdng.com`,
     description: author.content,
     alternates: {
-      canonical: `/blog/author/${author.metadata.slug}`,
+      canonical: `/blog/authors/${author.metadata.slug}`,
     },
     twitter: {
       ...twitterBaseMetadata,

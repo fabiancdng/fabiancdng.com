@@ -20,7 +20,7 @@ export const revalidate = 30 * 60;
  * Dynamically/statically generate metadata for the blog post.
  */
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata | null> {
-  const tag = await getTagBySlug(params.slug);
+  const tag = await getTagBySlug(params.slug.toLowerCase());
 
   if (!tag) return null;
 
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     title: `${tag.name} | Blog | fabiancdng.com`,
     description: `All posts tagged with '${tag.name}}'.`,
     alternates: {
-      canonical: `/blog/tag/${tag.slug}`,
+      canonical: `/blog/tags/${tag.slug}`,
     },
     twitter: {
       ...twitterBaseMetadata,
@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
  * A page for a tag in the blog.
  */
 const BlogTagPage = async ({ params }: { params: { slug: string } }) => {
-  const tag = await getTagBySlug(params.slug);
+  const tag = await getTagBySlug(params.slug.toLowerCase());
 
   // If the tag doesn't exist, return a 404.
   if (!tag) notFound();

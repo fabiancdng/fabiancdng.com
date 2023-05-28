@@ -10,7 +10,7 @@ const Author = async ({ slug, publishedAt, preview }: { slug: string; publishedA
 
   return (
     <div className="post-author w-fit">
-      <a className="w-fit" href="/author/fabiancdng">
+      <a className="w-fit" href="/authors/fabiancdng">
         <div className="flex items-center my-4">
           <Image
             src={authorImage.source}

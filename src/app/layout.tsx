@@ -29,46 +29,44 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>
-        <div className="app overflow-x-hidden dark:bg-slate-900 min-h-screen dark:text-white">
-          <GlobalsProvider>
-            <Navbar
-              links={[
-                {
-                  title: 'Home',
-                  name: 'home',
-                  href: '/',
-                },
-                {
-                  title: 'Projects',
-                  name: 'projects',
-                  href: '/#projects',
-                },
-                {
-                  title: 'Blog',
-                  name: 'blog',
-                  href: '/blog',
-                },
-                {
-                  title: 'About',
-                  name: 'about',
-                  href: '/about',
-                },
-              ]}
-            />
+      <body className="dark:bg-slate-900 dark:text-white">
+        <GlobalsProvider>
+          <Navbar
+            links={[
+              {
+                title: 'Home',
+                name: 'home',
+                href: '/',
+              },
+              {
+                title: 'Projects',
+                name: 'projects',
+                href: '/#projects',
+              },
+              {
+                title: 'Blog',
+                name: 'blog',
+                href: '/blog',
+              },
+              {
+                title: 'About',
+                name: 'about',
+                href: '/about',
+              },
+            ]}
+          />
 
-            {children}
+          {children}
 
-            <Footer
-              text={`Copyright © 2021-${new Date().getFullYear()} Fabian Reinders`}
-              links={[
-                { title: 'Contact', href: '/#contact-me' },
-                { title: 'Legal Notice', href: '/legal-notice' },
-                { title: 'Privacy Policy', href: '/privacy-policy' },
-              ]}
-            />
-          </GlobalsProvider>
-        </div>
+          <Footer
+            text={`Copyright © 2021-${new Date().getFullYear()} Fabian Reinders`}
+            links={[
+              { title: 'Contact', href: '/#contact-me' },
+              { title: 'Legal Notice', href: '/legal-notice' },
+              { title: 'Privacy Policy', href: '/privacy-policy' },
+            ]}
+          />
+        </GlobalsProvider>
       </body>
     </html>
   );

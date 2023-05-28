@@ -2,7 +2,6 @@
 
 import { useContext, useEffect, useState } from 'react';
 import DarkModeToggle from './DarkModeToggle';
-import NavbarLink from './NavbarLink';
 import Link from 'next/link';
 import Image from 'next/image';
 import NavbarImage from '../../../public/img/navbar-image.png';
@@ -76,12 +75,17 @@ const Navbar = ({ links }: NavbarProps) => {
             links.map((link, index) => (
               // Single Navigation Link
               <li key={index}>
-                <NavbarLink
-                  title={link.title}
+                <Link
                   href={link.href}
-                  active={link.name === activeNavItem}
-                  additionalCSS="dark:hover:bg-slate-600 dark:text-white hover:bg-slate-200 rounded transition-all duration-500 px-4 py-3"
-                />
+                  scroll={link.href.includes('#') ? false : true}
+                  className={`cursor-pointer dark:hover:bg-slate-600 dark:text-white hover:bg-slate-200 rounded transition-all duration-500 px-4 py-3`}>
+                  <span
+                    className={
+                      activeNavItem === link.name ? 'border-b-2 px-0.5 pb-1 border-b-slate-500 dark:border-b-slate-300' : 'px-0.5'
+                    }>
+                    {link.title}
+                  </span>
+                </Link>
               </li>
             ))
           }
@@ -119,7 +123,9 @@ const Navbar = ({ links }: NavbarProps) => {
                 onClick={() => setMobileMenuOpen(false)}
                 className="rounded bg-slate-200 hover:bg-slate-300 transition
                             ease-in-out duration-300 dark:bg-slate-600 dark:hover:bg-slate-500">
-                <NavbarLink title={link.title} href={link.href} active={false} additionalCSS="block w-full px-3 py-2" />
+                <Link href={link.href} scroll={link.href.includes('#') ? false : true} className={`cursor-pointer block w-full px-3 py-2`}>
+                  {link.title}
+                </Link>
               </li>
             ))
           }

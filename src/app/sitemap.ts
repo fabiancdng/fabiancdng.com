@@ -73,7 +73,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const posts = await getAllBlogPostsByTag(tag.slug);
 
     sitemap.push({
-      url: `${process.env.NEXT_PUBLIC_DOMAIN}/blog/tag/${tagSlug}`,
+      url: `${process.env.NEXT_PUBLIC_DOMAIN}/blog/tags/${tagSlug}`,
       lastModified: posts[0].metadata.updated_at,
     });
   }
@@ -90,7 +90,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const posts = await getAllBlogPostsByAuthor(author.metadata.slug);
 
     sitemap.push({
-      url: `${process.env.NEXT_PUBLIC_DOMAIN}/blog/author/${author.metadata.slug}`,
+      url: `${process.env.NEXT_PUBLIC_DOMAIN}/blog/authors/${author.metadata.slug}`,
       lastModified: posts[0].metadata.updated_at,
     });
   }
