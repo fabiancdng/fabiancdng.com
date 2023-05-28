@@ -18,7 +18,7 @@ export function getImagePath(slug: string, filename: string) {
  * Returns the URL for the `src` prop of an image from the content directory.
  */
 export function getImageSource(slug: string, filename: string) {
-  const source = `/api/content/images${slug}/img/${filename}?token=${process.env.NEXT_PUBLIC_CONTENT_IMAGE_API_KEY}`;
+  const source = `/api/content/images${slug}/img/${filename}`;
   return source;
 }
 

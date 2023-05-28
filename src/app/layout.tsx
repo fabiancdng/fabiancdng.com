@@ -29,6 +29,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        {process.env.NODE_ENV === 'production' && (
+          <script defer data-domain="fabiancdng.com" src="https://analytics.fabiancdng.com/js/plausible.js"></script>
+        )}
+      </head>
       <body>
         <div className="app overflow-x-hidden dark:bg-slate-900 min-h-screen dark:text-white">
           <GlobalsProvider>

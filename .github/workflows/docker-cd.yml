@@ -22,7 +22,6 @@ jobs:
         env:
           NEXT_PUBLIC_DOMAIN: ${{ env.NEXT_PUBLIC_DOMAIN }}
           NEXT_PUBLIC_CONTACT_EMAIL: ${{ env.NEXT_PUBLIC_CONTACT_EMAIL }}
-          NEXT_PUBLIC_CONTENT_IMAGE_API_KEY: ${{ env.NEXT_PUBLIC_CONTENT_IMAGE_API_KEY }}
         run: npm install && npm run build
       - name: Upload Next.js build as artifact
         uses: actions/upload-artifact@v2
