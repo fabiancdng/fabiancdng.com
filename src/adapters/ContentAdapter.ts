@@ -1,4 +1,4 @@
-import { AuthorMetadata, Page, Post, PostMetadata, Project, ProjectMetadata, Tag } from '@/types';
+import { AuthorMetadata, Page, PageMetadata, Post, PostMetadata, Project, ProjectMetadata, Tag } from '@/types';
 import matter from 'gray-matter';
 import { Author } from '@/types';
 import { readFile, readdir } from 'fs/promises';
@@ -312,7 +312,7 @@ export async function getPageBySlug(slug: string): Promise<Page | null> {
   });
 
   const content = postMatter.excerpt ? postMatter.content.slice(postMatter.excerpt.length + 3) : postMatter.content;
-  const metadata = postMatter.data as PostMetadata;
+  const metadata = postMatter.data as PageMetadata;
 
   return {
     slug: slug,
