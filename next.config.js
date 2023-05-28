@@ -17,18 +17,8 @@ const nextConfig = {
 
       // v3 -> v4 changed the permalink structure.
       {
-        source: '/blog/tags/WordPress',
-        destination: '/blog/tags/wordpress',
-        permanent: true,
-      },
-      {
         source: '/blog/tags/Next.js',
         destination: '/blog/tags/next-js',
-        permanent: true,
-      },
-      {
-        source: '/blog/tags/SEO',
-        destination: '/blog/tags/seo',
         permanent: true,
       },
       {
