@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 4.0.0 - 2023-05-28
+
+- Rewrite with Next.js 13.4 (App Router)
+- Drop Storyblok as a CMS (switch to `md` files)
+- Utilize Next.js Metadata APIs for new `sitemap.xml` and SEO
+
 ## 3.14.4 - 2023-05-18
 
 - Fix broken link `/blog/scaling-next-js-web-apps-with-docker` due to slug update
