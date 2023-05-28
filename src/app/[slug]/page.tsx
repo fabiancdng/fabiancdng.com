@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation';
 
 /**
  * If a request comes in to a page that exists in the file system, but has not been built yet,
- * generate the page on the fly and cache it.
+ * generate the page on the fly and cache it.,
  */
 export const dynamicParams = true;
 
