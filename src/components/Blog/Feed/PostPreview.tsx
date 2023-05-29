@@ -18,7 +18,6 @@ const PostPreview = ({ post }: { post: Post }) => {
             height={thumbnail.dimensions.height}
             alt={post.metadata.title}
             className="rounded-md"
-            priority
           />
         </Link>
       </div>
