@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 4.2.3 - 2023-05-29
+
+- Fix: Better Docker build
+
 ## 4.2.2 - 2023-05-29
 
 - Fix: GitHub Actions env vars undefined

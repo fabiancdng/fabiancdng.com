@@ -8,7 +8,6 @@ on:
 jobs:
   next-build:
     runs-on: ubuntu-latest
-    container: node:18-alpine
     name: Build and Deploy Next.js App
     steps:
       - name: Checkout code
