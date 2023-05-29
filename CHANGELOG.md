@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 4.2.2 - 2023-05-29
+
+- Fix: GitHub Actions env vars undefined
+- Fix: ISR instead of On-Demand only (as `revalidate_path` API is too complicated to opt-out of the load balancing for now)
+
 ## 4.2.1 - 2023-05-29
 
 - Fix: Don't lazy load blog post thumbnails
