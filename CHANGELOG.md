@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 4.2.1 - 2023-05-29
+
+- Fix: Don't lazy load blog post thumbnails
+
 ## 4.2.0 - 2023-05-29
 
 - Remove Background Revalidation
