@@ -1,0 +1,78 @@
+.markdownContent,
+.markdownContent {
+  @apply text-xl;
+}
+
+.markdownContent a {
+  @apply border-b-2 border-violet-700;
+  transition: all 0.15s ease-in-out;
+}
+
+.markdownContent a:hover {
+  @apply border-b-[3px] transition-all duration-[0.15s] ease-in-out;
+}
+
+.markdownContent figure {
+  @apply my-10;
+}
+
+.markdownContent figcaption {
+  @apply text-center text-gray-600 dark:text-gray-300 text-lg italic mt-3 mb-5;
+}
+
+.markdownContent img {
+  @apply w-full rounded-2xl my-10;
+}
+
+.markdownContent p b,
+.markdownContent p strong {
+  @apply font-semibold;
+}
+
+.markdownContent p {
+  @apply my-7;
+}
+
+.markdownContent hr {
+  @apply my-10;
+}
+
+.markdownContent h1 {
+  @apply text-5xl my-10 leading-[3.5rem] font-semibold;
+}
+
+.markdownContent h2 {
+  @apply text-3xl font-semibold mt-20;
+}
+
+.markdownContent h3 {
+  @apply text-2xl font-medium mt-[4rem];
+}
+
+.markdownContent h4 {
+  @apply text-2xl mt-16;
+}
+
+.markdownContent h5 {
+  @apply text-2xl mt-12;
+}
+
+.markdownContent h6 {
+  @apply text-2xl mt-12;
+}
+
+.markdownContent ul {
+  @apply my-7 pl-5 list-disc;
+}
+
+.markdownContent ul p {
+  @apply my-3;
+}
+
+.markdownContent ul li {
+  @apply ml-3 my-5;
+}
+
+.markdownContent blockquote {
+  @apply px-5 py-1 my-5 rounded-md border-l-4 border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-slate-800;
+}
