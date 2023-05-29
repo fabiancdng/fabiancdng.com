@@ -13,11 +13,6 @@ import PostGrid from '@/components/Blog/Feed/Grid/PostGrid';
 export const dynamicParams = true;
 
 /**
- * Cache the page for 30 minutes to prevent disk reads and re-parsing on every request.
- */
-export const revalidate = 30 * 60;
-
-/**
  * Dynamically/statically generate metadata for the blog post.
  */
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata | null> {
@@ -144,7 +139,8 @@ const AuthorPage = async ({ params }: { params: { slug: string } }) => {
  * Export possible paths for this page.
  */
 export async function generateStaticParams() {
-  return await getAllAuthorSlugs();
+  const authorSlugs = await getAllAuthorSlugs();
+  return authorSlugs.map((slug) => ({ slug }));
 }
 
 export default AuthorPage;

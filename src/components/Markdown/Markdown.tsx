@@ -65,6 +65,11 @@ const Markdown = ({ slug, content }: { slug: string; content: string }) => {
         {children}
       </Link>
     ),
+    blockquote: ({ children }: { children: JSX.Element[] }) => (
+      <blockquote className="px-5 py-1 my-5 rounded-md border-l-4 border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-slate-800">
+        {children}
+      </blockquote>
+    ),
   };
 
   return <ReactMarkdown className={styles.markdownContent} children={content} components={renderMap} />;

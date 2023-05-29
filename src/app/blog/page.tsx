@@ -5,11 +5,6 @@ import { Metadata } from 'next';
 import { openGraphBaseMetadata, twitterBaseMetadata } from '../metadata';
 
 /**
- * Cache the page for 30 minutes to prevent disk reads and re-parsing on every request.
- */
-export const revalidate = 30 * 60;
-
-/**
  * Set some metadata for the page for SEO.
  */
 export const metadata: Metadata = {

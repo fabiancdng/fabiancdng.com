@@ -11,11 +11,6 @@ import { notFound } from 'next/navigation';
 export const dynamicParams = true;
 
 /**
- * Cache the page for 30 minutes to prevent disk reads and re-parsing on every request.
- */
-export const revalidate = 30 * 60;
-
-/**
  * Dynamically/statically generate metadata for the page.
  */
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata | null> {

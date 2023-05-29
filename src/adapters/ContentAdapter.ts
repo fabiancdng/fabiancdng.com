@@ -427,7 +427,7 @@ export async function getAllAuthorSlugs() {
 
   const slugs: string[] = [];
 
-  const dirs = (await readdir(`${absPath}/content`)).filter((dir) => !dir.startsWith('.'));
+  const dirs = (await readdir(`${absPath}/content/authors`)).filter((dir) => !dir.startsWith('.'));
 
   dirs.forEach((dir) => slugs.push(dir));
 

@@ -72,7 +72,3 @@
 .markdownContent ul li {
   @apply ml-3 my-5;
 }
-
-.markdownContent blockquote {
-  @apply px-5 py-1 my-5 rounded-md border-l-4 border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-slate-800;
-}
