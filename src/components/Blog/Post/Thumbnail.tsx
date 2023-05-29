@@ -1,7 +1,7 @@
 import { getImageDimensions, getImagePath, getImageSource } from '@/adapters/ImageAdapter';
 import Image from 'next/image';
 
-const Thumbnail = ({ title, slug }: { title: string; slug: string }) => {
+const Thumbnail = ({ title, slug, priority }: { title: string; slug: string; priority: boolean }) => {
   const thumbnailPath = getImagePath(`/blog/${slug}`, 'thumbnail.jpg');
   const thumbnailSource = getImageSource(`/blog/${slug}`, 'thumbnail.jpg');
   const thumbnailDimensions = getImageDimensions(thumbnailPath);
@@ -11,6 +11,7 @@ const Thumbnail = ({ title, slug }: { title: string; slug: string }) => {
       <Image
         src={thumbnailSource}
         alt={title}
+        priority={priority}
         className="lg:w-11/12 w-full mx-auto my-16 rounded-lg"
         width={thumbnailDimensions.width}
         height={thumbnailDimensions.height}
