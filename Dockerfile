@@ -48,6 +48,10 @@ COPY --from=builder /app/public ./public
 # Shiki fix
 COPY --from=builder /app/node_modules/shiki ./node_modules/shiki
 
+# Copy .git folder for the content submodule
+# COPY --from=builder /app/.git ./.git
+# COPY --from=builder /app/content/.git ./content/.git
+
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
