@@ -9,7 +9,7 @@ jobs:
   next-build:
     runs-on: ubuntu-latest
     container: node:18-alpine
-    name: Build Next.js App
+    name: Build and Deploy Next.js App
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
@@ -23,32 +23,14 @@ jobs:
           NEXT_PUBLIC_DOMAIN: ${{ vars.NEXT_PUBLIC_DOMAIN }}
           NEXT_PUBLIC_CONTACT_EMAIL: ${{ vars.NEXT_PUBLIC_CONTACT_EMAIL }}
         run: npm install && npm run build
-      - name: Upload Next.js build as artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: build
-          path: |
-            .next
-            public
-          retention-days: 1
-
-  docker-build:
-    needs: next-build
-    runs-on: ubuntu-latest
-    name: Build and push Docker image
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v1
-        # Make sure submodules are cloned too.
-        # Submodule is private, so we need to use an access token.
-        with:
-          submodules: true
-          token: ${{ secrets.WEBSITE_BUILD_AT }}
-      - name: Download Next.js build artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: build
-          path: .
+      # - name: Upload Next.js build as artifact
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: build
+      #     path: |
+      #       .next
+      #       public
+      #     retention-days: 1
       - name: Login to GitHub Container Registry (ghcr.io)
         uses: docker/login-action@v1
         with:
@@ -65,5 +47,40 @@ jobs:
           push: true
           tags: |
             ghcr.io/fabiancdng/fabiancdng-website:latest
+
+  # docker-build:
+  #   needs: next-build
+  #   runs-on: ubuntu-latest
+  #   name: Build and push Docker image
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v1
+  #       # Make sure submodules are cloned too.
+  #       # Submodule is private, so we need to use an access token.
+  #       with:
+  #         submodules: true
+  #         token: ${{ secrets.WEBSITE_BUILD_AT }}
+  #     - name: Download Next.js build artifact
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: build
+  #         path: .
+  #     - name: Login to GitHub Container Registry (ghcr.io)
+  #       uses: docker/login-action@v1
+  #       with:
+  #         registry: ghcr.io
+  #         username: ${{ github.repository_owner }}
+  #         password: ${{ secrets.GITHUB_TOKEN }}
+  # - name: Get the version
+  #   id: get_version
+  #   run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\/v/}
+
+#       - name: Build and push Docker image
+#         uses: docker/build-push-action@v2
+#         with:
+#           context: .
+#           push: true
+#           tags: |
+#             ghcr.io/fabiancdng/fabiancdng-website:latest
 
 # ghcr.io/fabiancdng/fabiancdng-website:${{ steps.get_version.outputs.VERSION }}
