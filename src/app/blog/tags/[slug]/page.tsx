@@ -12,6 +12,11 @@ import BlogBanner from '@/components/Blog/Feed/BlogBanner';
 export const dynamicParams = true;
 
 /**
+ * Revalidate the cache for this page after 30 minutes as content might change.
+ */
+export const revalidate = 30 * 60;
+
+/**
  * Dynamically/statically generate metadata for the blog post.
  */
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata | null> {

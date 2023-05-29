@@ -11,6 +11,11 @@ import { notFound } from 'next/navigation';
 export const dynamicParams = true;
 
 /**
+ * Revalidate the cache for this page after 30 minutes as content might change.
+ */
+export const revalidate = 30 * 60;
+
+/**
  * Dynamically/statically generate metadata for the page.
  */
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata | null> {
@@ -60,7 +65,8 @@ const DynamicPage = async ({ params }: { params: { slug: string } }) => {
  * Export possible paths for this page.
  */
 export async function generateStaticParams() {
-  return await getAllPageSlugs();
+  const pageSlugs = await getAllPageSlugs();
+  return pageSlugs.map((slug) => ({ slug }));
 }
 
 export default DynamicPage;

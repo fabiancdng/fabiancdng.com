@@ -10,6 +10,11 @@ import Introduction from '@/components/Homepage/Introduction';
 import Contact from '@/components/Homepage/Contact';
 
 /**
+ * Revalidate the cache for this page after 30 minutes as content might change.
+ */
+export const revalidate = 30 * 60;
+
+/**
  * Set some metadata for the page for SEO.
  */
 export const metadata: Metadata = {
