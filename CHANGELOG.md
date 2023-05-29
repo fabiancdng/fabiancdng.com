@@ -2,9 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## 4.2.0 - 2023-05-29
+
+- Remove Background Revalidation
+- Add On-Demand Revalidation via API route
+- Add Authorization to Revalidation API route
+- Update examples in the repository
+
 ## 4.1.1 - 2023-05-28
 
-Fix: Add field `search_engine_index` to pages for setting robots tags and de-listing pages in `sitemap.xml`
+- Fix: Add field `search_engine_index` to pages for setting robots tags and de-listing pages in `sitemap.xml`
 
 ## 4.1.0 - 2023-05-28
 

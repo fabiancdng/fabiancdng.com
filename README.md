@@ -4,12 +4,12 @@
 
 This is the fourth iteration of my website.
 
-|     |                                                                                                       |
-| --- | ----------------------------------------------------------------------------------------------------- |
-| v1  | Strapi + Ghost as a CMS, Next.js 12 front end                                                         |
-| v2  | Ghost as a CMS for the blog, other content hard-coded; Next.js 12 front end                           |
-| v3  | Rewrite with Storyblok as a CMS, Next.js 13 on the front end                                          |
-| v3  | Rewrite without CMS; Content in Markdown files; Next.js 13.4 on the front end with Next.js App Router |
+| Version | Architecture                                                                                          |
+| ------- | ----------------------------------------------------------------------------------------------------- |
+| v1      | Strapi + Ghost as a CMS, Next.js 12 front end                                                         |
+| v2      | Ghost as a CMS for the blog, other content hard-coded; Next.js 12 front end                           |
+| v3      | Rewrite with Storyblok as a CMS, Next.js 13 on the front end                                          |
+| v3      | Rewrite without CMS; Content in Markdown files; Next.js 13.4 on the front end with Next.js App Router |
 
 ---
 
@@ -20,10 +20,6 @@ My website can be deployed using a single Docker image:
 - [`fabiancdng-website`](https://github.com/fabiancdng/fabiancdng.com/pkgs/container/fabiancdng-website) - Next.js front end
 
 There's a continuous build of the Docker image up on the Github container registry. You can build it yourself, however, using the Dockerfile provided in the repository.
-
-### Docker Compose
-
-I use Docker Compose to separate all services into their own container and allow container-to-container networking. You can find an example [docker-compose.yml](docker-compose.yml) in the repository.
 
 ---
 
