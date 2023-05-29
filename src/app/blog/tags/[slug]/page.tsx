@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
   return {
     title: `${tag.name} | Blog | fabiancdng.com`,
-    description: `All posts tagged with '${tag.name}}'.`,
+    description: `All posts tagged with '${tag.name}'.`,
     alternates: {
       canonical: `/blog/tags/${tag.slug}`,
     },
@@ -37,6 +37,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     },
     openGraph: {
       ...openGraphBaseMetadata,
+      url: `/blog/tags/${tag.slug}`,
       title: `${tag.name} | Blog | fabiancdng.com`,
       description: `All posts tagged with '${tag.name}'.`,
     },

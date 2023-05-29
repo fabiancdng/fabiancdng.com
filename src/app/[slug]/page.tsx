@@ -37,6 +37,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     },
     openGraph: {
       ...openGraphBaseMetadata,
+      url: `/${page.slug}`,
       title: `${page.metadata.title} | fabiancdng.com`,
       description: page.metadata.description,
     },

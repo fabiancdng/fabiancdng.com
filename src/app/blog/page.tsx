@@ -25,6 +25,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     ...openGraphBaseMetadata,
+    url: '/blog',
     title: 'Blog | fabiancdng.com',
     description: 'A blog about web development, my projects, and my learnings as a full-stack web developer.',
   },
