@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 4.2.5 - 2023-05-29
+
+- Fix: Image Optimization Broken
+
 ## 4.2.4 - 2023-05-29
 
 - Fix: Remove comments

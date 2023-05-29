@@ -15,8 +15,6 @@ COPY --chown=nextjs:nodejs .next/standalone ./
 COPY --chown=nextjs:nodejs .next/static ./.next/static
 # Copy files hosted in the container (or in volumes).
 COPY --chown=nextjs:nodejs ./public ./public
-# Shiki fix
-COPY --chown=nextjs:nodejs ./node_modules/shiki ./node_modules/shiki
 
 USER nextjs
 

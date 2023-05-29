@@ -9,7 +9,7 @@ jobs:
   next-build:
     runs-on: ubuntu-latest
     container: node:18-alpine
-    name: Build and Deploy Next.js App
+    name: Build Next.js App
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
@@ -23,13 +23,16 @@ jobs:
           NEXT_PUBLIC_DOMAIN: ${{ vars.NEXT_PUBLIC_DOMAIN }}
           NEXT_PUBLIC_CONTACT_EMAIL: ${{ vars.NEXT_PUBLIC_CONTACT_EMAIL }}
         run: npm install && npm run build
+      - name: Copy over additional dependencies to the standalone build
+        run: cp -R node_modules/shiki .next/standalone/shiki
       - name: Upload Next.js build as artifact
         uses: actions/upload-artifact@v2
         with:
           name: build
           path: |
-            .next
             public
+            .next/static
+            .next/standalone
           retention-days: 1
       # - name: Get the version
       #   id: get_version
