@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 4.2.6 - 2023-06-17
+
+- New Build With All Content Updates
+
 ## 4.2.5 - 2023-05-29
 
 - Fix: Image Optimization Broken
