@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 4.2.7 - 2023-06-25
+
+- Update content submodule in image build due to copyright reasons
+
 ## 4.2.6 - 2023-06-17
 
 - New Build With All Content Updates
