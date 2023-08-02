@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 4.2.8 - 2023-08-02
+
+- Fix: `PostPreview` Images not aligned
+
 ## 4.2.7 - 2023-06-25
 
 - Update content submodule in image build due to copyright reasons
