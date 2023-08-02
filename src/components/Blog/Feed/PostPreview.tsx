@@ -10,20 +10,22 @@ const PostPreview = ({ post }: { post: Post }) => {
   return (
     <article className="flex flex-col lg:flex-row lg:p-0 space-y-7 lg:space-y-2 mt-36 mb-28 px-14 items-start">
       {/* Thumbnail */}
-      <div className="lg:w-2/3 w-full px-0 sm:px-7 mx-auto">
+      <div className="lg:w-5/12 w-full px-0 sm:px-7 mx-auto">
         <Link href={`/blog/${post.slug}`}>
-          <Image
-            src={thumbnail.source}
-            width={thumbnail.dimensions.width}
-            height={thumbnail.dimensions.height}
-            alt={post.metadata.title}
-            className="rounded-md"
-          />
+          <div className="w-full">
+            <Image
+              src={thumbnail.source}
+              width={thumbnail.dimensions.width}
+              height={thumbnail.dimensions.height}
+              alt={post.metadata.title}
+              className="rounded-md"
+            />
+          </div>
         </Link>
       </div>
 
       {/* Post tags, title, author, date excerpt and link */}
-      <div className="lg:w-fit">
+      <div className="lg:w-7/12 w-full">
         {/* @ts-expect-error Server Component */}
         <Header post={post} metadata={post.metadata} excerpt={post.excerpt} preview={true} />
         {/* Read more link */}
