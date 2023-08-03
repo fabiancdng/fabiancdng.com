@@ -1,5 +1,19 @@
 import { ISizeCalculationResult } from 'image-size/dist/types/interface';
 
+export interface WP_User {
+  id: number;
+  name: string;
+  url: string;
+  description: string;
+  link: string;
+  slug: string;
+  avatar_urls: {
+    '24': string;
+    '48': string;
+    '96': string;
+  };
+}
+
 export interface WP_Embedded_Image {
   file: string;
   width: number;
@@ -98,21 +112,7 @@ export interface WP_Post {
   categories: number[];
   tags: number[];
   _embedded: {
-    author: [
-      {
-        id: number;
-        name: string;
-        url: string;
-        description: string;
-        link: string;
-        slug: string;
-        avatar_urls: {
-          '24': string;
-          '48': string;
-          '96': string;
-        };
-      }
-    ];
+    author: WP_User[];
     'wp:featuredmedia': WP_Embedded_Media[];
     'wp:term': [WP_Embedded_Term[], WP_Embedded_Term[]];
   };

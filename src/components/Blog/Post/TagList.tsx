@@ -7,7 +7,7 @@ const TagList = ({ tags }: { tags: WP_Embedded_Term[] }) => {
     <ul className="post-tags inline-flex">
       {tags.map((tag, index) => (
         <li key={index} className="post-tag">
-          <Link className="text-blue-800 font-semibold text-lg dark:text-slate-400 uppercase" href={`/blog/tags/${tag.slug}`}>
+          <Link className="text-blue-800 font-semibold text-lg dark:text-slate-400 uppercase" href={`/blog/categories/${tag.slug}`}>
             {tag.name}
           </Link>
           {/* '/' in between the tags */}

@@ -75,7 +75,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const posts = await getAllBlogPostsByTag(tag.slug);
 
     sitemap.push({
-      url: `${DOMAIN}/blog/tags/${tagSlug}`,
+      url: `${DOMAIN}/blog/categories/${tagSlug}`,
       lastModified: posts[0].metadata.updated_at,
     });
   }

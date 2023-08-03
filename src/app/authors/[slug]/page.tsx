@@ -1,10 +1,11 @@
-import { getAllAuthorSlugs, getAllBlogPostsByAuthor, getAuthorBySlug } from '@/adapters/ContentAdapter';
+import { getAuthorBySlug } from '@/adapters/ContentAdapter';
 import { Metadata } from 'next';
 import { openGraphBaseMetadata, twitterBaseMetadata } from '@/app/metadata';
 import { notFound } from 'next/navigation';
-import { getImage } from '@/adapters/ImageAdapter';
 import Image from 'next/image';
 import PostGrid from '@/components/Blog/Feed/Grid/PostGrid';
+import { env } from 'process';
+import { WP_Post, WP_User } from '@/types';
 
 /**
  * Dynamically/statically generate metadata for the blog post.
@@ -38,13 +39,17 @@ export async function generateMetadata({ params }: { params: { slug: string } })
  * An author page on the website.
  */
 const AuthorPage = async ({ params }: { params: { slug: string } }) => {
-  const author = await getAuthorBySlug(params.slug);
-  const authorAvatar = getImage(`/authors/${params.slug}`, 'avatar.jpg');
+  let wordPressEndpoint = `${env.WP_REST_API_URL}/wp/v2/users?slug=${params.slug}`;
+  const authorRequest = await fetch(wordPressEndpoint);
+  const authors: WP_User[] = await authorRequest.json();
+  const author = authors[0];
 
   // If the tag doesn't exist, return a 404.
-  if (!author) notFound();
+  if (!author || authors.length === 0) notFound();
 
-  const posts = await getAllBlogPostsByAuthor(author.metadata.slug);
+  wordPressEndpoint = `${env.WP_REST_API_URL}/wp/v2/posts?author=${author.id}&_fields=slug,title,excerpt,date,author,featured_media,_links,_embedded&_embed=author,wp:featuredmedia`;
+  const authorPostsRequest = await fetch(wordPressEndpoint);
+  const authorPosts: WP_Post[] = await authorPostsRequest.json();
 
   return (
     <main>
@@ -52,14 +57,14 @@ const AuthorPage = async ({ params }: { params: { slug: string } }) => {
         {/* Responsive section with the author's profile picture on the left and their name, bio and socials on the right */}
         <header className="flex flex-col items-center justify-center space-y-4 md:flex-row md:space-y-0 md:space-x-8">
           {/* Profile picture */}
-          {authorAvatar ? (
+          {author.avatar_urls[96] ? (
             <div className="flex-shrink-0 overflow-hidden rounded-full">
               <div className="w-52">
                 <Image
-                  src={authorAvatar.source}
-                  alt={`${author.metadata.name}'s profile picture}`}
-                  width={authorAvatar.dimensions.width}
-                  height={authorAvatar.dimensions.height}
+                  src={author.avatar_urls[96]}
+                  alt={`${author.name}'s profile picture}`}
+                  width={200}
+                  height={200}
                   sizes="(min-width: 1024px) 25vw
                       (min-width: 1280px) 35vw,
                       45vw"
@@ -77,14 +82,14 @@ const AuthorPage = async ({ params }: { params: { slug: string } }) => {
 
           {/* Name, bio and socials */}
           <div className="flex flex-col items-center justify-center space-y-5 md:items-start">
-            <h1 className="text-4xl font-bold text-center md:text-left">{author.metadata.name}</h1>
-            <p className="text-center md:text-left text-gray-600 dark:text-slate-400 text-lg">{author.content}</p>
+            <h1 className="text-4xl font-bold text-center md:text-left">{author.name}</h1>
+            <p className="text-center md:text-left text-gray-600 dark:text-slate-400 text-lg">{author.description}</p>
             <div className="flex items-center space-x-4">
               {/* Website link */}
-              {author.metadata.homepage && (
+              {author.url && (
                 <a
                   className="flex items-center w-fit dark:hover:bg-slate-500 dark:bg-slate-700 dark:text-white hover:bg-slate-300 bg-slate-200 rounded transition-all duration-500 px-4 py-2"
-                  href={author.metadata.homepage}
+                  href={author.url}
                   target="_blank">
                   <i className="fa-solid fa-globe mr-2 text-xl" />
                   <p className="mr-1">Website</p>
@@ -92,7 +97,7 @@ const AuthorPage = async ({ params }: { params: { slug: string } }) => {
               )}
 
               {/* Twitter link */}
-              {author.metadata.twitter && (
+              {/* {author.metadata.twitter && (
                 <a
                   className="flex items-center w-fit dark:hover:bg-slate-500 dark:bg-slate-700 dark:text-white hover:bg-slate-300 bg-slate-200 rounded transition-all duration-500 px-4 py-2"
                   href={`https://twitter.com/${author.metadata.twitter}`}
@@ -100,10 +105,10 @@ const AuthorPage = async ({ params }: { params: { slug: string } }) => {
                   <i className="fa-brands fa-twitter mr-2 text-xl" />
                   <p className="mr-1">Twitter</p>
                 </a>
-              )}
+              )} */}
 
               {/* GitHub link */}
-              {author.metadata.github && (
+              {/* {author.metadata.github && (
                 <a
                   className="flex items-center w-fit dark:hover:bg-slate-500 dark:bg-slate-700 dark:text-white hover:bg-slate-300 bg-slate-200 rounded transition-all duration-500 px-4 py-2"
                   href={`https://github.com/${author.metadata.github}`}
@@ -111,7 +116,7 @@ const AuthorPage = async ({ params }: { params: { slug: string } }) => {
                   <i className="fa-brands fa-github mr-2 text-xl" />
                   <p className="mr-1">GitHub</p>
                 </a>
-              )}
+              )} */}
             </div>
           </div>
         </header>
@@ -123,8 +128,8 @@ const AuthorPage = async ({ params }: { params: { slug: string } }) => {
 
       {/* Author's latest blog posts */}
       <section className="container mx-auto flex flex-col items-center md:items-start px-10">
-        <h2 className="text-4xl text-center md:text-start font-semibold mb-14">Latest posts by {author.metadata.name.split(' ')[0]}</h2>
-        <PostGrid posts={posts} />
+        <h2 className="text-4xl text-center md:text-start font-semibold mb-14">Latest posts by {author.name.split(' ')[0]}</h2>
+        <PostGrid posts={authorPosts} />
       </section>
     </main>
   );
@@ -134,8 +139,11 @@ const AuthorPage = async ({ params }: { params: { slug: string } }) => {
  * Export possible paths for this page.
  */
 export async function generateStaticParams() {
-  const authorSlugs = await getAllAuthorSlugs();
-  return authorSlugs.map((slug) => ({ slug }));
+  const wordPressEndpoint = env.WP_REST_API_URL + '/wp/v2/users?_fields=slug';
+  const authorSlugsRequest = await fetch(wordPressEndpoint);
+  const authorSlugs = await authorSlugsRequest.json();
+
+  return authorSlugs.map((author: { slug: string }) => ({ slug: author.slug }));
 }
 
 export default AuthorPage;

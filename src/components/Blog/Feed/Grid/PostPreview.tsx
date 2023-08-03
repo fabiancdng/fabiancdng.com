@@ -1,23 +1,22 @@
-import { getBlogPostThumbnail } from '@/adapters/ContentAdapter';
-import { Post } from '@/types';
+import { WP_Post } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const PostGridItem = ({ post }: { post: Post }) => {
-  const postThumbnail = getBlogPostThumbnail(post.slug);
+const PostGridItem = ({ post }: { post: WP_Post }) => {
+  const thumbnail = post['_embedded']['wp:featuredmedia'][0];
 
   return (
     <article className="flex flex-col items-center md:items-start justify-between space-y-5">
       {/* The post's thumbnail */}
       <div className="flex flex-col items-center md:items-start space-y-7">
-        {postThumbnail && (
+        {thumbnail && (
           <div className="overflow-hidden rounded-lg">
             <Link href={`/blog/${post.slug}`}>
               <Image
-                src={postThumbnail.source}
-                alt={`${post.metadata.title}`}
-                width={postThumbnail.dimensions.width}
-                height={postThumbnail.dimensions.height}
+                src={thumbnail.source_url}
+                alt={thumbnail.alt_text}
+                width={thumbnail.media_details.width}
+                height={thumbnail.media_details.height}
                 sizes="(max-width: 1024px) 35vw
                                   (max-width: 768px) 25vw,
                                   90vw"
@@ -30,12 +29,15 @@ const PostGridItem = ({ post }: { post: Post }) => {
         {/* The post's title */}
 
         <h3 className="text-2xl text-center md:text-start font-semibold">
-          <Link href={`/blog/${post.slug}`}>{post.metadata.title}</Link>
+          <Link href={`/blog/${post.slug}`}>{post.title.rendered}</Link>
         </h3>
 
         {/* The post's excerpt */}
         {post.excerpt && (
-          <p className=" text-gray-600 dark:text-slate-400 text-center md:text-start text-lg">{post.excerpt.split('.')[0]}.</p>
+          <div
+            dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
+            className=" text-gray-600 dark:text-slate-400 text-center md:text-start text-lg"
+          />
         )}
       </div>
 

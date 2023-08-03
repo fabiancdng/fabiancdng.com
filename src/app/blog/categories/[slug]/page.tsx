@@ -1,9 +1,10 @@
-import { getAllBlogPostsByTag, getAllTagSlugs, getTagBySlug } from '@/adapters/ContentAdapter';
+import { getAllBlogPostsByTag, getTagBySlug } from '@/adapters/ContentAdapter';
 import { Metadata } from 'next';
 import { openGraphBaseMetadata, twitterBaseMetadata } from '@/app/metadata';
 import { notFound } from 'next/navigation';
 import PostPreview from '@/components/Blog/Feed/PostPreview';
 import BlogBanner from '@/components/Blog/Feed/BlogBanner';
+import { env } from 'process';
 
 /**
  * Dynamically/statically generate metadata for the blog post.
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     title: `${tag.name} | Blog | fabiancdng.com`,
     description: `All posts tagged with '${tag.name}'.`,
     alternates: {
-      canonical: `/blog/tags/${tag.slug}`,
+      canonical: `/blog/categories/${tag.slug}`,
     },
     twitter: {
       ...twitterBaseMetadata,
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     },
     openGraph: {
       ...openGraphBaseMetadata,
-      url: `/blog/tags/${tag.slug}`,
+      url: `/blog/categories/${tag.slug}`,
       title: `${tag.name} | Blog | fabiancdng.com`,
       description: `All posts tagged with '${tag.name}'.`,
     },
@@ -34,9 +35,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 /**
- * A page for a tag in the blog.
+ * A page for a category in the blog.
  */
-const BlogTagPage = async ({ params }: { params: { slug: string } }) => {
+const BlogCategoryPage = async ({ params }: { params: { slug: string } }) => {
   const tag = await getTagBySlug(params.slug.toLowerCase());
 
   // If the tag doesn't exist, return a 404.
@@ -69,8 +70,11 @@ const BlogTagPage = async ({ params }: { params: { slug: string } }) => {
  * Export possible paths for this page.
  */
 export async function generateStaticParams() {
-  const tagSlugs = await getAllTagSlugs();
-  return tagSlugs.map((slug) => ({ slug }));
+  const wordPressEndpoint = env.WP_REST_API_URL + '/wp/v2/categories?_fields=slug';
+  const categorySlugsRequest = await fetch(wordPressEndpoint);
+  const categorySlugs = await categorySlugsRequest.json();
+
+  return categorySlugs.map((category: { slug: string }) => ({ slug: category.slug }));
 }
 
-export default BlogTagPage;
+export default BlogCategoryPage;

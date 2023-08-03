@@ -1,5 +1,6 @@
 import { WP_Post } from '@/types';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Author = async ({
   author,
@@ -12,7 +13,7 @@ const Author = async ({
 }) => {
   return (
     <div className="post-author w-fit">
-      <a className="w-fit" href="/authors/fabiancdng">
+      <Link className="w-fit" href={`/authors/${author.slug}`}>
         <div className="flex items-center my-4">
           <Image
             src={author.avatar_urls[48]}
@@ -34,7 +35,7 @@ const Author = async ({
             </p>
           </div>
         </div>
-      </a>
+      </Link>
     </div>
   );
 };
