@@ -1,0 +1,74 @@
+.wordPressContent,
+.wordPressContent {
+  @apply text-xl;
+}
+
+.wordPressContent a {
+  @apply border-b-2 border-violet-700;
+  transition: all 0.15s ease-in-out;
+}
+
+.wordPressContent a:hover {
+  @apply border-b-[3px] transition-all duration-[0.15s] ease-in-out;
+}
+
+.wordPressContent figure {
+  @apply my-10;
+}
+
+.wordPressContent figcaption {
+  @apply text-center text-gray-600 dark:text-gray-300 text-lg italic mt-3 mb-5;
+}
+
+.wordPressContent img {
+  @apply w-full rounded-2xl my-10;
+}
+
+.wordPressContent p b,
+.wordPressContent p strong {
+  @apply font-semibold;
+}
+
+.wordPressContent p {
+  @apply my-7;
+}
+
+.wordPressContent hr {
+  @apply my-10;
+}
+
+.wordPressContent h1 {
+  @apply text-5xl my-10 leading-[3.5rem] font-semibold;
+}
+
+.wordPressContent h2 {
+  @apply text-3xl font-semibold mt-20;
+}
+
+.wordPressContent h3 {
+  @apply text-2xl font-medium mt-[4rem];
+}
+
+.wordPressContent h4 {
+  @apply text-2xl mt-16;
+}
+
+.wordPressContent h5 {
+  @apply text-2xl mt-12;
+}
+
+.wordPressContent h6 {
+  @apply text-2xl mt-12;
+}
+
+.wordPressContent ul {
+  @apply my-7 pl-5 list-disc;
+}
+
+.wordPressContent ul p {
+  @apply my-3;
+}
+
+.wordPressContent ul li {
+  @apply ml-3 my-5;
+}

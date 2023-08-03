@@ -1,8 +1,8 @@
 import { WP_Post } from '@/types';
-import Markdown from '../../Markdown/Markdown';
 import Thumbnail from './Thumbnail';
 import Header from './Header';
 import PostShare from './PostShare';
+import styles from './Post.module.css';
 
 const Post = ({ post }: { post: WP_Post }) => {
   return (
@@ -12,8 +12,7 @@ const Post = ({ post }: { post: WP_Post }) => {
         <Header post={post} />
         <Thumbnail title={post.title.rendered} slug={post.slug} priority={true} />
         <div className="post-body max-w-3xl mx-auto">
-          <div dangerouslySetInnerHTML={{ __html: post.content.rendered }}></div>
-          {/* <Markdown slug={post.slug} content={post.content.rendered} /> */}
+          <div className={styles.wordPressContent} dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
         </div>
       </article>
 

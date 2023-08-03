@@ -1,74 +1,74 @@
-.markdownContent,
-.markdownContent {
+.wordPressContent,
+.wordPressContent {
   @apply text-xl;
 }
 
-.markdownContent a {
+.wordPressContent a {
   @apply border-b-2 border-violet-700;
   transition: all 0.15s ease-in-out;
 }
 
-.markdownContent a:hover {
+.wordPressContent a:hover {
   @apply border-b-[3px] transition-all duration-[0.15s] ease-in-out;
 }
 
-.markdownContent figure {
+.wordPressContent figure {
   @apply my-10;
 }
 
-.markdownContent figcaption {
+.wordPressContent figcaption {
   @apply text-center text-gray-600 dark:text-gray-300 text-lg italic mt-3 mb-5;
 }
 
-.markdownContent img {
+.wordPressContent img {
   @apply w-full rounded-2xl my-10;
 }
 
-.markdownContent p b,
-.markdownContent p strong {
+.wordPressContent p b,
+.wordPressContent p strong {
   @apply font-semibold;
 }
 
-.markdownContent p {
+.wordPressContent p {
   @apply my-7;
 }
 
-.markdownContent hr {
+.wordPressContent hr {
   @apply my-10;
 }
 
-.markdownContent h1 {
+.wordPressContent h1 {
   @apply text-5xl my-10 leading-[3.5rem] font-semibold;
 }
 
-.markdownContent h2 {
+.wordPressContent h2 {
   @apply text-3xl font-semibold mt-20;
 }
 
-.markdownContent h3 {
+.wordPressContent h3 {
   @apply text-2xl font-medium mt-[4rem];
 }
 
-.markdownContent h4 {
+.wordPressContent h4 {
   @apply text-2xl mt-16;
 }
 
-.markdownContent h5 {
+.wordPressContent h5 {
   @apply text-2xl mt-12;
 }
 
-.markdownContent h6 {
+.wordPressContent h6 {
   @apply text-2xl mt-12;
 }
 
-.markdownContent ul {
+.wordPressContent ul {
   @apply my-7 pl-5 list-disc;
 }
 
-.markdownContent ul p {
+.wordPressContent ul p {
   @apply my-3;
 }
 
-.markdownContent ul li {
+.wordPressContent ul li {
   @apply ml-3 my-5;
 }
