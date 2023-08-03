@@ -71,9 +71,11 @@ export interface WP_Embedded_Media {
 
 export interface WP_Embedded_Term {
   id: number;
+  count: number;
   link: string;
   name: string;
   slug: string;
+  description: string;
   taxonomy: 'post_tag' | 'category';
 }
 
