@@ -1,8 +1,9 @@
 import Post from '@/components/Blog/Post/Post';
-import { getAllBlogPostSlugs, getAuthorBySlug, getBlogPostThumbnail, getPostBySlug } from '@/adapters/ContentAdapter';
 import { Metadata } from 'next';
 import { openGraphBaseMetadata, twitterBaseMetadata } from '@/app/metadata';
 import { notFound } from 'next/navigation';
+import { env } from 'process';
+import { WP_Post } from '@/types';
 
 /**
  * If a request comes in to a page that exists in the file system, but has not been built yet,
@@ -19,51 +20,51 @@ export const revalidate = 30 * 60;
  * Dynamically/statically generate metadata for the blog post.
  */
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata | null> {
-  const post = await getPostBySlug(params.slug);
+  const wordPressEndpoint = `${env.WP_REST_API_URL}/wp/v2/posts?slug=${params.slug}&_embed`;
+  const postRequest = await fetch(wordPressEndpoint);
+  const posts: WP_Post[] = await postRequest.json();
+  const post = posts[0];
 
   if (!post) return null;
 
-  const author = await getAuthorBySlug(post.metadata.author);
-  const thumbnail = getBlogPostThumbnail(post.slug);
-
   return {
-    title: `${post.metadata.title} | Blog | fabiancdng.com`,
-    description: post.metadata.description,
-    authors: [{ name: author?.metadata.name, url: author?.metadata.homepage }],
+    title: `${post.title.rendered} | Blog | fabiancdng.com`,
+    description: post.excerpt.rendered,
+    authors: [{ name: post['_embedded']['author'][0].name, url: post['_embedded'].author[0].url }],
     alternates: {
       canonical: `/blog/${post.slug}`,
     },
     twitter: {
       ...twitterBaseMetadata,
-      title: `${post.metadata.title} | Blog | fabiancdng.com`,
-      description: post.metadata.description,
-      creator: author ? `@${author.metadata.twitter}` : undefined,
+      title: `${post.title.rendered} | Blog | fabiancdng.com`,
+      description: post.excerpt.rendered,
+      //creator: post['_embedded']['author'][0] ? `@${post['_embedded']['author'][0].slug}` : undefined,
       card: 'summary_large_image',
       images: [
         {
-          type: 'image/jpeg',
-          url: thumbnail.source,
-          width: thumbnail.dimensions.width,
-          height: thumbnail.dimensions.height,
-          alt: post.metadata.title,
+          type: post['_embedded']['wp:featuredmedia'][0].type,
+          url: post['_embedded']['wp:featuredmedia'][0].source_url,
+          width: post['_embedded']['wp:featuredmedia'][0].media_details.width,
+          height: post['_embedded']['wp:featuredmedia'][0].media_details.height,
+          alt: post['_embedded']['wp:featuredmedia'][0].alt_text,
         },
       ],
     },
     openGraph: {
       ...openGraphBaseMetadata,
       url: `/blog/${post.slug}`,
-      title: `${post.metadata.title} | Blog | fabiancdng.com`,
-      description: post.metadata.description,
+      title: `${post.title.rendered} | Blog | fabiancdng.com`,
+      description: post.excerpt.rendered,
       type: 'article',
-      publishedTime: post.metadata.published_at.toISOString(),
-      modifiedTime: post.metadata.updated_at.toISOString(),
+      publishedTime: post.date,
+      modifiedTime: post.modified,
       images: [
         {
-          type: 'image/jpeg',
-          url: thumbnail.source,
-          width: thumbnail.dimensions.width,
-          height: thumbnail.dimensions.height,
-          alt: post.metadata.title,
+          type: post['_embedded']['wp:featuredmedia'][0].type,
+          url: post['_embedded']['wp:featuredmedia'][0].source_url,
+          width: post['_embedded']['wp:featuredmedia'][0].media_details.width,
+          height: post['_embedded']['wp:featuredmedia'][0].media_details.height,
+          alt: post['_embedded']['wp:featuredmedia'][0].alt_text,
         },
       ],
     },
@@ -74,7 +75,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
  * A single blog post page.
  */
 const BlogPostPage = async ({ params }: { params: { slug: string } }) => {
-  const post = await getPostBySlug(params.slug);
+  const wordPressEndpoint = `${env.WP_REST_API_URL}/wp/v2/posts?slug=${params.slug}&_embed`;
+  const postRequest = await fetch(wordPressEndpoint);
+  const posts: WP_Post[] = await postRequest.json();
+  const post = posts[0];
 
   // If the post doesn't exist, return a 404.
   if (!post) {
@@ -92,8 +96,11 @@ const BlogPostPage = async ({ params }: { params: { slug: string } }) => {
  * Export possible paths for this page.
  */
 export async function generateStaticParams() {
-  const postSlugs = await getAllBlogPostSlugs();
-  return postSlugs.map((slug) => ({ slug }));
+  const wordPressEndpoint = env.WP_REST_API_URL + '/wp/v2/posts?_fields=slug';
+  const postSlugsRequest = await fetch(wordPressEndpoint);
+  const postSlugs = await postSlugsRequest.json();
+
+  return postSlugs.map((post: { slug: string }) => ({ slug: post.slug }));
 }
 
 export default BlogPostPage;

@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
+  images: {
+    domains: ['secure.gravatar.com'],
+  },
   async redirects() {
     return [
       // Important for functionality and backwards compatibility.

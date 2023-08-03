@@ -1,8 +1,8 @@
-import { Tag } from '@/types';
+import { WP_Embedded_Term } from '@/types';
 import Link from 'next/link';
 import React from 'react';
 
-const TagList = ({ tags }: { tags: Tag[] }) => {
+const TagList = ({ tags }: { tags: WP_Embedded_Term[] }) => {
   return (
     <ul className="post-tags inline-flex">
       {tags.map((tag, index) => (
