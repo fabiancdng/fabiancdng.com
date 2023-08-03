@@ -1,12 +1,10 @@
-import { Post } from '@/types';
+import { WP_Post } from '@/types';
 import Header from '../Post/Header';
 import Link from 'next/link';
 import Image from 'next/image';
-import { getBlogPostThumbnail } from '@/adapters/ContentAdapter';
 
-const PostPreview = ({ post }: { post: Post }) => {
-  const thumbnail = getBlogPostThumbnail(post.slug);
-
+const PostPreview = ({ post }: { post: WP_Post }) => {
+  const thumbnail = post['_embedded']['wp:featuredmedia'][0];
   return (
     <article className="flex flex-col lg:flex-row lg:p-0 space-y-7 lg:space-y-2 mt-36 mb-28 px-14 items-start">
       {/* Thumbnail */}
@@ -14,10 +12,10 @@ const PostPreview = ({ post }: { post: Post }) => {
         <Link href={`/blog/${post.slug}`}>
           <div className="w-full">
             <Image
-              src={thumbnail.source}
-              width={thumbnail.dimensions.width}
-              height={thumbnail.dimensions.height}
-              alt={post.metadata.title}
+              src={thumbnail.source_url}
+              width={thumbnail.media_details.width}
+              height={thumbnail.media_details.height}
+              alt={post.title.rendered}
               className="rounded-md"
             />
           </div>
@@ -27,7 +25,7 @@ const PostPreview = ({ post }: { post: Post }) => {
       {/* Post tags, title, author, date excerpt and link */}
       <div className="lg:w-7/12 w-full">
         {/* @ts-expect-error Server Component */}
-        <Header post={post} metadata={post.metadata} excerpt={post.excerpt} preview={true} />
+        <Header post={post} preview={true} />
         {/* Read more link */}
         <Link
           href={`/blog/${post.slug}`}

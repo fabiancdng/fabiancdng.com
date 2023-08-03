@@ -9,6 +9,7 @@ interface HeaderProps {
 }
 
 const Header = async ({ post, preview }: HeaderProps) => {
+  const author = post['_embedded']['author'][0];
   const categories = post['_embedded']['wp:term'][0];
   const tags = post['_embedded']['wp:term'][1];
 
@@ -25,7 +26,7 @@ const Header = async ({ post, preview }: HeaderProps) => {
       )}
 
       {/* @ts-expect-error Server Component */}
-      {preview && <Author slug={post['_embedded']['author'][0].slug} publishedAt={post.date} preview={true} />}
+      {preview && <Author author={author} publishedAt={post.date} preview={true} />}
 
       <div
         dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
@@ -35,7 +36,7 @@ const Header = async ({ post, preview }: HeaderProps) => {
       {!preview && (
         <div className="post-author my-4">
           {/* @ts-expect-error Server Component */}
-          <Author author={post['_embedded']['author'][0]} publishedAt={post.date} preview={false} />
+          <Author author={author} publishedAt={post.date} preview={false} />
         </div>
       )}
     </header>

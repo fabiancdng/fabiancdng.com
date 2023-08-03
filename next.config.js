@@ -2,7 +2,7 @@
 const nextConfig = {
   output: 'standalone',
   images: {
-    domains: ['secure.gravatar.com'],
+    domains: ['secure.gravatar.com', 'wp.fabiancdng.com'],
   },
   async redirects() {
     return [
