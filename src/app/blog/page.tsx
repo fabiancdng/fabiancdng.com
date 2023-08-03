@@ -5,11 +5,6 @@ import { Metadata } from 'next';
 import { openGraphBaseMetadata, twitterBaseMetadata } from '../metadata';
 
 /**
- * Revalidate the cache for this page after 30 minutes as content might change.
- */
-export const revalidate = 30 * 60;
-
-/**
  * Set some metadata for the page for SEO.
  */
 export const metadata: Metadata = {

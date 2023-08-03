@@ -6,17 +6,6 @@ import { env } from 'process';
 import { WP_Post } from '@/types';
 
 /**
- * If a request comes in to a page that exists in the file system, but has not been built yet,
- * generate the page on the fly and cache it.,
- */
-export const dynamicParams = true;
-
-/**
- * Revalidate the cache for this page after 30 minutes as content might change.
- */
-export const revalidate = 30 * 60;
-
-/**
  * Dynamically/statically generate metadata for the page.
  */
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata | null> {
