@@ -1,7 +1,7 @@
 import { WP_Post } from '@/types';
 import Author from '../Author';
 import Link from 'next/link';
-import TagList from './TagList';
+import CategoryList from './CategoryList';
 
 interface HeaderProps {
   post: WP_Post;
@@ -11,11 +11,11 @@ interface HeaderProps {
 const Header = async ({ post, preview }: HeaderProps) => {
   const author = post['_embedded']['author'][0];
   const categories = post['_embedded']['wp:term'][0];
-  const tags = post['_embedded']['wp:term'][1];
+  // const tags = post['_embedded']['wp:term'][1];
 
   return (
     <header className="w-full px-0 sm:px-7 mx-auto">
-      <TagList tags={categories} />
+      <CategoryList categories={categories} />
 
       {!preview ? (
         <h1 className="text-5xl my-4 leading-[3.5rem] font-semibold">{post.title.rendered}</h1>
