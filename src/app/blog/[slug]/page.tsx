@@ -2,24 +2,29 @@ import Post from '@/components/Blog/Post/Post';
 import { Metadata } from 'next';
 import { openGraphBaseMetadata, twitterBaseMetadata } from '@/app/metadata';
 import { notFound } from 'next/navigation';
-import { env } from 'process';
 import { WP_Post } from '@/types';
+import { getWpRessource } from '@/adapters/WordPressAdapter';
 
 /**
  * Dynamically/statically generate metadata for the blog post.
  */
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata | null> {
-  const wordPressEndpoint = `${env.WP_REST_API_URL}/wp/v2/posts?slug=${params.slug}&_embed`;
-  const postRequest = await fetch(wordPressEndpoint);
-  const posts: WP_Post[] = await postRequest.json();
+  // Get the full post from WordPress.
+  const posts: WP_Post[] = await getWpRessource('posts', {
+    slug: params.slug,
+    _embed: true,
+  });
   const post = posts[0];
+
+  const author = post['_embedded']['author'][0];
+  const thumbnail = post['_embedded']['wp:featuredmedia'][0];
 
   if (!post) return null;
 
   return {
     title: `${post.title.rendered} | Blog | fabiancdng.com`,
     description: post.excerpt.rendered,
-    authors: [{ name: post['_embedded']['author'][0].name, url: post['_embedded'].author[0].url }],
+    authors: [{ name: author.name, url: author.url }],
     alternates: {
       canonical: `/blog/${post.slug}`,
     },
@@ -31,11 +36,11 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       card: 'summary_large_image',
       images: [
         {
-          type: post['_embedded']['wp:featuredmedia'][0].type,
-          url: post['_embedded']['wp:featuredmedia'][0].source_url,
-          width: post['_embedded']['wp:featuredmedia'][0].media_details.width,
-          height: post['_embedded']['wp:featuredmedia'][0].media_details.height,
-          alt: post['_embedded']['wp:featuredmedia'][0].alt_text,
+          type: thumbnail.type,
+          url: thumbnail.source_url,
+          width: thumbnail.media_details.width,
+          height: thumbnail.media_details.height,
+          alt: thumbnail.alt_text,
         },
       ],
     },
@@ -49,11 +54,11 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       modifiedTime: post.modified,
       images: [
         {
-          type: post['_embedded']['wp:featuredmedia'][0].type,
-          url: post['_embedded']['wp:featuredmedia'][0].source_url,
-          width: post['_embedded']['wp:featuredmedia'][0].media_details.width,
-          height: post['_embedded']['wp:featuredmedia'][0].media_details.height,
-          alt: post['_embedded']['wp:featuredmedia'][0].alt_text,
+          type: thumbnail.type,
+          url: thumbnail.source_url,
+          width: thumbnail.media_details.width,
+          height: thumbnail.media_details.height,
+          alt: thumbnail.alt_text,
         },
       ],
     },
@@ -64,9 +69,11 @@ export async function generateMetadata({ params }: { params: { slug: string } })
  * A single blog post page.
  */
 const BlogPostPage = async ({ params }: { params: { slug: string } }) => {
-  const wordPressEndpoint = `${env.WP_REST_API_URL}/wp/v2/posts?slug=${params.slug}&_embed`;
-  const postRequest = await fetch(wordPressEndpoint);
-  const posts: WP_Post[] = await postRequest.json();
+  // Get the full post from WordPress.
+  const posts: WP_Post[] = await getWpRessource('posts', {
+    slug: params.slug,
+    _embed: true,
+  });
   const post = posts[0];
 
   // If the post doesn't exist, return a 404.
@@ -85,9 +92,10 @@ const BlogPostPage = async ({ params }: { params: { slug: string } }) => {
  * Export possible paths for this page.
  */
 export async function generateStaticParams() {
-  const wordPressEndpoint = env.WP_REST_API_URL + '/wp/v2/posts?_fields=slug';
-  const postSlugsRequest = await fetch(wordPressEndpoint);
-  const postSlugs = await postSlugsRequest.json();
+  // Get all post slugs from WordPress.
+  const postSlugs = await getWpRessource('posts', {
+    _fields: 'slug',
+  });
 
   return postSlugs.map((post: { slug: string }) => ({ slug: post.slug }));
 }

@@ -1,20 +1,16 @@
-import { getImageDimensions, getImagePath, getImageSource } from '@/adapters/ImageAdapter';
+import { WP_Embedded_Media } from '@/types';
 import Image from 'next/image';
 
-const Thumbnail = ({ title, slug, priority }: { title: string; slug: string; priority: boolean }) => {
-  const thumbnailPath = getImagePath(`/blog/${slug}`, 'thumbnail.jpg');
-  const thumbnailSource = getImageSource(`/blog/${slug}`, 'thumbnail.jpg');
-  const thumbnailDimensions = getImageDimensions(thumbnailPath);
-
+const Thumbnail = ({ image, priority }: { image: WP_Embedded_Media; priority: boolean }) => {
   return (
     <div className="w-full px-0 sm:px-7 h-full">
       <Image
-        src={thumbnailSource}
-        alt={title}
+        src={image.source_url}
+        alt={image.alt_text}
         priority={priority}
         className="lg:w-11/12 w-full mx-auto my-16 rounded-lg"
-        width={thumbnailDimensions.width}
-        height={thumbnailDimensions.height}
+        width={image.media_details.width}
+        height={image.media_details.height}
       />
     </div>
   );

@@ -1,36 +1,40 @@
-import { getAuthorBySlug } from '@/adapters/ContentAdapter';
 import { Metadata } from 'next';
 import { openGraphBaseMetadata, twitterBaseMetadata } from '@/app/metadata';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import PostGrid from '@/components/Blog/Feed/Grid/PostGrid';
-import { env } from 'process';
 import { WP_Post, WP_User } from '@/types';
+import { getWpRessource } from '@/adapters/WordPressAdapter';
 
 /**
  * Dynamically/statically generate metadata for the blog post.
  */
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata | null> {
-  const author = await getAuthorBySlug(params.slug);
+  // Get the full user from WordPress.
+  const authors: WP_User[] = await getWpRessource('users', {
+    slug: params.slug,
+    _embed: true,
+  });
+  const author = authors[0];
 
   if (!author) return null;
 
   return {
-    title: `${author.metadata.name} | Author | fabiancdng.com`,
-    description: author.content,
+    title: `${author.name} | Author | fabiancdng.com`,
+    description: author.description,
     alternates: {
-      canonical: `/blog/authors/${author.metadata.slug}`,
+      canonical: `/blog/authors/${author.slug}`,
     },
     twitter: {
       ...twitterBaseMetadata,
-      title: `${author.metadata.name} | Author | fabiancdng.com`,
-      description: author.content,
+      title: `${author.name} | Author | fabiancdng.com`,
+      description: author.description,
     },
     openGraph: {
       ...openGraphBaseMetadata,
-      url: `/blog/authors/${author.metadata.slug}`,
-      title: `${author.metadata.name} | Author | fabiancdng.com`,
-      description: author.content,
+      url: `/blog/authors/${author.slug}`,
+      title: `${author.name} | Author | fabiancdng.com`,
+      description: author.description,
     },
   };
 }
@@ -39,17 +43,23 @@ export async function generateMetadata({ params }: { params: { slug: string } })
  * An author page on the website.
  */
 const AuthorPage = async ({ params }: { params: { slug: string } }) => {
-  let wordPressEndpoint = `${env.WP_REST_API_URL}/wp/v2/users?slug=${params.slug}`;
-  const authorRequest = await fetch(wordPressEndpoint);
-  const authors: WP_User[] = await authorRequest.json();
+  // Get the full user from WordPress.
+  const authors = await getWpRessource('users', {
+    slug: params.slug,
+  });
   const author = authors[0];
 
   // If the tag doesn't exist, return a 404.
-  if (!author || authors.length === 0) notFound();
+  if (!author) notFound();
 
-  wordPressEndpoint = `${env.WP_REST_API_URL}/wp/v2/posts?author=${author.id}&_fields=slug,title,excerpt,date,author,featured_media,_links,_embedded&_embed=author,wp:featuredmedia`;
-  const authorPostsRequest = await fetch(wordPressEndpoint);
-  const authorPosts: WP_Post[] = await authorPostsRequest.json();
+  // Get the user's posts from WordPress (only needed fields).
+  const authorsPosts: WP_Post[] = await getWpRessource('posts', {
+    author: author.id,
+    _fields: ['slug', 'title', 'excerpt', 'featured_media', '_links', '_embedded'],
+    _embed: ['wp:featuredmedia'],
+  });
+
+  console.log(authorsPosts[0]['_embedded']);
 
   return (
     <main>
@@ -129,7 +139,7 @@ const AuthorPage = async ({ params }: { params: { slug: string } }) => {
       {/* Author's latest blog posts */}
       <section className="container mx-auto flex flex-col items-center md:items-start px-10">
         <h2 className="text-4xl text-center md:text-start font-semibold mb-14">Latest posts by {author.name.split(' ')[0]}</h2>
-        <PostGrid posts={authorPosts} />
+        <PostGrid posts={authorsPosts} />
       </section>
     </main>
   );
@@ -139,9 +149,10 @@ const AuthorPage = async ({ params }: { params: { slug: string } }) => {
  * Export possible paths for this page.
  */
 export async function generateStaticParams() {
-  const wordPressEndpoint = env.WP_REST_API_URL + '/wp/v2/users?_fields=slug';
-  const authorSlugsRequest = await fetch(wordPressEndpoint);
-  const authorSlugs = await authorSlugsRequest.json();
+  // Get all author slugs from WordPress.
+  const authorSlugs = await getWpRessource('users', {
+    _fields: 'slug',
+  });
 
   return authorSlugs.map((author: { slug: string }) => ({ slug: author.slug }));
 }

@@ -1,5 +1,5 @@
 import { WP_Post } from '@/types';
-import PostPreview from './PostPreview';
+import PostPreview from './PostGridItem';
 
 const PostGrid = ({ posts }: { posts: WP_Post[] }) => {
   return (
