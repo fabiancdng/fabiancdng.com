@@ -1,5 +1,5 @@
 import sendgrid from '@sendgrid/mail';
-import GetCurrentTimestamp from '@/utils/get-timestamp';
+import { GetCurrentTimestamp } from '@/app/utils';
 import { NextRequest, NextResponse } from 'next/server';
 import { RateLimiterMemory, RateLimiterRes } from 'rate-limiter-flexible';
 

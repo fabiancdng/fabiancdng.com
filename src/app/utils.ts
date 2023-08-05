@@ -3,7 +3,7 @@
  *
  * @returns - Current timestamp in the format of YYYY-MM-DD HH:MM:SS
  */
-const GetCurrentTimestamp = (): string => {
+export const GetCurrentTimestamp = (): string => {
   const now = new Date();
 
   const year = now.getFullYear();
@@ -15,5 +15,3 @@ const GetCurrentTimestamp = (): string => {
 
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 };
-
-export default GetCurrentTimestamp;
