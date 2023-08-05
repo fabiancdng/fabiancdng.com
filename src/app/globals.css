@@ -12,5 +12,5 @@ body,
 }
 
 pre.shiki {
-  @apply overflow-x-scroll p-6 rounded-lg;
+  @apply overflow-x-scroll mt-10 p-6 rounded-lg text-base;
 }

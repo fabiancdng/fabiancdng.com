@@ -72,3 +72,12 @@
 .wordPressContent ul li {
   @apply ml-3 my-5;
 }
+
+.wordPressContent blockquote {
+  @apply px-5 py-1 my-5 rounded-md border-l-4 border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-slate-800;
+}
+
+.wordPressContent > code,
+.wordPressContent p > code {
+  @apply bg-[#fdf2f2] text-[#c0392b] px-1 py-1 rounded-md border border-[#ccc];
+}
