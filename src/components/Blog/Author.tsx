@@ -16,10 +16,10 @@ const Author = async ({
       <Link className="w-fit" href={`/authors/${author.slug}`}>
         <div className="flex items-center my-4">
           <Image
-            src={author.avatar_urls[48]}
+            src={author['simple_local_avatar']['192']}
             alt={`${author.name} profile picture`}
-            width={48}
-            height={48}
+            width={192}
+            height={192}
             className="w-14 h-14 mr-2 rounded-full"
             priority={preview ? false : true}
           />

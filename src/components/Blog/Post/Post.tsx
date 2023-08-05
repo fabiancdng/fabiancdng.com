@@ -5,12 +5,14 @@ import PostShare from './PostShare';
 import styles from './Post.module.css';
 
 const Post = ({ post }: { post: WP_Post }) => {
+  const thumbnail = post['_embedded']['wp:featuredmedia'][0];
+
   return (
     <>
       <article id="blog-post" className="container pt-32 px-7 mx-auto mb-20 max-w-5xl text-black dark:text-white">
         {/* @ts-expect-error Server Component */}
         <Header post={post} />
-        <Thumbnail title={post.title.rendered} slug={post.slug} priority={true} />
+        <Thumbnail image={thumbnail} priority={true} />
         <div className="post-body max-w-3xl mx-auto">
           <div className={styles.wordPressContent} dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
         </div>

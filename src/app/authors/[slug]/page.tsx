@@ -59,22 +59,20 @@ const AuthorPage = async ({ params }: { params: { slug: string } }) => {
     _embed: ['wp:featuredmedia'],
   });
 
-  console.log(authorsPosts[0]['_embedded']);
-
   return (
     <main>
-      <article className="container pt-20 mx-auto px-20 lg:px-0 mb-20 max-w-5xl text-black dark:text-white">
+      <article className="container pt-36 mx-auto px-20 lg:px-0 mb-20 max-w-5xl text-black dark:text-white">
         {/* Responsive section with the author's profile picture on the left and their name, bio and socials on the right */}
         <header className="flex flex-col items-center justify-center space-y-4 md:flex-row md:space-y-0 md:space-x-8">
           {/* Profile picture */}
-          {author.avatar_urls[96] ? (
+          {author['simple_local_avatar'][192] ? (
             <div className="flex-shrink-0 overflow-hidden rounded-full">
               <div className="w-52">
                 <Image
-                  src={author.avatar_urls[96]}
+                  src={author['simple_local_avatar'][192]}
                   alt={`${author.name}'s profile picture}`}
-                  width={200}
-                  height={200}
+                  width={192}
+                  height={192}
                   sizes="(min-width: 1024px) 25vw
                       (min-width: 1280px) 35vw,
                       45vw"
