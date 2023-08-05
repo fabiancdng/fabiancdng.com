@@ -24,7 +24,6 @@ const PostPreview = ({ post }: { post: WP_Post }) => {
 
       {/* Post tags, title, author, date excerpt and link */}
       <div className="lg:w-7/12 w-full">
-        {/* @ts-expect-error Server Component */}
         <Header post={post} preview={true} />
         {/* Read more link */}
         <Link

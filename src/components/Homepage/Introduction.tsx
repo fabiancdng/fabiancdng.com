@@ -1,12 +1,9 @@
-import { getIntroduction } from '@/adapters/ContentAdapter';
 import Link from 'next/link';
-import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 
 const Introduction = async () => {
-  const introduction = await getIntroduction();
   return (
     <div className="introduction container max-w-7xl mx-auto mb-40 px-10 rounded">
-      <ReactMarkdown
+      {/* <ReactMarkdown
         children={introduction || ''}
         components={{
           h2: ({ node, ...props }) => (
@@ -21,7 +18,7 @@ const Introduction = async () => {
           strong: ({ node, ...props }) => <b className="underline" {...props} />,
           a: ({ node, ...props }) => <a className="underline" {...props} />,
         }}
-      />
+      /> */}
 
       <div className="mt-7 flex flex-row sm:justify-start justify-center">
         <Link

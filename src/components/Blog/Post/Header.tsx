@@ -2,6 +2,7 @@ import { WP_Post } from '@/types';
 import Author from '../Author';
 import Link from 'next/link';
 import CategoryList from './CategoryList';
+import { stripHtmlFromExcerpt } from '@/app/utils';
 
 interface HeaderProps {
   post: WP_Post;
@@ -25,18 +26,15 @@ const Header = async ({ post, preview }: HeaderProps) => {
         </Link>
       )}
 
-      {/* @ts-expect-error Server Component */}
-      {preview && <Author author={author} publishedAt={post.date} preview={true} />}
+      {preview && <Author author={author} publishedAt={new Date(post.date)} preview={true} />}
 
-      <div
-        dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
-        className={`${preview ? 'my-4' : 'my-7'} text-xl text-gray-500 dark:text-gray-300`}
-      />
+      <p className={`${preview ? 'my-4' : 'my-7'} text-xl text-gray-500 dark:text-gray-300`}>
+        {stripHtmlFromExcerpt(post.excerpt.rendered)}
+      </p>
 
       {!preview && (
         <div className="post-author my-4">
-          {/* @ts-expect-error Server Component */}
-          <Author author={author} publishedAt={post.date} preview={false} />
+          <Author author={author} publishedAt={new Date(post.date)} preview={false} />
         </div>
       )}
     </header>

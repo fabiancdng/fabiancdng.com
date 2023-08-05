@@ -1,3 +1,4 @@
+import { stripHtmlFromExcerpt } from '@/app/utils';
 import { WP_Post } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -34,10 +35,9 @@ const PostGridItem = ({ post }: { post: WP_Post }) => {
 
         {/* The post's excerpt */}
         {post.excerpt && (
-          <div
-            dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
-            className=" text-gray-600 dark:text-slate-400 text-center md:text-start text-lg"
-          />
+          <p className=" text-gray-600 dark:text-slate-400 text-center md:text-start text-lg">
+            {stripHtmlFromExcerpt(post.excerpt.rendered)}
+          </p>
         )}
       </div>
 

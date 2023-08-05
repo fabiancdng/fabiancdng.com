@@ -1,7 +1,6 @@
 'use client';
 
 import { Project } from '@/types';
-import Image from 'next/image';
 import React, { ReactNode, useEffect, useState } from 'react';
 
 const ProjectThumbnail = ({ project }: { project: Project }) => {
@@ -9,13 +8,13 @@ const ProjectThumbnail = ({ project }: { project: Project }) => {
     <div className="md:w-2/4">
       {project.thumbnail && (
         <a href={project.metadata.demo ? project.metadata.demo : '#'} target="_blank">
-          <Image
+          {/* <Image
             src={project.thumbnail.source}
             width={project.thumbnail.dimensions.width}
             height={project.thumbnail.dimensions.height}
             alt={project.metadata.title}
             className="rounded-md"
-          />
+          /> */}
         </a>
       )}
     </div>

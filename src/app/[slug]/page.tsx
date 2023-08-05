@@ -4,6 +4,7 @@ import Page from '@/components/Page/Page';
 import { notFound } from 'next/navigation';
 import { env } from 'process';
 import { WP_Post } from '@/types';
+import { stripHtmlFromExcerpt } from '../utils';
 
 /**
  * Dynamically/statically generate metadata for the page.
@@ -20,7 +21,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
   return {
     title: `${page.title.rendered} | fabiancdng.com`,
-    description: page.excerpt.rendered,
+    description: stripHtmlFromExcerpt(page.excerpt.rendered),
     robots: robots.includes(page.slug) ? 'noindex, follow' : undefined,
     alternates: {
       canonical: `/${page.slug}`,
@@ -28,13 +29,13 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     twitter: {
       ...twitterBaseMetadata,
       title: `${page.title.rendered} | fabiancdng.com`,
-      description: page.excerpt.rendered,
+      description: stripHtmlFromExcerpt(page.excerpt.rendered),
     },
     openGraph: {
       ...openGraphBaseMetadata,
       url: `/${page.slug}`,
       title: `${page.title.rendered} | fabiancdng.com`,
-      description: page.excerpt.rendered,
+      description: stripHtmlFromExcerpt(page.excerpt.rendered),
     },
   };
 }

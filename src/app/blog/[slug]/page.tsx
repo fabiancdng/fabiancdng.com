@@ -4,6 +4,7 @@ import { openGraphBaseMetadata, twitterBaseMetadata } from '@/app/metadata';
 import { notFound } from 'next/navigation';
 import { WP_Post } from '@/types';
 import { getWpRessource } from '@/adapters/WordPressAdapter';
+import { stripHtmlFromExcerpt } from '@/app/utils';
 
 /**
  * Dynamically/statically generate metadata for the blog post.
@@ -23,7 +24,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
   return {
     title: `${post.title.rendered} | Blog | fabiancdng.com`,
-    description: post.excerpt.rendered,
+    description: stripHtmlFromExcerpt(post.excerpt.rendered),
     authors: [{ name: author.name, url: author.url }],
     alternates: {
       canonical: `/blog/${post.slug}`,
@@ -31,7 +32,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     twitter: {
       ...twitterBaseMetadata,
       title: `${post.title.rendered} | Blog | fabiancdng.com`,
-      description: post.excerpt.rendered,
+      description: stripHtmlFromExcerpt(post.excerpt.rendered),
       //creator: post['_embedded']['author'][0] ? `@${post['_embedded']['author'][0].slug}` : undefined,
       card: 'summary_large_image',
       images: [
@@ -48,7 +49,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       ...openGraphBaseMetadata,
       url: `/blog/${post.slug}`,
       title: `${post.title.rendered} | Blog | fabiancdng.com`,
-      description: post.excerpt.rendered,
+      description: stripHtmlFromExcerpt(post.excerpt.rendered),
       type: 'article',
       publishedTime: post.date,
       modifiedTime: post.modified,

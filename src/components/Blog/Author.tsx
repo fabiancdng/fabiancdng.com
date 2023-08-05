@@ -27,7 +27,7 @@ const Author = async ({
           <div className="block py-4 mt-1 ml-1">
             <p className="text-lg font-medium leading-3 mb-1">{author.name}</p>
             <p className="text-gray-600 text-md dark:text-slate-400">
-              {new Date(publishedAt).toLocaleDateString('en-US', {
+              {publishedAt.toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
