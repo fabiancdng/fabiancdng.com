@@ -1,16 +1,6 @@
-import {
-  getAllAuthorSlugs,
-  getAllBlogPostSlugs,
-  getAllBlogPostsByAuthor,
-  getAllBlogPostsByTag,
-  getAllPageSlugs,
-  getAllTagSlugs,
-  getAuthorBySlug,
-  getPageBySlug,
-  getPostBySlug,
-  getTagBySlug,
-} from '@/adapters/ContentAdapter';
+import { getWpRessource } from '@/adapters/WordPressAdapter';
 import { MetadataRoute } from 'next';
+import { getRobots } from './utils';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const sitemap: MetadataRoute.Sitemap = [];
@@ -24,77 +14,85 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${DOMAIN}`,
   });
 
-  const allBlogPostSlugs = await getAllBlogPostSlugs();
-  const latestBlogPost = await getPostBySlug(allBlogPostSlugs[0]);
+  // Fetch latest blog post
+  const latestBlogPost = await getWpRessource('posts', {
+    per_page: 1,
+    orderby: 'date',
+    order: 'desc',
+  });
+
   sitemap.push({
     url: `${DOMAIN}/blog`,
-    lastModified: latestBlogPost ? latestBlogPost.metadata.updated_at : undefined,
+    lastModified: latestBlogPost.length ? latestBlogPost[0].date : undefined,
   });
 
   /**
    * Pages
    */
-  const pageSlugs = await getAllPageSlugs();
+  const pages = await getWpRessource('pages', { _fields: ['slug', 'modified'] });
+  const robots = getRobots();
 
-  for (const pageSlug of pageSlugs) {
-    const page = await getPageBySlug(pageSlug);
-
-    if (!page || page.metadata.search_engine_index === false) continue;
-
-    sitemap.push({
-      url: `${DOMAIN}/${pageSlug}`,
-      lastModified: page.metadata.updated_at,
-    });
+  for (const page of pages) {
+    if (!robots.includes(page.slug)) {
+      sitemap.push({
+        url: `${DOMAIN}/${page.slug}`,
+        lastModified: page.modified,
+      });
+    }
   }
 
   /**
    * Blog Posts
    */
-  const blogPostSlugs = await getAllBlogPostSlugs();
+  const blogPosts = await getWpRessource('posts', { _fields: ['slug', 'modified'] });
 
-  for (const blogPostSlug of blogPostSlugs) {
-    const post = await getPostBySlug(blogPostSlug);
-
-    if (!post) continue;
-
+  for (const post of blogPosts) {
     sitemap.push({
-      url: `${DOMAIN}/blog/${blogPostSlug}`,
-      lastModified: post.metadata.updated_at,
+      url: `${DOMAIN}/blog/${post.slug}`,
+      lastModified: post.modified,
     });
   }
 
   /**
-   * Tags
+   * Categories
    */
-  const tagSlugs = await getAllTagSlugs();
+  const categories = await getWpRessource('categories', {});
 
-  for (const tagSlug of tagSlugs) {
-    const tag = await getTagBySlug(tagSlug);
-    if (!tag) continue;
-
-    const posts = await getAllBlogPostsByTag(tag.slug);
-
-    sitemap.push({
-      url: `${DOMAIN}/blog/categories/${tagSlug}`,
-      lastModified: posts[0].metadata.updated_at,
+  for (const category of categories) {
+    const posts = await getWpRessource('posts', {
+      per_page: 1,
+      orderby: 'date',
+      order: 'desc',
+      categories: category.id,
     });
+
+    if (posts.length) {
+      sitemap.push({
+        url: `${DOMAIN}/blog/categories/${category.slug}`,
+        lastModified: posts[0].date,
+      });
+    }
   }
 
   /**
    * Authors
    */
-  const authorSlugs = await getAllAuthorSlugs();
+  const authors = await getWpRessource('users', {});
 
-  for (const authorSlug of authorSlugs) {
-    const author = await getAuthorBySlug(authorSlug);
-    if (!author) continue;
-
-    const posts = await getAllBlogPostsByAuthor(author.metadata.slug);
-
-    sitemap.push({
-      url: `${DOMAIN}/blog/authors/${author.metadata.slug}`,
-      lastModified: posts[0].metadata.updated_at,
+  for (const author of authors) {
+    const posts = await getWpRessource('posts', {
+      per_page: 1,
+      orderby: 'date',
+      order: 'desc',
+      author: author.id,
     });
+
+    if (posts.length) {
+      sitemap.push({
+        url: `${DOMAIN}/blog/authors/${author.slug}`,
+        lastModified: posts[0].date,
+      });
+    }
   }
 
   return sitemap;

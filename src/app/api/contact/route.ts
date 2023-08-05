@@ -1,5 +1,5 @@
 import sendgrid from '@sendgrid/mail';
-import { GetCurrentTimestamp } from '@/app/utils';
+import { getCurrentTimestamp } from '@/app/utils';
 import { NextRequest, NextResponse } from 'next/server';
 import { RateLimiterMemory, RateLimiterRes } from 'rate-limiter-flexible';
 
@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
 
   // Optional logging to see the responses
   // in the command line where next.js app is running.
-  console.log(`[${GetCurrentTimestamp()}] API: Received contact form: `, body);
+  console.log(`[${getCurrentTimestamp()}] API: Received contact form: `, body);
 
   // Guard clause checks for first and last name,
   // and returns early if they are not found
@@ -119,7 +119,7 @@ export async function POST(request: NextRequest) {
 
                     <hr />
 
-                    <p>Received: ${GetCurrentTimestamp()}</p>
+                    <p>Received: ${getCurrentTimestamp()}</p>
                 </div>
             `,
     });
