@@ -1,3 +1,4 @@
+import { getCurrentTimestamp } from '@/app/utils';
 import { env } from 'process';
 import querystring from 'query-string';
 
@@ -17,6 +18,8 @@ export const getWpRessource = async (endpoint: string, query: any) => {
 
   // Put together the full URL for the call.
   const requestUrl = `${WP_REST_API_URL}/${endpoint}/?${requestQueryString}`;
+
+  console.log(`[${getCurrentTimestamp()}] getWpRessource() fetching ${requestUrl}.`);
 
   // Make the HTTP request to the WordPress REST API using the fetch API.
   const response = await fetch(requestUrl, {

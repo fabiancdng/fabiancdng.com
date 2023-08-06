@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
+import { getCurrentTimestamp } from '@/app/utils';
 
 export async function POST(request: NextRequest) {
   // Get token and path fields from the POST body.
@@ -16,6 +17,8 @@ export async function POST(request: NextRequest) {
   }
 
   revalidatePath(path);
+
+  console.log(`[${getCurrentTimestamp()}] Revalidation order created for path [${path}]`);
 
   return NextResponse.json({ success: true, message: 'Revalidation order created.' }, { status: 200 });
 }
