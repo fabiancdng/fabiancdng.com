@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## 5.0.0 - 2023-08-06
+
+- Switch to WordPress as headless CMS for content management
+- Remove automatic cache validation after time intervals (all sites/API calls are static now)
+- Implement On-Demand cache revalidation via API (can be called from WordPress when a page is updated)
+- Update Styling
+- `/tags` -> `/categories` (Tags will be added in the future)
+- Remove projects and introduction on the homepage for the time being
+
 ## 4.2.8 - 2023-08-02
 
 - Fix: `PostPreview` Images not aligned
