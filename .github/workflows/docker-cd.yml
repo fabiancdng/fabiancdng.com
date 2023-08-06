@@ -29,7 +29,7 @@ jobs:
           WP_APPLICATION_PASSWORD: ${{ secrets.WP_APPLICATION_PASSWORD }}
         run: npm install && npm run build
       - name: Copy over additional dependencies to the standalone build
-        run: cp -R node_modules/shiki .next/standalone/shiki
+        run: cp -R node_modules/shiki .next/standalone/node_modules/
       - name: Upload Next.js build as artifact
         uses: actions/upload-artifact@v2
         with:
