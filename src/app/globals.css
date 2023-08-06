@@ -11,6 +11,21 @@ body,
   scroll-behavior: smooth;
 }
 
+hr {
+  @apply w-full border-gray-300 dark:border-slate-600 my-10;
+}
+
+/* Multi-line highlighted code */
 pre.shiki {
   @apply overflow-x-scroll mt-10 p-6 rounded-lg text-base;
+}
+
+/* Inline code */
+p > code {
+  @apply bg-red-50 text-red-700 px-1 py-1 rounded-md border border-gray-300 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600;
+}
+
+/* Quote blocks */
+blockquote {
+  @apply px-5 py-1 my-5 rounded-md border-l-4 border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-slate-800;
 }

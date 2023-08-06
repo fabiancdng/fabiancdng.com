@@ -44,11 +44,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   name: 'home',
                   href: '/',
                 },
-                {
-                  title: 'Projects',
-                  name: 'projects',
-                  href: '/#projects',
-                },
+                // {
+                //   title: 'Projects',
+                //   name: 'projects',
+                //   href: '/#projects',
+                // },
                 {
                   title: 'Blog',
                   name: 'blog',
