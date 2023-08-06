@@ -67,10 +67,9 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      # - name: Get the version
-      #   id: get_version
-      #   run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\/v/}
-
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\/v/}
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
@@ -78,5 +77,4 @@ jobs:
           push: true
           tags: |
             ghcr.io/fabiancdng/fabiancdng-website:latest
-
-# ghcr.io/fabiancdng/fabiancdng-website:${{ steps.get_version.outputs.VERSION }}
+            ghcr.io/fabiancdng/fabiancdng-website:${{ steps.get_version.outputs.VERSION }}
