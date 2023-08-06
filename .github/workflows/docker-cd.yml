@@ -21,8 +21,12 @@ jobs:
         #   token: ${{ secrets.WEBSITE_BUILD_AT }}
       - name: Build the Next.js app
         env:
+          NEXT_PUBLIC_SITENAME: ${{ vars.NEXT_PUBLIC_SITENAME }}
           NEXT_PUBLIC_DOMAIN: ${{ vars.NEXT_PUBLIC_DOMAIN }}
           NEXT_PUBLIC_CONTACT_EMAIL: ${{ vars.NEXT_PUBLIC_CONTACT_EMAIL }}
+          NEXT_PUBLIC_ROBOTS: ${{ vars.NEXT_PUBLIC_ROBOTS }}
+          WP_REST_API_URL: ${{ secrets.WP_REST_API_URL }}
+          WP_APPLICATION_PASSWORD: ${{ secrets.WP_APPLICATION_PASSWORD }}
         run: npm install && npm run build
       - name: Copy over additional dependencies to the standalone build
         run: cp -R node_modules/shiki .next/standalone/shiki
