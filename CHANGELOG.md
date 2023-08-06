@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 5.1.2 - 2023-08-06
+
+- Fix: Issue with CD workflow due to wrong path
+
 ## 5.1.1 - 2023-08-06
 
 - Update Docker build
