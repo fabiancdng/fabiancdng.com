@@ -1,6 +1,0 @@
-[submodule "fabiancdng.com-content"]
-	path = fabiancdng.com-content
-	url = https://github.com/fabiancdng/fabiancdng.com-content
-[submodule "content"]
-	path = content
-	url = https://github.com/fabiancdng/fabiancdng.com-content
