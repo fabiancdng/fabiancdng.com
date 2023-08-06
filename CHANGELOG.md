@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 5.1.0 - 2023-08-06
+
+- New: New API for revalidating the cache for certain route segments on-demand.
+
 ## 5.0.0 - 2023-08-06
 
 - Switch to WordPress as headless CMS for content management
