@@ -10,15 +10,18 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: false, message: 'Missing token or path.' }, { status: 400 });
   }
 
-  const { token, path } = body;
+  const { token, paths } = body;
 
   if (token !== process.env.ADMIN_API_KEY) {
     return NextResponse.json({ success: false, message: 'Unauthorized.' }, { status: 401 });
   }
 
-  revalidatePath(path);
+  // Order revalidation of all given paths.
+  paths.forEach((path: string) => {
+    revalidatePath(path);
+  });
 
-  console.log(`[${getCurrentTimestamp()}] Revalidation order created for path [${path}]`);
+  console.log(`[${getCurrentTimestamp()}] Revalidation order created for paths [${paths}]`);
 
   return NextResponse.json({ success: true, message: 'Revalidation order created.' }, { status: 200 });
 }
