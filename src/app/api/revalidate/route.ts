@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
   // Get token and path fields from the POST body.
   const body = await request.json().catch(() => ({}));
 
-  if (body.token === undefined || body.path === undefined) {
+  if (body.token === undefined || body.paths === undefined) {
     return NextResponse.json({ success: false, message: 'Missing token or path.' }, { status: 400 });
   }
 

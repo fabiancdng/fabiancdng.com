@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+# 5.3.0 - 2023-08-08
+
+- New Docker build
+
+# 5.2.0 - 2023-08-08
+
+- API: Allow multiple paths to be revalidated per request
+
 ## 5.1.2 - 2023-08-06
 
 - Fix: Issue with CD workflow due to wrong path
