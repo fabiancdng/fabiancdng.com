@@ -2,11 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-# 5.3.0 - 2023-08-08
+## 5.2.1 - 2023-08-21
 
-- New Docker build
+- Add `pm2` process management for the Docker runtime to leverage multiple CPU cores for best performance
 
-# 5.2.0 - 2023-08-08
+## 5.2.0 - 2023-08-08
 
 - API: Allow multiple paths to be revalidated per request
 
