@@ -22,26 +22,22 @@ export async function POST(request: NextRequest) {
   console.log(`[${getCurrentTimestamp()}] WordPress webhook request received: ${JSON.stringify(body)}`);
 
   // Check if the args field has the required fields.
-  if (
-    body['args'][1]['post_id'] === undefined ||
-    body['args'][1]['post_type'] === undefined ||
-    body['args'][1]['post_name'] === undefined
-  ) {
-    return new Response(JSON.stringify({ success: false, message: 'Missing post_id, post_type or post_name field.' }), { status: 400 });
+  if (body['args'][1]['post_type'] === undefined) {
+    return new Response(JSON.stringify({ success: false, message: 'Missing post_type field.' }), { status: 400 });
   }
 
-  // If post_type is page, revalidate the specific page.
+  // If post_type is page, revalidate the page cache.
   if (body['args'][1]['post_type'] === 'page') {
-    revalidatePath('/' + body['args'][1]['post_name']);
+    revalidatePath('/[slug]', 'page');
     return new Response(JSON.stringify({ success: true, message: 'Page revalidation order created successfully.' }), { status: 200 });
   }
 
-  // If post_type is post, revalidate the specific post, the post overview page, the category pages, and the author pages.
+  // If post_type is post, revalidate the blog cache.
   if (body['args'][1]['post_type'] === 'post') {
-    revalidatePath(`/blog`);
-    revalidatePath('/blog/' + body['args'][1]['post_name']);
-    revalidatePath('/blog/categories/[slug]');
-    revalidatePath('/authors/[slug]');
+    revalidatePath(`/blog`, 'page');
+    revalidatePath('/blog/[slug]', 'page');
+    revalidatePath('/blog/categories/[slug]', 'page');
+    revalidatePath('/authors/[slug]', 'page');
     return new Response(JSON.stringify({ success: true, message: 'Post revalidation order created successfully.' }), { status: 200 });
   }
 }
