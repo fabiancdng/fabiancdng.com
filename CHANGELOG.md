@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 5.3.1 - 2023-10-29
+
+- Upgrade to Next.js 14
+
 ## 5.3.0 - 2023-10-29
 
 - Add WordPress webhook endpoint for improved cache revalidation
