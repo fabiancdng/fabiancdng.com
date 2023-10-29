@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 5.3.0 - 2023-10-29
+
+- Add WordPress webhook endpoint for improved cache revalidation
+
 ## 5.2.1 - 2023-08-21
 
 - Add `pm2` process management for the Docker runtime to leverage multiple CPU cores for best performance
