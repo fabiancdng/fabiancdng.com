@@ -57,8 +57,8 @@ const Navbar = ({ links }: NavbarProps) => {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-20 bg-white dark:bg-slate-800 border-slate-500
-                      ${atTop ? '' : 'drop-shadow-md'} transition-all ease-in-out duration-500`}>
+      className={`fixed top-0 left-0 w-full z-20 border-slate-500
+                      ${atTop ? 'bg-none' : 'bg-white dark:bg-slate-800 drop-shadow-md'} transition-all ease-in-out duration-500 z-50`}>
       {/* Navigation */}
       <nav className="flex items-center my-1 px-6 mx-auto">
         {/* Site title/logo */}
@@ -69,7 +69,10 @@ const Navbar = ({ links }: NavbarProps) => {
         </div>
 
         {/* Desktop: Navigation Links */}
-        <ul className="hidden left-0 lg:flex flex-1 justify-end items-center gap-5 text mr-7 uppercase text-md">
+        <ul
+          className={`hidden left-0 lg:flex flex-1 justify-end items-center gap-5 text mr-7 uppercase text-md ${
+            atTop ? 'text-white' : 'text-black'
+          }`}>
           {
             // Render all nav links (separate `NavbarLink` component).
             links.map((link, index) => (
