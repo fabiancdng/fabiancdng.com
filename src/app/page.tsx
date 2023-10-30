@@ -3,6 +3,10 @@ import Avatar from '../../public/img/avatar.jpg';
 import HeroSection from '@/components/Homepage/HeroSection';
 import { openGraphBaseMetadata, twitterBaseMetadata } from './metadata';
 import Contact from '@/components/Homepage/Contact';
+import Projects from '@/components/Homepage/Projects/Projects';
+import SingleProject from '@/components/Homepage/Projects/Project';
+import { Project } from '@/types';
+import fs from 'fs/promises';
 
 /**
  * Set some metadata for the page for SEO.
@@ -23,6 +27,9 @@ export const metadata: Metadata = {
 };
 
 const HomePage = async () => {
+  const file = await fs.readFile(process.cwd() + '/src/app/data/projects.json', 'utf8');
+  const projects = JSON.parse(file);
+
   return (
     <main>
       <HeroSection
@@ -41,20 +48,11 @@ const HomePage = async () => {
       {/* <Introduction /> */}
 
       {/* Client Component: Uses IntersectionObserver to sync scroll position with activeNavLink state in GlobalsContext. */}
-      {/* <Projects title="Projects" subtitle="Some of the work I'm involved in."> */}
-      {/*projects.map((project, index) => (
-        // Client Component: Uses client-side state.
-        <SingleProject key={index} project={project} reverseDesign={index % 2 === 0}> */}
-      {/* Server Component: Renders markdown on server and is injected as child of Server Component. */}
-      {/*<ReactMarkdown
-            children={project.content}
-            components={{
-              p: ({ node, ...props }) => <p className="text-gray-700 dark:text-gray-400 text-lg my-4" {...props} />,
-            }}
-          />
-        </SingleProject>
-      ))} */}
-      {/* </Projects> */}
+      <Projects title="Projects" subtitle="Some of the things I've built.">
+        {projects.data.map((project: Project, index: number) => (
+          <SingleProject key={index} project={project} reverseDesign={index % 2 === 0} description={project.description} />
+        ))}
+      </Projects>
 
       <Contact title="Contact me" subtitle="Feel free to contact me using the email below or the contact form." />
     </main>

@@ -139,17 +139,18 @@ export interface WP_Post {
 export interface Project {
   slug: string;
   metadata: ProjectMetadata;
-  thumbnail: string;
-  content: string;
+  description: string;
+  thumbnail: {
+    src: string;
+    width: number;
+    height: number;
+    alt: string;
+  };
 }
 
 export interface ProjectMetadata {
   title: string;
   subtitle: string;
-  author: string;
-  description: string;
-  published_at: Date;
-  updated_at: Date;
   technologies: string[];
   demo: string;
   github: string;

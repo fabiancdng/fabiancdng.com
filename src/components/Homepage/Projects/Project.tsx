@@ -1,6 +1,7 @@
 'use client';
 
 import { Project } from '@/types';
+import Image from 'next/image';
 import React, { ReactNode, useEffect, useState } from 'react';
 
 const ProjectThumbnail = ({ project }: { project: Project }) => {
@@ -8,13 +9,13 @@ const ProjectThumbnail = ({ project }: { project: Project }) => {
     <div className="md:w-2/4">
       {project.thumbnail && (
         <a href={project.metadata.demo ? project.metadata.demo : '#'} target="_blank">
-          {/* <Image
-            src={project.thumbnail.source}
-            width={project.thumbnail.dimensions.width}
-            height={project.thumbnail.dimensions.height}
+          <Image
+            src={project.thumbnail.src}
+            width={project.thumbnail.width}
+            height={project.thumbnail.height}
             alt={project.metadata.title}
             className="rounded-md"
-          /> */}
+          />
         </a>
       )}
     </div>
@@ -24,10 +25,10 @@ const ProjectThumbnail = ({ project }: { project: Project }) => {
 interface SingleProjectProps {
   project: Project;
   reverseDesign: boolean;
-  children: ReactNode;
+  description: string;
 }
 
-const SingleProject = ({ project, reverseDesign, children }: SingleProjectProps) => {
+const SingleProject = ({ project, reverseDesign, description }: SingleProjectProps) => {
   const [screenWidth, setScreenWidth] = useState(0);
   const [reverseDesignState, setReverseDesign] = useState(reverseDesign);
 
@@ -78,10 +79,10 @@ const SingleProject = ({ project, reverseDesign, children }: SingleProjectProps)
           <h2 className="text-3xl font-semibold my-2">{project.metadata.title}</h2>
 
           {/* Subtitle */}
-          <h3 className="text-2xl font-medium">{project.metadata.subtitle}</h3>
+          <h3 className="text-2xl font-medium my-3">{project.metadata.subtitle}</h3>
 
           {/* Description/Content */}
-          {children}
+          <div className="text-lg my-3" dangerouslySetInnerHTML={{ __html: description }}></div>
 
           <div className="flex flex-row align-center space-x-4 mt-5">
             {/* View code link with GitHub icon */}
