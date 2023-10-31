@@ -84,7 +84,9 @@ const Navbar = ({ links }: NavbarProps) => {
                   className={`cursor-pointer dark:hover:bg-slate-600 dark:text-white hover:bg-slate-200 rounded transition-all duration-500 px-4 py-3`}>
                   <span
                     className={
-                      activeNavItem === link.name ? 'border-b-2 px-0.5 pb-1 border-b-slate-500 dark:border-b-slate-300' : 'px-0.5'
+                      activeNavItem === link.name
+                        ? `border-b-2 px-0.5 pb-1 ${atTop ? '' : 'border-b-slate-500'}  dark:border-b-slate-300`
+                        : 'px-0.5'
                     }>
                     {link.title}
                   </span>

@@ -33,16 +33,9 @@ const HomePage = async () => {
   return (
     <main>
       <HeroSection
-        title="I'm Fabian"
+        title="I'm Fabian."
         subtitle="Hey!"
-        description="Student & Full-Stack Web Developer"
-        logo={{
-          src: Avatar,
-          alt: 'Fabian profile picture',
-          sizes: `(min-width: 1024px) 25vw
-                (min-width: 1280px) 35vw,
-                45vw`,
-        }}
+        description="I'm a <b><u>student</u></b> & <b><u>full-stack web developer</u></b> who builds stuff for the web."
       />
 
       {/* <Introduction /> */}
