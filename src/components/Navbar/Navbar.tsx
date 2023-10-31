@@ -99,7 +99,9 @@ const Navbar = ({ links }: NavbarProps) => {
                 <Link
                   href={link.href}
                   scroll={true}
-                  className={`cursor-pointer dark:hover:bg-slate-600 dark:text-white hover:bg-slate-200 rounded transition-all duration-500 px-4 py-3`}>
+                  className={`cursor-pointer ${
+                    atTop ? 'hover:bg-slate-200 hover:bg-opacity-50' : 'hover:bg-slate-200 dark:hover:bg-slate-600'
+                  }  dark:text-white rounded transition-all duration-500 px-4 py-3`}>
                   <span
                     className={
                       activeNavItem === link.name
@@ -146,7 +148,7 @@ const Navbar = ({ links }: NavbarProps) => {
                 onClick={() => setMobileMenuOpen(false)}
                 className="rounded bg-slate-200 hover:bg-slate-300 transition
                             ease-in-out duration-300 dark:bg-slate-600 dark:hover:bg-slate-500">
-                <Link href={link.href} scroll={link.href.includes('#') ? false : true} className={`cursor-pointer block w-full px-3 py-2`}>
+                <Link href={link.href} scroll={true} className={`cursor-pointer block w-full px-3 py-2`}>
                   {link.title}
                 </Link>
               </li>

@@ -21,7 +21,7 @@ const BlogBanner = ({ title, description, linkTitle, link }: BlogBannerProps) =>
         fill
       />
       <div className="relative flex flex-col space-y-12 items-center max-w-6xl mx-auto mt-12 z-1">
-        <h1 className="text-6xl text-center text-white font-bold z-1">{title}</h1>
+        <h1 className="md:text-6xl text-5xl text-center text-white font-bold z-1">{title}</h1>
         <h3 className="text-3xl text-center font-semibold text-white z-1">{description}</h3>
 
         {/*  Sign up to newsletter input */}
