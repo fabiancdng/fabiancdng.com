@@ -36,6 +36,9 @@ const Navbar = ({ links }: NavbarProps) => {
   // State representing if at the top/very beginning of the page or not.
   const [atTop, setAtTop] = useState(true);
 
+  // Only track atTop state on these pages, as only they have a backdrop to react to.
+  const pagesWithBackdrop = ['home', 'blog'];
+
   useEffect(() => {
     const handleResize = () => {
       // Update screenWidth state on resize.
@@ -47,13 +50,28 @@ const Navbar = ({ links }: NavbarProps) => {
     // Event listener for keeping screenWidth up-to-date.
     window.addEventListener('resize', handleResize);
 
-    const handleScroll = () => {
-      setAtTop(document.documentElement.scrollTop === 0);
-    };
+    if (!pagesWithBackdrop.includes(activeNavItem)) {
+      // Fix state to false.
+      // TODO: Refactor this to be more elegant.
+      setAtTop(false);
+    } else {
+      // Reset initial state to true.
+      setAtTop(true);
 
-    // Event listener for keeping atTop up-to-date.
-    window.addEventListener('scroll', handleScroll);
-  }, [screenWidth]);
+      const handleScroll = () => {
+        setAtTop(document.documentElement.scrollTop === 0);
+      };
+
+      // Event listener for keeping atTop up-to-date.
+      window.addEventListener('scroll', handleScroll);
+
+      // Clean up event listeners on unmount.
+      return () => {
+        window.removeEventListener('resize', handleResize);
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }
+  }, [screenWidth, activeNavItem]);
 
   return (
     <header
@@ -80,7 +98,7 @@ const Navbar = ({ links }: NavbarProps) => {
               <li key={index}>
                 <Link
                   href={link.href}
-                  scroll={link.href.includes('#') ? false : true}
+                  scroll={true}
                   className={`cursor-pointer dark:hover:bg-slate-600 dark:text-white hover:bg-slate-200 rounded transition-all duration-500 px-4 py-3`}>
                   <span
                     className={

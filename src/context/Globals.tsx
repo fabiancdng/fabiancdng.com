@@ -47,9 +47,12 @@ export const GlobalsProvider = ({ children }: globalsProviderProps) => {
     } else if (path.includes('#projects')) {
       // On homepage in the projects section.
       setActiveNavItem('projects');
+    } else if (path === '/blog') {
+      // Blog overview page.
+      setActiveNavItem('blog');
     } else if (path.includes('/blog')) {
       // On any page matching /blog*.
-      setActiveNavItem('blog');
+      setActiveNavItem('blog-single');
     } else {
       // Not on any page matching a navlink. Clear state.
       setActiveNavItem('');
