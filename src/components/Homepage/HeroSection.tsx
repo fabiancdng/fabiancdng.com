@@ -12,7 +12,7 @@ const SocialMediaLink = ({ href, icon }: { href: string; icon: string }) => {
       href={href}
       type="button"
       target="_blank"
-      className={`w-12 h-12 flex justify-center items-center rounded-full bg-slate-200 hover:bg-slate-100 hover:opacity-100 opacity-75 transition-all ease-in-out text-2xl text-black`}>
+      className={`w-12 h-12 flex justify-center items-center rounded-full bg-slate-200 hover:bg-slate-100 hover:opacity-100 opacity-60 transition-all ease-in-out text-2xl text-black`}>
       <i className={`${icon}`}></i>
     </Link>
   );
@@ -36,7 +36,7 @@ const HeroSection = ({ title, subtitle, description }: HeroSectionProps) => {
         <div className="hero-content z-20 max-w-4xl px-10">
           {/* Text & Socials */}
           <h2 className="text-5xl text-center font-semibold lg:text-left text-slate-200">{subtitle}</h2>
-          <h1 className="text-6xl text-center lg:text-left my-5 font-bold bg-gradient-to-br from-blue-500 to-purple-500 dark:from-blue-400 dark:to-purple-500 bg-clip-text text-transparent">
+          <h1 className="text-6xl text-center lg:text-left my-5 font-bold bg-gradient-to-br from-blue-500 to-purple-600 bg-clip-text text-transparent">
             {title}
           </h1>
           <p
@@ -47,7 +47,7 @@ const HeroSection = ({ title, subtitle, description }: HeroSectionProps) => {
 
         {/* Vertically aligned social media buttons (with Icon) in the bottom right corner */}
         <div className="socials z-20 absolute bottom-0 xl:left-28 lg:left-10 lg:block hidden">
-          <ul className="flex flex-col space-y-3 after:w-[3px] after:h-24 after:mt-5 after:mx-auto after:opacity-75 after:bg-slate-200">
+          <ul className="flex flex-col space-y-3 after:w-[3px] after:h-24 after:mt-5 after:mx-auto after:opacity-60 after:bg-slate-200">
             <li>
               <SocialMediaLink href="https://github.com/fabiancdng" icon="fab fa-github" />
             </li>
@@ -60,6 +60,11 @@ const HeroSection = ({ title, subtitle, description }: HeroSectionProps) => {
               <SocialMediaLink href="mailto:fabian@fabiancdng.com" icon="fas fa-envelope" />
             </li>
           </ul>
+        </div>
+        {/* Animated arrow at the bottom (in the middle of the screen) of the hero section signaling that you can scroll down */}
+        <div className="arrow z-20 absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-10 flex flex-col items-center space-y-2">
+          <p className="text-slate-200 opacity-60 uppercase text-sm">Scroll down to continue</p>
+          <i className="fas fa-chevron-down text-4xl animate-bounce text-slate-200 opacity-50"></i>
         </div>
       </div>
     </div>

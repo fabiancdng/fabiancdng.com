@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 5.4.0
+
+- New hero section design
+- Social media links in hero section
+- Re-add projects section (current datasource is a simple JSON file)
+- Add ability for navbar to blend in with a background image (like the one on the hero section)
+- Fix smooth scrolling
+
 ## 5.3.2 - 2023-10-29
 
 - Fix WP webhook cache revalidation
