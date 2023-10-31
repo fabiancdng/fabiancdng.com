@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## 5.4.0
+## 5.4.1 - 2023-10-31
+
+- Fix performance issues due to large (uncompressed) background video
+
+## 5.4.0 - 2023-10-31
 
 - New hero section design
 - Social media links in hero section
