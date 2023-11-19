@@ -2,6 +2,9 @@ import { getWpRessource } from '@/adapters/WordPressAdapter';
 import { MetadataRoute } from 'next';
 import { getRobots } from './utils';
 
+// Make sure the sitemap is revalidated every 12 hours.
+export const revalidate = 12 * 60 * 60;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const sitemap: MetadataRoute.Sitemap = [];
 
@@ -23,7 +26,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   sitemap.push({
     url: `${DOMAIN}/blog`,
-    lastModified: latestBlogPost.length ? latestBlogPost[0].date : undefined,
+    lastModified: latestBlogPost.length ? new Date(latestBlogPost[0].date) : undefined,
   });
 
   /**
@@ -36,7 +39,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     if (!robots.includes(page.slug)) {
       sitemap.push({
         url: `${DOMAIN}/${page.slug}`,
-        lastModified: page.modified,
+        lastModified: new Date(page.modified),
       });
     }
   }
@@ -49,7 +52,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const post of blogPosts) {
     sitemap.push({
       url: `${DOMAIN}/blog/${post.slug}`,
-      lastModified: post.modified,
+      lastModified: new Date(post.modified),
     });
   }
 
@@ -69,7 +72,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     if (posts.length) {
       sitemap.push({
         url: `${DOMAIN}/blog/categories/${category.slug}`,
-        lastModified: posts[0].date,
+        lastModified: new Date(posts[0].date),
       });
     }
   }
@@ -90,7 +93,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     if (posts.length) {
       sitemap.push({
         url: `${DOMAIN}/blog/authors/${author.slug}`,
-        lastModified: posts[0].date,
+        lastModified: new Date(posts[0].date),
       });
     }
   }
