@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 5.5.0 - 2023-11-19
+
+- Add revalidation interval to `sitemap.ts`
+
 ## 5.4.1 - 2023-10-31
 
 - Fix performance issues due to large (uncompressed) background video
