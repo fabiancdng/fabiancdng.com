@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 5.6.0 - 2023-11-25
+
+- Add functionality to auto-hide navbar on scroll down and re-appear on scroll up (only on content pages)
+- Refactor code to determine currently active page/nav item
+- Other small design tweaks and fixes here
+
 ## 5.5.0 - 2023-11-19
 
 - Add revalidation interval to `sitemap.ts`
