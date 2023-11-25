@@ -27,67 +27,77 @@ const Navbar = ({ links }: NavbarProps) => {
   // Get active nav item from globals context.
   const { currentPageType } = useContext(GlobalsContext);
 
+  // State determining whether to use Desktop or Mobile view for the navbar.
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [screenWidth, setScreenWidth] = useState(0);
-  const [fixed, setFixed] = useState(false);
+
+  // State based on config.
   const [blend, setBlend] = useState(false);
 
-  // The width (in px) when the mobile nav is used instead.
-  const menuBreakpoint = 640;
+  // State for hiding the navbar when scrolling down and showing it when scrolling up.
+  const [visible, setVisible] = useState(true);
 
   // State representing if at the top/very beginning of the page or not.
   const [atTop, setAtTop] = useState(true);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
 
+  // Keep track of window width for mobile menu.
   useEffect(() => {
     const config = {
-      // Make nav always visible on these pages.
-      fixed: ['home', 'projects', 'blog-overview', 'blog-category-page', 'author-page'],
+      // The width (in px) when the mobile nav is used instead.
+      menuBreakpoint: 640,
       // Make nav blend in with background image when on top of these pages.
-      blend: ['home', 'blog-overview', 'blog-category-page'],
+      blend: ['home', 'projects', 'blog-overview', 'blog-category-page'],
     };
 
     const handleResize = () => {
       // Update screenWidth state on resize.
       setScreenWidth(window.innerWidth);
       // Auto-toggle mobile menu when not in use anymore.
-      if (screenWidth < menuBreakpoint) setMobileMenuOpen(false);
+      if (screenWidth < config.menuBreakpoint) setMobileMenuOpen(false);
     };
 
     // Event listener for keeping screenWidth up-to-date.
     window.addEventListener('resize', handleResize);
 
-    if (config.fixed.includes(currentPageType)) {
-      setFixed(true);
-    } else {
-      setFixed(false);
-    }
-
-    if (config.blend.includes(currentPageType)) {
-      setBlend(true);
-    } else {
-      setBlend(false);
-    }
-
-    const handleScroll = () => {
-      setAtTop(document.documentElement.scrollTop === 0);
-    };
-
-    // Event listener for keeping atTop up-to-date.
-    window.addEventListener('scroll', handleScroll);
+    if (config.blend.includes(currentPageType)) setBlend(true);
+    else setBlend(false);
 
     // Clean up event listeners on unmount.
     return () => {
       window.removeEventListener('resize', handleResize);
-      window.removeEventListener('scroll', handleScroll);
     };
   }, [screenWidth, currentPageType]);
 
+  // Hide navbar when scrolling down and show it when scrolling up.
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.scrollY;
+
+      if (!blend) {
+        if (currentScrollPos > prevScrollPos) {
+          setVisible(false);
+          setMobileMenuOpen(false);
+        } else {
+          setVisible(true);
+        }
+        setPrevScrollPos(currentScrollPos);
+      }
+
+      setAtTop(currentScrollPos <= 0);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  });
+
   return (
     <header
-      className={`${fixed ? 'fixed top-0 left-0' : ''} w-full z-20 border-slate-500
-                      ${
-                        blend && atTop ? 'bg-none' : 'bg-white dark:bg-slate-800 drop-shadow-md'
-                      } transition-all ease-in-out duration-500 z-50`}>
+      className={`fixed top-0 left-0 transition-all ease-in-out duration-500 ${
+        visible ? '' : '-translate-y-full'
+      } w-full z-20 border-slate-500
+                  ${blend && atTop ? 'bg-none' : 'bg-white dark:bg-slate-800 drop-shadow-md'}   z-50`}>
       {/* Navigation */}
       <nav className="flex items-center my-1 px-6 mx-auto">
         {/* Site title/logo */}
