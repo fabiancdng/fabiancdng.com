@@ -76,9 +76,7 @@ export const GlobalsProvider = ({ children }: globalsProviderProps) => {
       return matchPageType(path, pageTypes);
     };
 
-    const pageType = getCurrentPageType();
-    console.log(pageType);
-    setCurrentPageType(pageType);
+    setCurrentPageType(getCurrentPageType());
   }, [path]);
 
   return (

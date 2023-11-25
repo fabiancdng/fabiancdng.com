@@ -200,12 +200,12 @@ const Contact = ({ title, subtitle }: ContactProps) => {
             </div>
 
             {/* Data privacy accept checkbox */}
-            <div className="mb-6 flex flex-row items-center">
+            <div className="mb-6 px-2 flex flex-row items-center">
               <input
                 type="checkbox"
                 required
                 className="border border-solid border-gray-300 rounded transition ease-in-out m-0
-                  focus:bg-white focus:border-blue-600 w-5 h-5 focus:outline-none"
+                  focus:bg-white focus:border-blue-600 w-6 h-6 focus:outline-none"
                 id="contact-form-data-privacy-checkbox"
               />
               <label
@@ -226,7 +226,7 @@ const Contact = ({ title, subtitle }: ContactProps) => {
               className={`w-full hover:bg-slate-300 bg-slate-200 rounded cursor-pointer
               text-md mx-auto transition-all duration-500 dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-white
               flex flex-row justify-center space-x-3 items-center align-center border border-slate-300 hover:border-slate-600
-              dark:border-slate-500 dark:hover:border-slate-200 py-2`}>
+              dark:border-slate-500 dark:hover:border-slate-200 py-3`}>
               {/* Submission processing */}
               {formSubmissionStatus.status === 'processing_submission' && (
                 <>
