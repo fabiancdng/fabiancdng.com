@@ -35,7 +35,7 @@ const HomePage = async () => {
       <HeroSection
         title="I'm Fabian."
         subtitle="Hey!"
-        description="I'm a <b><u>student</u></b> & <b><u>full-stack web developer</u></b> who builds stuff for the web."
+        description="I'm a <b><u>student</u></b> & <b><u>full-stack web developer</u></b> and I build stuff for the web."
       />
 
       {/* <Introduction /> */}
