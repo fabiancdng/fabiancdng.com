@@ -10,6 +10,11 @@ body {
   scroll-behavior: smooth;
 }
 
+body:is(.dark) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(15 23 42 / var(--tw-bg-opacity));
+}
+
 hr {
   @apply w-full border-gray-300 dark:border-slate-600 my-10;
 }

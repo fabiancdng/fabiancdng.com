@@ -32,7 +32,7 @@ const Navbar = ({ links }: NavbarProps) => {
   const [screenWidth, setScreenWidth] = useState(0);
 
   // State based on config.
-  const [blend, setBlend] = useState(false);
+  const [blend, setBlend] = useState(true);
 
   // State for hiding the navbar when scrolling down and showing it when scrolling up.
   const [visible, setVisible] = useState(true);
@@ -94,10 +94,8 @@ const Navbar = ({ links }: NavbarProps) => {
 
   return (
     <header
-      className={`fixed top-0 left-0 transition-all ease-in-out duration-500 ${
-        visible ? '' : '-translate-y-full'
-      } w-full z-20 border-slate-500
-                  ${blend && atTop ? 'bg-none' : 'bg-white dark:bg-slate-800 drop-shadow-md'}   z-50`}>
+      className={`fixed top-0 left-0 transition-all ease-in-out duration-500 ${visible ? '' : '-translate-y-full'} w-full border-slate-500
+                  ${blend && atTop ? 'bg-none' : 'bg-white dark:bg-slate-800 drop-shadow-md'} z-50`}>
       {/* Navigation */}
       <nav className="flex items-center my-1 px-6 mx-auto">
         {/* Site title/logo */}
