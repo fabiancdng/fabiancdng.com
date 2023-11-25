@@ -16,16 +16,16 @@ interface globalsProviderProps {
 interface globalsContext {
   colorMode: 'light' | 'dark';
   setColorMode: (colorMode: 'light' | 'dark') => void;
-  activeNavItem: string;
-  setActiveNavItem: (activeNavItem: string) => void;
+  currentPageType: string;
+  setCurrentPageType: (currentPageType: string) => void;
 }
 
 // Create the context.
 export const GlobalsContext = createContext<globalsContext>({
   colorMode: 'light',
   setColorMode: () => {},
-  activeNavItem: '',
-  setActiveNavItem: () => {},
+  currentPageType: '',
+  setCurrentPageType: () => {},
 });
 
 /**
@@ -34,29 +34,51 @@ export const GlobalsContext = createContext<globalsContext>({
 export const GlobalsProvider = ({ children }: globalsProviderProps) => {
   const path = usePathname();
   const [colorMode, setColorMode] = useState<'light' | 'dark'>('light');
-  const [activeNavItem, setActiveNavItem] = useState<string>('');
+  const [currentPageType, setCurrentPageType] = useState<string>('');
 
   useEffect(() => {
-    // Set active nav item state based on the current route (/ parts of it).
-    if (path === '/') {
-      // On homepage (including contact-me section).
-      setActiveNavItem('home');
-    } else if (path === '/about') {
-      // Custom about page.
-      setActiveNavItem('about');
-    } else if (path.includes('#projects')) {
-      // On homepage in the projects section.
-      setActiveNavItem('projects');
-    } else if (path === '/blog') {
-      // Blog overview page.
-      setActiveNavItem('blog');
-    } else if (path.includes('/blog')) {
-      // On any page matching /blog*.
-      setActiveNavItem('blog-single');
-    } else {
-      // Not on any page matching a navlink. Clear state.
-      setActiveNavItem('');
-    }
+    /**
+     * Return the current page type based on the current route.
+     *
+     * Get the most specific match.
+     *
+     * @returns The current page type.
+     */
+    const getCurrentPageType = () => {
+      const pageTypes = {
+        '/': 'home-page',
+        '/blog': 'blog-overview',
+        '/blog/categories/*': 'blog-category-page',
+        '/authors/*': 'author-page',
+        '/blog/*': 'blog-post-page',
+        '/about': 'about-page',
+        '/*': 'custom-page',
+      };
+
+      /**
+       * Matches a given path against a set of page types and returns the most specific ones.
+       *
+       * @param path The Next.js path to match against.
+       * @param navItems The object mapping paths to page types.
+       * @returns The most specific match.
+       */
+      const matchPageType = (path: string, navItems: { [key: string]: string }): string => {
+        for (let key in navItems) {
+          let regex = new RegExp('^' + key.replace('*', '.*') + '$');
+          if (regex.test(path)) {
+            return navItems[key];
+          }
+        }
+        return 'home'; //  Default value as fallback.
+      };
+
+      // Return the most specific match.
+      return matchPageType(path, pageTypes);
+    };
+
+    const pageType = getCurrentPageType();
+    console.log(pageType);
+    setCurrentPageType(pageType);
   }, [path]);
 
   return (
@@ -64,8 +86,8 @@ export const GlobalsProvider = ({ children }: globalsProviderProps) => {
       value={{
         colorMode,
         setColorMode,
-        activeNavItem,
-        setActiveNavItem,
+        currentPageType,
+        setCurrentPageType,
       }}>
       {children}
     </GlobalsContext.Provider>

@@ -25,10 +25,12 @@ interface NavbarProps {
 
 const Navbar = ({ links }: NavbarProps) => {
   // Get active nav item from globals context.
-  const { activeNavItem } = useContext(GlobalsContext);
+  const { currentPageType } = useContext(GlobalsContext);
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [screenWidth, setScreenWidth] = useState(0);
+  const [fixed, setFixed] = useState(false);
+  const [blend, setBlend] = useState(false);
 
   // The width (in px) when the mobile nav is used instead.
   const menuBreakpoint = 640;
@@ -36,10 +38,14 @@ const Navbar = ({ links }: NavbarProps) => {
   // State representing if at the top/very beginning of the page or not.
   const [atTop, setAtTop] = useState(true);
 
-  // Only track atTop state on these pages, as only they have a backdrop to react to.
-  const pagesWithBackdrop = ['home', 'blog'];
-
   useEffect(() => {
+    const config = {
+      // Make nav always visible on these pages.
+      fixed: ['home', 'projects', 'blog-overview', 'blog-category-page', 'author-page'],
+      // Make nav blend in with background image when on top of these pages.
+      blend: ['home', 'blog-overview', 'blog-category-page'],
+    };
+
     const handleResize = () => {
       // Update screenWidth state on resize.
       setScreenWidth(window.innerWidth);
@@ -50,33 +56,38 @@ const Navbar = ({ links }: NavbarProps) => {
     // Event listener for keeping screenWidth up-to-date.
     window.addEventListener('resize', handleResize);
 
-    if (!pagesWithBackdrop.includes(activeNavItem)) {
-      // Fix state to false.
-      // TODO: Refactor this to be more elegant.
-      setAtTop(false);
+    if (config.fixed.includes(currentPageType)) {
+      setFixed(true);
     } else {
-      // Reset initial state to true.
-      setAtTop(true);
-
-      const handleScroll = () => {
-        setAtTop(document.documentElement.scrollTop === 0);
-      };
-
-      // Event listener for keeping atTop up-to-date.
-      window.addEventListener('scroll', handleScroll);
-
-      // Clean up event listeners on unmount.
-      return () => {
-        window.removeEventListener('resize', handleResize);
-        window.removeEventListener('scroll', handleScroll);
-      };
+      setFixed(false);
     }
-  }, [screenWidth, activeNavItem]);
+
+    if (config.blend.includes(currentPageType)) {
+      setBlend(true);
+    } else {
+      setBlend(false);
+    }
+
+    const handleScroll = () => {
+      setAtTop(document.documentElement.scrollTop === 0);
+    };
+
+    // Event listener for keeping atTop up-to-date.
+    window.addEventListener('scroll', handleScroll);
+
+    // Clean up event listeners on unmount.
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [screenWidth, currentPageType]);
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-20 border-slate-500
-                      ${atTop ? 'bg-none' : 'bg-white dark:bg-slate-800 drop-shadow-md'} transition-all ease-in-out duration-500 z-50`}>
+      className={`${fixed ? 'fixed top-0 left-0' : ''} w-full z-20 border-slate-500
+                      ${
+                        blend && atTop ? 'bg-none' : 'bg-white dark:bg-slate-800 drop-shadow-md'
+                      } transition-all ease-in-out duration-500 z-50`}>
       {/* Navigation */}
       <nav className="flex items-center my-1 px-6 mx-auto">
         {/* Site title/logo */}
@@ -89,7 +100,7 @@ const Navbar = ({ links }: NavbarProps) => {
         {/* Desktop: Navigation Links */}
         <ul
           className={`hidden left-0 lg:flex flex-1 justify-end items-center gap-5 text mr-7 uppercase text-md ${
-            atTop ? 'text-white' : 'text-black'
+            blend && atTop ? 'text-white' : 'text-black'
           }`}>
           {
             // Render all nav links (separate `NavbarLink` component).
@@ -104,8 +115,8 @@ const Navbar = ({ links }: NavbarProps) => {
                   }  dark:text-white rounded transition-all duration-500 px-4 py-3`}>
                   <span
                     className={
-                      activeNavItem === link.name
-                        ? `border-b-2 px-0.5 pb-1 ${atTop ? '' : 'border-b-slate-500'}  dark:border-b-slate-300`
+                      currentPageType.includes(link.name)
+                        ? `border-b-2 px-0.5 pb-1 ${blend && atTop ? '' : 'border-b-slate-500'}  dark:border-b-slate-300`
                         : 'px-0.5'
                     }>
                     {link.title}

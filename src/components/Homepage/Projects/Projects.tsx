@@ -16,16 +16,16 @@ const Projects = ({ title, subtitle, children }: ProjectsProps) => {
   const projectsSectionRef = useRef<HTMLDivElement>(null);
 
   // Get values from global website context to set active nav item.
-  const { setActiveNavItem } = useContext(GlobalsContext);
+  const { setCurrentPageType } = useContext(GlobalsContext);
 
   useEffect(() => {
     // Create IntersectionObserver to change active nav item based on section in viewport.
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          setActiveNavItem('projects');
+          setCurrentPageType('projects');
         } else {
-          setActiveNavItem('home');
+          setCurrentPageType('home');
         }
       },
       { threshold: 0.2 }
@@ -38,7 +38,7 @@ const Projects = ({ title, subtitle, children }: ProjectsProps) => {
       // Disconnect observer when component unmounts.
       observer.disconnect();
     };
-  }, [setActiveNavItem]);
+  }, [setCurrentPageType]);
 
   return (
     <div id="projects" ref={projectsSectionRef}>
