@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useState } from 'react';
 
 /**
@@ -113,11 +114,13 @@ const Contact = ({ title, subtitle }: ContactProps) => {
     <div
       id="contact-me"
       className={`w-screen mt-24 flex flex-col lg:flex-row container xl:max-w-7xl max-w-5xl mx-auto px-10
-        dark:bg-slate-800 bg-slate-100 rounded pb-20`}>
+        dark:bg-slate-800 bg-slate-100 rounded-lg border border-gray-200 dark:border-slate-500 shadow-sm pb-10`}>
       {/* Responsive wrapper left */}
       <div className="container mx-auto px-0 md:px-16 pt-20 flex flex-col items-center lg:items-start w-full lg:w-5/12">
         {/* Title */}
-        <h2 className="text-gray-800 dark:text-slate-100 text-5xl font-semibold text-center lg:text-start mx-4 sm:mx-0">{title}</h2>
+        <h2 className="text-gray-800 dark:text-slate-100 mb-4 leading-10 text-5xl font-semibold text-center lg:text-start mx-4 sm:mx-0">
+          {title}
+        </h2>
 
         {/* Subtitle */}
         {subtitle && (
@@ -192,8 +195,28 @@ const Contact = ({ title, subtitle }: ContactProps) => {
                   border border-solid border-gray-300 rounded transition ease-in-out m-0
                   focus:bg-white focus:border-blue-600 focus:outline-none`}
                 id="contact-form-message-content"
-                rows={3}
+                rows={7}
                 placeholder="Message"></textarea>
+            </div>
+
+            {/* Data privacy accept checkbox */}
+            <div className="mb-6 flex flex-row items-center">
+              <input
+                type="checkbox"
+                required
+                className="border border-solid border-gray-300 rounded transition ease-in-out m-0
+                  focus:bg-white focus:border-blue-600 w-5 h-5 focus:outline-none"
+                id="contact-form-data-privacy-checkbox"
+              />
+              <label
+                htmlFor="contact-form-data-privacy-checkbox"
+                className="ml-3 text-gray-700 dark:text-slate-200 font-medium text-left text-md">
+                I accept that my data will be stored and processed in accordance with the{' '}
+                <Link href="/privacy-policy" className="underline" target="_blank">
+                  data privacy policy
+                </Link>
+                .
+              </label>
             </div>
 
             {/* Submit button */}
