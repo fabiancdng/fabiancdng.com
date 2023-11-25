@@ -33,14 +33,14 @@ const HeroSection = ({ title, subtitle, description }: HeroSectionProps) => {
 
         <div className="video-overlay absolute top-0 left-0 bottom-0 right-0 z-10 bg-[rgba(0,0,0,0.6)] scale-105"></div>
 
-        <div className="hero-content z-20 max-w-4xl px-10">
+        <div className="hero-content z-20 max-w-[60rem] px-10">
           {/* Text & Socials */}
-          <h2 className="text-5xl text-center font-semibold lg:text-left text-slate-200">{subtitle}</h2>
-          <h1 className="text-6xl text-center lg:text-left my-5 font-bold bg-gradient-to-br from-blue-500 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-[3rem] leading-[1] text-center font-semibold lg:text-left text-slate-200">{subtitle}</h2>
+          <h1 className="text-[4rem] leading-[1] text-center lg:text-left my-5 font-bold bg-gradient-to-br from-blue-500 to-purple-600 bg-clip-text text-transparent">
             {title}
           </h1>
           <p
-            className="text-3xl leading-[1.5] text-center font-medium lg:text-left mb-7 text-slate-300"
+            className="text-[2rem] leading-[1.3] text-center font-medium lg:text-left mb-7 text-slate-300"
             dangerouslySetInnerHTML={{ __html: description }}
           />
         </div>
