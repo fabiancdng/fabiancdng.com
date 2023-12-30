@@ -25,10 +25,9 @@ const ProjectThumbnail = ({ project }: { project: WP_Post }) => {
 interface SingleProjectProps {
   project: WP_Post;
   reverseDesign: boolean;
-  description: string;
 }
 
-const SingleProject = ({ project, reverseDesign, description }: SingleProjectProps) => {
+const SingleProject = ({ project, reverseDesign }: SingleProjectProps) => {
   const [screenWidth, setScreenWidth] = useState(0);
   const [reverseDesignState, setReverseDesign] = useState(reverseDesign);
 

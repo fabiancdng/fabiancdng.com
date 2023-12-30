@@ -43,7 +43,7 @@ const HomePage = async () => {
       {/* Client Component: Uses IntersectionObserver to sync scroll position with activeNavLink state in GlobalsContext. */}
       <Projects title="Projects" subtitle="Some of the things I've built.">
         {projects.map((project: WP_Post, index: number) => (
-          <SingleProject key={index} project={project} reverseDesign={index % 2 === 0} description={project.description} />
+          <SingleProject key={index} project={project} reverseDesign={index % 2 === 0} />
         ))}
       </Projects>
 
