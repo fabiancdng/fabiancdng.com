@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 5.7.1 - 2023-12-30
+
+- Fix: Undefined prop `description` for `Project` component
+
 ## 5.7.0 - 2023-12-30
 
 - Add feature to render portfolio projects from CPT (instead of JSON files)
