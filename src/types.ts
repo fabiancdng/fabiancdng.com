@@ -132,26 +132,6 @@ export interface WP_Post {
   _embedded: {
     author: WP_User[];
     'wp:featuredmedia': WP_Embedded_Media[];
-    'wp:term': [WP_Embedded_Term[], WP_Embedded_Term[]];
+    'wp:term': WP_Embedded_Term[][];
   };
-}
-
-export interface Project {
-  slug: string;
-  metadata: ProjectMetadata;
-  description: string;
-  thumbnail: {
-    src: string;
-    width: number;
-    height: number;
-    alt: string;
-  };
-}
-
-export interface ProjectMetadata {
-  title: string;
-  subtitle: string;
-  technologies: string[];
-  demo: string;
-  github: string;
 }

@@ -33,3 +33,11 @@ p > code {
 blockquote {
   @apply px-5 py-1 my-5 rounded-md border-l-4 border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-slate-800;
 }
+
+.portfolio-project-html p {
+  @apply mt-3;
+}
+
+.portfolio-project-html .project-button {
+  @apply flex items-center align-baseline w-fit text-base dark:hover:bg-slate-500 dark:bg-slate-700 dark:text-white hover:bg-slate-300 bg-slate-200 rounded transition-all duration-500 px-5 py-[11px];
+}
