@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 5.7.0 - 2023-12-30
+
+- Add feature to render portfolio projects from CPT (instead of JSON files)
+
 ## 5.6.0 - 2023-11-25
 
 - Add functionality to auto-hide navbar on scroll down and re-appear on scroll up (only on content pages)
