@@ -1,0 +1,32 @@
+/* Styling for custom WordPress blocks */
+.portfolio-project-large {
+  @apply container pb-5 mx-auto mt-24 text-black dark:text-white;
+}
+
+.portfolio-project-large-inner {
+  @apply flex flex-col md:flex-row mt-14 mb-14;
+}
+
+.portfolio-project-large-inner .project-info {
+  @apply md:w-2/3 md:mt-0 mt-6 md:pl-16;
+}
+
+.portfolio-project-large h2 {
+  @apply text-3xl font-semibold my-2;
+}
+
+.portfolio-project-large .portfolio-project-description {
+  @apply text-lg my-3;
+}
+
+.portfolio-project-large p {
+  @apply mt-3;
+}
+
+.portfolio-project-large .project-buttons {
+  @apply flex flex-row space-x-4 mt-5;
+}
+
+.portfolio-project-large .project-button {
+  @apply flex items-center align-baseline w-fit text-base dark:hover:bg-slate-500 dark:bg-slate-700 dark:text-white hover:bg-slate-300 bg-slate-200 rounded transition-all duration-500 px-5 py-[11px];
+}

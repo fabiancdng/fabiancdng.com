@@ -137,17 +137,17 @@ const Navbar = ({ links }: NavbarProps) => {
 
         {/* Desktop: Icon to toggle dark/light mode */}
         <div className="hidden lg:flex">
-          <DarkModeToggle additionalCSS="w-14" />
+          <DarkModeToggle additionalCSS="w-14 h-11" />
         </div>
 
         {/* Mobile menu toggler (icon) and dark mode switch */}
         <div className="flex lg:hidden space-x-4 flex-1 justify-end text-3xl">
           {/* Icon to toggle dark/light mode */}
-          <DarkModeToggle additionalCSS="w-14 m-2" />
+          <DarkModeToggle additionalCSS="w-14 h-12 m-2" />
           <button
             aria-label="Toggle menu"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={`rounded p-1 m-2 w-14 transition-all
+            className={`rounded m-2 w-14 h-12 transition-all
                         ease-in-out duration-200 hover:bg-slate-200 bg-slate-100 dark:bg-slate-600 dark:hover:bg-slate-500 dark:text-white
                         border border-slate-300 hover:border-slate-600 dark:border-slate-500 dark:hover:border-slate-200`}>
             <i className="fa-solid fa-bars" />

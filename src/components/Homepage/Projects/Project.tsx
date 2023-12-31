@@ -24,41 +24,17 @@ const ProjectThumbnail = ({ project }: { project: WP_Post }) => {
 
 interface SingleProjectProps {
   project: WP_Post;
-  reverseDesign: boolean;
 }
 
-const SingleProject = ({ project, reverseDesign }: SingleProjectProps) => {
-  const [screenWidth, setScreenWidth] = useState(0);
-  const [reverseDesignState, setReverseDesign] = useState(reverseDesign);
-
-  useEffect(() => {
-    const handleResize = () => {
-      // Set the screen width.
-      setScreenWidth(window.innerWidth);
-
-      // Disregard reverse design if viewport is too small.
-      if (screenWidth < 768) setReverseDesign(false);
-      else setReverseDesign(reverseDesign);
-    };
-
-    // Event listener for keeping screenWidth up-to-date.
-    window.addEventListener('resize', handleResize);
-
-    // Initial call on mount.
-    handleResize();
-
-    // Cleanup resource-hungry event listeners after unmount.
-    return () => window.removeEventListener('resize', handleResize);
-  }, [screenWidth, reverseDesign]);
-
+const SingleProject = ({ project }: SingleProjectProps) => {
   return (
-    <div className="container pb-5  mx-auto mt-24 text-black dark:text-white">
-      <div className="flex flex-col md:flex-row mt-14 mb-14">
+    <div className="portfolio-project-large">
+      <div className="portfolio-project-large-inner">
         {/* Thumbnail (if not reversed) */}
-        {!reverseDesignState && <ProjectThumbnail project={project} />}
+        <ProjectThumbnail project={project} />
 
         {/* Project info */}
-        <div className={`md:w-2/3 md:mt-0 mt-6 ${!reverseDesignState ? 'md:pl-16' : 'md:pr-16'}`}>
+        <div className="project-info">
           {/* Technologies used */}
           {project['_embedded']['wp:term'] && (
             <div className="flex flex-row space-x-3">
@@ -79,13 +55,13 @@ const SingleProject = ({ project, reverseDesign }: SingleProjectProps) => {
           )}
 
           {/* Title */}
-          <h2 className="text-3xl font-semibold my-2">{project.title.rendered}</h2>
+          <h2>{project.title.rendered}</h2>
 
           {/* Subtitle */}
           {/* <h3 className="text-2xl font-medium my-3">{project.metadata.subtitle}</h3> */}
 
           {/* Description/Content */}
-          <div className="portfolio-project-html text-lg my-3" dangerouslySetInnerHTML={{ __html: project.content.rendered }}></div>
+          <div className="portfolio-project-description" dangerouslySetInnerHTML={{ __html: project.content.rendered }}></div>
 
           {/* <div className="flex flex-row align-center space-x-4 mt-5"> */}
           {/* View code link with GitHub icon */}
@@ -111,9 +87,6 @@ const SingleProject = ({ project, reverseDesign }: SingleProjectProps) => {
             )} */}
           {/* </div> */}
         </div>
-
-        {/* Thumbnail (if reversed) */}
-        {reverseDesignState && <ProjectThumbnail project={project} />}
       </div>
     </div>
   );

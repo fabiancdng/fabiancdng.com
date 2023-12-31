@@ -48,7 +48,7 @@ const DarkModeToggle = ({ additionalCSS }: DarkModeToggleProps) => {
       aria-label="Toggle dark mode"
       onClick={changeColorMode}
       className={
-        `hover:bg-slate-200 bg-slate-100 flex flex-col justify-center items-center rounded cursor-pointer px-4 py-2
+        `hover:bg-slate-200 bg-slate-100 flex flex-col justify-center items-center rounded cursor-pointer
             text-xl transition-all duration-500 dark:bg-slate-600 dark:hover:bg-slate-500 dark:text-white
             border border-slate-300 hover:border-slate-600 dark:border-slate-500 dark:hover:border-slate-200 ` + additionalCSS
       }>

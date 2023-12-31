@@ -7,6 +7,8 @@ import SingleProject from '@/components/Homepage/Projects/Project';
 import { getWpRessource } from '@/adapters/WordPressAdapter';
 import { WP_Post } from '@/types';
 
+import './wp-blocks.css';
+
 /**
  * Set some metadata for the page for SEO.
  */
@@ -43,7 +45,7 @@ const HomePage = async () => {
       {/* Client Component: Uses IntersectionObserver to sync scroll position with activeNavLink state in GlobalsContext. */}
       <Projects title="Projects" subtitle="Some of the things I've built.">
         {projects.map((project: WP_Post, index: number) => (
-          <SingleProject key={index} project={project} reverseDesign={index % 2 === 0} />
+          <SingleProject key={index} project={project} />
         ))}
       </Projects>
 
