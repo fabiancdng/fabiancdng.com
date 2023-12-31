@@ -7,6 +7,14 @@
   @apply flex flex-col md:flex-row mt-14 mb-14;
 }
 
+.portfolio-project-large .thumbnail {
+  @apply md:w-2/4;
+}
+
+.portfolio-project-large .thumbnail img {
+  @apply w-full h-auto rounded-md;
+}
+
 .portfolio-project-large-inner .project-info {
   @apply md:w-2/3 md:mt-0 mt-6 md:pl-16;
 }
@@ -29,4 +37,20 @@
 
 .portfolio-project-large .project-button {
   @apply flex items-center align-baseline w-fit text-base dark:hover:bg-slate-500 dark:bg-slate-700 dark:text-white hover:bg-slate-300 bg-slate-200 rounded transition-all duration-500 px-5 py-[11px];
+}
+
+.portfolio-project-large .project-info .tag-list {
+  @apply flex flex-row space-x-3;
+}
+
+.portfolio-project-large .project-info .tag-list-inner {
+  @apply mb-1 inline-flex space-x-3;
+}
+
+.portfolio-project-large .project-info .tag-list-inner .tag {
+  @apply text-blue-800 font-semibold text-lg dark:text-slate-400;
+}
+
+.portfolio-project-large .project-info .tag-list-inner .separator {
+  @apply text-gray-800 font-semibold dark:text-slate-200;
 }
