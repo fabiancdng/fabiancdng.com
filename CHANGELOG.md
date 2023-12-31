@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 5.8.0 - 2023-12-31
+
+- Add Gutenberg block that allows for the rendering of a single project on the homepage to take place entirely in WordPress
+
 ## 5.7.1 - 2023-12-30
 
 - Fix: Undefined prop `description` for `Project` component
